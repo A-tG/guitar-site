@@ -1,1 +1,1 @@
-# Metronome, scales and other features (in future) for guitar players.
+# Website with metronome, scales and other features (in future) for guitar players.
