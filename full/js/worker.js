@@ -10,7 +10,7 @@ onmessage = function(e)
     var action = e.data;
     if (action == 'start')
     {
-        intervalID = setInterval(metronomeTick, 1000 / 30);
+        intervalID = setInterval(metronomeTick, 1000 / 60);
     } 
     else if (action == 'stop')
     {
