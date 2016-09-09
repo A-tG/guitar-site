@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Artistic Guitar</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <div class="bg_block">
+      <div class="content_block">
+        <div class="head_block">
+          <div class="logo_block">
+            <a class="logo" href="#" title="Artistic Guitar">Artistic Guitar</a>
+          </div>
+          <ul class="metronome_block">
+            <li class="metronome_icon">
+              <div class="trapezoid_bottom"></div>
+              <div class="trapezoid_leftside"></div>
+              <div class="trapezoid_rightside"></div>
+              <div class="trapezoid_top"></div>
+              <div class="dot1"></div>
+              <div class="dot2"></div>
+              <div class="dot3"></div>
+              <div class="dot4"></div>
+              <div class="dot5"></div>
+              <div class="ticker"></div>
+              <div class="weight"></div>
+            </li>
+            <li id="metronome_play_btn" class="play_btn_block">
+              <div class="play_btn transitional"></div>
+            </li>
+            <li id="metronome_stop_btn" class="stop_btn_block">
+              <div class="stop_btn transitional"></div>
+            </li>
+            <li class="volume_block">
+              <div class="metronome_option_head">
+                <span class="option_head_start_val">0%</span>
+                <span class="option_head_end_val">100%</span>
+                <span class="metronome_options_text">Volume</span>
+              </div>
+              <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
+            </li>
+            <li class="tempo_block">
+              <ul>
+                <li>
+                  <div class="metronome_option_head">
+                    <span class="option_head_start_val">40</span>
+                    <span class="option_head_end_val">210</span>
+                    <span class="metronome_options_text">Tempo</span>
+                  </div>
+                  <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="210" step="1"/>
+                </li>
+                <li class="tempo_input_block">
+                  <div id="metronome_tempo_left_arrow" class="left_arrow transitional"></div>
+                  <input id="metronome_tempo_input" class="tempo_input" type="text" list="tempos" size="4" maxlength="7" min="40" max="210">
+                  <div id="metronome_tempo_right_arrow" class="right_arrow transitional"></div>
+                  <datalist id="tempos">
+                    <option>40</option>
+                    <option>45</option>
+                    <option>50</option>
+                    <option>55</option>
+                    <option>60</option>
+                    <option>65</option>
+                    <option>70</option>
+                    <option>75</option>
+                    <option>80</option>
+                    <option>85</option>
+                    <option>90</option>
+                    <option>95</option>
+                    <option>100</option>
+                    <option>105</option>
+                    <option>110</option>
+                    <option>115</option>
+                    <option>120</option>
+                    <option>125</option>
+                    <option>130</option>
+                    <option>135</option>
+                    <option>140</option>
+                    <option>145</option>
+                    <option>150</option>
+                    <option>155</option>
+                    <option>160</option>
+                    <option>165</option>
+                    <option>170</option>
+                    <option>175</option>
+                    <option>180</option>
+                    <option>185</option>
+                    <option>190</option>
+                    <option>195</option>
+                    <option>200</option>
+                    <option>205</option>
+                    <option>210</option>
+                  </datalist>
+                </li>
+              </ul>
+            </li>
+            <li class="signature_block">
+              <ul>
+                <li>
+                  <span class="metronome_options_text">Signature</span>
+                </li>
+                <li>
+                  <div class="signature_option_block">
+                    <div id="metronome_beats_left_arrow" class="left_arrow transitional"></div>
+                    <select id="metronome_beats_select" class="signature_select">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4" selected>4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                    </select>
+                    <div id="metronome_beats_right_arrow" class="right_arrow transitional"></div>
+                  </div>
+                  <div class="signature_option_block">
+                    <div id="metronome_beat_val_left_arrow" class="left_arrow transitional"></div>
+                    <select id="metronome_beat_val_select" class="signature_select">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="4" selected>4</option>
+                      <option value="8">8</option>
+                      <option value="16">16</option>
+                      <option value="32">32</option>
+                    </select>
+                    <div id="metronome_beat_val_right_arrow" class="right_arrow transitional"></div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <div id="add_new_item_btn" class="add_new_item transitional">
+          <div class="big_plus_hor_line transitional"></div>
+          <div class="big_plus_ver_line transitional"></div>
+        </div>
+      </div>
+      <noscript class="noscipt_warning">Please enable javascript or update your browser</noscript>
+    </div>
+    <script id="scale_notes_tmpl" type="text/plain">
+      <li class="scale_notes">
+        <ul class="scale_note">
+          <span>{{=it.root}}</span>
+          <div class="separator_ver_small"></div>
+        </ul>
+        {{~it.semiTones :semiTone:i}}
+          <ul class="semitone_block semitone_width{{=semiTone}}">{{=semiTone}}</ul>
+          <ul class="scale_note">
+            <span>{{=it.notes[i + 1]}}</span>
+            <div class="separator_ver_small"></div>
+          </ul>
+        {{~}}
+      </li>
+    </script>
+    <script id="string_ver_fret_tmpl" type="text/plain">
+      <div class="fret_ver">
+      </div>
+    </script>
+    <script id="string_hor_fret_tmpl" type="text/plain">
+      <div class="fret_hor">
+        <div class="string{{=it.currentStringNumber}}"></div>
+        <div class="note normal_note"></div>
+      </div>
+    </script>
+    <script id="fretboard_single_mark" type="text/plain">
+      <div class="fret_marker"></div>
+    </script>
+    <script id="fretboard_double_mark" type="text/plain">
+      <div class="fret_marker marker_top"></div>
+      <div class="fret_marker marker_bottom"></div>
+    </script>
+    <script id="string_tune_block_tmpl" type="text/plain">
+      <li class="string_tune">
+        <div class="left_arrow transitional"></div>
+        <select class="string_tune_select">
+          <option value="B">B</option>
+          <option value="A#">A#</option>
+          <option value="A">A</option>
+          <option value="G#">G#</option>
+          <option value="G">G</option>
+          <option value="F#">F#</option>
+          <option value="F">F</option>
+          <option value="E" selected>E</option>
+          <option value="D#">D#</option>
+          <option value="D">D</option>
+          <option value="C#">C#</option>
+          <option value="C">C</option>
+        </select>
+        <div class="right_arrow transitional"></div>
+      </li>
+    </script>
+    <script id="scales_item_tmpl" type="text/plain">
+      <div id="{{=it.id}}" class="item_block">
+        <ul class="strings_options_block">
+          <li class="strings_btns_block">
+            <div class="string_btn delete_string transitional" title="delete string">
+              <div class="minus transitional"></div>
+            </div>
+            <div class="strings_number">0</div>
+            <div class="string_btn add_string transitional" title="add string">
+              <div class="plus_hor_line transitional"></div>
+              <div class="plus_ver_line transitional"></div>
+            </div>
+          </li>
+        </ul>
+        <div class="item_content">
+          <select class="item_head_select">
+            <option>Scales</option>
+          </select>
+          <div class="fretboard">
+            <div class="fret_null">
+            </div>
+            <div class="clear"></div>
+          </div>
+          <ul class="tuning_options">
+            <li>
+              <span class="options_text">Tuning:</span>
+              <select class="tuning_select">
+                <option value="standart_e" selected>Standart E</option>
+                <option value="standart_e_bass">Standart E Bass</option>
+                <option value="drop_d">Dropped D</option>
+                <option value="custom">Custom</option>
+              </select>
+            </li>
+            <li>
+              <span class="options_text">Half-step:</span>
+              <div class="half_step_block">
+                <div class="left_arrow transitional"></div>
+                <select class="half_step_select">
+                  <option value="-11">-11</option>
+                  <option value="-10">-10</option>
+                  <option value="-9">-9</option>
+                  <option value="-8">-8</option>
+                  <option value="-7">-7</option>
+                  <option value="-6">-6</option>
+                  <option value="-5">-5</option>
+                  <option value="-4">-4</option>
+                  <option value="-3">-3</option>
+                  <option value="-2">-2</option>
+                  <option value="-1">-1</option>
+                  <option value="0" selected>0</option>
+                  <option value="1">+1</option>
+                  <option value="2">+2</option>
+                  <option value="3">+3</option>
+                  <option value="4">+4</option>
+                  <option value="5">+5</option>
+                  <option value="6">+6</option>
+                  <option value="7">+7</option>
+                  <option value="8">+8</option>
+                  <option value="9">+9</option>
+                  <option value="10">+10</option>
+                  <option value="11">+11</option>
+                </select>
+                <div class="right_arrow transitional"></div>
+              </div>
+            </li>
+          </ul>
+          <div class="scale_select_block">
+            <span class="options_text">Scale:</span>
+            <select class="scale_select">
+              <option value="major" selected>Major</option>
+              <option value="ionian">Ionian Mode</option>
+              <option value="minor">Minor</option>
+              <option value="aeolian">Aeolian Mode</option>
+              <option value="harmonic_min">Harmonic Minor</option>
+              <option value="chromatic">Chromatic</option>
+            </select>
+          </div>
+          <div class="scale_options_block">
+            <ul class="scale_notes_signs">
+              <li>Root:</li>
+              <li>Scale Notes</li>
+              <li>Semi-tones</li>
+            </ul>
+            <div class="scale_notes_and_semitones_block">
+              <ul>
+                <li class="root_note transitional selected_text">C</li>
+                <li class="root_note transitional">C#</li>
+                <li class="root_note transitional">D</li>
+                <li class="root_note transitional">D#</li>
+                <li class="root_note transitional">E</li>
+                <li class="root_note transitional">F</li>
+                <li class="root_note transitional">F#</li>
+                <li class="root_note transitional">G</li>
+                <li class="root_note transitional">G#</li>
+                <li class="root_note transitional">A</li>
+                <li class="root_note transitional">A#</li>
+                <li class="root_note transitional">B</li>
+                <div class="clear"></div>
+              </ul>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="close_btn transitional" title="close">
+          <div class="close_block">
+            <div class="close_hor_line transitional"></div>
+            <div class="close_ver_line transitional"></div>
+          </div>
+        </div>
+        <div class="set_default_btn transitional" title="set current options as default">
+          <div class="checkmark">
+           <div class="checkmark_stem transitional"></div>
+           <div class="checkmark_kick transitional"></div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/dot.min.js"></script>
+    <script type="text/javascript" src="js/js.cookie.js"></script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/metronome.js"></script>
+    <script type="text/javascript" src="js/scales.js"></script>
+    <script type="text/javascript" src="js/items.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

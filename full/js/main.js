@@ -1,0 +1,3 @@
+getDefaultScaleOptionsFromCookie();
+metronome.init();
+createNewItem();
