@@ -25,7 +25,7 @@ select
 }
 .bg_block
 {
-    background: #666;
+    background: #333;
     min-height: 100vh;
     
 }
@@ -36,10 +36,8 @@ select
     min-width: 1125px;
     max-width: 100vw;
     width: 1600px;
-    background: #333;
     padding-bottom: 70px;
     box-sizing: border-box;
-    box-shadow: 0 0 2px #000;
 }
 
 .head_block
@@ -958,7 +956,7 @@ select
 {
     position: relative;
     box-sizing: border-box;
-    margin: 70px 0 0 6.25%;
+    margin: 70px auto;
     border: 2px solid #fc0;
     height: 100px;
     width: 100px;
