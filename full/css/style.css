@@ -958,8 +958,8 @@ select
     box-sizing: border-box;
     margin: 70px auto;
     border: 2px solid #fc0;
-    height: 100px;
-    width: 100px;
+    height: 75px;
+    width: 75px;
     padding: 0 6.5px 0 8.5px;
 }
 .big_plus_hor_line
