@@ -31,21 +31,28 @@ select
 }
 .content_block
 {
+    background: #333;
     margin: 0 auto;
     min-height: 100vh;
     min-width: 1125px;
     max-width: 100vw;
-    width: 1600px;
+    width: 100%;
     padding-bottom: 70px;
     box-sizing: border-box;
 }
 
 .head_block
 {
-    margin: 0 auto;
-    width: 80%;
-    border-bottom: 2px solid #666;
+    background: #222;
+    width: 100%;
     min-height: 50px;
+}
+.head_block_content
+{
+    width: 70%;
+    min-width: 900px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 .logo_block
 {
@@ -311,6 +318,8 @@ select
     position: relative;
     margin: 70px auto 0;
     width: 90%;
+    min-width: 1050px;
+    max-width: 1780px;
     background: #222;
     box-shadow: 0 0 5px #000;
 }

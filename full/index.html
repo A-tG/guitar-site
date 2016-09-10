@@ -9,158 +9,160 @@
     <div class="bg_block">
       <div class="content_block">
         <div class="head_block">
-          <div class="logo_block">
-            <a class="logo" href="#" title="Artistic Guitar">Artistic Guitar</a>
+          <div class="head_block_content">
+            <div class="logo_block">
+              <a class="logo" href="#" title="Artistic Guitar">Artistic Guitar</a>
+            </div>
+            <ul class="metronome_block">
+              <li class="metronome_icon">
+                <div class="trapezoid_bottom"></div>
+                <div class="trapezoid_leftside"></div>
+                <div class="trapezoid_rightside"></div>
+                <div class="trapezoid_top"></div>
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+                <div class="dot3"></div>
+                <div class="dot4"></div>
+                <div class="dot5"></div>
+                <div class="ticker"></div>
+                <div class="weight"></div>
+              </li>
+              <li id="metronome_play_btn" class="play_btn_block">
+                <div class="play_btn transitional"></div>
+              </li>
+              <li id="metronome_stop_btn" class="stop_btn_block">
+                <div class="stop_btn transitional"></div>
+              </li>
+              <li class="volume_block">
+                <div class="metronome_option_head">
+                  <span class="option_head_start_val">0%</span>
+                  <span class="option_head_end_val">100%</span>
+                  <span class="metronome_options_text">Volume</span>
+                </div>
+                <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
+              </li>
+              <li class="tempo_block">
+                <ul>
+                  <li>
+                    <div class="metronome_option_head">
+                      <span class="option_head_start_val">40</span>
+                      <span class="option_head_end_val">320</span>
+                      <span class="metronome_options_text">Tempo</span>
+                    </div>
+                    <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
+                  </li>
+                  <li class="tempo_input_block">
+                    <div id="metronome_tempo_left_arrow" class="left_arrow transitional"></div>
+                    <input id="metronome_tempo_input" class="tempo_input" type="text" list="tempos" size="4" maxlength="7" min="40" max="210">
+                    <div id="metronome_tempo_right_arrow" class="right_arrow transitional"></div>
+                    <datalist id="tempos">
+                      <option>40</option>
+                      <option>45</option>
+                      <option>50</option>
+                      <option>55</option>
+                      <option>60</option>
+                      <option>65</option>
+                      <option>70</option>
+                      <option>75</option>
+                      <option>80</option>
+                      <option>85</option>
+                      <option>90</option>
+                      <option>95</option>
+                      <option>100</option>
+                      <option>105</option>
+                      <option>110</option>
+                      <option>115</option>
+                      <option>120</option>
+                      <option>125</option>
+                      <option>130</option>
+                      <option>135</option>
+                      <option>140</option>
+                      <option>145</option>
+                      <option>150</option>
+                      <option>155</option>
+                      <option>160</option>
+                      <option>165</option>
+                      <option>170</option>
+                      <option>175</option>
+                      <option>180</option>
+                      <option>185</option>
+                      <option>190</option>
+                      <option>195</option>
+                      <option>200</option>
+                      <option>205</option>
+                      <option>210</option>
+                      <option>215</option>
+                      <option>220</option>
+                      <option>225</option>
+                      <option>230</option>
+                      <option>235</option>
+                      <option>240</option>
+                      <option>245</option>
+                      <option>250</option>
+                      <option>255</option>
+                      <option>260</option>
+                      <option>265</option>
+                      <option>270</option>
+                      <option>275</option>
+                      <option>280</option>
+                      <option>285</option>
+                      <option>290</option>
+                      <option>295</option>
+                      <option>300</option>
+                      <option>305</option>
+                      <option>310</option>
+                      <option>315</option>
+                      <option>320</option>
+                    </datalist>
+                  </li>
+                </ul>
+              </li>
+              <li class="signature_block">
+                <ul>
+                  <li>
+                    <span class="metronome_options_text">Signature</span>
+                  </li>
+                  <li>
+                    <div class="signature_option_block">
+                      <div id="metronome_beats_left_arrow" class="left_arrow transitional"></div>
+                      <select id="metronome_beats_select" class="signature_select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected>4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                      </select>
+                      <div id="metronome_beats_right_arrow" class="right_arrow transitional"></div>
+                    </div>
+                    <div class="signature_option_block">
+                      <div id="metronome_beat_val_left_arrow" class="left_arrow transitional"></div>
+                      <select id="metronome_beat_val_select" class="signature_select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4" selected>4</option>
+                        <option value="8">8</option>
+                        <option value="16">16</option>
+                        <option value="32">32</option>
+                      </select>
+                      <div id="metronome_beat_val_right_arrow" class="right_arrow transitional"></div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="clear"></div>
           </div>
-          <ul class="metronome_block">
-            <li class="metronome_icon">
-              <div class="trapezoid_bottom"></div>
-              <div class="trapezoid_leftside"></div>
-              <div class="trapezoid_rightside"></div>
-              <div class="trapezoid_top"></div>
-              <div class="dot1"></div>
-              <div class="dot2"></div>
-              <div class="dot3"></div>
-              <div class="dot4"></div>
-              <div class="dot5"></div>
-              <div class="ticker"></div>
-              <div class="weight"></div>
-            </li>
-            <li id="metronome_play_btn" class="play_btn_block">
-              <div class="play_btn transitional"></div>
-            </li>
-            <li id="metronome_stop_btn" class="stop_btn_block">
-              <div class="stop_btn transitional"></div>
-            </li>
-            <li class="volume_block">
-              <div class="metronome_option_head">
-                <span class="option_head_start_val">0%</span>
-                <span class="option_head_end_val">100%</span>
-                <span class="metronome_options_text">Volume</span>
-              </div>
-              <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
-            </li>
-            <li class="tempo_block">
-              <ul>
-                <li>
-                  <div class="metronome_option_head">
-                    <span class="option_head_start_val">40</span>
-                    <span class="option_head_end_val">320</span>
-                    <span class="metronome_options_text">Tempo</span>
-                  </div>
-                  <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
-                </li>
-                <li class="tempo_input_block">
-                  <div id="metronome_tempo_left_arrow" class="left_arrow transitional"></div>
-                  <input id="metronome_tempo_input" class="tempo_input" type="text" list="tempos" size="4" maxlength="7" min="40" max="210">
-                  <div id="metronome_tempo_right_arrow" class="right_arrow transitional"></div>
-                  <datalist id="tempos">
-                    <option>40</option>
-                    <option>45</option>
-                    <option>50</option>
-                    <option>55</option>
-                    <option>60</option>
-                    <option>65</option>
-                    <option>70</option>
-                    <option>75</option>
-                    <option>80</option>
-                    <option>85</option>
-                    <option>90</option>
-                    <option>95</option>
-                    <option>100</option>
-                    <option>105</option>
-                    <option>110</option>
-                    <option>115</option>
-                    <option>120</option>
-                    <option>125</option>
-                    <option>130</option>
-                    <option>135</option>
-                    <option>140</option>
-                    <option>145</option>
-                    <option>150</option>
-                    <option>155</option>
-                    <option>160</option>
-                    <option>165</option>
-                    <option>170</option>
-                    <option>175</option>
-                    <option>180</option>
-                    <option>185</option>
-                    <option>190</option>
-                    <option>195</option>
-                    <option>200</option>
-                    <option>205</option>
-                    <option>210</option>
-                    <option>215</option>
-                    <option>220</option>
-                    <option>225</option>
-                    <option>230</option>
-                    <option>235</option>
-                    <option>240</option>
-                    <option>245</option>
-                    <option>250</option>
-                    <option>255</option>
-                    <option>260</option>
-                    <option>265</option>
-                    <option>270</option>
-                    <option>275</option>
-                    <option>280</option>
-                    <option>285</option>
-                    <option>290</option>
-                    <option>295</option>
-                    <option>300</option>
-                    <option>305</option>
-                    <option>310</option>
-                    <option>315</option>
-                    <option>320</option>
-                  </datalist>
-                </li>
-              </ul>
-            </li>
-            <li class="signature_block">
-              <ul>
-                <li>
-                  <span class="metronome_options_text">Signature</span>
-                </li>
-                <li>
-                  <div class="signature_option_block">
-                    <div id="metronome_beats_left_arrow" class="left_arrow transitional"></div>
-                    <select id="metronome_beats_select" class="signature_select">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4" selected>4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                    </select>
-                    <div id="metronome_beats_right_arrow" class="right_arrow transitional"></div>
-                  </div>
-                  <div class="signature_option_block">
-                    <div id="metronome_beat_val_left_arrow" class="left_arrow transitional"></div>
-                    <select id="metronome_beat_val_select" class="signature_select">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="4" selected>4</option>
-                      <option value="8">8</option>
-                      <option value="16">16</option>
-                      <option value="32">32</option>
-                    </select>
-                    <div id="metronome_beat_val_right_arrow" class="right_arrow transitional"></div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <div class="clear"></div>
         </div>
         <div id="add_new_item_btn" class="add_new_item transitional">
           <div class="big_plus_hor_line transitional"></div>
