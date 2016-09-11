@@ -14,7 +14,7 @@ var MAX_BEATS = 16;
 var MIN_BEAT_VAL = 1;
 var MAX_BEAT_VAL = 32;
 var MIN_TEMPO = 40;
-var MAX_TEMPO = 210
+var MAX_TEMPO = 320
 var DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS = 1;
 
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];

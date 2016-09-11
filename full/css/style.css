@@ -960,6 +960,18 @@ select
 {
     width: 90px;
 }
+.semitone_width6
+{
+    width: 110px;
+}
+.semitone_width7
+{
+    width: 130px;
+}
+.semitone_width8
+{
+    width: 150px;
+}
 
 .add_new_item
 {
