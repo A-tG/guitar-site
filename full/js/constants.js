@@ -27,7 +27,8 @@ var SCALES = {
     "minor": [2, 1, 2, 2, 1, 2, 2],
     "ionian": [2, 1, 2, 2, 1, 2, 2],
     "harmonic_min": [2, 1, 2, 2, 1, 3, 1],
-    "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "major_arp": [4, 3, 5]
 }
 var TUNINGS = {
     "standart_e": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
