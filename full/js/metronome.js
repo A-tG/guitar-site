@@ -23,13 +23,13 @@ var metronome = {
     $beatValLeftArrow: $('#' + METR_BEAT_VAL_LEFT_ARROW_ID),
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
     
-    playBeatFromQueue: function()
+    scheduleBeatFromQueue: function()
     {
         if (this.beatsQueue.length > 0)
         {
             beat = this.beatsQueue.shift();
             var osc = audioCtx.createOscillator();
-            osc.type = 'sawtooth';
+            osc.type = 'square';
             var freq = 440;
             if (this.beatNumber == 0)
             {
@@ -56,7 +56,7 @@ var metronome = {
                     time: lastBeatInQueue.time + delay, 
                     number: itemThis.beatNumber
                 });
-                itemThis.playBeatFromQueue();
+                itemThis.scheduleBeatFromQueue();
                 itemThis.beatNumber = (itemThis.beatNumber + 1) % itemThis.beats;
             }
         }
