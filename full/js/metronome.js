@@ -4,7 +4,7 @@ var worker = new Worker("js/worker.js");
 var metronome = {
     beats: DEFAULT_METR_BEATS,
     beatValue: DEFAULT_METR_BEAT_VAL,
-    volume: DEFAULT_METR_VOLUME / 100,
+    volume: (sliderLogVal(DEFAULT_METR_VOLUME, 1, 100)) / 100,
     tempo: DEFAULT_METR_TEMPO,
     gainNode: audioCtx.createGain(),
     beatNumber: 0,
@@ -91,7 +91,8 @@ var metronome = {
     {
         itemThis = event.data.itemThis;
         var volume = $(this).val();
-        volume = (+volume) / 100;
+        volume = sliderLogVal(+volume, 1, 100);
+        volume = volume / 100;
         itemThis.gainNode.gain.value = volume;
         itemThis.volume = volume;
     },
@@ -227,7 +228,8 @@ var metronome = {
     {
         this.$stopBtn.hide();
         this.tempo = +this.$tempoRange.val();
-        this.volume = (+this.$volumeRange.val()) / 100;
+        var initVolume = sliderLogVal(+this.$volumeRange.val(), 1, 100)
+        this.volume = initVolume / 100;
         this.gainNode.gain.value = this.volume;
         this.gainNode.connect(audioCtx.destination);
         worker.onmessage = this.workerTick;
