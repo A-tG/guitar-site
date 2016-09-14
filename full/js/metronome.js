@@ -74,7 +74,7 @@ var metronome = {
         itemThis = event.data.itemThis;
         $(this).hide();
         itemThis.$stopBtn.show();
-        beatNumber = 0;
+        itemThis.beatNumber = 0;
         worker.postMessage('start');
     },
     
