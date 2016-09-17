@@ -29,12 +29,20 @@ var SCALES = {
     "harmonic_min": [2, 1, 2, 2, 1, 3, 1],
     "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     "major_arp": [4, 3, 5],
-    "dorian": [2, 1, 2, 2, 2, 1, 2]
+    "dorian": [2, 1, 2, 2, 2, 1, 2],
+    "phrygian": [1, 2, 2, 2, 1, 2, 2],
+    "lydian": [2, 2, 2, 1, 2, 2, 1],
+    "myxolydian": [2, 2, 1, 2, 2, 1, 2],
+    "locrian": [1, 2, 2, 1, 2, 2, 2],
+    "melodic_min": [2, 1, 2, 2, 2, 2, 1],
+    "altered_dom": [1, 2, 1, 2, 2, 2, 2]
 }
 var TUNINGS = {
     "standart_e": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
     "standart_e_bass": ["G", "D", "A", "E", "B"],
-    "drop_d": ["E", "B", "G", "D", "A", "D", "B"]
+    "drop_d_6": ["E", "B", "G", "D", "A", "D", "B", "F#", "C#", "G#", "D#", "A#"],
+    "drop_a_7": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
+    "drop_e_8": ["E", "B", "G", "D", "A", "E", "B", "E", "C#", "G#", "D#", "A#"]
 }
 var CUSTOM_TUNING_VALUE = "custom";
 
