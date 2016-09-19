@@ -234,6 +234,8 @@ var metronome = {
         this.gainNode.connect(audioCtx.destination);
         worker.onmessage = this.workerTick;
         this.$tempoInput.val(this.tempo);
+        this.beats = this.$beatsSelect.val();
+        this.beatValue = this.$beatValSelect.val();
         this.$playBtn.click({itemThis: this}, this.onPlayBtn);
         this.$stopBtn.click({itemThis: this}, this.onStopBtn);
         this.$volumeRange.change({itemThis: this}, this.onVolumeChange);
