@@ -98,6 +98,7 @@ var DEL_STRING_BTN_CLASS = "delete_string";
 var CLOSE_BTN_CLASS = "close_btn";
 var SET_DEFAULT_BTN_CLASS = "set_default_btn";
 
+var METRONOME_DISABLED_ID = "metronome_disabled_block";
 var ADD_NEW_ITEM_BTN_ID = "add_new_item_btn";
 var METR_PLAY_BTN_ID = "metronome_play_btn";
 var METR_STOP_BTN_ID = "metronome_stop_btn";
