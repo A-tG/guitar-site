@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Artistic Guitar</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <div class="bg_block">
@@ -27,12 +28,8 @@
                 <div class="ticker"></div>
                 <div class="weight"></div>
               </li>
-              <li id="metronome_play_btn" class="play_btn_block">
-                <div class="play_btn transitional"></div>
-              </li>
-              <li id="metronome_stop_btn" class="stop_btn_block">
-                <div class="stop_btn transitional"></div>
-              </li>
+              <li id="metronome_play_btn" class="play_btn material-icons md-48 transitional">&#xE037;</li>
+              <li id="metronome_stop_btn" class="stop_btn material-icons md-48 transitional">&#xE034;</li>
               <li class="volume_block">
                 <div class="metronome_option_head">
                   <span class="option_head_start_val">0%</span>
@@ -165,8 +162,7 @@
           </div>
         </div>
         <div id="add_new_item_btn" class="add_new_item transitional">
-          <div class="big_plus_hor_line transitional"></div>
-          <div class="big_plus_ver_line transitional"></div>
+          <i class="material-icons md-82">&#xE147;</i>
         </div>
       </div>
       <noscript class="noscipt_warning">Please enable javascript or update your browser</noscript>
@@ -227,14 +223,9 @@
       <div id="{{=it.id}}" class="item_block">
         <ul class="strings_options_block">
           <li class="strings_btns_block">
-            <div class="string_btn delete_string transitional" title="delete string">
-              <div class="minus transitional"></div>
-            </div>
+            <div class="material-icons md-24 string_btn delete_string transitional" title="Delete string">&#xE15D;</div>
             <div class="strings_number">0</div>
-            <div class="string_btn add_string transitional" title="add string">
-              <div class="plus_hor_line transitional"></div>
-              <div class="plus_ver_line transitional"></div>
-            </div>
+            <div class="material-icons md-24 string_btn add_string transitional" title="Add string">&#xE148;</div>
           </li>
         </ul>
         <div class="item_content">
@@ -363,18 +354,8 @@
           </div>
           <div class="clear"></div>
         </div>
-        <div class="close_btn transitional" title="close">
-          <div class="close_block">
-            <div class="close_hor_line transitional"></div>
-            <div class="close_ver_line transitional"></div>
-          </div>
-        </div>
-        <div class="set_default_btn transitional" title="set current options as default">
-          <div class="checkmark">
-           <div class="checkmark_stem transitional"></div>
-           <div class="checkmark_kick transitional"></div>
-          </div>
-        </div>
+        <div class="close_btn material-icons md-36  transitional" title="Close">&#xE5C9;</div>
+        <div class="set_default_btn material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
         <div class="clear"></div>
       </div>
     </script>

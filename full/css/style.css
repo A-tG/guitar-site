@@ -194,34 +194,21 @@ select
     -webkit-transform: rotate(31deg);
     transform: rotate(31deg);
 }
-.play_btn_block, .stop_btn_block
-{
-    width: 50px;
-    height: 50px;
-}
 .play_btn
 {
-    margin: 5px 0 0 6px;
-    border-top: 20px solid transparent;
-    border-left: 40px solid #fc0;
-    border-bottom: 20px solid transparent;
+    color: #fc0;
 }
-.play_btn_block:hover .transitional
+.play_btn:hover
 {
-    border-left-color: #fff;
+    color: #fff;
 }
 .stop_btn
 {
-    box-sizing: border-box;
-    margin: 5px auto;
-    width: 38px;
-    height: 40px;
-    border-left: 10px solid #fc0;
-    border-right: 10px solid #fc0;
+    color: #fc0;
 }
-.stop_btn_block:hover .transitional
+.stop_btn:hover
 {
-    border-color: #fff;
+    color: #fff;
 }
 .volume_block
 {
@@ -332,7 +319,7 @@ select
 }
 .strings_btns_block
 {
-    margin: 9px auto 10px auto;
+    margin: 6px auto 7px auto;
     text-align: center;
 }
 .strings_number
@@ -347,51 +334,21 @@ select
 .string_btn
 {
     box-sizing: border-box;
-    border: 2px solid #fc0;
-    width: 18px;
-    height: 18px;
     vertical-align: middle;
 }
 .delete_string
 {
-    display: inline-block;
+    color: #fc0;
     margin-left: 4px;
 }
 .add_string
 {
-    display: inline-block;
+    color: #fc0;
     margin-right: 4px;
-}
-.minus
-{
-    margin: 50% auto auto;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 2px;
-    background: #fc0;
-}
-.plus_hor_line
-{
-    position: absolute;
-    margin: 6px auto auto 1px;
-    width: 12px;
-    height: 2px;
-    background: #fc0;
-}
-.plus_ver_line
-{
-    margin: 1px auto;
-    width: 2px;
-    background: #fc0;
-    height: 12px;
 }
 .string_btn:hover
 {
-    border-color: #fff;
-}
-.string_btn:hover .transitional
-{
-    background: #fff;
+    color: #fff;
 }
 .string_tune
 {
@@ -703,43 +660,11 @@ select
     position: absolute;
     top: 0;
     right: 0;
-    border: 2px solid #fc0;
-    width: 25px;
-    height: 25px;
-    box-sizing: border-box;
-    
-}
-.close_block
-{
-    width: 100%;
-    height: 100%;
-    -ms-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-.close_hor_line
-{
-    margin-top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background: #fc0;
-}
-.close_ver_line
-{
-    margin: 0 auto;
-    height: 100%;
-    width: 3px;
-    background: #fc0;
+    color: #fc0;
 }
 .close_btn:hover
 {
-    border-color: #fff;
-}
-.close_btn:hover .transitional
-{
-    background: #fff;
+    color: #fff;
 }
 
 .set_default_btn
@@ -748,47 +673,12 @@ select
     bottom: 0px;
     right: 0px;
     margin: auto 0 0 auto;
-    border: 2px solid #fc0;
-    width: 25px;
-    height: 25px;
     box-sizing: border-box;
-    
+    color: #fc0;
 }
 .set_default_btn:hover
 {
-    border-color: #fff;
-}
-.set_default_btn:hover .transitional
-{
-    background: #fff;
-}
-.checkmark
-{
-    position: absolute;
-    width: 8px;
-    height: 14px;
-    left: 7px;
-    top: 3px;
-    -ms-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-.checkmark_stem
-{
-    position: absolute;
-    right: 0;
-    height: 14px;
-    width: 3px;
-    background: #fc0;
-}
-.checkmark_kick
-{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 7px;
-    background: #fc0;
+    color: #fff;
 }
 
 .options_text
@@ -975,41 +865,13 @@ select
 
 .add_new_item
 {
-    position: relative;
-    box-sizing: border-box;
     margin: 70px auto;
-    border: 2px solid #fc0;
-    height: 75px;
-    width: 75px;
-    padding: 0 6.5px 0 8.5px;
-}
-.big_plus_hor_line
-{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    width: 83.33%;
-    height: 6.66%;
-    background: #fc0;
-}
-.big_plus_ver_line
-{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    width: 6.66%;
-    background: #fc0;
-    height: 83.33%;
+    color: #fc0;
+    width: 82px;
 }
 .add_new_item:hover
 {
-    border-color: #fff;
-}
-.add_new_item:hover .transitional
-{  
-    background: #fff;
+    color: #fff;
 }
 .selected_text
 {
@@ -1032,4 +894,25 @@ select
     font-family: Tahoma, Arial, Verdana;
     font-size: 25px;
     font-weight: bold;
+}
+
+.material-icons.md-18 
+{ 
+    font-size: 18px; 
+}
+.material-icons.md-24 
+{ 
+    font-size: 24px; 
+}
+.material-icons.md-36 
+{ 
+    font-size: 36px; 
+}
+.material-icons.md-48 
+{ 
+    font-size: 48px; 
+}
+.material-icons.md-82 
+{ 
+    font-size: 82px; 
 }
