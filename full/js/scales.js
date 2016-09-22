@@ -169,7 +169,7 @@ function ScalesItem(id)
     
     this.selectCurrentTuning = function()
     {
-        $("." + TUNING_SELECT_CLASS + " [value='" + this.tuning + "']", this.$itemBlock).prop("selected", true);
+        this.$itemBlock.find("." + TUNING_SELECT_CLASS + " [value='" + this.tuning + "']").prop("selected", true);
     }
     
     this.selectCurrentScale = function()
@@ -231,7 +231,7 @@ function ScalesItem(id)
         itemThis.stringsTunes[currentStringTuneNumber] = stringTune;
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
-        $('.' + TUNING_SELECT_CLASS + " [value='" + CUSTOM_TUNING_VALUE + "']", this.$itemBlock).prop("selected", true);
+        itemThis.selectCurrentTuning();
     }
     
     this.onLeftArrowTuneClick = function(event)
@@ -245,7 +245,7 @@ function ScalesItem(id)
         $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + " :contains('" + note + "')", $outterSelector).prop("selected", true);
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
-        $('.' + TUNING_SELECT_CLASS + " [value='" + CUSTOM_TUNING_VALUE + "']", this.$itemBlock).prop("selected", true);
+        itemThis.selectCurrentTuning();
     }
     
     this.onRightArrowTuneClick = function(event)
@@ -259,7 +259,7 @@ function ScalesItem(id)
         $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + " :contains('" + note + "')", $outterSelector).prop("selected", true);
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
-        $('.' + TUNING_SELECT_CLASS + " [value='" + CUSTOM_TUNING_VALUE + "']", this.$itemBlock).prop("selected", true);
+        itemThis.selectCurrentTuning();
     }
     
     this.onTuningChange = function(event)
@@ -439,8 +439,8 @@ function ScalesItem(id)
         $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onScaleChange);
         $('.' + TUNING_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onTuningChange);
         $('.' + HALF_STEP_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onHalfStepChange);
-        $('.' + LEFT_ARROW_CLASS, '.' + HALF_STEP_BLOCK_CLASS, this.$itemBlock).click({itemThis: this}, this.onLeftArrowHalfStepClick);
-        $('.' + RIGHT_ARROW_CLASS, '.' + HALF_STEP_BLOCK_CLASS, this.$itemBlock).click({itemThis: this}, this.onRightArrowHalfStepCLick);
+        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS).find('.' + LEFT_ARROW_CLASS).click({itemThis: this}, this.onLeftArrowHalfStepClick);
+        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS).find('.' + RIGHT_ARROW_CLASS).click({itemThis: this}, this.onRightArrowHalfStepCLick);
         $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).on("click", '.' + ROOT_NOTE_CLASS, {itemThis: this}, this.onRootNoteChange);
         $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onAddStringButton);
         $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onDelStringButton);
