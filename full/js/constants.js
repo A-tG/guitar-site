@@ -120,6 +120,8 @@ var WRONG_NOTE_MSG = "Wrong note";
 var WRONG_SCALE_NAME_MSG = "Wrong scale name (value)";
 var WRONG_STRING_TUNE_NOTE_MSG = "Wrong string tune note";
 var WRONG_TUNING_NAME = "Wrong tuning name (value)";
+var WEB_AUDIO_INIT_ERR_MSG = "Web audio initialization error";
+var WORKER_INIT_ERR_MSG = "Web worker initialization error";
 
 var SCALE_NOTES_TMPL = doT.template($("#scale_notes_tmpl").html());
 var STRING_VER_FRET_TMPL = doT.template($("#string_ver_fret_tmpl").html());

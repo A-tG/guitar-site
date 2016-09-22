@@ -8,7 +8,7 @@ try
 }
 catch (err)
 {
-    console.log("Web audio initialization error");
+    console.log(WEB_AUDIO_INIT_ERR_MSG);
     isMetronomeCanWork = false;
 }
 try
@@ -17,7 +17,7 @@ try
 }
 catch (err)
 {
-    console.log("Web worker initialization error");
+    console.log(WORKER_INIT_ERR_MSG);
     isMetronomeCanWork = false;
 }
 
