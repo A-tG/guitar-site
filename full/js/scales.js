@@ -177,6 +177,11 @@ function ScalesItem(id)
         $("." + SCALE_SELECT_CLASS + " [value='" + this.scale + "']", this.$itemBlock).prop("selected", true);
     }
     
+    this.selectCurrentHalfStep = function()
+    {
+        $("." + HALF_STEP_SELECT_CLASS + " [value='" + this.halfStep + "']", this.$itemBlock).prop("selected", true);
+    }
+    
     this.moveTuning = function(steps, isForward)
     {
        for (var i = 1; i <= steps; i++)
@@ -310,7 +315,7 @@ function ScalesItem(id)
             itemThis.moveTuning(1, false);
             itemThis.selectCurrentStringsTunes();
             itemThis.putNotesOnAllStrings();
-            $("." + HALF_STEP_SELECT_CLASS + " [value='" + halfStep + "']", itemThis.$itemBlock).prop("selected", true);
+            itemThis.selectCurrentHalfStep();
         }
     }
     
@@ -325,7 +330,7 @@ function ScalesItem(id)
             itemThis.moveTuning(1, true);
             itemThis.selectCurrentStringsTunes();
             itemThis.putNotesOnAllStrings();
-            $("." + HALF_STEP_SELECT_CLASS + " [value='" + halfStep + "']", itemThis.$itemBlock).prop("selected", true);
+            itemThis.selectCurrentHalfStep();
         }
     }
     
@@ -435,6 +440,7 @@ function ScalesItem(id)
         this.changeScaleNotesBlock();
         this.selectCurrentTuning();
         this.selectCurrentScale();
+        this.selectCurrentHalfStep();
         this.putNotesOnAllStrings();
         $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onScaleChange);
         $('.' + TUNING_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onTuningChange);
