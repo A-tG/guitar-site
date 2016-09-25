@@ -424,7 +424,7 @@ function ScalesItem(id)
     
     this.initAnimation = function()
     {
-        this.$itemBlock.hide();
+        this.$itemBlock.hide(0);
         this.$itemBlock.show(200);
     }
     
