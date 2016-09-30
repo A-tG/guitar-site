@@ -21,7 +21,7 @@ function createNewItem()
     }
     else
     {
-        $addNewItemBtn.hide(200)
+        $addNewItemBtn.hide(200);
     }
 }
 
