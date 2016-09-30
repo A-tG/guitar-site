@@ -1,7 +1,7 @@
 var menuItems = [];
 var usedIDs = [];
 
-function createNewItemID()
+function getIDforNewItem()
 {
     var digit = 0
     while ((usedIDs.indexOf("menuItem" + digit)) >= 0)
@@ -13,7 +13,7 @@ function createNewItemID()
 
 function createNewItem()
 {
-    var id = createNewItemID()
+    var id = getIDforNewItem()
     if (menuItems.length < MAX_ITEMS_NUMBER)
     {
         menuItems.push(new ScalesItem(id));

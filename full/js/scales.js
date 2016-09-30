@@ -51,10 +51,10 @@ function ScalesItem(id)
     this.stringsNumber = 3;
     this.stringsTunes = DEFAULT_STRING_TUNES;
     
-    this.putNotesOnString = function(CurrentStringNumber)
+    this.putNotesOnString = function(currentStringNumber)
     {
-        var stringTune = this.getTuneForString(CurrentStringNumber);
-        var horFretSelector = '.' + HOR_FRET_CLASS + ':eq(' + CurrentStringNumber + ')';
+        var stringTune = this.getTuneForString(currentStringNumber);
+        var horFretSelector = '.' + HOR_FRET_CLASS + ':eq(' + currentStringNumber + ')';
         var $horFrets = $(horFretSelector, $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock), this.$fretboardBlock);
         var semiTonesPattern = getSemiTonesPatternForString(this.scaleNotes, this.semiTones, stringTune);
         var notesBlocks = $('.' + NOTE_CLASS, $horFrets);

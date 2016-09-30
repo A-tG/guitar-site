@@ -221,7 +221,7 @@ function sliderLogVal(position, minVal, maxVal)
         var minLogVal = Math.log(minVal);
         var maxLogVal = Math.log(maxVal);
         var scale = (maxLogVal - minLogVal) / (maxPosition - minPosition);
-        value = Math.exp(minLogVal + scale* (position - minPosition));
+        value = Math.exp(minLogVal + scale * (position - minPosition));
     }
     return value;
 }
