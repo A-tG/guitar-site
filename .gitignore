@@ -16,6 +16,8 @@ local.properties
 .settings/
 .loadpath
 
+*.bat
+
 # External tool builders
 .externalToolBuilders/
 
