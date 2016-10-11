@@ -645,6 +645,10 @@ select
 {
     background: #0bb;
 }
+.transparent_note
+{
+    opacity: 0.3;
+}
 .fret_marker
 {
     position: absolute;

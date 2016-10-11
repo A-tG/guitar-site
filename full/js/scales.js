@@ -4,7 +4,8 @@ var defaultScaleItemOptions = {
     tuning: "standart_e",
     halfStep: 0,
     stringsTunes: DEFAULT_STRING_TUNES,
-    stringsNumber: 6
+    stringsNumber: 6,
+    isTriadMode: false
 }
 
 function getDefaultScaleOptionsFromCookie()
@@ -36,6 +37,10 @@ function getDefaultScaleOptionsFromCookie()
         {
             defaultScaleItemOptions.stringsNumber = +options.stringsNumber;
         }
+        if ((options.isTriadMode !== undefined) && (typeof options.isTriadMode === 'boolean'))
+        {
+            defaultScaleItemOptions.isTriadMode = options.isTriadMode;
+        }
     }
 }
 
@@ -50,6 +55,7 @@ function ScalesItem(id)
     this.halfStep = 0;
     this.stringsNumber = 3;
     this.stringsTunes = DEFAULT_STRING_TUNES;
+    this.isTriadMode = false;
     
     this.putNotesOnString = function(currentStringNumber)
     {
@@ -57,35 +63,41 @@ function ScalesItem(id)
         var horFretSelector = '.' + HOR_FRET_CLASS + ':eq(' + currentStringNumber + ')';
         var $horFrets = $(horFretSelector, $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock), this.$fretboardBlock);
         var semiTonesPattern = getSemiTonesPatternForString(this.scaleNotes, this.semiTones, stringTune);
-        var notesBlocks = $('.' + NOTE_CLASS, $horFrets);
-        $(notesBlocks).css("display", "none");
-        var note = stringTune;
+        var $notesBlocks = $('.' + NOTE_CLASS, $horFrets);
+        $notesBlocks.css("display", "none");
+        $notesBlocks.toggleClass(TRANSPARENT_NOTE_CLASS, false);
         var stringTuneOffset = semiTonesPattern.shift();
-        for (var i = 0; i < stringTuneOffset; i++)
-        {
-            note = nextNote(note);
-        }
+        var note = nextNoteAfterSemiTones(stringTune, stringTuneOffset);
         var k = 0;
-        for (var i = stringTuneOffset; i < notesBlocks.length;)
+        for (var i = stringTuneOffset; i < $notesBlocks.length;)
         {
-            $(notesBlocks[i]).css("display", "inline");
-            $(notesBlocks[i]).text(note);
+            var noteBlock = $notesBlocks[i];
+            $(noteBlock).css("display", "inline");
+            if (this.isTriadMode)
+            {
+                var noteStep = this.scaleNotes.indexOf(note) + 1;
+                if ((noteStep != 1) && (noteStep != 3) && (noteStep != 5))
+                {
+                    $(noteBlock).toggleClass(TRANSPARENT_NOTE_CLASS, true);
+                }
+                $(noteBlock).text(noteStep);
+            }
+            else
+            { 
+                $(noteBlock).text(note);
+            }
             if (note == this.root)
             {
-                $(notesBlocks[i]).toggleClass(NORMAL_NOTE_CLASS, false).toggleClass(HIGHLIGHTED_NOTE_CLASS, true);
+                $(noteBlock).toggleClass(NORMAL_NOTE_CLASS, false).toggleClass(HIGHLIGHTED_NOTE_CLASS, true);
             }
             else
             {
-                $(notesBlocks[i]).toggleClass(NORMAL_NOTE_CLASS, true).toggleClass(HIGHLIGHTED_NOTE_CLASS, false);
+                $(noteBlock).toggleClass(NORMAL_NOTE_CLASS, true).toggleClass(HIGHLIGHTED_NOTE_CLASS, false);
             }
-            i = i + semiTonesPattern[k % semiTonesPattern.length];
-            for (var j = 0; j < semiTonesPattern[k]; j++)
-            {
-                note = nextNote(note);
-            }
+            i = i + semiTonesPattern[k];
+            note = nextNoteAfterSemiTones(note, semiTonesPattern[k]);
             k = ++k % semiTonesPattern.length;
         }
-        
     }
     
     this.putNotesOnAllStrings = function()
@@ -182,21 +194,11 @@ function ScalesItem(id)
         $("." + HALF_STEP_SELECT_CLASS + " [value='" + this.halfStep + "']", this.$itemBlock).prop("selected", true);
     }
     
-    this.moveTuning = function(steps, isForward)
+    this.moveTuning = function(halfSteps)
     {
-       for (var i = 1; i <= steps; i++)
+        for (var k = 0; k < this.stringsTunes.length; k++)
         {
-            for (var k = 0; k < this.stringsTunes.length; k++)
-            {
-                if (isForward)
-                {
-                    this.stringsTunes[k] = nextNote(this.stringsTunes[k]);
-                }
-                else
-                {
-                    this.stringsTunes[k] = prevNote(this.stringsTunes[k]);
-                }
-            }
+            this.stringsTunes[k] = nextNoteAfterSemiTones(this.stringsTunes[k], halfSteps);
         }
     }
     
@@ -281,9 +283,7 @@ function ScalesItem(id)
             {
                 itemThis.tuning = tuningName;
                 itemThis.stringsTunes = getTuneNotes(tuningName);
-                var steps = Math.abs(itemThis.halfStep);
-                var isForward = itemThis.halfStep > 0;
-                itemThis.moveTuning(steps, isForward);
+                itemThis.moveTuning(itemThis.halfStep);
                 itemThis.putNotesOnAllStrings();
                 itemThis.selectCurrentStringsTunes();
             }
@@ -297,9 +297,8 @@ function ScalesItem(id)
         var newValue = $(this).val().replace(/[^-0-9]/gim, '');
         newValue = +newValue;
         itemThis.halfStep = newValue;
-        var isForward = newValue > oldValue;
-        var valuesDiff = Math.abs(newValue - oldValue)
-        itemThis.moveTuning(valuesDiff, isForward);
+        var valuesDiff = newValue - oldValue;
+        itemThis.moveTuning(valuesDiff);
         itemThis.selectCurrentStringsTunes();
         itemThis.putNotesOnAllStrings();
     }
@@ -312,7 +311,7 @@ function ScalesItem(id)
         {
             halfStep = prevHalfStep(halfStep);
             itemThis.halfStep = halfStep;
-            itemThis.moveTuning(1, false);
+            itemThis.moveTuning(-1);
             itemThis.selectCurrentStringsTunes();
             itemThis.putNotesOnAllStrings();
             itemThis.selectCurrentHalfStep();
@@ -327,7 +326,7 @@ function ScalesItem(id)
         {
             halfStep = nextHalfStep(halfStep);
             itemThis.halfStep = halfStep;
-            itemThis.moveTuning(1, true);
+            itemThis.moveTuning(1);
             itemThis.selectCurrentStringsTunes();
             itemThis.putNotesOnAllStrings();
             itemThis.selectCurrentHalfStep();
@@ -388,6 +387,7 @@ function ScalesItem(id)
         defaultScaleItemOptions.halfStep = itemThis.halfStep;
         defaultScaleItemOptions.stringsTunes = itemThis.stringsTunes;
         defaultScaleItemOptions.stringsNumber = itemThis.stringsNumber;
+        defaultScaleItemOptions.isTriadMode = itemThis.isTriadMode;
         Cookies.set("defaultScaleOptions", defaultScaleItemOptions, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
     }
     
@@ -420,6 +420,7 @@ function ScalesItem(id)
             stringsNumber = MIN_STRINGS_NUMBER;
         }
         this.stringsNumber = stringsNumber;
+        this.isTriadMode = defaultScaleItemOptions.isTriadMode;
     }
     
     this.initAnimation = function()

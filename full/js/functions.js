@@ -146,6 +146,26 @@ function nextNote(note)
     return resultNote;
 }
 
+function nextNoteAfterSemiTones(note, semiTones)
+{
+    var resultNote = note;
+    if (semiTones > 0)
+    {
+        for (var i = 0; i < semiTones; i++)
+        {
+            resultNote = nextNote(resultNote);
+        }
+    }
+    else
+    {
+        for (var i = 0; i > semiTones; i--)
+        {
+            resultNote = prevNote(resultNote);
+        }
+    }
+    return resultNote;
+}
+
 function prevHalfStep(halfStep)
 {
     halfStep--;

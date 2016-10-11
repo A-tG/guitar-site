@@ -28,7 +28,6 @@ var SCALES = {
     "ionian": [2, 1, 2, 2, 1, 2, 2],
     "harmonic_min": [2, 1, 2, 2, 1, 3, 1],
     "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    "major_arp": [4, 3, 5],
     "dorian": [2, 1, 2, 2, 2, 1, 2],
     "phrygian": [1, 2, 2, 2, 1, 2, 2],
     "lydian": [2, 2, 2, 1, 2, 2, 1],
@@ -81,6 +80,7 @@ var VER_FRET_CLASS = "fret_ver";
 var NOTE_CLASS = "note";
 var NORMAL_NOTE_CLASS = "normal_note";
 var HIGHLIGHTED_NOTE_CLASS = "highlighted_note";
+var TRANSPARENT_NOTE_CLASS = "transparent_note";
 var STRINGS_OPTIONS_BLOCK_CLASS = "strings_options_block";
 var STRING_TUNE_BLOCK_CLASS = "string_tune";
 var STRING_TUNE_SELECT_CLASS = "string_tune_select";
