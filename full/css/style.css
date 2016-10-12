@@ -773,6 +773,29 @@ select
     height: 25px;
 }
 
+.triads_mode_block
+{
+    margin-top: 10px;
+}
+.triads_checkbox
+{
+    color: #fc0;
+    vertical-align: middle;
+}
+.triads_checkbox:hover
+{
+    color: #fff;
+}
+.triads_checkbox_empty
+{
+    color: #fc0;
+    vertical-align: middle;
+}
+.triads_checkbox_empty:hover
+{
+    color: #fff;
+}
+
 .scale_options_block
 {
     float: left;

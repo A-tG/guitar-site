@@ -97,6 +97,8 @@ var ADD_STRING_BTN_CLASS = "add_string";
 var DEL_STRING_BTN_CLASS = "delete_string";
 var CLOSE_BTN_CLASS = "close_btn";
 var SET_DEFAULT_BTN_CLASS = "set_default_btn";
+var TRIADS_CHECKBOX_CLASS = "triads_checkbox";
+var TRIADS_CHECKBOX_EMPTY_CLASS = "triads_checkbox_empty";
 
 var METRONOME_DISABLED_ID = "metronome_disabled_block";
 var ADD_NEW_ITEM_BTN_ID = "add_new_item_btn";

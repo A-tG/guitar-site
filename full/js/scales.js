@@ -71,28 +71,28 @@ function ScalesItem(id)
         var k = 0;
         for (var i = stringTuneOffset; i < $notesBlocks.length;)
         {
-            var noteBlock = $notesBlocks[i];
-            $(noteBlock).css("display", "inline");
+            var $noteBlock = $($notesBlocks[i]);
+            $noteBlock.css("display", "inline");
             if (this.isTriadMode)
             {
                 var noteStep = this.scaleNotes.indexOf(note) + 1;
                 if ((noteStep != 1) && (noteStep != 3) && (noteStep != 5))
                 {
-                    $(noteBlock).toggleClass(TRANSPARENT_NOTE_CLASS, true);
+                    $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
                 }
-                $(noteBlock).text(noteStep);
+                $noteBlock.text(noteStep);
             }
             else
             { 
-                $(noteBlock).text(note);
+                $noteBlock.text(note);
             }
             if (note == this.root)
             {
-                $(noteBlock).toggleClass(NORMAL_NOTE_CLASS, false).toggleClass(HIGHLIGHTED_NOTE_CLASS, true);
+                $noteBlock.toggleClass(NORMAL_NOTE_CLASS, false).toggleClass(HIGHLIGHTED_NOTE_CLASS, true);
             }
             else
             {
-                $(noteBlock).toggleClass(NORMAL_NOTE_CLASS, true).toggleClass(HIGHLIGHTED_NOTE_CLASS, false);
+                $noteBlock.toggleClass(NORMAL_NOTE_CLASS, true).toggleClass(HIGHLIGHTED_NOTE_CLASS, false);
             }
             i = i + semiTonesPattern[k];
             note = nextNoteAfterSemiTones(note, semiTonesPattern[k]);
@@ -391,6 +391,24 @@ function ScalesItem(id)
         Cookies.set("defaultScaleOptions", defaultScaleItemOptions, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
     }
     
+    this.onTriadsCheckboxClick = function(event)
+    {
+        var itemThis = event.data.itemThis;
+        if (itemThis.isTriadMode)
+        {
+            itemThis.isTriadMode = false;
+            itemThis.$triadsCheckbox.hide(0);
+            itemThis.$triadsCheckboxEmpty.show(0);
+        }
+        else
+        {
+            itemThis.isTriadMode = true;
+            itemThis.$triadsCheckboxEmpty.hide(0);
+            itemThis.$triadsCheckbox.show(0);
+        }
+        itemThis.putNotesOnAllStrings();
+    }
+    
     this.initStrings = function()
     {
         for (var i = 0; i < FRETS_NUMBER; i++)
@@ -423,6 +441,22 @@ function ScalesItem(id)
         this.isTriadMode = defaultScaleItemOptions.isTriadMode;
     }
     
+    this.initTriadsCheckbox = function()
+    {
+        this.$triadsCheckbox = $('.' + TRIADS_CHECKBOX_CLASS, this.$itemBlock);
+        this.$triadsCheckboxEmpty = $('.' + TRIADS_CHECKBOX_EMPTY_CLASS, this.$itemBlock);
+        if (this.isTriadMode)
+        {
+            this.$triadsCheckboxEmpty.hide(0);
+        }
+        else
+        {
+            this.$triadsCheckbox.hide(0);
+        }
+        this.$triadsCheckbox.click({itemThis: this}, this.onTriadsCheckboxClick);
+        this.$triadsCheckboxEmpty.click({itemThis: this}, this.onTriadsCheckboxClick);
+    }
+    
     this.initAnimation = function()
     {
         this.$itemBlock.hide(0);
@@ -438,6 +472,7 @@ function ScalesItem(id)
         this.initAnimation();
         this.readDefaultScaleItemOptions();
         this.initStrings();
+        this.initTriadsCheckbox();
         this.changeScaleNotesBlock();
         this.selectCurrentTuning();
         this.selectCurrentScale();
