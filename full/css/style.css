@@ -34,7 +34,7 @@ select
     background: #333;
     margin: 0 auto;
     min-height: 100vh;
-    min-width: 1350px;
+    min-width: 1250px;
     max-width: 100vw;
     width: 100%;
     padding-bottom: 70px;
@@ -321,7 +321,7 @@ select
     position: relative;
     margin: 70px auto 0;
     width: 90%;
-    min-width: 1300px;
+    min-width: 1250px;
     max-width: 1780px;
     background: #222;
     box-shadow: 0 0 5px #000;
@@ -716,7 +716,7 @@ select
 {
     float: left;
     margin-top: 7px;
-    width: 25%;
+    width: 22%;
 }
 .tuning_options li
 {
