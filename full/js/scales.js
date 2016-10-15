@@ -142,7 +142,7 @@ function ScalesItem(id)
             if (stringNumber == 0)
             {
                 fretNumberInPattern = i % 12;
-                isFretWithMarker = (fretNumberInPattern == 3) || (fretNumberInPattern == 5) || (fretNumberInPattern == 7) || (fretNumberInPattern == 10);
+                isFretWithMarker = (fretNumberInPattern == 3) || (fretNumberInPattern == 5) || (fretNumberInPattern == 7) || (fretNumberInPattern == 9);
                 isFretWithDoubleMarker = (i != 0) && (fretNumberInPattern == 0);
                 if (isFretWithMarker)
                 {
