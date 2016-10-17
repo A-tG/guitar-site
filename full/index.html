@@ -171,13 +171,13 @@
     <script id="scale_notes_tmpl" type="text/plain">
       <li class="scale_notes">
         <ul class="scale_note">
-          <span>{{=it.root}}</span>
+          <span class="scale_note_text transitional">{{=it.root}}</span>
           <div class="separator_ver_small"></div>
         </ul>
         {{~it.semiTones :semiTone:i}}
           <ul class="semitone_block semitone_width{{=semiTone}}">{{=semiTone}}</ul>
           <ul class="scale_note">
-            <span>{{=it.notes[i + 1]}}</span>
+            <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small"></div>
           </ul>
         {{~}}
@@ -328,8 +328,8 @@
             </select>
             <div class="triads_mode_block">
               <span class="options_text">Triads</span>
-              <div class="triads_checkbox material-icons md-24  transitional" title="Showing triades">&#xE834;</div>
-              <div class="triads_checkbox_empty material-icons md-24  transitional" title="Showing notes">&#xE835;</div>
+              <div class="triads_checkbox material-icons md-24  transitional" title="Show notes">&#xE834;</div>
+              <div class="triads_checkbox_empty material-icons md-24  transitional" title="Show triads">&#xE835;</div>
             </div>
           </div>
           <div class="scale_options_block">

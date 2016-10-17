@@ -27,7 +27,8 @@ select
 {
     background: #333;
     min-height: 100vh;
-    
+    height: 100%;
+    height: 100vh;
 }
 .content_block
 {
@@ -50,7 +51,7 @@ select
 .head_block_content
 {
     width: 70%;
-    min-width: 900px;
+    min-width: 940px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -842,14 +843,21 @@ select
 }
 .scale_note
 {
-    color: #fff;
+    color: #fc0;
     display: inline-block;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
-    line-height: 27px;
     text-align: center;
     min-width: 27px;
     position: relative;
+}
+.scale_note_text
+{
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    line-height: 27px;
+}
+.scale_note:hover
+{
+    color: #fff;
 }
 .semitone_block
 {

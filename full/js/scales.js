@@ -56,6 +56,8 @@ function ScalesItem(id)
     this.stringsNumber = 3;
     this.stringsTunes = DEFAULT_STRING_TUNES;
     this.isTriadMode = false;
+    this.normalNotesShowPattern = [true, true, true, true, true, true, true, true, true, true, true, true];
+    this.triadsNotesShowPattern = [true, false, true, false, true, false, false, false, false, false, false, false];
     
     this.putNotesOnString = function(currentStringNumber)
     {
@@ -73,27 +75,24 @@ function ScalesItem(id)
         {
             var $noteBlock = $($notesBlocks[i]);
             $noteBlock.css("display", "inline");
+            var noteStep = this.scaleNotes.indexOf(note);
+            var isHideNote = false;
             if (this.isTriadMode)
             {
-                var noteStep = this.scaleNotes.indexOf(note) + 1;
-                if ((noteStep != 1) && (noteStep != 3) && (noteStep != 5))
-                {
-                    $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
-                }
-                $noteBlock.text(noteStep);
+                isHideNote = !this.triadsNotesShowPattern[noteStep];
+                $noteBlock.text(noteStep + 1);
             }
             else
-            { 
+            {
+                isHideNote = !this.normalNotesShowPattern[noteStep];
                 $noteBlock.text(note);
             }
-            if (note == this.root)
+            if (isHideNote)
             {
-                $noteBlock.toggleClass(NORMAL_NOTE_CLASS, false).toggleClass(HIGHLIGHTED_NOTE_CLASS, true);
+                $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
             }
-            else
-            {
-                $noteBlock.toggleClass(NORMAL_NOTE_CLASS, true).toggleClass(HIGHLIGHTED_NOTE_CLASS, false);
-            }
+            var isRoot = (note == this.root);
+            $noteBlock.toggleClass(NORMAL_NOTE_CLASS, !isRoot).toggleClass(HIGHLIGHTED_NOTE_CLASS, isRoot);
             i = i + semiTonesPattern[k];
             note = nextNoteAfterSemiTones(note, semiTonesPattern[k]);
             k = ++k % semiTonesPattern.length;
@@ -205,7 +204,7 @@ function ScalesItem(id)
     this.changeScaleNotesBlock = function()
     {
         $('.' + SCALE_NOTES_CLASS, this.$itemBlock).remove();
-        var notes = this.scaleNotes;
+        var notes = this.scaleNotes.slice();
         notes.push(this.root);
         var param = {
             root: this.root, 
@@ -213,6 +212,23 @@ function ScalesItem(id)
             notes: notes
         }
         $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).append(SCALE_NOTES_TMPL(param));
+        var $scaleNotesBlocks = $('.' + SCALE_NOTES_CLASS, this.$itemBlock).find('.' + SCALE_NOTE_TEXT_CLASS);
+        var scaleNotesNumber = $scaleNotesBlocks.length - 1;
+        for (var i = 0; i < scaleNotesNumber; i++)
+        {
+            var isHideNote = !(this.isTriadMode ? this.triadsNotesShowPattern[i] : this.normalNotesShowPattern[i]);
+            if (isHideNote)
+            {
+                var $noteBlock = $($scaleNotesBlocks[i]);
+                $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
+                if (i == 0)
+                {
+                    $noteBlock = $($scaleNotesBlocks[scaleNotesNumber]);
+                    $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
+                }
+            }
+        }
+        $('.' + SCALE_NOTES_CLASS, this.$itemBlock).on("click", '.' + SCALE_NOTE_CLASS, {itemThis: this}, this.onScaleNoteClick);
     }
     
     this.onScaleChange = function(event)
@@ -348,6 +364,38 @@ function ScalesItem(id)
         }
     }
     
+    this.onScaleNoteClick = function(event)
+    {
+        var itemThis = event.data.itemThis;
+        var scaleNoteNumber = $('.' + SCALE_NOTE_CLASS, itemThis.$itemBlock).index(this);
+        scaleNoteNumber = scaleNoteNumber % itemThis.scaleNotes.length;
+        var isShowNote = false;
+        if (itemThis.isTriadMode)
+        {
+            isShowNote = !itemThis.triadsNotesShowPattern[scaleNoteNumber];
+            itemThis.triadsNotesShowPattern[scaleNoteNumber] = isShowNote;
+        }
+        else
+        {
+            isShowNote = !itemThis.normalNotesShowPattern[scaleNoteNumber];
+            itemThis.normalNotesShowPattern[scaleNoteNumber] = isShowNote;
+        }
+        var isRootNote = (scaleNoteNumber == 0);
+        if (isRootNote)
+        {
+            var $noteBlock = $('.' + SCALE_NOTE_CLASS, itemThis.$itemBlock).last().find('.' + SCALE_NOTE_TEXT_CLASS);
+            $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
+            $noteBlock = $('.' + SCALE_NOTE_CLASS, itemThis.$itemBlock).first().find('.' + SCALE_NOTE_TEXT_CLASS);
+            $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
+        }
+        else
+        {
+            var $noteBlock = $(this).find('.' + SCALE_NOTE_TEXT_CLASS);
+            $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
+        }
+        itemThis.putNotesOnAllStrings();
+    }
+    
     this.onAddStringButton = function(event)
     {
         var itemThis = event.data.itemThis;
@@ -406,6 +454,7 @@ function ScalesItem(id)
             itemThis.$triadsCheckboxEmpty.hide(0);
             itemThis.$triadsCheckbox.show(0);
         }
+        itemThis.changeScaleNotesBlock();
         itemThis.putNotesOnAllStrings();
     }
     
