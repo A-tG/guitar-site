@@ -16,6 +16,8 @@ var MAX_BEAT_VAL = 32;
 var MIN_TEMPO = 40;
 var MAX_TEMPO = 320;
 var DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS = 30;
+var DEFAULT_NOTES_SHOW_PATTERN = [true, true, true, true, true, true, true, true, true, true, true, true];
+var DEFAULT_TRIADS_SHOW_PATTERN = [true, false, true, false, true, false, false, false, false, false, false, false];
 
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 var DEFAULT_SCALE_SEMITONES = [2, 2, 1, 2, 2, 2, 1];

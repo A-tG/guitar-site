@@ -5,7 +5,9 @@ var defaultScaleItemOptions = {
     halfStep: 0,
     stringsTunes: DEFAULT_STRING_TUNES,
     stringsNumber: 6,
-    isTriadMode: false
+    isTriadMode: false,
+    normalNotesShowPattern: DEFAULT_NOTES_SHOW_PATTERN,
+    triadsNotesShowPattern: DEFAULT_TRIADS_SHOW_PATTERN
 }
 
 function getDefaultScaleOptionsFromCookie()
@@ -41,6 +43,14 @@ function getDefaultScaleOptionsFromCookie()
         {
             defaultScaleItemOptions.isTriadMode = options.isTriadMode;
         }
+        if ((options.normalNotesShowPattern !== undefined) && isCorrectNotesShowPattern(options.normalNotesShowPattern))
+        {
+            defaultScaleItemOptions.normalNotesShowPattern = options.normalNotesShowPattern;
+        }
+        if ((options.triadsNotesShowPattern !== undefined) && isCorrectNotesShowPattern(options.triadsNotesShowPattern))
+        {
+            defaultScaleItemOptions.triadsNotesShowPattern = options.triadsNotesShowPattern;
+        }
     }
 }
 
@@ -56,8 +66,8 @@ function ScalesItem(id)
     this.stringsNumber = 3;
     this.stringsTunes = DEFAULT_STRING_TUNES;
     this.isTriadMode = false;
-    this.normalNotesShowPattern = [true, true, true, true, true, true, true, true, true, true, true, true];
-    this.triadsNotesShowPattern = [true, false, true, false, true, false, false, false, false, false, false, false];
+    this.normalNotesShowPattern = DEFAULT_NOTES_SHOW_PATTERN;
+    this.triadsNotesShowPattern = DEFAULT_TRIADS_SHOW_PATTERN;
     
     this.putNotesOnString = function(currentStringNumber)
     {
@@ -488,6 +498,8 @@ function ScalesItem(id)
         }
         this.stringsNumber = stringsNumber;
         this.isTriadMode = defaultScaleItemOptions.isTriadMode;
+        this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
+        this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
     }
     
     this.initTriadsCheckbox = function()

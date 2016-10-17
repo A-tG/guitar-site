@@ -245,3 +245,14 @@ function sliderLogVal(position, minVal, maxVal)
     }
     return value;
 }
+
+function isCorrectNotesShowPattern(notesShowPattern)
+{
+    var result = false;
+    if ((typeof notesShowPattern === "object") && (Array.isArray(notesShowPattern)) && 
+    (notesShowPattern.every(function(arrElement) {return (typeof arrElement === "boolean")})))
+    {
+        result = true;
+    }
+    return result;
+}
