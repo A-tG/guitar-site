@@ -248,11 +248,8 @@ function sliderLogVal(position, minVal, maxVal)
 
 function isCorrectNotesShowPattern(notesShowPattern)
 {
-    var result = false;
-    if ((typeof notesShowPattern === "object") && (Array.isArray(notesShowPattern)) && 
-    (notesShowPattern.every(function(arrElement) {return (typeof arrElement === "boolean")})))
-    {
-        result = true;
-    }
-    return result;
+    var isArray = (typeof notesShowPattern === "object") && (Array.isArray(notesShowPattern));
+    var isEveryElementBoolType = notesShowPattern.every(function(arrElement) {return (typeof arrElement === "boolean")});
+    var isCorrectLength = (notesShowPattern.length == 14);
+    return (isArray && isEveryElementBoolType && isCorrectLength);
 }
