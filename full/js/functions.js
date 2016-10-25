@@ -1,5 +1,9 @@
 function isCorrectNote(note)
 {
+    if (typeof note !== "string")
+    {
+        return false;
+    }
     var isCorrect = false;
     if (NOTES.indexOf(note.toUpperCase()) >= 0)
     {
@@ -14,6 +18,11 @@ function isCorrectNote(note)
 
 function isCorrectSemitonesSum(semiTones)
 {
+    var isArray = (typeof semiTones === "object") && (Array.isArray(semiTones));
+    if (!isArray)
+    {
+        return false;
+    }
     var isCorrect = false;
     var semiTonesSum = 0;
     for (var i = 0; i < semiTones.length; i++)
@@ -33,6 +42,10 @@ function isCorrectSemitonesSum(semiTones)
 
 function isCorrectScale(scaleName)
 {
+    if (typeof note !== "string")
+    {
+        return false;
+    }
     var isCorrect = false;
     var semiTones = SCALES[scaleName];
     if (semiTones !== undefined)
@@ -48,6 +61,11 @@ function isCorrectScale(scaleName)
 
 function isCorrectTuningNotes(stringsTunes)
 {
+    var isArray = (typeof semiTones === "object") && (Array.isArray(semiTones));
+    if (!isArray)
+    {
+        return false;
+    }
     var isCorrect = false;
     for (var i = 0; i < stringsTunes.length; i++)
     {
@@ -62,8 +80,16 @@ function isCorrectTuningNotes(stringsTunes)
 
 function isCorrectTuning(tuningName)
 {
+    if (typeof note !== "string")
+    {
+        return false;
+    }
     var isCorrect = false;
-    if (tuningName !== CUSTOM_TUNING_VALUE)
+    if (tuningName == CUSTOM_TUNING_VALUE)
+    {
+        isCorrect = true;
+    }
+    else
     {
         var stringsTunes = TUNINGS[tuningName];
         if (stringsTunes !== undefined)
@@ -75,21 +101,33 @@ function isCorrectTuning(tuningName)
             console.log(tuningName + ': ' + WRONG_TUNING_NAME)
         }
     }
-    else
-    {
-        isCorrect = true;
-    }
     return isCorrect;
 }
 
 function isCorrectHalfStep(halfStep)
 {
-    return ((+halfStep) >= MIN_HALF_STEP) && ((+halfStep) <= MAX_HALF_STEP);
+    return (Number.isInteger(halfStep)) && ((+halfStep) >= MIN_HALF_STEP) && ((+halfStep) <= MAX_HALF_STEP);
 }
 
 function isCorrectStringsNumber(number)
 {
-    return ((+number) >= MIN_STRINGS_NUMBER) && ((+number) <= MAX_STRINGS_NUMBER);
+    return (Number.isInteger(number)) && ((+number) >= MIN_STRINGS_NUMBER) && ((+number) <= MAX_STRINGS_NUMBER);
+}
+
+function isCorrectNotesShowPattern(notesShowPattern)
+{
+    var isArray = (typeof notesShowPattern === "object") && (Array.isArray(notesShowPattern));
+    if (!isArray)
+    {
+        return false;
+    }
+    var isEveryElementBoolType = notesShowPattern.every(function(arrElement) {return (typeof arrElement === "boolean")});
+    if (!isEveryElementBoolType)
+    {
+        return false;
+    }
+    var isCorrectLength = (notesShowPattern.length == 14);
+    return (isArray && isEveryElementBoolType && isCorrectLength);
 }
 
 function getScaleSemitones(scaleName)
@@ -244,12 +282,4 @@ function sliderLogVal(position, minVal, maxVal)
         value = Math.exp(minLogVal + scale * (position - minPosition));
     }
     return value;
-}
-
-function isCorrectNotesShowPattern(notesShowPattern)
-{
-    var isArray = (typeof notesShowPattern === "object") && (Array.isArray(notesShowPattern));
-    var isEveryElementBoolType = notesShowPattern.every(function(arrElement) {return (typeof arrElement === "boolean")});
-    var isCorrectLength = (notesShowPattern.length == 14);
-    return (isArray && isEveryElementBoolType && isCorrectLength);
 }
