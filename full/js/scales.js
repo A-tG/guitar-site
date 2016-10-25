@@ -68,36 +68,35 @@ function ScalesItem(id)
     this.isTriadMode = false;
     this.normalNotesShowPattern = DEFAULT_NOTES_SHOW_PATTERN;
     this.triadsNotesShowPattern = DEFAULT_TRIADS_SHOW_PATTERN;
+    this.notesBlocks = [];
     
     this.putNotesOnString = function(currentStringNumber)
     {
         var stringTune = this.getTuneForString(currentStringNumber);
-        var horFretSelector = '.' + HOR_FRET_CLASS + ':eq(' + currentStringNumber + ')';
-        var $horFrets = $(horFretSelector, $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock), this.$fretboardBlock);
         var semiTonesPattern = getSemiTonesPatternForString(this.scaleNotes, this.semiTones, stringTune);
-        var $notesBlocks = $('.' + NOTE_CLASS, $horFrets);
-        $notesBlocks.css("display", "none");
+        var $notesBlocks = $(this.notesBlocks[currentStringNumber]);
+        $notesBlocks.toggleClass(HIDDEN_NOTE_CLASS, true);
         $notesBlocks.toggleClass(TRANSPARENT_NOTE_CLASS, false);
         var stringTuneOffset = semiTonesPattern.shift();
         var note = nextNoteAfterSemiTones(stringTune, stringTuneOffset);
         var k = 0;
         for (var i = stringTuneOffset; i < $notesBlocks.length;)
         {
-            var $noteBlock = $($notesBlocks[i]);
-            $noteBlock.css("display", "inline");
+            var $noteBlock = $(this.notesBlocks[currentStringNumber][i]);
+            $noteBlock.toggleClass(HIDDEN_NOTE_CLASS, false);
             var noteStep = this.scaleNotes.indexOf(note);
-            var isHideNote = false;
+            var isTransparentNote = false;
             if (this.isTriadMode)
             {
-                isHideNote = !this.triadsNotesShowPattern[noteStep];
+                isTransparentNote = !this.triadsNotesShowPattern[noteStep];
                 $noteBlock.text(noteStep + 1);
             }
             else
             {
-                isHideNote = !this.normalNotesShowPattern[noteStep];
+                isTransparentNote = !this.normalNotesShowPattern[noteStep];
                 $noteBlock.text(note);
             }
-            if (isHideNote)
+            if (isTransparentNote)
             {
                 $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
             }
@@ -147,7 +146,13 @@ function ScalesItem(id)
         var fretNumberInPattern = 0;
         for (var i = 0; i < verFrets.length; i++)
         {
-            $(verFrets[i]).append(STRING_FRET_TMPL(param));
+            var $fret = $(STRING_FRET_TMPL(param)).appendTo(verFrets[i]);
+            var noteBlock = $('.' + NOTE_CLASS, $fret)[0];
+            if (this.notesBlocks[stringNumber] === undefined)
+            {
+                this.notesBlocks[stringNumber] = [];
+            }
+            this.notesBlocks[stringNumber][i] = noteBlock;
             if (stringNumber == 0)
             {
                 fretNumberInPattern = i % 12;
@@ -226,8 +231,8 @@ function ScalesItem(id)
         var scaleNotesNumber = $scaleNotesBlocks.length - 1;
         for (var i = 0; i < scaleNotesNumber; i++)
         {
-            var isHideNote = !(this.isTriadMode ? this.triadsNotesShowPattern[i] : this.normalNotesShowPattern[i]);
-            if (isHideNote)
+            var isTransparentNote = !(this.isTriadMode ? this.triadsNotesShowPattern[i] : this.normalNotesShowPattern[i]);
+            if (isTransparentNote)
             {
                 var $noteBlock = $($scaleNotesBlocks[i]);
                 $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
@@ -423,6 +428,7 @@ function ScalesItem(id)
         var stringNumber = itemThis.stringsNumber
         if (stringNumber > MIN_STRINGS_NUMBER)
         {
+            itemThis.notesBlocks.pop();
             itemThis.delLastString();
             itemThis.decStringsNumber();
         }

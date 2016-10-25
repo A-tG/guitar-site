@@ -618,7 +618,6 @@ select
 }
 .note
 {
-    display: none;
     cursor: default;
     position: absolute;
     left: 50%;
@@ -645,6 +644,10 @@ select
 .highlighted_note
 {
     background: #0bb;
+}
+.hidden_note
+{
+    display: none;
 }
 .transparent_note
 {

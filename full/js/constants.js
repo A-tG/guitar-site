@@ -83,6 +83,7 @@ var NOTE_CLASS = "note";
 var NORMAL_NOTE_CLASS = "normal_note";
 var HIGHLIGHTED_NOTE_CLASS = "highlighted_note";
 var TRANSPARENT_NOTE_CLASS = "transparent_note";
+var HIDDEN_NOTE_CLASS = "hidden_note";
 var STRINGS_OPTIONS_BLOCK_CLASS = "strings_options_block";
 var STRING_TUNE_BLOCK_CLASS = "string_tune";
 var STRING_TUNE_SELECT_CLASS = "string_tune_select";

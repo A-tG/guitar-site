@@ -42,7 +42,7 @@ function isCorrectSemitonesSum(semiTones)
 
 function isCorrectScale(scaleName)
 {
-    if (typeof note !== "string")
+    if (typeof scaleName !== "string")
     {
         return false;
     }
@@ -61,7 +61,7 @@ function isCorrectScale(scaleName)
 
 function isCorrectTuningNotes(stringsTunes)
 {
-    var isArray = (typeof semiTones === "object") && (Array.isArray(semiTones));
+    var isArray = (typeof stringsTunes === "object") && (Array.isArray(stringsTunes));
     if (!isArray)
     {
         return false;
@@ -80,7 +80,7 @@ function isCorrectTuningNotes(stringsTunes)
 
 function isCorrectTuning(tuningName)
 {
-    if (typeof note !== "string")
+    if (typeof tuningName !== "string")
     {
         return false;
     }
