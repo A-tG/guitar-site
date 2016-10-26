@@ -37,6 +37,10 @@ function createItemsFromURLparameters()
         menuItems.push(new ScalesItem(id, itemsJSONs[i]));
         usedIDs.push(id);
     }
+    if (menuItems.length >= MAX_ITEMS_NUMBER)
+    {
+        $addNewItemBtn.hide(200);
+    }
 }
 
 function deleteItem(id)
@@ -62,7 +66,8 @@ function changeURLitemsParameters()
     var urlString = '?';
     for (var i = 0; i < itemsJSONs.length; i++)
     {
-        urlString += 'i' + i + '=' + itemsJSONs[i];
+        var encodedParameter = btoa(itemsJSONs[i]);
+        urlString += 'i' + i + '=' + encodedParameter;
         if (i < (itemsJSONs.length - 1))
         {
             urlString += '&';
@@ -76,6 +81,7 @@ function readURLitemsParameters()
     var url = window.location.href;
     var index = url.indexOf('?');
     var parameters = [];
+    var preparedParameters = [];
     if (index != -1)
     {
         var parametersStr = url.slice(index + 1);
@@ -87,11 +93,19 @@ function readURLitemsParameters()
             {
                 var parameter = parameters[i].slice(index + 1);
                 parameter = decodeURI(parameter);
-                parameters[i] = parameter;
+                try
+                {
+                    parameter = atob(parameter);
+                    preparedParameters.push(parameter);
+                }
+                catch (err)
+                {
+                    console.log(PARAMS_ATOB_ERROR_MSG + '\n' + err);
+                }
             }
         }
     }
-    itemsJSONs = parameters;
+    itemsJSONs = preparedParameters;
 }
 
 function changeItemJSON(item)
