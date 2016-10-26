@@ -7,4 +7,4 @@ else
     $('#' + METRONOME_DISABLED_ID).show(0);
 }
 getDefaultScaleOptionsFromCookie();
-createNewItem();
+itemsInit();

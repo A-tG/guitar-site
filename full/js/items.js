@@ -1,6 +1,8 @@
 var menuItems = [];
 var usedIDs = [];
 
+var itemsJSONs = [];
+
 function getIDforNewItem()
 {
     var digit = 0
@@ -13,15 +15,27 @@ function getIDforNewItem()
 
 function createNewItem()
 {
-    var id = getIDforNewItem()
+    var id = getIDforNewItem();
     if (menuItems.length < MAX_ITEMS_NUMBER)
     {
         menuItems.push(new ScalesItem(id));
         usedIDs.push(id);
+        itemsJSONs.push(menuItems[menuItems.length - 1].getItemJSON());
+        changeURLitemsParameters();
     }
     else
     {
         $addNewItemBtn.hide(200);
+    }
+}
+
+function createItemsFromURLparameters()
+{
+    for (var i = 0; (i < itemsJSONs.length) && (i < MAX_ITEMS_NUMBER); i++)
+    {
+        var id = getIDforNewItem();
+        menuItems.push(new ScalesItem(id, itemsJSONs[i]));
+        usedIDs.push(id);
     }
 }
 
@@ -36,8 +50,66 @@ function deleteItem(id)
         if(menuItems[i].id === id)
         {
             menuItems.splice(i, 1);
+            itemsJSONs.splice(i, 1);
             usedIDs.splice(usedIDs.indexOf(id), 1);
+            changeURLitemsParameters();
         }
+    }
+}
+
+function changeURLitemsParameters()
+{
+    var urlString = '?';
+    for (var i = 0; i < itemsJSONs.length; i++)
+    {
+        urlString += 'i' + i + '=' + itemsJSONs[i];
+        if (i < (itemsJSONs.length - 1))
+        {
+            urlString += '&';
+        }
+    }
+    history.replaceState({}, "", urlString);
+}
+
+function readURLitemsParameters()
+{
+    var url = window.location.href;
+    var index = url.indexOf('?');
+    var parameters = [];
+    if (index != -1)
+    {
+        var parametersStr = url.slice(index + 1);
+        parameters = parametersStr.split('&');
+        for (var i = 0; i < parameters.length; i++)
+        {
+            var index = parameters[i].indexOf('=');
+            if (index != -1)
+            {
+                var parameter = parameters[i].slice(index + 1);
+                parameter = decodeURI(parameter);
+                parameters[i] = parameter;
+            }
+        }
+    }
+    itemsJSONs = parameters;
+}
+
+function changeItemJSON(item)
+{
+    var index = $('.' + ITEM_CLASS).index(item.$itemBlock);
+    itemsJSONs[index] = item.getItemJSON();
+}
+
+function itemsInit()
+{
+    readURLitemsParameters();
+    if (itemsJSONs.length == 0)
+    {
+        createNewItem();
+    }
+    else
+    {
+        createItemsFromURLparameters();
     }
 }
 

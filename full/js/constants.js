@@ -73,6 +73,7 @@ var TUNINGS = {
 }
 var CUSTOM_TUNING_VALUE = "custom";
 
+var ITEM_CLASS = "item_block";
 var STRING_NUMBER_CLASS = "strings_number";
 var SCALE_SELECT_CLASS = "scale_select";
 var FRETBOARD_CLASS = "fretboard";

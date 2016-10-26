@@ -126,7 +126,7 @@ function isCorrectNotesShowPattern(notesShowPattern)
     {
         return false;
     }
-    var isCorrectLength = (notesShowPattern.length == 14);
+    var isCorrectLength = (notesShowPattern.length == 12);
     return (isArray && isEveryElementBoolType && isCorrectLength);
 }
 
@@ -280,6 +280,41 @@ function sliderLogVal(position, minVal, maxVal)
         var maxLogVal = Math.log(maxVal);
         var scale = (maxLogVal - minLogVal) / (maxPosition - minPosition);
         value = Math.exp(minLogVal + scale * (position - minPosition));
+    }
+    return value;
+}
+
+function semiTonesPatternBoolToInt(field, value) 
+{
+    if (isCorrectNotesShowPattern(value))
+    {
+        for (var i = 0; i < value.length; i++)
+        {
+            value[i] = value[i] ? 1 : 0;
+        }
+    }    
+    return value;
+}
+
+function semiTonesPatternIntToBool(field, value)
+{ 
+    var isArray = (typeof value === "object") && (Array.isArray(value));
+    if (!isArray)
+    {
+        return value;
+    }
+    var isEveryElementIntType = value.every(function(arrElement) {return Number.isInteger(arrElement)});
+    if (!isEveryElementIntType)
+    {
+        return value;
+    }
+    var isCorrectLength = (value.length == 12);
+    if (isArray && isEveryElementIntType && isCorrectLength)
+    {
+        for (var i = 0; i < value.length; i++)
+        {
+            value[i] = (value[i] === 0) ? false : true;
+        }
     }
     return value;
 }

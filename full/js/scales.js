@@ -15,27 +15,27 @@ function getDefaultScaleOptionsFromCookie()
     if (Cookies.getJSON("defaultScaleOptions") !== undefined)
     {
         var options = Cookies.getJSON("defaultScaleOptions");
-        if ((options.scale !== undefined) && (isCorrectScale(options.scale)))
+        if ((options.scale !== undefined) && isCorrectScale(options.scale))
         {
             defaultScaleItemOptions.scale = options.scale;
         }
-        if ((options.root !== undefined) && (isCorrectNote(options.root)))
+        if ((options.root !== undefined) && isCorrectNote(options.root))
         {
             defaultScaleItemOptions.root = options.root;
         }
-        if ((options.tuning !== undefined) && (isCorrectTuning(options.tuning)))
+        if ((options.tuning !== undefined) && isCorrectTuning(options.tuning))
         {
             defaultScaleItemOptions.tuning = options.tuning;
         }
-        if ((options.halfStep !== undefined) && (isCorrectHalfStep(options.halfStep)))
+        if ((options.halfStep !== undefined) && isCorrectHalfStep(options.halfStep))
         {
             defaultScaleItemOptions.halfStep = +options.halfStep;
         }
-        if ((options.stringsTunes !== undefined) && (isCorrectTuningNotes(options.stringsTunes)))
+        if ((options.stringsTunes !== undefined) && isCorrectTuningNotes(options.stringsTunes))
         {
             defaultScaleItemOptions.stringsTunes = options.stringsTunes;
         }
-        if ((options.stringsNumber !== undefined) && (isCorrectStringsNumber(options.stringsNumber)))
+        if ((options.stringsNumber !== undefined) && isCorrectStringsNumber(options.stringsNumber))
         {
             defaultScaleItemOptions.stringsNumber = +options.stringsNumber;
         }
@@ -54,8 +54,33 @@ function getDefaultScaleOptionsFromCookie()
     }
 }
 
-function ScalesItem(id)
+function isCorrectScalesJSONfields(JSONstring)
 {
+    var isCorrect = false;
+    var isParsable = true;
+    var obj = {};
+    try
+    {
+        obj = JSON.parse(JSONstring, semiTonesPatternIntToBool); 
+    }
+    catch (err)
+    {
+        isParsable = false;
+    }
+    if (isParsable)
+    {
+        isCorrect = (obj.t == "scales") && isCorrectScale(obj.s) && isCorrectNote(obj.r) && 
+            isCorrectTuning(obj.tn) && isCorrectHalfStep(obj.hs) && isCorrectTuningNotes(obj.strt) &&
+            isCorrectStringsNumber(obj.strn) && (typeof obj.tr === 'boolean') && isCorrectNotesShowPattern(obj.np) &&
+            isCorrectNotesShowPattern(obj.tp);
+            
+    }
+    return isCorrect;
+}
+
+function ScalesItem(id, JSONstring)
+{
+    this.type = "scales";
     this.id = id;
     this.scale = "major";
     this.root = "C";
@@ -246,6 +271,13 @@ function ScalesItem(id)
         $('.' + SCALE_NOTES_CLASS, this.$itemBlock).on("click", '.' + SCALE_NOTE_CLASS, {itemThis: this}, this.onScaleNoteClick);
     }
     
+    this.selectCurrentRootNote = function()
+    {
+        $('.' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, this.$itemBlock).toggleClass(SELECTED_TEXT_CLASS, false);
+        var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.root + "')", this.$itemBlock).first();
+        $rootNoteToSelect.toggleClass(SELECTED_TEXT_CLASS, true);
+    }
+    
     this.onScaleChange = function(event)
     {
         var itemThis = event.data.itemThis;
@@ -257,6 +289,8 @@ function ScalesItem(id)
             itemThis.scaleNotes = getNotesFromSemiTones(itemThis.root, itemThis.semiTones);
             itemThis.putNotesOnAllStrings();
             itemThis.changeScaleNotesBlock();
+            changeItemJSON(itemThis);
+            changeURLitemsParameters();
         }
     }
     
@@ -270,6 +304,8 @@ function ScalesItem(id)
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.onLeftArrowTuneClick = function(event)
@@ -284,6 +320,8 @@ function ScalesItem(id)
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.onRightArrowTuneClick = function(event)
@@ -298,6 +336,8 @@ function ScalesItem(id)
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.onTuningChange = function(event)
@@ -319,6 +359,8 @@ function ScalesItem(id)
                 itemThis.selectCurrentStringsTunes();
             }
         }
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.onHalfStepChange = function(event)
@@ -332,6 +374,8 @@ function ScalesItem(id)
         itemThis.moveTuning(valuesDiff);
         itemThis.selectCurrentStringsTunes();
         itemThis.putNotesOnAllStrings();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.onLeftArrowHalfStepClick = function(event)
@@ -346,6 +390,8 @@ function ScalesItem(id)
             itemThis.selectCurrentStringsTunes();
             itemThis.putNotesOnAllStrings();
             itemThis.selectCurrentHalfStep();
+            changeItemJSON(itemThis);
+            changeURLitemsParameters();
         }
     }
     
@@ -361,6 +407,8 @@ function ScalesItem(id)
             itemThis.selectCurrentStringsTunes();
             itemThis.putNotesOnAllStrings();
             itemThis.selectCurrentHalfStep();
+            changeItemJSON(itemThis);
+            changeURLitemsParameters();
         }
     }
     
@@ -371,11 +419,12 @@ function ScalesItem(id)
         if (isCorrectNote(note))
         {
             itemThis.root = note.toUpperCase();
-            $(' .' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, itemThis.$itemBlock).toggleClass(SELECTED_TEXT_CLASS, false);
-            $(this).toggleClass(SELECTED_TEXT_CLASS, true);
+            itemThis.selectCurrentRootNote();
             itemThis.scaleNotes = getNotesFromSemiTones(itemThis.root, itemThis.semiTones);
             itemThis.changeScaleNotesBlock();
             itemThis.putNotesOnAllStrings();
+            changeItemJSON(itemThis);
+            changeURLitemsParameters();
         }
     }
     
@@ -409,6 +458,8 @@ function ScalesItem(id)
             $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
         }
         itemThis.putNotesOnAllStrings();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.onAddStringButton = function(event)
@@ -419,6 +470,8 @@ function ScalesItem(id)
         {
             itemThis.addString(stringNumber);
             itemThis.incStringsNumber();
+            changeItemJSON(itemThis);
+            changeURLitemsParameters();
         }
     }
     
@@ -431,6 +484,8 @@ function ScalesItem(id)
             itemThis.notesBlocks.pop();
             itemThis.delLastString();
             itemThis.decStringsNumber();
+            changeItemJSON(itemThis);
+            changeURLitemsParameters();
         }
     }
     
@@ -472,6 +527,8 @@ function ScalesItem(id)
         }
         itemThis.changeScaleNotesBlock();
         itemThis.putNotesOnAllStrings();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
     
     this.initStrings = function()
@@ -508,6 +565,51 @@ function ScalesItem(id)
         this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
     }
     
+    this.getItemJSON = function()
+    {
+        var fieldsToSave =
+        {
+            t: this.type,
+            s: this.scale,
+            r: this.root,
+            tn: this.tuning,
+            hs: this.halfStep,
+            strt: this.stringsTunes,
+            strn: this.stringsNumber,
+            tr: this.isTriadMode,
+            np: this.normalNotesShowPattern.slice(),
+            tp: this.triadsNotesShowPattern.slice()
+        }
+        var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
+        return JSONstring;
+    }
+    
+    this.setItemsFieldFromJSON = function(JSONstring)
+    {
+        if (isCorrectScalesJSONfields(JSONstring))
+        {
+            obj = JSON.parse(JSONstring, semiTonesPatternIntToBool);
+            this.type = obj.t;
+            this.scale = obj.s;
+            this.root = obj.r;
+            this.tuning = obj.tn;
+            this.halfStep = obj.hs;
+            this.stringsNumber = obj.strn;
+            this.stringsTunes = obj.strt;
+            this.isTriadMode = obj.tr;
+            this.normalNotesShowPattern = obj.np;
+            this.triadsNotesShowPattern = obj.tp;
+            this.semiTones = getScaleSemitones(this.scale);
+            this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
+        }
+        else
+        {
+            this.readDefaultScaleItemOptions();
+            changeItemJSON(this);
+            changeURLitemsParameters();
+        }
+    }       
+    
     this.initTriadsCheckbox = function()
     {
         this.$triadsCheckbox = $('.' + TRIADS_CHECKBOX_CLASS, this.$itemBlock);
@@ -537,13 +639,21 @@ function ScalesItem(id)
         this.$stringsNumberBlock = $('.' + STRING_NUMBER_CLASS, this.$itemBlock);
         this.$fretboardBlock = $('.' + FRETBOARD_CLASS, this.$itemBlock);
         this.initAnimation();
-        this.readDefaultScaleItemOptions();
+        if (JSONstring)
+        {
+            this.setItemsFieldFromJSON(JSONstring)
+        }
+        else
+        {
+            this.readDefaultScaleItemOptions();
+        }
         this.initStrings();
         this.initTriadsCheckbox();
         this.changeScaleNotesBlock();
         this.selectCurrentTuning();
         this.selectCurrentScale();
         this.selectCurrentHalfStep();
+        this.selectCurrentRootNote();
         this.putNotesOnAllStrings();
         $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onScaleChange);
         $('.' + TUNING_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onTuningChange);
