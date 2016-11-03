@@ -1,22 +1,32 @@
-var intervalID = null;
-
-function metronomeTick()
-{
-    postMessage('tick');
+var metronome = {
+    tickIntervalID: null,
+    tick: function()
+    {
+        postMessage('metronomeTick');
+    },
+    start: function()
+    {
+        this.tickIntervalID = setInterval(this.tick, 1000 / 60);
+    },
+    stop: function()
+    {
+        if (this.tickIntervalID != undefined)
+        {
+            clearInterval(this.tickIntervalID);
+        }
+    }
 }
 
 onmessage = function(e)
 {
     var action = e.data;
-    if (action == 'start')
+    switch (action)
     {
-        intervalID = setInterval(metronomeTick, 1000 / 60);
-    } 
-    else if (action == 'stop')
-    {
-        if (intervalID != undefined)
-        {
-            clearInterval(intervalID);
-        }
+        case 'startMetronomeTicking':
+            metronome.start();
+            break;
+        case 'stopMetronomeTicking':
+            metronome.stop();
+            break;
     }
 }

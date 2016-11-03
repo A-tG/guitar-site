@@ -1,24 +1,24 @@
 var audioCtx;
 var worker;
-var isMetronomeCanWork = true;
+var isMetronomeCanWork = false;
 
 try
 {
     audioCtx = new AudioContext;
+    isMetronomeCanWork = true;
 }
 catch (err)
 {
-    console.log(WEB_AUDIO_INIT_ERR_MSG);
-    isMetronomeCanWork = false;
+    console.log(WEB_AUDIO_INIT_ERR_MSG + '\n' + err);
 }
 try
 {
     worker = new Worker("js/worker.js");
+    isMetronomeCanWork = true;
 }
 catch (err)
 {
-    console.log(WORKER_INIT_ERR_MSG);
-    isMetronomeCanWork = false;
+    console.log(WORKER_INIT_ERR_MSG + '\n' + err);
 }
 
 
@@ -47,7 +47,7 @@ var metronome = {
     {
         if (this.beatsQueue.length > 0)
         {
-            beat = this.beatsQueue.shift();
+            var beat = this.beatsQueue.shift();
             var osc = audioCtx.createOscillator();
             osc.type = 'square';
             var freq = 440;
@@ -95,16 +95,16 @@ var metronome = {
         $(this).hide();
         itemThis.$stopBtn.show();
         itemThis.beatNumber = 0;
-        worker.postMessage('start');
+        worker.postMessage('startMetronomeTicking');
     },
     
     onStopBtn: function(event)
     {
         itemThis = event.data.itemThis;
-        itemThis.beatsQueue = [];
         $(this).hide();
         itemThis.$playBtn.show();
-        worker.postMessage('stop');
+        worker.postMessage('stopMetronomeTicking');
+        itemThis.beatsQueue = [];
     },
     
     onVolumeChange: function(event)
@@ -238,7 +238,7 @@ var metronome = {
     {
         var action = e.data;
         var itemThis = metronome;
-        if (action == 'tick')
+        if (action == 'metronomeTick')
         {
             itemThis.beatsScheduler();
         }
@@ -247,6 +247,11 @@ var metronome = {
     init: function()
     {
         this.$stopBtn.hide();
+        if (!isMetronomeCanWork)
+        {
+            $('#' + METRONOME_DISABLED_ID).show(0);
+            return;
+        }
         this.tempo = +this.$tempoRange.val();
         var initVolume = sliderLogVal(+this.$volumeRange.val(), 1, 100)
         this.volume = initVolume / 100;
