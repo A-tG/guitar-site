@@ -5,20 +5,12 @@ var isMetronomeCanWork = false;
 try
 {
     audioCtx = new AudioContext;
-    isMetronomeCanWork = true;
-}
-catch (err)
-{
-    console.log(WEB_AUDIO_INIT_ERR_MSG + '\n' + err);
-}
-try
-{
     worker = new Worker("js/worker.js");
     isMetronomeCanWork = true;
 }
 catch (err)
 {
-    console.log(WORKER_INIT_ERR_MSG + '\n' + err);
+    console.log(err);
 }
 
 
