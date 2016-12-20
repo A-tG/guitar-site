@@ -1,3 +1,2 @@
 metronome.init();
-getDefaultScaleOptionsFromCookie();
 itemsInit();

@@ -116,6 +116,7 @@ function changeItemJSON(item)
 
 function itemsInit()
 {
+    getDefaultScaleOptionsFromCookie();
     readURLitemsParameters();
     if (itemsJSONs.length == 0)
     {
