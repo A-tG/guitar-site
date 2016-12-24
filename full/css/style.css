@@ -32,6 +32,7 @@ select
 }
 .content_block
 {
+    text-align: center;
     background: #333;
     margin: 0 auto;
     min-height: 100vh;
@@ -50,14 +51,11 @@ select
 }
 .head_block_content
 {
-    width: 70%;
-    min-width: 940px;
-    max-width: 1400px;
-    margin: 0 auto;
+    text-align: center;
 }
 .logo_block
 {
-    float: left;
+    display: inline-block;
     padding-right: 10px;
 }
 .logo
@@ -67,7 +65,7 @@ select
     font-size: 24px;
     text-decoration: none;
     text-transform: capitalize;
-    line-height: 50px;
+    vertical-align: middle;
 }
 .metronome_disabled_block
 {
@@ -82,10 +80,11 @@ select
     text-align: center;
     color: #000;
     display: none;
+    vertical-align: middle;
 }
 .metronome_block
 {
-    float: left;
+    display: inline-block;
     position: relative;
 }
 .metronome_block li
@@ -319,6 +318,9 @@ select
 
 .item_block
 {
+    vertical-align: top;
+    display: inline-block;
+    text-align: justify;
     position: relative;
     margin: 70px auto 0;
     width: 90%;
@@ -327,15 +329,31 @@ select
     background: #222;
     box-shadow: 0 0 5px #000;
 }
+.item_content
+{
+    width: 95%;
+    margin: 5px 15px;
+}
+.item_head_select
+{
+    margin-top: 5px;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    text-decoration: none;
+    text-transform: capitalize;
+    background: #555;
+    height: 25px;
+}
 .strings_options_block
 {
-    max-width: 8%;
-    float: left;
-    margin: 0 1% 0 1%;
+    display: inline-block;
+    margin: 4px 10px 0 0;
 }
 .strings_btns_block
 {
-    margin: 6px auto 7px auto;
+    float: left;
+    margin: 3px 1% 3px 0;
     text-align: center;
 }
 .strings_number
@@ -409,28 +427,17 @@ select
     border-left-color: #fff;
 }
 
-.item_content
+.fretboard_block
 {
-    width: 88.88%;
-    float: left;
+    width: 100%;
+    display: flex;
 }
-.item_head_select
-{
-    margin-top: 5px;
-    color: #fc0;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
-    text-decoration: none;
-    text-transform: capitalize;
-    background: #555;
-    height: 25px;
-}
-
 .fretboard
 {
+    display: inline-block;
+    flex: 2;
     position: relative;
     margin-top: 6px;
-    width: 100%;
 }
 .fret_hor
 {
@@ -705,6 +712,10 @@ select
     color: #fff;
 }
 
+.item_options_block
+{
+    text-align: center;
+}
 .options_text
 {
     display: inline-block;
@@ -718,13 +729,14 @@ select
 
 .tuning_options
 {
+    min-height: 60px;
+    text-align: justify;
     float: left;
     margin-top: 7px;
-    width: 27%;
 }
 .tuning_options li
 {
-    margin-bottom: 2px;
+    margin-bottom: 10px;
 }
 .tuning_options li:last-child
 {
@@ -762,6 +774,8 @@ select
 
 .scale_select_block
 {
+    min-height: 60px;
+    text-align: justify;
     float: right;
     margin-top: 7px;
 }
@@ -779,7 +793,7 @@ select
 
 .triads_mode_block
 {
-    margin-top: 10px;
+    margin-top: 9px;
 }
 .triads_checkbox
 {
@@ -802,7 +816,8 @@ select
 
 .scale_options_block
 {
-    float: left;
+    text-align: justify;
+    display: inline-block;
 }
 .scale_notes_signs
 {
@@ -986,23 +1001,6 @@ select
 
 @media screen and (max-width: 1250px)
 {
-    .logo_block
-    {
-        float: none;
-        width: 100%;
-        padding: 0;
-        text-align: center;
-    }
-    .head_block_content
-    {
-        min-width: 700px;
-        width: 100%
-    }
-    .metronome_block
-    {
-        width: 100%;
-        text-align: center;
-    }
     .content_block
     {
         min-width: 700px;
@@ -1011,22 +1009,6 @@ select
     {
         min-width: 700px;
         width: 100%;
-    }
-    .strings_options_block
-    {
-        max-width: 12%;
-    }
-    .item_content
-    {
-        width: 84%;
-    }
-    .tuning_options
-    {
-        width: 50%;
-    }
-    .scale_select_block
-    {
-        width: 50%;
     }
     .fret_ver:nth-child(2)
     {
@@ -1076,52 +1058,19 @@ select
     {
         width: 5.93%;
     }
-    .fret_ver:nth-child(14)
+    .fret_ver:nth-child(14), .fret_ver:nth-child(15), .fret_ver:nth-child(16), 
+    .fret_ver:nth-child(17), .fret_ver:nth-child(18), .fret_ver:nth-child(19), 
+    .fret_ver:nth-child(20), .fret_ver:nth-child(21), .fret_ver:nth-child(22), 
+    .fret_ver:nth-child(23), .fret_ver:nth-child(24), .fret_ver:nth-child(25)
     {
         display: none;
     }
-    .fret_ver:nth-child(15)
+}
+
+@media screen and (min-width: 1920px)
+{
+    .item_block
     {
-        display: none;
-    }
-    .fret_ver:nth-child(16)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(17)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(18)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(19)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(20)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(21)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(22)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(23)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(24)
-    {
-        display: none;
-    }
-    .fret_ver:nth-child(25)
-    {
-        display: none;
+        margin-right: 30px;
     }
 }
