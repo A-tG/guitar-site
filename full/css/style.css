@@ -336,7 +336,6 @@ select
 }
 .item_head_select
 {
-    margin-top: 5px;
     color: #fc0;
     font-family: Tahoma, Arial, Verdana;
     font-size: 18px;
@@ -353,7 +352,7 @@ select
 .strings_btns_block
 {
     float: left;
-    margin: 3px 1% 3px 0;
+    margin-right: 10px;
     text-align: center;
 }
 .strings_number
@@ -1003,12 +1002,53 @@ select
 {
     .content_block
     {
-        min-width: 700px;
+        min-width: 600px;
     }
     .item_block
     {
-        min-width: 700px;
+        min-width: 600px;
         width: 100%;
+    }
+    .strings_btns_block
+    {
+        margin-left: 10px;
+    }
+    .strings_options_block
+    {
+        margin-top: 2px;
+    }
+    .string_tune
+    {
+        margin: 6px auto;
+    }
+    .fret_hor
+    {
+        height: 24px;
+        position: relative;
+    }
+    .fret_hor:first-child
+    {
+        height: 21px;
+        margin-bottom: 2px;
+    }
+    .fret_hor:last-child
+    {
+        height: 21px;
+        margin-top: 2px;
+    }
+    .left_arrow
+    {
+        margin-right: 6px;
+        border-top: 9px solid transparent;
+        border-right: 18px solid #fc0;
+        border-bottom: 9px solid transparent;
+    }
+    .right_arrow
+    {
+        margin-left: 6px;
+        border-top: 9px solid transparent;
+        border-left: 18px solid #fc0;
+        border-bottom: 9px solid transparent;
     }
     .fret_ver:nth-child(2)
     {
@@ -1064,6 +1104,10 @@ select
     .fret_ver:nth-child(23), .fret_ver:nth-child(24), .fret_ver:nth-child(25)
     {
         display: none;
+    }
+    .scale_notes_signs
+    {
+        margin-right: 5px;
     }
 }
 
