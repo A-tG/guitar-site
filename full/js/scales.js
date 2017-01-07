@@ -43,39 +43,17 @@ function getDefaultScaleOptionsFromCookie()
         {
             defaultScaleItemOptions.isTriadMode = options.isTriadMode;
         }
-        if ((options.normalNotesShowPattern !== undefined) && isCorrectNotesShowPattern(options.normalNotesShowPattern))
+        if ((options.normalNotesShowPattern !== undefined) && 
+                isCorrectNotesShowPattern(options.normalNotesShowPattern))
         {
             defaultScaleItemOptions.normalNotesShowPattern = options.normalNotesShowPattern;
         }
-        if ((options.triadsNotesShowPattern !== undefined) && isCorrectNotesShowPattern(options.triadsNotesShowPattern))
+        if ((options.triadsNotesShowPattern !== undefined) && 
+                isCorrectNotesShowPattern(options.triadsNotesShowPattern))
         {
             defaultScaleItemOptions.triadsNotesShowPattern = options.triadsNotesShowPattern;
         }
     }
-}
-
-function isCorrectScalesJSONfields(JSONstring)
-{
-    var isCorrect = false;
-    var isParsable = true;
-    var obj = {};
-    try
-    {
-        obj = JSON.parse(JSONstring, semiTonesPatternIntToBool); 
-    }
-    catch (err)
-    {
-        isParsable = false;
-    }
-    if (isParsable)
-    {
-        isCorrect = (obj.t == "scales") && isCorrectScale(obj.s) && isCorrectNote(obj.r) && 
-            isCorrectTuning(obj.tn) && isCorrectHalfStep(obj.hs) && isCorrectTuningNotes(obj.strt) &&
-            isCorrectStringsNumber(obj.strn) && (typeof obj.tr === 'boolean') && isCorrectNotesShowPattern(obj.np) &&
-            isCorrectNotesShowPattern(obj.tp);
-            
-    }
-    return isCorrect;
 }
 
 function ScalesItem(id, JSONstring)
@@ -161,9 +139,11 @@ function ScalesItem(id, JSONstring)
     this.addString = function(stringNumber)
     {
         var stringTune = this.getTuneForString(stringNumber);
-        var $stringOptionsBlock = $("." + STRINGS_OPTIONS_BLOCK_CLASS, this.$itemBlock).append(STRING_TUNE_BLOCK_TMPL());
+        var $stringOptionsBlock = $("." + STRINGS_OPTIONS_BLOCK_CLASS, this.$itemBlock)
+            .append(STRING_TUNE_BLOCK_TMPL());
         var $addedStringTuneBlock = $stringOptionsBlock.children().last();
-        $('.' + STRING_TUNE_SELECT_CLASS + " :contains('" + stringTune + "')", $addedStringTuneBlock).prop("selected", true)
+        $('.' + STRING_TUNE_SELECT_CLASS + " :contains('" + stringTune + "')", $addedStringTuneBlock)
+            .prop("selected", true)
         var param = {currentStringNumber: stringNumber + 1}
         var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock);
         var isFretWithMarker = false;
@@ -181,7 +161,8 @@ function ScalesItem(id, JSONstring)
             if (stringNumber == 0)
             {
                 fretNumberInPattern = i % 12;
-                isFretWithMarker = (fretNumberInPattern == 3) || (fretNumberInPattern == 5) || (fretNumberInPattern == 7) || (fretNumberInPattern == 9);
+                isFretWithMarker = (fretNumberInPattern == 3) || (fretNumberInPattern == 5) || 
+                    (fretNumberInPattern == 7) || (fretNumberInPattern == 9);
                 isFretWithDoubleMarker = (i != 0) && (fretNumberInPattern == 0);
                 if (isFretWithMarker)
                 {
@@ -214,7 +195,9 @@ function ScalesItem(id, JSONstring)
         var $outterSelector = $('.' + STRINGS_OPTIONS_BLOCK_CLASS, this.$itemBlock);
         for (var i = 0; i < this.stringsNumber; i++)
         {
-            $outterSelector.find("." + STRING_TUNE_SELECT_CLASS + ":eq(" + i + ")" + " :contains('" + this.getTuneForString(i) + "')").prop("selected", true);
+            $outterSelector.find("." + STRING_TUNE_SELECT_CLASS + ":eq(" + i + ")" + 
+                " :contains('" + this.getTuneForString(i) + "')")
+                .prop("selected", true);
         }
     }
     
@@ -268,7 +251,8 @@ function ScalesItem(id, JSONstring)
                 }
             }
         }
-        $('.' + SCALE_NOTES_CLASS, this.$itemBlock).on("click", '.' + SCALE_NOTE_CLASS, {itemThis: this}, this.onScaleNoteClick);
+        $('.' + SCALE_NOTES_CLASS, this.$itemBlock)
+            .on("click", '.' + SCALE_NOTE_CLASS, {itemThis: this}, this.onScaleNoteClick);
     }
     
     this.selectCurrentRootNote = function()
@@ -316,7 +300,9 @@ function ScalesItem(id, JSONstring)
         var note = itemThis.stringsTunes[currentStringTuneNumber];
         note = prevNote(note);
         itemThis.stringsTunes[currentStringTuneNumber] = note;
-        $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + " :contains('" + note + "')", $outterSelector).prop("selected", true);
+        $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + 
+            " :contains('" + note + "')", $outterSelector)
+            .prop("selected", true);
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
@@ -332,7 +318,9 @@ function ScalesItem(id, JSONstring)
         var note = itemThis.stringsTunes[currentStringTuneNumber];
         note = nextNote(note);
         itemThis.stringsTunes[currentStringTuneNumber] = note;
-        $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + " :contains('" + note + "')", $outterSelector).prop("selected", true);
+        $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + 
+            " :contains('" + note + "')", $outterSelector)
+            .prop("selected", true);
         itemThis.putNotesOnString(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
@@ -564,41 +552,67 @@ function ScalesItem(id, JSONstring)
         this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
         this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
     }
+
+    this.isCorrectScalesJSONfields = function(JSONstring)
+    {
+        var isCorrect = false;
+        var isParsable = true;
+        var parsedArr = [];
+        try
+        {
+            parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool); 
+        }
+        catch (err)
+        {
+            isParsable = false;
+        }
+        if (isParsable)
+        {
+            isCorrect = (parsedArr.length == 10) && 
+                (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && isCorrectNote(parsedArr[2]) && 
+                isCorrectTuning(parsedArr[3]) && isCorrectHalfStep(parsedArr[4]) && 
+                isCorrectStringsNumber(parsedArr[5]) && isCorrectTuningNotes(parsedArr[6]) && 
+                (typeof (parsedArr[7] === 'boolean')) && 
+                isCorrectNotesShowPattern(parsedArr[8]) &&
+                isCorrectNotesShowPattern(parsedArr[9]); 
+        }
+        return isCorrect;
+    }
     
     this.getItemJSON = function()
     {
         var fieldsToSave =
-        {
-            t: this.type,
-            s: this.scale,
-            r: this.root,
-            tn: this.tuning,
-            hs: this.halfStep,
-            strt: this.stringsTunes,
-            strn: this.stringsNumber,
-            tr: this.isTriadMode,
-            np: this.normalNotesShowPattern.slice(),
-            tp: this.triadsNotesShowPattern.slice()
-        }
+        [
+            this.type,
+            this.scale,
+            this.root,
+            this.tuning,
+            this.halfStep,
+            this.stringsNumber,
+            this.stringsTunes,
+            this.isTriadMode,
+            this.normalNotesShowPattern.slice(),
+            this.triadsNotesShowPattern.slice()
+        ];
         var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
         return JSONstring;
     }
     
     this.setItemsFieldFromJSON = function(JSONstring)
     {
-        if (isCorrectScalesJSONfields(JSONstring))
+        if (this.isCorrectScalesJSONfields(JSONstring))
         {
-            obj = JSON.parse(JSONstring, semiTonesPatternIntToBool);
-            this.type = obj.t;
-            this.scale = obj.s;
-            this.root = obj.r;
-            this.tuning = obj.tn;
-            this.halfStep = obj.hs;
-            this.stringsNumber = obj.strn;
-            this.stringsTunes = obj.strt;
-            this.isTriadMode = obj.tr;
-            this.normalNotesShowPattern = obj.np;
-            this.triadsNotesShowPattern = obj.tp;
+            var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
+            this.type = parsedArr[0];
+            this.scale = parsedArr[1];
+            this.root = parsedArr[2];
+            this.tuning = parsedArr[3];
+            this.halfStep = parsedArr[4];
+            this.stringsNumber = parsedArr[5];
+            this.stringsTunes = parsedArr[6];
+            this.isTriadMode = parsedArr[7];
+            this.normalNotesShowPattern = parsedArr[8];
+            this.triadsNotesShowPattern = parsedArr[9];
             this.semiTones = getScaleSemitones(this.scale);
             this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
         }
@@ -658,9 +672,12 @@ function ScalesItem(id, JSONstring)
         $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onScaleChange);
         $('.' + TUNING_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onTuningChange);
         $('.' + HALF_STEP_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onHalfStepChange);
-        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS).find('.' + LEFT_ARROW_CLASS).click({itemThis: this}, this.onLeftArrowHalfStepClick);
-        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS).find('.' + RIGHT_ARROW_CLASS).click({itemThis: this}, this.onRightArrowHalfStepCLick);
-        $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).on("click", '.' + ROOT_NOTE_CLASS, {itemThis: this}, this.onRootNoteChange);
+        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS)
+            .find('.' + LEFT_ARROW_CLASS).click({itemThis: this}, this.onLeftArrowHalfStepClick);
+        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS)
+            .find('.' + RIGHT_ARROW_CLASS).click({itemThis: this}, this.onRightArrowHalfStepCLick);
+        $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock)
+            .on("click", '.' + ROOT_NOTE_CLASS, {itemThis: this}, this.onRootNoteChange);
         $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onAddStringButton);
         $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onDelStringButton);
         $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onCloseButton);
