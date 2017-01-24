@@ -96,7 +96,7 @@ function ScalesItem(id, JSONstring)
             $noteBlock.toggleClass(HIDDEN_NOTE_CLASS, false);
             var noteStep = this.scaleNotes.indexOf(note);
             var isTransparentNote = false;
-            var isInBox = (i >= this.boxFirstFret) && (i < (this.boxFirstFret + boxSize)) || (this.boxFirstFret == -1);
+            var isInBox = (i >= this.boxFirstFret) && (i <= (this.boxFirstFret + boxSize)) || (this.boxFirstFret == -1);
             if (this.isTriadMode)
             {
                 isTransparentNote = !this.triadsNotesShowPattern[noteStep];
@@ -143,7 +143,10 @@ function ScalesItem(id, JSONstring)
             while (currentStringNote != higherStringNote)
             {
                 currentStringNote = nextNote(currentStringNote);
-                boxSize++;
+                if (currentStringNote != higherStringNote)
+                {
+                    boxSize++;
+                }
             }
         }
         else
@@ -158,7 +161,7 @@ function ScalesItem(id, JSONstring)
         var maxBoxSize = 0;
         for (var i = 0; i < this.stringsNumber; i++)
         {
-            var boxSize = this.calculateNotesBoxSize(1, fretNumber);
+            var boxSize = this.calculateNotesBoxSize(i, fretNumber);
             if (boxSize > maxBoxSize)
             {
                 maxBoxSize = boxSize;
@@ -549,6 +552,7 @@ function ScalesItem(id, JSONstring)
         defaultScaleItemOptions.stringsTunes = itemThis.stringsTunes;
         defaultScaleItemOptions.stringsNumber = itemThis.stringsNumber;
         defaultScaleItemOptions.isTriadMode = itemThis.isTriadMode;
+        defaultScaleItemOptions.boxFirstFret = itemThis.boxFirstFret;
         Cookies.set("defaultScaleOptions", defaultScaleItemOptions, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
     }
     
@@ -576,7 +580,8 @@ function ScalesItem(id, JSONstring)
     this.onFretClick = function(event)
     {
         var itemThis = event.data.itemThis;
-        var fretNumber = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock).index(this);
+        var fretNumber = itemThis.$fretboardBlock.
+            find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS).index(this);
         if (itemThis.boxFirstFret == fretNumber)
         {
             itemThis.boxFirstFret = -1;
@@ -598,23 +603,23 @@ function ScalesItem(id, JSONstring)
     {
         var itemThis = event.data.itemThis;
         var fretNumber = itemThis.$fretboardBlock.
-            find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS).index(this);
+            find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS).index(this);
         var boxSize = itemThis.calculateNotesBoxSizeForAllStrings(fretNumber);
         if (itemThis.isBoxFit(fretNumber, boxSize))
         {
             var $fretsHovers = $('.' + FRET_HOVER_CLASS, itemThis.$fretboardBlock);
-            for (var i = fretNumber; i <= fretNumber + boxSize; i++)
+            for (var i = 0; i <= boxSize; i++)
             {
                 var hoverClass = FRET_HOVER_ACTIVE_CENTER_CLASS;
-                if (i == fretNumber)
+                if (i == 0)
                 {
                     hoverClass = FRET_HOVER_ACTIVE_START_CLASS;
                 }
-                else if (i == fretNumber + boxSize) 
+                else if (i == boxSize) 
                 {
                     hoverClass = FRET_HOVER_ACTIVE_END_CLASS;
                 }
-                $($fretsHovers[i]).toggleClass(hoverClass, true);
+                $($fretsHovers[fretNumber + i]).toggleClass(hoverClass, true);
             }
         }
     }
@@ -660,6 +665,7 @@ function ScalesItem(id, JSONstring)
         this.isTriadMode = defaultScaleItemOptions.isTriadMode;
         this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
         this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
+        this.boxFirstFret = defaultScaleItemOptions.boxFirstFret;
     }
 
     this.isCorrectScalesJSONfields = function(JSONstring)
@@ -793,9 +799,9 @@ function ScalesItem(id, JSONstring)
         $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onDelStringButton);
         $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onCloseButton);
         $('.' + SET_DEFAULT_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onSetDefaultButton);
-        this.$fretboardBlock.on("click", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, {itemThis: this}, this.onFretClick);
-        this.$fretboardBlock.on("mouseenter", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, {itemThis: this}, this.onFretHoverIn);
-        this.$fretboardBlock.on("mouseleave", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, {itemThis: this}, this.onFretHoverOut);
+        this.$fretboardBlock.on("click", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {itemThis: this}, this.onFretClick);
+        this.$fretboardBlock.on("mouseenter", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {itemThis: this}, this.onFretHoverIn);
+        this.$fretboardBlock.on("mouseleave", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {itemThis: this}, this.onFretHoverOut);
     }
     
     this.init();
