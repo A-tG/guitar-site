@@ -440,32 +440,76 @@ select
 }
 .fret_hor
 {
+    border-right: 4px solid #fff;
+    background: #000;
     height: 21px;
     position: relative;
 }
 .fret_hor:first-child
 {
     height: 18px;
-    margin-bottom: 2px;
+    padding-bottom: 2px;
 }
 .fret_hor:last-child
 {
     height: 18px;
-    margin-top: 2px;
+    padding-top: 2px;
 }
 .fret_null
 {
+    position: relative;
     float: left;
     width: 0.625%;
     background: #fff;
+}
+.fret_null .fret_ver_hover
+{
+    margin: -4px 0 -4px 0;
 }
 .fret_ver
 {
     position: relative;
     float: left;
-    background: #000;
-    border-right: 4px solid #fff;
     box-sizing: border-box;
+}
+.fret_ver_hover
+{
+    position: absolute;
+    border-color: #0bb;
+    border-style: solid;
+    border-width: 0;
+    z-index: 3;
+    margin: -4px;
+    height: 100%;
+    width: 100%;
+}
+.fret_ver_hover_active_start
+{
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    -moz-border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+}
+.fret_ver_hover_active_center
+{
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+}
+.fret_ver_hover_active_end
+{
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-right-width: 4px;
+    -moz-border-radius: 0 5px 5px 0;
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+}
+.fret_ver_inner
+{
+    position: relative;
+    width: 100%;
 }
 .fret_ver:nth-child(2)
 {
@@ -613,8 +657,9 @@ select
 }
 .string1, .string2, .string3, .string4, .string5, .string6, .string7, .string8, .string9, .string10, .string11, .string12
 {
+    z-index: 2;
     background: #ccc;
-    width: 110%;
+    width: 100%;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -638,7 +683,7 @@ select
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    z-index: 1;
+    z-index: 4;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -657,10 +702,11 @@ select
 }
 .transparent_note
 {
-    opacity: 0.3;
+    opacity: 0.4;
 }
 .fret_marker
 {
+    z-index: 1;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -680,9 +726,24 @@ select
 {
     top: 75%;
 }
+.fret_double_dot_block
+{
+    text-align: center;
+}
+.fret_dot
+{
+    display: inline-block;
+    margin: 6px auto;
+    background: #fff;
+    width: 6px;
+    height: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
 .fret_null .note
 {
-    margin-left: -9px;
+    margin-left: -6px;
 }
 
 .close_btn
@@ -731,7 +792,6 @@ select
     min-height: 60px;
     text-align: justify;
     float: left;
-    margin-top: 7px;
 }
 .tuning_options li
 {
@@ -776,7 +836,6 @@ select
     min-height: 60px;
     text-align: justify;
     float: right;
-    margin-top: 7px;
 }
 .scale_select
 {
@@ -821,7 +880,7 @@ select
 .scale_notes_signs
 {
     float: left;
-    margin: 8px 20px 0 0;
+    margin: 0px 20px 0 0;
 }
 .scale_notes_signs li
 {
@@ -852,7 +911,6 @@ select
 .scale_notes_and_semitones_block
 {
     float: left;
-    margin-top: 8px;
 }
 .scale_notes
 {
@@ -1029,12 +1087,12 @@ select
     .fret_hor:first-child
     {
         height: 21px;
-        margin-bottom: 2px;
+        padding-bottom: 2px;
     }
     .fret_hor:last-child
     {
         height: 21px;
-        margin-top: 2px;
+        padding-top: 2px;
     }
     .left_arrow
     {

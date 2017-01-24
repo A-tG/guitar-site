@@ -184,12 +184,26 @@
     </script>
     <script id="string_ver_fret_tmpl" type="text/plain">
       <div class="fret_ver">
+        <div class="fret_ver_inner">
+          <div class="fret_ver_hover"></div>
+        </div>
       </div>
     </script>
     <script id="string_hor_fret_tmpl" type="text/plain">
       <div class="fret_hor">
         <div class="string{{=it.currentStringNumber}}"></div>
         <div class="note normal_note"></div>
+      </div>
+    </script>
+    <script id="fret_dot_tmpl" type="text/plain">
+      <div class="fret_double_dot_block">
+        <div class="fret_dot"></div>
+      </div>
+    </script>
+    <script id="fret_double_dot_tmpl" type="text/plain">
+      <div class="fret_double_dot_block">
+        <div class="fret_dot"></div>
+        <div class="fret_dot"></div>
       </div>
     </script>
     <script id="fretboard_single_mark" type="text/plain">
@@ -236,7 +250,9 @@
           <div class="fretboard_block">
             <ul class="strings_options_block"></ul>
             <div class="fretboard">
-              <div class="fret_null"></div>
+              <div class="fret_null">
+                <div class="fret_ver_hover"></div>
+              </div>
               <div class="clear"></div>
             </div>
             <div class="clear"></div>
@@ -365,7 +381,7 @@
             <div class="clear"></div>
           </div>
         </div>
-        <div class="close_btn material-icons md-36  transitional" title="Close">&#xE5C9;</div>
+        <div class="close_btn material-icons md-36 transitional" title="Close">&#xE5C9;</div>
         <div class="set_default_btn material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
       </div>
     </script>
