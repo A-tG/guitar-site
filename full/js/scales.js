@@ -7,7 +7,8 @@ var defaultScaleItemOptions = {
     stringsNumber: 6,
     isTriadMode: false,
     normalNotesShowPattern: DEFAULT_NOTES_SHOW_PATTERN,
-    triadsNotesShowPattern: DEFAULT_TRIADS_SHOW_PATTERN
+    triadsNotesShowPattern: DEFAULT_TRIADS_SHOW_PATTERN,
+    boxFirstFret: -1
 }
 
 function getDefaultScaleOptionsFromCookie()
@@ -52,6 +53,10 @@ function getDefaultScaleOptionsFromCookie()
                 isCorrectNotesShowPattern(options.triadsNotesShowPattern))
         {
             defaultScaleItemOptions.triadsNotesShowPattern = options.triadsNotesShowPattern;
+        }
+        if ((options.boxFirstFret !== undefined) && isCorrectBoxFret(options.boxFirstFret))
+        {
+            defaultScaleItemOptions.boxFirstFret = options.boxFirstFret;
         }
     }
 }
@@ -585,6 +590,8 @@ function ScalesItem(id, JSONstring)
             }
         }
         itemThis.putNotesOnAllStrings();
+        changeItemJSON(itemThis);
+        changeURLitemsParameters();
     }
 
     this.onFretHoverIn = function(event)
@@ -670,13 +677,13 @@ function ScalesItem(id, JSONstring)
         }
         if (isParsable)
         {
-            isCorrect = (parsedArr.length == 10) && 
-                (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && isCorrectNote(parsedArr[2]) && 
-                isCorrectTuning(parsedArr[3]) && isCorrectHalfStep(parsedArr[4]) && 
-                isCorrectStringsNumber(parsedArr[5]) && isCorrectTuningNotes(parsedArr[6]) && 
-                (typeof (parsedArr[7] === 'boolean')) && 
-                isCorrectNotesShowPattern(parsedArr[8]) &&
-                isCorrectNotesShowPattern(parsedArr[9]); 
+            isCorrect = (parsedArr.length == 11) && 
+                (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && 
+                isCorrectNote(parsedArr[2]) && isCorrectTuning(parsedArr[3]) && 
+                isCorrectHalfStep(parsedArr[4]) && isCorrectStringsNumber(parsedArr[5]) && 
+                isCorrectTuningNotes(parsedArr[6]) && (typeof (parsedArr[7] === 'boolean')) && 
+                isCorrectNotesShowPattern(parsedArr[8]) && isCorrectNotesShowPattern(parsedArr[9]) &&
+                isCorrectBoxFret(parsedArr[10]); 
         }
         return isCorrect;
     }
@@ -694,7 +701,8 @@ function ScalesItem(id, JSONstring)
             this.stringsTunes,
             this.isTriadMode,
             this.normalNotesShowPattern.slice(),
-            this.triadsNotesShowPattern.slice()
+            this.triadsNotesShowPattern.slice(),
+            this.boxFirstFret
         ];
         var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
         return JSONstring;
@@ -717,6 +725,7 @@ function ScalesItem(id, JSONstring)
             this.triadsNotesShowPattern = parsedArr[9];
             this.semiTones = getScaleSemitones(this.scale);
             this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
+            this.boxFirstFret = parsedArr[10];
         }
         else
         {

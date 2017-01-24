@@ -130,6 +130,11 @@ function isCorrectNotesShowPattern(notesShowPattern)
     return (isArray && isEveryElementBoolType && isCorrectLength);
 }
 
+function isCorrectBoxFret(fretNumber)
+{
+    return (Number.isInteger(fretNumber)) && (fretNumber >= -1) && (fretNumber <= FRETS_NUMBER);
+}
+
 function getScaleSemitones(scaleName)
 {
     scaleName = scaleName.toLowerCase();
