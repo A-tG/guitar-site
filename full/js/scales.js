@@ -126,6 +126,23 @@ function ScalesItem(id, JSONstring)
             this.putNotesOnString(i);
         }
     }
+
+    this.putNotesOnNearStrings = function(stringNumber)
+    {
+        if (stringNumber == 0)
+        {
+            this.putNotesOnString(1);
+        }
+        else if (stringNumber == this.stringsNumber)
+        {
+            this.putNotesOnString(stringNumber - 1);
+        }
+        else
+        {
+            this.putNotesOnString(stringNumber - 1);
+            this.putNotesOnString(stringNumber + 1);
+        }
+    }
     
     this.calculateNotesBoxSize = function(stringNumber, fretNumber)
     {
@@ -343,6 +360,7 @@ function ScalesItem(id, JSONstring)
         var currentStringTuneNumber = $('.' + STRING_TUNE_SELECT_CLASS, $outterSelector).index(this);
         itemThis.stringsTunes[currentStringTuneNumber] = stringTune;
         itemThis.putNotesOnString(currentStringTuneNumber);
+        itemThis.putNotesOnNearStrings(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
         changeItemJSON(itemThis);
@@ -361,6 +379,7 @@ function ScalesItem(id, JSONstring)
             " :contains('" + note + "')", $outterSelector)
             .prop("selected", true);
         itemThis.putNotesOnString(currentStringTuneNumber);
+        itemThis.putNotesOnNearStrings(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
         changeItemJSON(itemThis);
@@ -379,6 +398,7 @@ function ScalesItem(id, JSONstring)
             " :contains('" + note + "')", $outterSelector)
             .prop("selected", true);
         itemThis.putNotesOnString(currentStringTuneNumber);
+        itemThis.putNotesOnNearStrings(currentStringTuneNumber);
         itemThis.tuning = CUSTOM_TUNING_VALUE;
         itemThis.selectCurrentTuning();
         changeItemJSON(itemThis);
