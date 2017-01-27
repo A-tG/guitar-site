@@ -1,3 +1,63 @@
+@font-face 
+{
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../iconfonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('../iconfonts/Material Icons'),
+    local('../iconfonts/MaterialIcons-Regular'),
+        url(../iconfonts/MaterialIcons-Regular.woff2) format('woff2'),
+        url(../iconfonts/MaterialIcons-Regular.woff) format('woff'),
+        url(../iconfonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons 
+{
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.material-icons.md-18 
+{ 
+    font-size: 18px; 
+}
+.material-icons.md-24 
+{ 
+    font-size: 24px; 
+}
+.material-icons.md-36 
+{ 
+    font-size: 36px; 
+}
+.material-icons.md-48 
+{ 
+    font-size: 48px; 
+}
+.material-icons.md-82 
+{ 
+    font-size: 82px; 
+}
+
 body, div, ul, li
 {
     margin: 0;
@@ -426,7 +486,7 @@ select
     border-left-color: #fff;
 }
 
-.fretboard_block
+.neck_block
 {
     width: 100%;
     display: flex;
@@ -440,6 +500,7 @@ select
 }
 .fret_hor
 {
+    box-sizing: border-box;
     border-right: 4px solid #fff;
     background: #000;
     height: 21px;
@@ -470,7 +531,6 @@ select
 {
     position: relative;
     float: left;
-    box-sizing: border-box;
 }
 .fret_ver_hover
 {
@@ -655,11 +715,12 @@ select
 {
     height: 7px;
 }
-.string1, .string2, .string3, .string4, .string5, .string6, .string7, .string8, .string9, .string10, .string11, .string12
+.string
 {
     z-index: 2;
     background: #ccc;
     width: 100%;
+    border-right: 4px solid #ccc;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -1023,37 +1084,6 @@ select
     font-family: Tahoma, Arial, Verdana;
     font-size: 25px;
     font-weight: bold;
-}
-
-.material-icons.md-18 
-{ 
-    font-size: 18px; 
-}
-.material-icons.md-24 
-{ 
-    font-size: 24px; 
-}
-.material-icons.md-36 
-{ 
-    font-size: 36px; 
-}
-.material-icons.md-48 
-{ 
-    font-size: 48px; 
-}
-.material-icons.md-82 
-{ 
-    font-size: 82px; 
-}
-
-.material-icons
-{
-    display: inline-block;
-    font-size: 24px;
-    line-height: 1;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
 }
 
 @media screen and (max-width: 1250px)
