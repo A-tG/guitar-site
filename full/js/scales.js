@@ -63,257 +63,166 @@ function getDefaultScaleOptionsFromCookie()
 
 function ScalesItem(id, JSONstring)
 {
-    this.type = "scales";
-    this.id = id;
-    this.scale = "major";
-    this.root = "C";
-    this.semiTones = DEFAULT_SCALE_SEMITONES;
-    this.scaleNotes = DEFAULT_SCALE_NOTES;
-    this.tuning = "standart_e";
-    this.halfStep = 0;
-    this.stringsNumber = 3;
-    this.stringsTunes = DEFAULT_STRING_TUNES;
-    this.isTriadMode = false;
-    this.boxFirstFret = -1;
-    this.normalNotesShowPattern = DEFAULT_NOTES_SHOW_PATTERN;
-    this.triadsNotesShowPattern = DEFAULT_TRIADS_SHOW_PATTERN;
-    this.notesBlocks = [];
-    
-    this.putNotesOnString = function(currentStringNumber)
-    {
-        var boxSize = this.calculateNotesBoxSize(currentStringNumber);
-        var stringTune = this.getTuneForString(currentStringNumber);
-        var semiTonesPattern = getSemiTonesPatternForString(this.scaleNotes, this.semiTones, stringTune);
-        var $notesBlocks = $(this.notesBlocks[currentStringNumber]);
-        $notesBlocks.toggleClass(HIDDEN_NOTE_CLASS, true);
-        $notesBlocks.toggleClass(TRANSPARENT_NOTE_CLASS, false);
-        var stringTuneOffset = semiTonesPattern.shift();
-        var note = nextNoteAfterSemiTones(stringTune, stringTuneOffset);
-        var k = 0;
-        for (var i = stringTuneOffset; i < $notesBlocks.length;)
+    this.state = {
+        id: id,
+        type: "scales",
+        scale: "major",
+        root: "C",
+        scaleNotes: DEFAULT_SCALE_NOTES,
+        semiTones: DEFAULT_SCALE_SEMITONES,
+        tuning: "standart_e",
+        stringsNumber: 0,
+        stringsTunes: DEFAULT_STRING_TUNES,
+        halfStep: 0,
+        isTriadMode: false,
+        boxFirstFret: -1,
+        normalNotesShowPattern: DEFAULT_NOTES_SHOW_PATTERN,
+        triadsNotesShowPattern: DEFAULT_TRIADS_SHOW_PATTERN,
+
+        isCorrectSerializationData: function(JSONstring)
         {
-            var $noteBlock = $(this.notesBlocks[currentStringNumber][i]);
-            $noteBlock.toggleClass(HIDDEN_NOTE_CLASS, false);
-            var noteStep = this.scaleNotes.indexOf(note);
-            var isTransparentNote = false;
-            var isInBox = (i >= this.boxFirstFret) && (i <= (this.boxFirstFret + boxSize)) || (this.boxFirstFret == -1);
-            if (this.isTriadMode)
+            var isCorrect = false;
+            var isParsable = true;
+            var parsedArr = [];
+            try
             {
-                isTransparentNote = !this.triadsNotesShowPattern[noteStep];
-                $noteBlock.text(noteStep + 1);
+                parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool); 
+            }
+            catch (err)
+            {
+                isParsable = false;
+            }
+            if (isParsable)
+            {
+                isCorrect = (parsedArr.length == 11) && 
+                    (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && 
+                    isCorrectNote(parsedArr[2]) && isCorrectTuning(parsedArr[3]) && 
+                    isCorrectHalfStep(parsedArr[4]) && isCorrectStringsNumber(parsedArr[5]) && 
+                    isCorrectTuningNotes(parsedArr[6]) && (typeof (parsedArr[7] === 'boolean')) && 
+                    isCorrectNotesShowPattern(parsedArr[8]) && isCorrectNotesShowPattern(parsedArr[9]) &&
+                    isCorrectBoxFret(parsedArr[10]); 
+            }
+            return isCorrect;
+        },
+
+        updateSerializedData: function()
+        {
+            var index = $('.' + ITEM_CLASS).index($('#' + this.id));
+            updateItemSerializedData(index, this.serialize());
+            updateItemsQueryParams();
+        },
+
+        serialize: function()
+        {
+            var fieldsToSave =
+            [
+                this.type,
+                this.scale,
+                this.root,
+                this.tuning,
+                this.halfStep,
+                this.stringsNumber,
+                this.stringsTunes,
+                this.isTriadMode,
+                this.normalNotesShowPattern.slice(),
+                this.triadsNotesShowPattern.slice(),
+                this.boxFirstFret
+            ];
+            var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
+            return JSONstring;
+        },
+        
+        deserialize: function(JSONstring)
+        {
+            if (this.isCorrectSerializationData(JSONstring))
+            {
+                var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
+                this.type = parsedArr[0];
+                this.scale = parsedArr[1];
+                this.root = parsedArr[2];
+                this.tuning = parsedArr[3];
+                this.halfStep = parsedArr[4];
+                this.stringsNumber = parsedArr[5];
+                this.stringsTunes = parsedArr[6];
+                this.isTriadMode = parsedArr[7];
+                this.normalNotesShowPattern = parsedArr[8];
+                this.triadsNotesShowPattern = parsedArr[9];
+                this.semiTones = getScaleSemitones(this.scale);
+                this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
+                this.boxFirstFret = parsedArr[10];
             }
             else
             {
-                isTransparentNote = !this.normalNotesShowPattern[noteStep];
-                $noteBlock.text(note);
+                this.readDefaultScaleItemOptions();
+                this.updateSerializedData();
             }
-            if (isTransparentNote || !isInBox)
-            {
-                $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
-            }
-            var isRoot = (note == this.root);
-            $noteBlock.toggleClass(NORMAL_NOTE_CLASS, !isRoot).toggleClass(HIGHLIGHTED_NOTE_CLASS, isRoot);
-            i = i + semiTonesPattern[k];
-            note = nextNoteAfterSemiTones(note, semiTonesPattern[k]);
-            k = ++k % semiTonesPattern.length;
-        }
+        },
+
+        saveToDefaultOptions: function()
+        {
+            defaultScaleItemOptions.scale = this.scale;
+            defaultScaleItemOptions.root = this.root;
+            defaultScaleItemOptions.semiTones = this.semiTones;
+            defaultScaleItemOptions.tuning = this.tuning;
+            defaultScaleItemOptions.halfStep = this.halfStep;
+            defaultScaleItemOptions.stringsTunes = this.stringsTunes;
+            defaultScaleItemOptions.stringsNumber = this.stringsNumber;
+            defaultScaleItemOptions.isTriadMode = this.isTriadMode;
+            defaultScaleItemOptions.boxFirstFret = this.boxFirstFret;
+            Cookies.set("defaultScaleOptions", defaultScaleItemOptions, 
+                {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
+        },
+
+        readFromDefaultOptions: function()
+        {
+            this.scale = defaultScaleItemOptions.scale;
+            this.root = defaultScaleItemOptions.root;
+            this.semiTones = getScaleSemitones(this.scale);
+            this.scaleNotes =  getNotesFromSemiTones(this.root, this.semiTones);
+            this.tuning = defaultScaleItemOptions.tuning;
+            this.halfStep = defaultScaleItemOptions.halfStep;
+            this.stringsTunes = defaultScaleItemOptions.stringsTunes;
+            this.stringsNumber = defaultScaleItemOptions.stringsNumber;
+            this.isTriadMode = defaultScaleItemOptions.isTriadMode;
+            this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
+            this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
+            this.boxFirstFret = defaultScaleItemOptions.boxFirstFret;
+        } 
     }
-    
+
     this.putNotesOnAllStrings = function()
     {
-        for (var i = 0; i < this.stringsNumber; i++)
-        {
-            this.putNotesOnString(i);
-        }
+        this.neck.putNotesOnAllStrings();
     }
 
-    this.putNotesOnNearStrings = function(stringNumber)
-    {
-        if (stringNumber == 0)
-        {
-            this.putNotesOnString(1);
-        }
-        else if (stringNumber == this.stringsNumber)
-        {
-            this.putNotesOnString(stringNumber - 1);
-        }
-        else
-        {
-            this.putNotesOnString(stringNumber - 1);
-            this.putNotesOnString(stringNumber + 1);
-        }
-    }
-    
-    this.calculateNotesBoxSize = function(stringNumber, fretNumber)
-    {
-        if (!fretNumber)
-        {
-            var fretNumber = this.boxFirstFret;
-        }
-        var boxSize = 0;
-        if (stringNumber > 0)
-        {
-            var higherStringNote = this.getTuneForString(stringNumber - 1);
-            var currentStringNote = this.getTuneForString(stringNumber);
-            higherStringNote = nextNoteAfterSemiTones(higherStringNote, fretNumber);
-            currentStringNote = nextNoteAfterSemiTones(currentStringNote, fretNumber);
-            while (currentStringNote != higherStringNote)
-            {
-                currentStringNote = nextNote(currentStringNote);
-                if (currentStringNote != higherStringNote)
-                {
-                    boxSize++;
-                }
-            }
-        }
-        else
-        {
-            boxSize = 4;
-        }
-        return boxSize;
-    }
-
-    this.calculateNotesBoxSizeForAllStrings = function(fretNumber)
-    {
-        var maxBoxSize = 0;
-        for (var i = 0; i < this.stringsNumber; i++)
-        {
-            var boxSize = this.calculateNotesBoxSize(i, fretNumber);
-            if (boxSize > maxBoxSize)
-            {
-                maxBoxSize = boxSize;
-            }
-        }
-        return maxBoxSize;
-    }
-
-    this.isBoxFit = function(fretNumber, boxSize)
-    {
-        return (fretNumber + boxSize) <= FRETS_NUMBER;
-    }
-
-    this.incStringsNumber = function()
-    {
-        this.stringsNumber++;
-        this.$stringsNumberBlock.text('' + this.stringsNumber);
-    }
-    
-    this.decStringsNumber = function()
-    {
-        this.stringsNumber--;
-        this.$stringsNumberBlock.text('' + this.stringsNumber);
-    }
-    
-    this.getTuneForString = function(stringNumber)
-    {
-        return this.stringsTunes[stringNumber % this.stringsTunes.length];
-    }
-    
-    this.addString = function(stringNumber)
-    {
-        var stringTune = this.getTuneForString(stringNumber);
-        var $stringOptionsBlock = $("." + STRINGS_OPTIONS_BLOCK_CLASS, this.$itemBlock)
-            .append(STRING_TUNE_BLOCK_TMPL());
-        var $addedStringTuneBlock = $stringOptionsBlock.children().last();
-        $('.' + STRING_TUNE_SELECT_CLASS + " :contains('" + stringTune + "')", $addedStringTuneBlock)
-            .prop("selected", true)
-        var param = {currentStringNumber: stringNumber + 1}
-        var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, this.$fretboardBlock);
-        var isFretWithMarker = false;
-        var isFretWithDoubleMarker = false;
-        var fretNumberInPattern = 0;
-        for (var i = 0; i < verFrets.length; i++)
-        {
-            var $fret = $(STRING_FRET_TMPL(param)).appendTo(verFrets[i]);
-            var noteBlock = $('.' + NOTE_CLASS, $fret)[0];
-            if (this.notesBlocks[stringNumber] === undefined)
-            {
-                this.notesBlocks[stringNumber] = [];
-            }
-            this.notesBlocks[stringNumber][i] = noteBlock;
-            if (stringNumber == 0)
-            {
-                isFretWithMarker = (i == 1) || (i == 3) || (i == 5) || (i == 7) || 
-                    (i == 9) || (i == 15) || (i == 17) || (i == 19) || (i == 21);
-                isFretWithDoubleMarker = (i == 12) || (i == 24);
-                if (isFretWithMarker)
-                {
-                    $(verFrets[i]).append(STRING_FRET_MARK_TMPL());
-                    $(FRET_DOT_TMPL()).insertAfter(verFrets[i]);
-                }
-                else if(isFretWithDoubleMarker)
-                {
-                    $(verFrets[i]).append(STRING_DOUBLE_FRET_MARK_TMPL());
-                    $(FRET_DOUBLE_DOT_TMPL()).insertAfter(verFrets[i]);
-                }
-            }
-        }
-        this.putNotesOnString(stringNumber);
-        $('.' + STRING_TUNE_SELECT_CLASS, $addedStringTuneBlock).change({itemThis: this}, this.onStringTuneChange);
-        $('.' + LEFT_ARROW_CLASS, $addedStringTuneBlock).click({itemThis: this}, this.onLeftArrowTuneClick);
-        $('.' + RIGHT_ARROW_CLASS, $addedStringTuneBlock).click({itemThis: this}, this.onRightArrowTuneClick);
-    }
-    
-    this.delLastString = function()
-    {
-        $("." + STRING_TUNE_BLOCK_CLASS, this.$itemBlock).last().remove();
-        var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock);
-        for (var i = 0; i < verFrets.length; i++)
-        {
-            $('.' + HOR_FRET_CLASS, $(verFrets[i])).last().remove();
-        }
-    }
-    
     this.selectCurrentStringsTunes = function()
     {
-        var $outterSelector = $('.' + STRINGS_OPTIONS_BLOCK_CLASS, this.$itemBlock);
-        for (var i = 0; i < this.stringsNumber; i++)
-        {
-            $outterSelector.find("." + STRING_TUNE_SELECT_CLASS + ":eq(" + i + ")" + 
-                " :contains('" + this.getTuneForString(i) + "')")
-                .prop("selected", true);
-        }
-    }
-    
-    this.selectCurrentTuning = function()
-    {
-        this.$itemBlock.find("." + TUNING_SELECT_CLASS + " [value='" + this.tuning + "']").prop("selected", true);
+        this.neck.selectCurrentStringsTunes();
     }
     
     this.selectCurrentScale = function()
     {
-        $("." + SCALE_SELECT_CLASS + " [value='" + this.scale + "']", this.$itemBlock).prop("selected", true);
-    }
-    
-    this.selectCurrentHalfStep = function()
-    {
-        $("." + HALF_STEP_SELECT_CLASS + " [value='" + this.halfStep + "']", this.$itemBlock).prop("selected", true);
-    }
-    
-    this.moveTuning = function(halfSteps)
-    {
-        for (var k = 0; k < this.stringsTunes.length; k++)
-        {
-            this.stringsTunes[k] = nextNoteAfterSemiTones(this.stringsTunes[k], halfSteps);
-        }
+        $("." + SCALE_SELECT_CLASS + " [value='" + this.state.scale + "']", this.$itemBlock).
+            prop("selected", true);
     }
     
     this.changeScaleNotesBlock = function()
     {
         $('.' + SCALE_NOTES_CLASS, this.$itemBlock).remove();
-        var notes = this.scaleNotes.slice();
-        notes.push(this.root);
+        var notes = this.state.scaleNotes.slice();
+        notes.push(this.state.root);
         var param = {
-            root: this.root, 
-            semiTones: this.semiTones, 
+            root: this.state.root, 
+            semiTones: this.state.semiTones, 
             notes: notes
         }
         $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).append(SCALE_NOTES_TMPL(param));
-        var $scaleNotesBlocks = $('.' + SCALE_NOTES_CLASS, this.$itemBlock).find('.' + SCALE_NOTE_TEXT_CLASS);
+        var $scaleNotesBlocks = $('.' + SCALE_NOTES_CLASS, this.$itemBlock).
+            find('.' + SCALE_NOTE_TEXT_CLASS);
         var scaleNotesNumber = $scaleNotesBlocks.length - 1;
         for (var i = 0; i < scaleNotesNumber; i++)
         {
-            var isTransparentNote = !(this.isTriadMode ? this.triadsNotesShowPattern[i] : this.normalNotesShowPattern[i]);
+            var isTransparentNote = !(this.state.isTriadMode ? this.state.triadsNotesShowPattern[i] : this.state.normalNotesShowPattern[i]);
             if (isTransparentNote)
             {
                 var $noteBlock = $($scaleNotesBlocks[i]);
@@ -326,195 +235,72 @@ function ScalesItem(id, JSONstring)
             }
         }
         $('.' + SCALE_NOTES_CLASS, this.$itemBlock)
-            .on("click", '.' + SCALE_NOTE_CLASS, {itemThis: this}, this.onScaleNoteClick);
+            .on("click", '.' + SCALE_NOTE_CLASS, {that: this}, this.onScaleNoteClick);
     }
     
     this.selectCurrentRootNote = function()
     {
-        $('.' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, this.$itemBlock).toggleClass(SELECTED_TEXT_CLASS, false);
-        var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.root + "')", this.$itemBlock).first();
+        $('.' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, this.$itemBlock).
+            toggleClass(SELECTED_TEXT_CLASS, false);
+        var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.state.root + "')", 
+            this.$itemBlock).first();
         $rootNoteToSelect.toggleClass(SELECTED_TEXT_CLASS, true);
     }
     
     this.onScaleChange = function(event)
     {
-        var itemThis = event.data.itemThis;
+        var that = event.data.that;
         var scaleName = $(this).val().toLowerCase();
         if (isCorrectScale(scaleName))
         {
-            itemThis.scale = scaleName;
-            itemThis.semiTones = getScaleSemitones(scaleName);
-            itemThis.scaleNotes = getNotesFromSemiTones(itemThis.root, itemThis.semiTones);
-            itemThis.putNotesOnAllStrings();
-            itemThis.changeScaleNotesBlock();
-            changeItemJSON(itemThis);
-            changeURLitemsParameters();
-        }
-    }
-    
-    this.onStringTuneChange = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var $outterSelector = $('.' + STRINGS_OPTIONS_BLOCK_CLASS, event.data.itemThis.$itemBlock);
-        var stringTune = $(this).val();
-        var currentStringTuneNumber = $('.' + STRING_TUNE_SELECT_CLASS, $outterSelector).index(this);
-        itemThis.stringsTunes[currentStringTuneNumber] = stringTune;
-        itemThis.putNotesOnString(currentStringTuneNumber);
-        itemThis.putNotesOnNearStrings(currentStringTuneNumber);
-        itemThis.tuning = CUSTOM_TUNING_VALUE;
-        itemThis.selectCurrentTuning();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-    
-    this.onLeftArrowTuneClick = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var $outterSelector = $('.' + STRINGS_OPTIONS_BLOCK_CLASS, event.data.itemThis.$itemBlock);
-        var currentStringTuneNumber = $('.' + LEFT_ARROW_CLASS, $outterSelector).index(this);
-        var note = itemThis.stringsTunes[currentStringTuneNumber];
-        note = prevNote(note);
-        itemThis.stringsTunes[currentStringTuneNumber] = note;
-        $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + 
-            " :contains('" + note + "')", $outterSelector)
-            .prop("selected", true);
-        itemThis.putNotesOnString(currentStringTuneNumber);
-        itemThis.putNotesOnNearStrings(currentStringTuneNumber);
-        itemThis.tuning = CUSTOM_TUNING_VALUE;
-        itemThis.selectCurrentTuning();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-    
-    this.onRightArrowTuneClick = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var $outterSelector = $('.' + STRINGS_OPTIONS_BLOCK_CLASS, event.data.itemThis.$itemBlock);
-        var currentStringTuneNumber = $('.' + RIGHT_ARROW_CLASS, $outterSelector).index(this);
-        var note = itemThis.stringsTunes[currentStringTuneNumber];
-        note = nextNote(note);
-        itemThis.stringsTunes[currentStringTuneNumber] = note;
-        $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + currentStringTuneNumber + ")" + 
-            " :contains('" + note + "')", $outterSelector)
-            .prop("selected", true);
-        itemThis.putNotesOnString(currentStringTuneNumber);
-        itemThis.putNotesOnNearStrings(currentStringTuneNumber);
-        itemThis.tuning = CUSTOM_TUNING_VALUE;
-        itemThis.selectCurrentTuning();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-    
-    this.onTuningChange = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var tuningName = $(this).val().toLowerCase();
-        if (tuningName == CUSTOM_TUNING_VALUE)
-        {
-            itemThis.tuning = tuningName;
-        }
-        else
-        {
-            if (isCorrectTuning(tuningName))
-            {
-                itemThis.tuning = tuningName;
-                itemThis.stringsTunes = getTuneNotes(tuningName);
-                itemThis.moveTuning(itemThis.halfStep);
-                itemThis.putNotesOnAllStrings();
-                itemThis.selectCurrentStringsTunes();
-            }
-        }
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-    
-    this.onHalfStepChange = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var oldValue = itemThis.halfStep;
-        var newValue = $(this).val().replace(/[^-0-9]/gim, '');
-        newValue = +newValue;
-        itemThis.halfStep = newValue;
-        var valuesDiff = newValue - oldValue;
-        itemThis.moveTuning(valuesDiff);
-        itemThis.selectCurrentStringsTunes();
-        itemThis.putNotesOnAllStrings();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-    
-    this.onLeftArrowHalfStepClick = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var halfStep =  itemThis.halfStep;
-        if (halfStep != -MAX_HALF_STEP)
-        {
-            halfStep = prevHalfStep(halfStep);
-            itemThis.halfStep = halfStep;
-            itemThis.moveTuning(-1);
-            itemThis.selectCurrentStringsTunes();
-            itemThis.putNotesOnAllStrings();
-            itemThis.selectCurrentHalfStep();
-            changeItemJSON(itemThis);
-            changeURLitemsParameters();
-        }
-    }
-    
-    this.onRightArrowHalfStepCLick = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var halfStep = itemThis.halfStep;
-        if (halfStep != MAX_HALF_STEP)
-        {
-            halfStep = nextHalfStep(halfStep);
-            itemThis.halfStep = halfStep;
-            itemThis.moveTuning(1);
-            itemThis.selectCurrentStringsTunes();
-            itemThis.putNotesOnAllStrings();
-            itemThis.selectCurrentHalfStep();
-            changeItemJSON(itemThis);
-            changeURLitemsParameters();
+            that.state.scale = scaleName;
+            that.state.semiTones = getScaleSemitones(scaleName);
+            that.state.scaleNotes = getNotesFromSemiTones(that.state.root, that.state.semiTones);
+            that.putNotesOnAllStrings();
+            that.changeScaleNotesBlock();
+            that.state.updateSerializedData();
         }
     }
     
     this.onRootNoteChange = function(event)
     {
-        var itemThis = event.data.itemThis;
+        var that = event.data.that;
         var note = $(this).text();
         if (isCorrectNote(note))
         {
-            itemThis.root = note.toUpperCase();
-            itemThis.selectCurrentRootNote();
-            itemThis.scaleNotes = getNotesFromSemiTones(itemThis.root, itemThis.semiTones);
-            itemThis.changeScaleNotesBlock();
-            itemThis.putNotesOnAllStrings();
-            changeItemJSON(itemThis);
-            changeURLitemsParameters();
+            that.state.root = note.toUpperCase();
+            that.selectCurrentRootNote();
+            that.state.scaleNotes = getNotesFromSemiTones(that.state.root, that.state.semiTones);
+            that.changeScaleNotesBlock();
+            that.putNotesOnAllStrings();
+            that.state.updateSerializedData();
         }
     }
     
     this.onScaleNoteClick = function(event)
     {
-        var itemThis = event.data.itemThis;
-        var scaleNoteNumber = $('.' + SCALE_NOTE_CLASS, itemThis.$itemBlock).index(this);
-        scaleNoteNumber = scaleNoteNumber % itemThis.scaleNotes.length;
+        var that = event.data.that;
+        var scaleNoteNumber = $('.' + SCALE_NOTE_CLASS, that.$itemBlock).index(this);
+        scaleNoteNumber = scaleNoteNumber % that.state.scaleNotes.length;
         var isShowNote = false;
-        if (itemThis.isTriadMode)
+        if (that.state.isTriadMode)
         {
-            isShowNote = !itemThis.triadsNotesShowPattern[scaleNoteNumber];
-            itemThis.triadsNotesShowPattern[scaleNoteNumber] = isShowNote;
+            isShowNote = !that.state.triadsNotesShowPattern[scaleNoteNumber];
+            that.state.triadsNotesShowPattern[scaleNoteNumber] = isShowNote;
         }
         else
         {
-            isShowNote = !itemThis.normalNotesShowPattern[scaleNoteNumber];
-            itemThis.normalNotesShowPattern[scaleNoteNumber] = isShowNote;
+            isShowNote = !that.state.normalNotesShowPattern[scaleNoteNumber];
+            that.state.normalNotesShowPattern[scaleNoteNumber] = isShowNote;
         }
         var isRootNote = (scaleNoteNumber == 0);
         if (isRootNote)
         {
-            var $noteBlock = $('.' + SCALE_NOTE_CLASS, itemThis.$itemBlock).last().find('.' + SCALE_NOTE_TEXT_CLASS);
+            var $noteBlock = $('.' + SCALE_NOTE_CLASS, that.$itemBlock).last().
+                find('.' + SCALE_NOTE_TEXT_CLASS);
             $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
-            $noteBlock = $('.' + SCALE_NOTE_CLASS, itemThis.$itemBlock).first().find('.' + SCALE_NOTE_TEXT_CLASS);
+            $noteBlock = $('.' + SCALE_NOTE_CLASS, that.$itemBlock).first().
+                find('.' + SCALE_NOTE_TEXT_CLASS);
             $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
         }
         else
@@ -522,250 +308,53 @@ function ScalesItem(id, JSONstring)
             var $noteBlock = $(this).find('.' + SCALE_NOTE_TEXT_CLASS);
             $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
         }
-        itemThis.putNotesOnAllStrings();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-    
-    this.onAddStringButton = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var stringNumber = itemThis.stringsNumber
-        if (stringNumber < MAX_STRINGS_NUMBER)
-        {
-            itemThis.addString(stringNumber);
-            itemThis.incStringsNumber();
-            changeItemJSON(itemThis);
-            changeURLitemsParameters();
-        }
-    }
-    
-    this.onDelStringButton = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var stringNumber = itemThis.stringsNumber
-        if (stringNumber > MIN_STRINGS_NUMBER)
-        {
-            itemThis.notesBlocks.pop();
-            itemThis.delLastString();
-            itemThis.decStringsNumber();
-            changeItemJSON(itemThis);
-            changeURLitemsParameters();
-        }
+        that.putNotesOnAllStrings();
+        that.state.updateSerializedData();
     }
     
     this.onCloseButton = function(event)
     {
-        var itemThis = event.data.itemThis;
-        itemThis.$itemBlock.hide(200, function() {$(this).remove();});
-        deleteItem(itemThis.id);
+        var that = event.data.that;
+        that.$itemBlock.hide(200, function() {$(this).remove();});
+        deleteItem(that.id);
     }
     
     this.onSetDefaultButton = function(event)
     {
-        var itemThis = event.data.itemThis;
-        defaultScaleItemOptions.scale = itemThis.scale;
-        defaultScaleItemOptions.root = itemThis.root;
-        defaultScaleItemOptions.semiTones = itemThis.semiTones;
-        defaultScaleItemOptions.tuning = itemThis.tuning;
-        defaultScaleItemOptions.halfStep = itemThis.halfStep;
-        defaultScaleItemOptions.stringsTunes = itemThis.stringsTunes;
-        defaultScaleItemOptions.stringsNumber = itemThis.stringsNumber;
-        defaultScaleItemOptions.isTriadMode = itemThis.isTriadMode;
-        defaultScaleItemOptions.boxFirstFret = itemThis.boxFirstFret;
-        Cookies.set("defaultScaleOptions", defaultScaleItemOptions, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
+        var that = event.data.that;
+        that.state.saveToDefaultOptions();
     }
     
     this.onTriadsCheckboxClick = function(event)
     {
-        var itemThis = event.data.itemThis;
-        if (itemThis.isTriadMode)
+        var that = event.data.that;
+        if (that.state.isTriadMode)
         {
-            itemThis.isTriadMode = false;
-            itemThis.$triadsCheckbox.hide(0);
-            itemThis.$triadsCheckboxEmpty.show(0);
+            that.state.isTriadMode = false;
+            that.$triadsCheckbox.hide(0);
+            that.$triadsCheckboxEmpty.show(0);
         }
         else
         {
-            itemThis.isTriadMode = true;
-            itemThis.$triadsCheckboxEmpty.hide(0);
-            itemThis.$triadsCheckbox.show(0);
+            that.state.isTriadMode = true;
+            that.$triadsCheckboxEmpty.hide(0);
+            that.$triadsCheckbox.show(0);
         }
-        itemThis.changeScaleNotesBlock();
-        itemThis.putNotesOnAllStrings();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-
-    this.onFretClick = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var fretNumber = itemThis.$fretboardBlock.
-            find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS).index(this);
-        if (itemThis.boxFirstFret == fretNumber)
-        {
-            itemThis.boxFirstFret = -1;
-        }
-        else
-        {
-            var boxSize = itemThis.calculateNotesBoxSizeForAllStrings(fretNumber);
-            if (itemThis.isBoxFit(fretNumber, boxSize))
-            {
-                itemThis.boxFirstFret = fretNumber;
-            }
-        }
-        itemThis.putNotesOnAllStrings();
-        changeItemJSON(itemThis);
-        changeURLitemsParameters();
-    }
-
-    this.onFretHoverIn = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        var fretNumber = itemThis.$fretboardBlock.
-            find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS).index(this);
-        var boxSize = itemThis.calculateNotesBoxSizeForAllStrings(fretNumber);
-        if (itemThis.isBoxFit(fretNumber, boxSize))
-        {
-            var $fretsHovers = $('.' + FRET_HOVER_CLASS, itemThis.$fretboardBlock);
-            for (var i = 0; i <= boxSize; i++)
-            {
-                var hoverClass = FRET_HOVER_ACTIVE_CENTER_CLASS;
-                if (i == 0)
-                {
-                    hoverClass = FRET_HOVER_ACTIVE_START_CLASS;
-                }
-                else if (i == boxSize) 
-                {
-                    hoverClass = FRET_HOVER_ACTIVE_END_CLASS;
-                }
-                $($fretsHovers[fretNumber + i]).toggleClass(hoverClass, true);
-            }
-        }
-    }
-
-    this.onFretHoverOut = function(event)
-    {
-        var itemThis = event.data.itemThis;
-        itemThis.$fretboardBlock.find('.' + FRET_HOVER_CLASS).
-            toggleClass(FRET_HOVER_ACTIVE_START_CLASS, false).
-            toggleClass(FRET_HOVER_ACTIVE_CENTER_CLASS, false).
-            toggleClass(FRET_HOVER_ACTIVE_END_CLASS, false);
-    }
-    
-    this.initStrings = function()
-    {
-        for (var i = 0; i < FRETS_NUMBER; i++)
-        {
-            this.$fretboardBlock.children().last().before(STRING_VER_FRET_TMPL());
-        }
-        for (var i = 0; i < this.stringsNumber; i++)
-        {
-            this.addString(i);
-            this.$stringsNumberBlock.text('' + this.stringsNumber);
-        }
-        this.selectCurrentStringsTunes();
+        that.changeScaleNotesBlock();
+        that.putNotesOnAllStrings();
+        that.state.updateSerializedData();
     }
     
     this.readDefaultScaleItemOptions = function()
     {
-        this.scale = defaultScaleItemOptions.scale;
-        this.root = defaultScaleItemOptions.root;
-        this.semiTones = getScaleSemitones(this.scale);
-        this.scaleNotes =  getNotesFromSemiTones(this.root, this.semiTones);
-        this.tuning = defaultScaleItemOptions.tuning;
-        this.halfStep = defaultScaleItemOptions.halfStep;
-        this.stringsTunes = defaultScaleItemOptions.stringsTunes;
-        var stringsNumber = defaultScaleItemOptions.stringsNumber;
-        if (stringsNumber < MIN_STRINGS_NUMBER)
-        {
-            stringsNumber = MIN_STRINGS_NUMBER;
-        }
-        this.stringsNumber = stringsNumber;
-        this.isTriadMode = defaultScaleItemOptions.isTriadMode;
-        this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
-        this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
-        this.boxFirstFret = defaultScaleItemOptions.boxFirstFret;
-    }
-
-    this.isCorrectScalesJSONfields = function(JSONstring)
-    {
-        var isCorrect = false;
-        var isParsable = true;
-        var parsedArr = [];
-        try
-        {
-            parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool); 
-        }
-        catch (err)
-        {
-            isParsable = false;
-        }
-        if (isParsable)
-        {
-            isCorrect = (parsedArr.length == 11) && 
-                (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && 
-                isCorrectNote(parsedArr[2]) && isCorrectTuning(parsedArr[3]) && 
-                isCorrectHalfStep(parsedArr[4]) && isCorrectStringsNumber(parsedArr[5]) && 
-                isCorrectTuningNotes(parsedArr[6]) && (typeof (parsedArr[7] === 'boolean')) && 
-                isCorrectNotesShowPattern(parsedArr[8]) && isCorrectNotesShowPattern(parsedArr[9]) &&
-                isCorrectBoxFret(parsedArr[10]); 
-        }
-        return isCorrect;
-    }
-    
-    this.getItemJSON = function()
-    {
-        var fieldsToSave =
-        [
-            this.type,
-            this.scale,
-            this.root,
-            this.tuning,
-            this.halfStep,
-            this.stringsNumber,
-            this.stringsTunes,
-            this.isTriadMode,
-            this.normalNotesShowPattern.slice(),
-            this.triadsNotesShowPattern.slice(),
-            this.boxFirstFret
-        ];
-        var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
-        return JSONstring;
-    }
-    
-    this.setItemsFieldFromJSON = function(JSONstring)
-    {
-        if (this.isCorrectScalesJSONfields(JSONstring))
-        {
-            var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
-            this.type = parsedArr[0];
-            this.scale = parsedArr[1];
-            this.root = parsedArr[2];
-            this.tuning = parsedArr[3];
-            this.halfStep = parsedArr[4];
-            this.stringsNumber = parsedArr[5];
-            this.stringsTunes = parsedArr[6];
-            this.isTriadMode = parsedArr[7];
-            this.normalNotesShowPattern = parsedArr[8];
-            this.triadsNotesShowPattern = parsedArr[9];
-            this.semiTones = getScaleSemitones(this.scale);
-            this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
-            this.boxFirstFret = parsedArr[10];
-        }
-        else
-        {
-            this.readDefaultScaleItemOptions();
-            changeItemJSON(this);
-            changeURLitemsParameters();
-        }
-    }       
+        this.state.readFromDefaultOptions();
+    }    
     
     this.initTriadsCheckbox = function()
     {
         this.$triadsCheckbox = $('.' + TRIADS_CHECKBOX_CLASS, this.$itemBlock);
         this.$triadsCheckboxEmpty = $('.' + TRIADS_CHECKBOX_EMPTY_CLASS, this.$itemBlock);
-        if (this.isTriadMode)
+        if (this.state.isTriadMode)
         {
             this.$triadsCheckboxEmpty.hide(0);
         }
@@ -773,8 +362,8 @@ function ScalesItem(id, JSONstring)
         {
             this.$triadsCheckbox.hide(0);
         }
-        this.$triadsCheckbox.click({itemThis: this}, this.onTriadsCheckboxClick);
-        this.$triadsCheckboxEmpty.click({itemThis: this}, this.onTriadsCheckboxClick);
+        this.$triadsCheckbox.click({that: this}, this.onTriadsCheckboxClick);
+        this.$triadsCheckboxEmpty.click({that: this}, this.onTriadsCheckboxClick);
     }
     
     this.initAnimation = function()
@@ -785,43 +374,32 @@ function ScalesItem(id, JSONstring)
     
     this.init = function()
     {
-        $addNewItemBtn.before(SCALES_ITEM_BLOCK_TMPL({id: this.id}));
-        this.$itemBlock = $('#' + this.id);
-        this.$stringsNumberBlock = $('.' + STRING_NUMBER_CLASS, this.$itemBlock);
-        this.$fretboardBlock = $('.' + FRETBOARD_CLASS, this.$itemBlock);
+        $addNewItemBtn.before(SCALES_ITEM_BLOCK_TMPL({id: id}));
+        this.$itemBlock = $('#' + id);
         this.initAnimation();
+        this.neck = new Neck(this.state, $('.' + NECK_BLOCK_CLASS, this.$itemBlock), 
+            $('.' + STRING_NUMBER_CLASS, this.$itemBlock), 
+            $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock),
+            $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock),
+            $('.' + TUNING_OPTIONS_CLASS, this.$itemBlock));
         if (JSONstring)
         {
-            this.setItemsFieldFromJSON(JSONstring)
+            this.state.deserialize(JSONstring)
         }
         else
         {
-            this.readDefaultScaleItemOptions();
+            this.state.readFromDefaultOptions();
         }
-        this.initStrings();
+        this.neck.init();
         this.initTriadsCheckbox();
         this.changeScaleNotesBlock();
-        this.selectCurrentTuning();
         this.selectCurrentScale();
-        this.selectCurrentHalfStep();
         this.selectCurrentRootNote();
-        this.putNotesOnAllStrings();
-        $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onScaleChange);
-        $('.' + TUNING_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onTuningChange);
-        $('.' + HALF_STEP_SELECT_CLASS, this.$itemBlock).change({itemThis: this}, this.onHalfStepChange);
-        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS)
-            .find('.' + LEFT_ARROW_CLASS).click({itemThis: this}, this.onLeftArrowHalfStepClick);
-        this.$itemBlock.find('.' + HALF_STEP_BLOCK_CLASS)
-            .find('.' + RIGHT_ARROW_CLASS).click({itemThis: this}, this.onRightArrowHalfStepCLick);
+        $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({that: this}, this.onScaleChange);
         $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock)
-            .on("click", '.' + ROOT_NOTE_CLASS, {itemThis: this}, this.onRootNoteChange);
-        $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onAddStringButton);
-        $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onDelStringButton);
-        $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onCloseButton);
-        $('.' + SET_DEFAULT_BTN_CLASS, this.$itemBlock).click({itemThis: this}, this.onSetDefaultButton);
-        this.$fretboardBlock.on("click", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {itemThis: this}, this.onFretClick);
-        this.$fretboardBlock.on("mouseenter", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {itemThis: this}, this.onFretHoverIn);
-        this.$fretboardBlock.on("mouseleave", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {itemThis: this}, this.onFretHoverOut);
+            .on("click", '.' + ROOT_NOTE_CLASS, {that: this}, this.onRootNoteChange);
+        $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({that: this}, this.onCloseButton);
+        $('.' + SET_DEFAULT_BTN_CLASS, this.$itemBlock).click({that: this}, this.onSetDefaultButton);
     }
     
     this.init();

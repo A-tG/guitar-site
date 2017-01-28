@@ -1,7 +1,7 @@
 var menuItems = [];
 var usedIDs = [];
 
-var itemsJSONs = [];
+var serializedItems = [];
 
 function getIDforNewItem()
 {
@@ -20,8 +20,8 @@ function createNewItem()
     {
         menuItems.push(new ScalesItem(id));
         usedIDs.push(id);
-        itemsJSONs.push(menuItems[menuItems.length - 1].getItemJSON());
-        changeURLitemsParameters();
+        serializedItems.push(menuItems[menuItems.length - 1].state.serialize());
+        updateItemsQueryParams();
     }
     else
     {
@@ -29,12 +29,12 @@ function createNewItem()
     }
 }
 
-function createItemsFromURLparameters()
+function createItemsFromQueryParams()
 {
-    for (var i = 0; (i < itemsJSONs.length) && (i < MAX_ITEMS_NUMBER); i++)
+    for (var i = 0; (i < serializedItems.length) && (i < MAX_ITEMS_NUMBER); i++)
     {
         var id = getIDforNewItem();
-        menuItems.push(new ScalesItem(id, itemsJSONs[i]));
+        menuItems.push(new ScalesItem(id, serializedItems[i]));
         usedIDs.push(id);
     }
     if (menuItems.length >= MAX_ITEMS_NUMBER)
@@ -54,21 +54,21 @@ function deleteItem(id)
         if(menuItems[i].id === id)
         {
             menuItems.splice(i, 1);
-            itemsJSONs.splice(i, 1);
+            serializedItems.splice(i, 1);
             usedIDs.splice(usedIDs.indexOf(id), 1);
-            changeURLitemsParameters();
+            updateItemsQueryParams();
         }
     }
 }
 
-function changeURLitemsParameters()
+function updateItemsQueryParams()
 {
     var urlString = '?';
-    for (var i = 0; i < itemsJSONs.length; i++)
+    for (var i = 0; i < serializedItems.length; i++)
     {
-        var encodedParameter = btoa(itemsJSONs[i]);
+        var encodedParameter = btoa(serializedItems[i]);
         urlString += 'i' + i + '=' + encodedParameter;
-        if (i < (itemsJSONs.length - 1))
+        if (i < (serializedItems.length - 1))
         {
             urlString += '&';
         }
@@ -76,7 +76,7 @@ function changeURLitemsParameters()
     history.replaceState({}, "", urlString);
 }
 
-function readURLitemsParameters()
+function readItemsQueryParams()
 {
     var url = window.location.href;
     var index = url.indexOf('?');
@@ -105,26 +105,25 @@ function readURLitemsParameters()
             }
         }
     }
-    itemsJSONs = preparedParameters;
+    serializedItems = preparedParameters;
 }
 
-function changeItemJSON(item)
+function updateItemSerializedData(index, data)
 {
-    var index = $('.' + ITEM_CLASS).index(item.$itemBlock);
-    itemsJSONs[index] = item.getItemJSON();
+    serializedItems[index] = data;
 }
 
 function itemsInit()
 {
     getDefaultScaleOptionsFromCookie();
-    readURLitemsParameters();
-    if (itemsJSONs.length == 0)
+    readItemsQueryParams();
+    if (serializedItems.length == 0)
     {
         createNewItem();
     }
     else
     {
-        createItemsFromURLparameters();
+        createItemsFromQueryParams();
     }
 }
 
