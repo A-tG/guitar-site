@@ -316,7 +316,7 @@ function ScalesItem(id, JSONstring)
     {
         var that = event.data.that;
         that.$itemBlock.hide(200, function() {$(this).remove();});
-        deleteItem(that.id);
+        deleteItem(that.state.id);
     }
     
     this.onSetDefaultButton = function(event)

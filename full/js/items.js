@@ -51,7 +51,7 @@ function deleteItem(id)
     }
     for (var i = 0; i < menuItems.length; i++)
     {
-        if(menuItems[i].id === id)
+        if(menuItems[i].state.id === id)
         {
             menuItems.splice(i, 1);
             serializedItems.splice(i, 1);
