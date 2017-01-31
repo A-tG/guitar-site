@@ -1,6 +1,5 @@
 var menuItems = [];
 var usedIDs = [];
-
 var serializedItems = [];
 
 function getIDforNewItem()
@@ -18,9 +17,10 @@ function createNewItem()
     var id = getIDforNewItem();
     if (menuItems.length < MAX_ITEMS_NUMBER)
     {
-        menuItems.push(new ScalesItem(id));
+        var menuItem = new ScalesItem(id);
+        menuItems.push(menuItem);
         usedIDs.push(id);
-        serializedItems.push(menuItems[menuItems.length - 1].state.serialize());
+        serializedItems.push(menuItem.state.serialize());
         updateItemsQueryParams();
     }
     else

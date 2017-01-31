@@ -1,6 +1,5 @@
 function Fretboard(state, $fretboardBlock)
 {
-    this.$fretboardBlock = $fretboardBlock;
     this.notesBlocks = [];
     
     this.putNotesOnString = function(stringNumber)
@@ -124,7 +123,7 @@ function Fretboard(state, $fretboardBlock)
     this.addString = function(stringNumber)
     {
         var param = {currentStringNumber: stringNumber + 1}
-        var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, this.$fretboardBlock);
+        var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, $fretboardBlock);
         var isFretWithMarker = false;
         var isFretWithDoubleMarker = false;
         for (var i = 0; i < verFrets.length; i++)
@@ -158,7 +157,7 @@ function Fretboard(state, $fretboardBlock)
     
     this.delLastString = function()
     {
-        var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock);
+        var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, $fretboardBlock);
         for (var i = 0; i < verFrets.length; i++)
         {
             $('.' + HOR_FRET_CLASS, $(verFrets[i])).last().remove();
@@ -168,7 +167,7 @@ function Fretboard(state, $fretboardBlock)
     this.onFretClick = function(event)
     {
         var that = event.data.that;
-        var fretNumber = that.$fretboardBlock.
+        var fretNumber = $fretboardBlock.
             find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS).index(this);
         if (state.boxFirstFret == fretNumber)
         {
@@ -183,18 +182,18 @@ function Fretboard(state, $fretboardBlock)
             }
         }
         that.putNotesOnAllStrings();
-        state.updateSerializedData();
+        state.saveToQuery();
     }
 
     this.onFretHoverIn = function(event)
     {
         var that = event.data.that;
-        var fretNumber = that.$fretboardBlock.
+        var fretNumber = $fretboardBlock.
             find('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS).index(this);
         var boxSize = that.calculateNotesBoxSizeForAllStrings(fretNumber);
         if (that.isBoxFit(fretNumber, boxSize))
         {
-            var $fretsHovers = $('.' + FRET_HOVER_CLASS, that.$fretboardBlock);
+            var $fretsHovers = $('.' + FRET_HOVER_CLASS, $fretboardBlock);
             for (var i = 0; i <= boxSize; i++)
             {
                 var hoverClass = FRET_HOVER_ACTIVE_CENTER_CLASS;
@@ -214,7 +213,7 @@ function Fretboard(state, $fretboardBlock)
     this.onFretHoverOut = function(event)
     {
         var that = event.data.that;
-        that.$fretboardBlock.find('.' + FRET_HOVER_CLASS).
+        $fretboardBlock.find('.' + FRET_HOVER_CLASS).
             toggleClass(FRET_HOVER_ACTIVE_START_CLASS, false).
             toggleClass(FRET_HOVER_ACTIVE_CENTER_CLASS, false).
             toggleClass(FRET_HOVER_ACTIVE_END_CLASS, false);
@@ -224,14 +223,14 @@ function Fretboard(state, $fretboardBlock)
     {
         for (var i = 0; i < FRETS_NUMBER; i++)
         {
-            this.$fretboardBlock.children().last().before(STRING_VER_FRET_TMPL());
+            $fretboardBlock.children().last().before(STRING_VER_FRET_TMPL());
         }
         for (var i = 0; i < state.stringsNumber; i++)
         {
             this.addString(i);
         }
-        this.$fretboardBlock.on("click", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {that: this}, this.onFretClick);
-        this.$fretboardBlock.on("mouseenter", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {that: this}, this.onFretHoverIn);
-        this.$fretboardBlock.on("mouseleave", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {that: this}, this.onFretHoverOut);
+        $fretboardBlock.on("click", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {that: this}, this.onFretClick);
+        $fretboardBlock.on("mouseenter", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {that: this}, this.onFretHoverIn);
+        $fretboardBlock.on("mouseleave", '.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, {that: this}, this.onFretHoverOut);
     }
 }

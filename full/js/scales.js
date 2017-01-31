@@ -79,7 +79,7 @@ function ScalesItem(id, JSONstring)
         normalNotesShowPattern: DEFAULT_NOTES_SHOW_PATTERN,
         triadsNotesShowPattern: DEFAULT_TRIADS_SHOW_PATTERN,
 
-        isCorrectSerializationData: function(JSONstring)
+        isCorrectSerializedData: function(JSONstring)
         {
             var isCorrect = false;
             var isParsable = true;
@@ -105,7 +105,7 @@ function ScalesItem(id, JSONstring)
             return isCorrect;
         },
 
-        updateSerializedData: function()
+        saveToQuery: function()
         {
             var index = $('.' + ITEM_CLASS).index($('#' + this.id));
             updateItemSerializedData(index, this.serialize());
@@ -134,28 +134,20 @@ function ScalesItem(id, JSONstring)
         
         deserialize: function(JSONstring)
         {
-            if (this.isCorrectSerializationData(JSONstring))
-            {
-                var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
-                this.type = parsedArr[0];
-                this.scale = parsedArr[1];
-                this.root = parsedArr[2];
-                this.tuning = parsedArr[3];
-                this.halfStep = parsedArr[4];
-                this.stringsNumber = parsedArr[5];
-                this.stringsTunes = parsedArr[6];
-                this.isTriadMode = parsedArr[7];
-                this.normalNotesShowPattern = parsedArr[8];
-                this.triadsNotesShowPattern = parsedArr[9];
-                this.semiTones = getScaleSemitones(this.scale);
-                this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
-                this.boxFirstFret = parsedArr[10];
-            }
-            else
-            {
-                this.readDefaultScaleItemOptions();
-                this.updateSerializedData();
-            }
+            var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
+            this.type = parsedArr[0];
+            this.scale = parsedArr[1];
+            this.root = parsedArr[2];
+            this.tuning = parsedArr[3];
+            this.halfStep = parsedArr[4];
+            this.stringsNumber = parsedArr[5];
+            this.stringsTunes = parsedArr[6];
+            this.isTriadMode = parsedArr[7];
+            this.normalNotesShowPattern = parsedArr[8];
+            this.triadsNotesShowPattern = parsedArr[9];
+            this.semiTones = getScaleSemitones(this.scale);
+            this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
+            this.boxFirstFret = parsedArr[10];
         },
 
         saveToDefaultOptions: function()
@@ -187,7 +179,27 @@ function ScalesItem(id, JSONstring)
             this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
             this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
             this.boxFirstFret = defaultScaleItemOptions.boxFirstFret;
-        } 
+        },
+
+        init: function(JSONstring)
+        {
+            if (JSONstring !== undefined)
+            {
+                if (this.isCorrectSerializedData(JSONstring))
+                {
+                    this.deserialize(JSONstring);
+                }
+                else
+                {
+                    this.readFromDefaultOptions();
+                    this.saveToQuery();
+                }
+            }
+            else
+            {
+                this.readFromDefaultOptions();
+            } 
+        }
     }
 
     this.putNotesOnAllStrings = function()
@@ -206,7 +218,7 @@ function ScalesItem(id, JSONstring)
             prop("selected", true);
     }
     
-    this.changeScaleNotesBlock = function()
+    this.updateScaleNotesBlock = function()
     {
         $('.' + SCALE_NOTES_CLASS, this.$itemBlock).remove();
         var notes = this.state.scaleNotes.slice();
@@ -220,9 +232,14 @@ function ScalesItem(id, JSONstring)
         var $scaleNotesBlocks = $('.' + SCALE_NOTES_CLASS, this.$itemBlock).
             find('.' + SCALE_NOTE_TEXT_CLASS);
         var scaleNotesNumber = $scaleNotesBlocks.length - 1;
+        var notesShowPattern = this.state.normalNotesShowPattern;
+        if (this.state.isTriadMode)
+        {
+            notesShowPattern = this.state.triadsNotesShowPattern;
+        }
         for (var i = 0; i < scaleNotesNumber; i++)
         {
-            var isTransparentNote = !(this.state.isTriadMode ? this.state.triadsNotesShowPattern[i] : this.state.normalNotesShowPattern[i]);
+            var isTransparentNote = !(notesShowPattern[i]);
             if (isTransparentNote)
             {
                 var $noteBlock = $($scaleNotesBlocks[i]);
@@ -257,8 +274,8 @@ function ScalesItem(id, JSONstring)
             that.state.semiTones = getScaleSemitones(scaleName);
             that.state.scaleNotes = getNotesFromSemiTones(that.state.root, that.state.semiTones);
             that.putNotesOnAllStrings();
-            that.changeScaleNotesBlock();
-            that.state.updateSerializedData();
+            that.updateScaleNotesBlock();
+            that.state.saveToQuery();
         }
     }
     
@@ -271,9 +288,9 @@ function ScalesItem(id, JSONstring)
             that.state.root = note.toUpperCase();
             that.selectCurrentRootNote();
             that.state.scaleNotes = getNotesFromSemiTones(that.state.root, that.state.semiTones);
-            that.changeScaleNotesBlock();
+            that.updateScaleNotesBlock();
             that.putNotesOnAllStrings();
-            that.state.updateSerializedData();
+            that.state.saveToQuery();
         }
     }
     
@@ -309,7 +326,7 @@ function ScalesItem(id, JSONstring)
             $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
         }
         that.putNotesOnAllStrings();
-        that.state.updateSerializedData();
+        that.state.saveToQuery();
     }
     
     this.onCloseButton = function(event)
@@ -340,9 +357,9 @@ function ScalesItem(id, JSONstring)
             that.$triadsCheckboxEmpty.hide(0);
             that.$triadsCheckbox.show(0);
         }
-        that.changeScaleNotesBlock();
+        that.updateScaleNotesBlock();
         that.putNotesOnAllStrings();
-        that.state.updateSerializedData();
+        that.state.saveToQuery();
     }
     
     this.readDefaultScaleItemOptions = function()
@@ -377,22 +394,15 @@ function ScalesItem(id, JSONstring)
         $addNewItemBtn.before(SCALES_ITEM_BLOCK_TMPL({id: id}));
         this.$itemBlock = $('#' + id);
         this.initAnimation();
+        this.state.init(JSONstring);
         this.neck = new Neck(this.state, $('.' + NECK_BLOCK_CLASS, this.$itemBlock), 
             $('.' + STRING_NUMBER_CLASS, this.$itemBlock), 
             $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock),
             $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock),
             $('.' + TUNING_OPTIONS_CLASS, this.$itemBlock));
-        if (JSONstring)
-        {
-            this.state.deserialize(JSONstring)
-        }
-        else
-        {
-            this.state.readFromDefaultOptions();
-        }
         this.neck.init();
         this.initTriadsCheckbox();
-        this.changeScaleNotesBlock();
+        this.updateScaleNotesBlock();
         this.selectCurrentScale();
         this.selectCurrentRootNote();
         $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({that: this}, this.onScaleChange);

@@ -39,7 +39,7 @@ function StringsTuning(state, $stringsTuningBlock, eventAction)
         state.stringsTunes[stringNumber] = stringTune;
         state.tuning = CUSTOM_TUNING_VALUE;
         eventAction(stringNumber);
-        state.updateSerializedData();
+        state.saveToQuery();
     }
     
     this.onLeftArrowTuneClick = function(event)
@@ -54,7 +54,7 @@ function StringsTuning(state, $stringsTuningBlock, eventAction)
             .prop("selected", true);
         state.tuning = CUSTOM_TUNING_VALUE;
         eventAction(stringNumber);
-        state.updateSerializedData();
+        state.saveToQuery();
     }
     
     this.onRightArrowTuneClick = function(event)
@@ -69,7 +69,7 @@ function StringsTuning(state, $stringsTuningBlock, eventAction)
             .prop("selected", true);
         state.tuning = CUSTOM_TUNING_VALUE;
         eventAction(stringNumber);
-        state.updateSerializedData();
+        state.saveToQuery();
     }
 
     this.init = function()

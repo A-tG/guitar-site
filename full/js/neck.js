@@ -67,7 +67,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
                 that.selectCurrentStringsTunes();
             }
         }
-        state.updateSerializedData();
+        state.saveToQuery();
     }
     
     this.selectCurrentHalfStep = function()
@@ -87,7 +87,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
         that.moveTuning(valuesDiff);
         that.selectCurrentStringsTunes();
         that.putNotesOnAllStrings();
-        state.updateSerializedData();
+        state.saveToQuery();
     }
     
     this.onLeftArrowHalfStepClick = function(event)
@@ -102,7 +102,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
             that.selectCurrentStringsTunes();
             that.putNotesOnAllStrings();
             that.selectCurrentHalfStep();
-            state.updateSerializedData();
+            state.saveToQuery();
         }
     }
     
@@ -118,7 +118,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
             that.selectCurrentStringsTunes();
             that.putNotesOnAllStrings();
             that.selectCurrentHalfStep();
-            state.updateSerializedData();
+            state.saveToQuery();
         }
     }
 
@@ -131,7 +131,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
             that.stringsTunings.addStringTuning(that.getStringTune(state.stringsNumber));
             state.stringsNumber++;
             $stringsNumberBlock.text('' + state.stringsNumber);
-            state.updateSerializedData();
+            state.saveToQuery();
         }
     }
 
@@ -144,7 +144,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
             that.stringsTunings.delLastString();
             state.stringsNumber--;
             $stringsNumberBlock.text('' + state.stringsNumber);
-            state.updateSerializedData();
+            state.saveToQuery();
         }
     }
 
