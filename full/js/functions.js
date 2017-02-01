@@ -274,6 +274,26 @@ function getSemiTonesPatternForString(scaleNotes, semiTones, stringTune)
     return pattern;
 }
 
+function getTuningName(stringsTunes)
+{
+    var name = CUSTOM_TUNING_VALUE;
+    for (var tuningName in TUNINGS)
+    {
+        var isLengthEqual = TUNINGS[tuningName].length == stringsTunes.length;
+        if (isLengthEqual)
+        {
+            var isEqualTunings = TUNINGS[tuningName].every(function(stringTune, i, tuning) {
+                return stringTune == stringsTunes[i];
+            });
+            if (isEqualTunings)
+            {
+                return tuningName;
+            }
+        }
+    }
+    return name;
+}
+
 function sliderLogVal(position, minVal, maxVal)
 {
     var minPosition = 0;
