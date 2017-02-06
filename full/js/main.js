@@ -1,2 +1,2 @@
 metronome.init();
-itemsInit();
+menuItems.init();

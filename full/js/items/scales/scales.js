@@ -45,12 +45,12 @@ function getDefaultScaleOptionsFromCookie()
             defaultScaleItemOptions.isTriadMode = options.isTriadMode;
         }
         if ((options.normalNotesShowPattern !== undefined) && 
-                isCorrectNotesShowPattern(options.normalNotesShowPattern))
+            isCorrectNotesShowPattern(options.normalNotesShowPattern))
         {
             defaultScaleItemOptions.normalNotesShowPattern = options.normalNotesShowPattern;
         }
         if ((options.triadsNotesShowPattern !== undefined) && 
-                isCorrectNotesShowPattern(options.triadsNotesShowPattern))
+            isCorrectNotesShowPattern(options.triadsNotesShowPattern))
         {
             defaultScaleItemOptions.triadsNotesShowPattern = options.triadsNotesShowPattern;
         }
@@ -195,11 +195,17 @@ ScalesItem.prototype.onScaleNoteClick = function(event)
     that.state.saveToQuery();
 }
 
+ScalesItem.prototype.deleteItem = function()
+{
+    var $itemBlock = $(this);
+    menuItems.deleteItem($itemBlock.attr("id"));
+    $itemBlock.remove();
+}
+
 ScalesItem.prototype.onCloseButton = function(event)
 {
     var that = event.data.that;
-    that.$itemBlock.hide(200, function() {$(this).remove();});
-    deleteItem(that.state.id);
+    that.$itemBlock.hide(200, that.deleteItem);
 }
 
 ScalesItem.prototype.onSetDefaultButton = function(event)
@@ -252,7 +258,7 @@ ScalesItem.prototype.initAnimation = function()
 
 ScalesItem.prototype.init = function(id, JSONstring)
 {
-    $addNewItemBtn.before(SCALES_ITEM_BLOCK_TMPL({id: id}));
+    menuItems.$addNewItemBtn.before(SCALES_ITEM_BLOCK_TMPL({id: id}));
     this.$itemBlock = $('#' + id);
     this.initAnimation();
     this.neck = new Neck(this.state, $('.' + NECK_BLOCK_CLASS, this.$itemBlock), 
@@ -265,8 +271,8 @@ ScalesItem.prototype.init = function(id, JSONstring)
     this.selectCurrentScale();
     this.selectCurrentRootNote();
     $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({that: this}, this.onScaleChange);
-    $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock)
-        .on("click", '.' + ROOT_NOTE_CLASS, {that: this}, this.onRootNoteChange);
+    $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).
+        on("click", '.' + ROOT_NOTE_CLASS, {that: this}, this.onRootNoteChange);
     $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({that: this}, this.onCloseButton);
     $('.' + SET_DEFAULT_BTN_CLASS, this.$itemBlock).click({that: this}, this.onSetDefaultButton);
 }

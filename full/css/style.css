@@ -5,7 +5,7 @@
     font-weight: 400;
     src: url(../iconfonts/MaterialIcons-Regular.eot); /* For IE6-8 */
     src: local('../iconfonts/Material Icons'),
-    local('../iconfonts/MaterialIcons-Regular'),
+        local('../iconfonts/MaterialIcons-Regular'),
         url(../iconfonts/MaterialIcons-Regular.woff2) format('woff2'),
         url(../iconfonts/MaterialIcons-Regular.woff) format('woff'),
         url(../iconfonts/MaterialIcons-Regular.ttf) format('truetype');

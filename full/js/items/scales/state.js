@@ -46,9 +46,8 @@ ScaleItemState.prototype.isCorrectSerializedData = function(JSONstring)
 
 ScaleItemState.prototype.saveToQuery = function()
 {
-    var index = $('.' + ITEM_CLASS).index($('#' + this.id));
-    updateItemSerializedData(index, this.serialize());
-    updateItemsQueryParams();
+    menuItems.updateItemSerializedData(this.id, this.serialize());
+    menuItems.updateItemsQueryParams();
 }
 
 ScaleItemState.prototype.serialize = function()
@@ -122,20 +121,10 @@ ScaleItemState.prototype.readFromDefaultOptions = function()
 
 ScaleItemState.prototype.init = function(JSONstring)
 {
-    if (JSONstring !== undefined)
+    this.readFromDefaultOptions();
+    if (JSONstring && this.isCorrectSerializedData(JSONstring))
     {
-        if (this.isCorrectSerializedData(JSONstring))
-        {
-            this.deserialize(JSONstring);
-        }
-        else
-        {
-            this.readFromDefaultOptions();
-            this.saveToQuery();
-        }
+        this.deserialize(JSONstring);
     }
-    else
-    {
-        this.readFromDefaultOptions();
-    } 
+    this.saveToQuery();
 }
