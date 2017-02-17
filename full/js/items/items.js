@@ -121,7 +121,6 @@ var menuItems = {
     {
         this.$addNewItemBtn = $('#' + ADD_NEW_ITEM_BTN_ID);
         this.$addNewItemBtn.click({that: this}, this.onNewItemButton);
-        getDefaultScaleOptionsFromCookie();
         var itemsSerializedStates = this.readItemsQueryParams();
         if (itemsSerializedStates.length == 0)
         {

@@ -14,7 +14,7 @@
               <a class="logo" href="" title="Artistic Guitar">Artistic Guitar</a>
             </div>
             <ul class="metronome_block">
-              <div id="metronome_disabled_block" class="metronome_disabled_block">Update your browser to use metronome</div>
+              <li id="metronome_disabled_block" class="metronome_disabled_block">Update your browser to use metronome</li>
               <li class="metronome_icon">
                 <div class="trapezoid_bottom"></div>
                 <div class="trapezoid_leftside"></div>
@@ -244,17 +244,25 @@
             <select class="item_head_select">
               <option>Scales</option>
             </select>
+            <div class="lh_toggle_block">
+              <div class="lh_toggle transitional">Left handed</div>
+              <div class="toggle_checkbox">
+                <div class="toggle_checkbox_slider slider_rh transitional"></div>
+              </div>
+              <div class="rh_toggle transitional">Right handed</div>
+            </div>
             <div class="clear"></div>
           </div>
           <div class="neck_block">
-            <ul class="strings_options_block"></ul>
-            <div class="fretboard">
-              <div class="fret_null">
-                <div class="fret_ver_hover"></div>
+            <div class="tuners_and_fretboard_block">
+              <ul class="strings_options_block"></ul>
+              <div class="fretboard">
+                <div class="fret_null">
+                  <div class="fret_ver_hover"></div>
+                </div>
+                <div class="clear"></div>
               </div>
-              <div class="clear"></div>
             </div>
-            <div class="clear"></div>
           </div>
           <div class="item_options_block">
             <ul class="tuning_options">
@@ -389,6 +397,8 @@
     <script type="text/javascript" src="js/js.cookie.js"></script>
     <script type="text/javascript" src="js/constants.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/defaults/defaults.js"></script>
+    <script type="text/javascript" src="js/defaults/scales.js"></script>
     <script type="text/javascript" src="js/metronome.js"></script>
     <script type="text/javascript" src="js/items/parts/strings_tunings.js"></script>
     <script type="text/javascript" src="js/items/parts/fretboard.js"></script>

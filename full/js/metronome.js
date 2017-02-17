@@ -42,10 +42,10 @@ var metronome = {
             var beat = this.beatsQueue.shift();
             var osc = audioCtx.createOscillator();
             osc.type = 'square';
-            var freq = 440;
+            var freq = SECOND_CLICK_FREQ;
             if (this.beatNumber == 0)
             {
-                freq = 640;
+                freq = FIRST_CLICK_FREQ;
             }
             osc.frequency.value = freq;
             osc.connect(this.gainNode);

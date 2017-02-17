@@ -14,6 +14,7 @@ function ScaleItemState(id, JSONstring)
     this.boxFirstFret = -1;
     this.normalNotesShowPattern = DEFAULT_NOTES_SHOW_PATTERN;
     this.triadsNotesShowPattern = DEFAULT_TRIADS_SHOW_PATTERN;
+    this.isLH = false;
 
     this.init(JSONstring);
 }
@@ -33,13 +34,13 @@ ScaleItemState.prototype.isCorrectSerializedData = function(JSONstring)
     }
     if (isParsable)
     {
-        isCorrect = (parsedArr.length == 11) && 
+        isCorrect = (parsedArr.length == 12) && 
             (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && 
             isCorrectNote(parsedArr[2]) && isCorrectTuning(parsedArr[3]) && 
             isCorrectHalfStep(parsedArr[4]) && isCorrectStringsNumber(parsedArr[5]) && 
-            isCorrectTuningNotes(parsedArr[6]) && (typeof (parsedArr[7] === 'boolean')) && 
+            isCorrectTuningNotes(parsedArr[6]) && (typeof parsedArr[7] === 'boolean') && 
             isCorrectNotesShowPattern(parsedArr[8]) && isCorrectNotesShowPattern(parsedArr[9]) &&
-            isCorrectBoxFret(parsedArr[10]); 
+            isCorrectBoxFret(parsedArr[10]) && (typeof parsedArr[11] === 'boolean'); 
     }
     return isCorrect;
 }
@@ -64,7 +65,8 @@ ScaleItemState.prototype.serialize = function()
         this.isTriadMode,
         this.normalNotesShowPattern.slice(),
         this.triadsNotesShowPattern.slice(),
-        this.boxFirstFret
+        this.boxFirstFret,
+        this.isLH
     ];
     var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
     return JSONstring;
@@ -86,37 +88,39 @@ ScaleItemState.prototype.deserialize = function(JSONstring)
     this.semiTones = getScaleSemitones(this.scale);
     this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
     this.boxFirstFret = parsedArr[10];
+    this.isLH = parsedArr[11];
 }
 
 ScaleItemState.prototype.saveToDefaultOptions = function()
 {
-    defaultScaleItemOptions.scale = this.scale;
-    defaultScaleItemOptions.root = this.root;
-    defaultScaleItemOptions.semiTones = this.semiTones;
-    defaultScaleItemOptions.tuning = this.tuning;
-    defaultScaleItemOptions.halfStep = this.halfStep;
-    defaultScaleItemOptions.stringsTunes = this.stringsTunes;
-    defaultScaleItemOptions.stringsNumber = this.stringsNumber;
-    defaultScaleItemOptions.isTriadMode = this.isTriadMode;
-    defaultScaleItemOptions.boxFirstFret = this.boxFirstFret;
-    Cookies.set("defaultScaleOptions", defaultScaleItemOptions, 
-        {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
+    defaults.scales.scale = this.scale;
+    defaults.scales.root = this.root;
+    defaults.scales.semiTones = this.semiTones;
+    defaults.scales.tuning = this.tuning;
+    defaults.scales.halfStep = this.halfStep;
+    defaults.scales.stringsTunes = this.stringsTunes;
+    defaults.scales.stringsNumber = this.stringsNumber;
+    defaults.scales.isTriadMode = this.isTriadMode;
+    defaults.scales.boxFirstFret = this.boxFirstFret;
+    defaults.scales.isLH = this.isLH;
+    Cookies.set("defaultScaleOptions", defaults.scales, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
 }
 
 ScaleItemState.prototype.readFromDefaultOptions = function()
 {
-    this.scale = defaultScaleItemOptions.scale;
-    this.root = defaultScaleItemOptions.root;
+    this.scale = defaults.scales.scale;
+    this.root = defaults.scales.root;
     this.semiTones = getScaleSemitones(this.scale);
     this.scaleNotes =  getNotesFromSemiTones(this.root, this.semiTones);
-    this.tuning = defaultScaleItemOptions.tuning;
-    this.halfStep = defaultScaleItemOptions.halfStep;
-    this.stringsTunes = defaultScaleItemOptions.stringsTunes;
-    this.stringsNumber = defaultScaleItemOptions.stringsNumber;
-    this.isTriadMode = defaultScaleItemOptions.isTriadMode;
-    this.normalNotesShowPattern = defaultScaleItemOptions.normalNotesShowPattern;
-    this.triadsNotesShowPattern = defaultScaleItemOptions.triadsNotesShowPattern;
-    this.boxFirstFret = defaultScaleItemOptions.boxFirstFret;
+    this.tuning = defaults.scales.tuning;
+    this.halfStep = defaults.scales.halfStep;
+    this.stringsTunes = defaults.scales.stringsTunes;
+    this.stringsNumber = defaults.scales.stringsNumber;
+    this.isTriadMode = defaults.scales.isTriadMode;
+    this.normalNotesShowPattern = defaults.scales.normalNotesShowPattern;
+    this.triadsNotesShowPattern = defaults.scales.triadsNotesShowPattern;
+    this.boxFirstFret = defaults.scales.boxFirstFret;
+    this.isLH = defaults.scales.isLH;
 }
 
 ScaleItemState.prototype.init = function(JSONstring)

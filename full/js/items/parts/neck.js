@@ -1,4 +1,4 @@
-function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringBtn, $tuningOptionsBlock)
+function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringBtn, $tuningOptionsBlock, $lhToggleBlock)
 {
     this.state = state;
     this.$neckBlock = $neckBlock;
@@ -6,6 +6,7 @@ function Neck(state, $neckBlock, $stringsNumberBlock, $addStringBtn, $delStringB
     this.$addStringBtn = $addStringBtn;
     this.$delStringBtn = $delStringBtn;
     this.$tuningOptionsBlock = $tuningOptionsBlock;
+    this.$lhToggleBlock = $lhToggleBlock;
 
     var that = this;
 
@@ -56,6 +57,20 @@ Neck.prototype.selectCurrentTuning = function()
 {
     this.$tuningOptionsBlock.find('.' + TUNING_SELECT_CLASS + " [value='" + this.state.tuning + "']").
         prop("selected", true);
+}
+
+Neck.prototype.switchLH = function()
+{
+    this.$lhToggleBlock.find('.' + TOGGLE_SLIDER_CLASS).
+        toggleClass(SLIDER_LH_CLASS, this.state.isLH).toggleClass(SLIDER_RH_CLASS, !this.state.isLH);
+    this.$neckBlock.toggleClass(LH_CLASS, this.state.isLH);
+}
+
+Neck.prototype.switchLHevent = function()
+{
+    this.state.isLH = !this.state.isLH;
+    this.switchLH();
+    this.state.saveToQuery();
 }
 
 Neck.prototype.onTuningChange = function(event)
@@ -158,12 +173,37 @@ Neck.prototype.onDelStringButton = function(event)
     }
 }
 
+Neck.prototype.onLhToggleSlider = function(event)
+{
+    var that = event.data.that;
+    that.switchLHevent();
+}
+
+Neck.prototype.onLhToggleClick = function(event)
+{
+    var that = event.data.that;
+    if (!that.state.isLH)
+    {
+        that.switchLHevent();
+    }
+}
+
+Neck.prototype.onRhToggleClick =function(event)
+{
+    var that = event.data.that;
+    if (that.state.isLH)
+    {
+        that.switchLHevent();
+    }
+}
+
 Neck.prototype.init = function()
 {
     this.$stringsNumberBlock.text('' + this.state.stringsNumber);
     this.selectCurrentTuning();
     this.selectCurrentHalfStep();
     this.putNotesOnAllStrings();
+    this.switchLH();
     this.$addStringBtn.click({that: this}, this.onAddStringButton);
     this.$delStringBtn.click({that: this}, this.onDelStringButton);
     $('.' + TUNING_SELECT_CLASS, this.$tuningOptionsBlock).change({that: this}, this.onTuningChange);
@@ -172,4 +212,7 @@ Neck.prototype.init = function()
         find('.' + LEFT_ARROW_CLASS).click({that: this}, this.onLeftArrowHalfStepClick);
     this.$tuningOptionsBlock.find('.' + HALF_STEP_BLOCK_CLASS).
         find('.' + RIGHT_ARROW_CLASS).click({that: this}, this.onRightArrowHalfStepCLick);
+    this.$lhToggleBlock.find('.' + TOGGLE_CHECKBOX_CLASS).click({that: this}, this.onLhToggleSlider);
+    this.$lhToggleBlock.find('.' + LH_TOGGLE_CLASS).click({that: this}, this.onLhToggleClick);
+    this.$lhToggleBlock.find('.' + RH_TOGGLE_CLASS).click({that: this}, this.onRhToggleClick);
 }

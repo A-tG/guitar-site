@@ -394,8 +394,56 @@ select
     width: 95%;
     margin: 5px 15px;
 }
+
+.lh_toggle_block
+{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.lh_toggle_block div
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.toggle_checkbox
+{
+    position: relative;
+    background: #555;
+    width: 40px;
+    height: 18px;
+    border-radius: 2px;
+}
+.lh_toggle, .rh_toggle
+{
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+}
+.toggle_checkbox_slider
+{
+    position: absolute;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    background: #fc0;
+    border-radius: 2px;
+}
+.slider_rh
+{
+    right: 0;
+}
+.slider_lh
+{
+    left: 0;
+}
+.toggle_checkbox:hover .toggle_checkbox_slider
+{
+    background: #fff;
+}
+
 .item_head_select
 {
+    float: left;
     color: #fc0;
     font-family: Tahoma, Arial, Verdana;
     font-size: 18px;
@@ -489,6 +537,9 @@ select
 .neck_block
 {
     width: 100%;
+}
+.tuners_and_fretboard_block
+{
     display: flex;
 }
 .fretboard
@@ -1210,4 +1261,27 @@ select
     {
         margin-right: 30px;
     }
+}
+
+.lh
+{
+    -moz-transform: scaleX(-1);  
+    -o-transform: scaleX(-1); 
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); 
+}
+
+.lh .note
+{
+    -moz-transform: scaleX(-1);  
+    -o-transform: scaleX(-1); 
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); 
+}
+.lh .string_tune_select
+{
+    -moz-transform: scaleX(-1);  
+    -o-transform: scaleX(-1); 
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); 
 }

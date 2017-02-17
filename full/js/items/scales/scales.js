@@ -1,66 +1,3 @@
-var defaultScaleItemOptions = {
-    scale: "major",
-    root: "C",
-    tuning: "standart_e",
-    halfStep: 0,
-    stringsTunes: DEFAULT_STRING_TUNES,
-    stringsNumber: 6,
-    isTriadMode: false,
-    normalNotesShowPattern: DEFAULT_NOTES_SHOW_PATTERN,
-    triadsNotesShowPattern: DEFAULT_TRIADS_SHOW_PATTERN,
-    boxFirstFret: -1
-}
-
-function getDefaultScaleOptionsFromCookie()
-{
-    if (Cookies.getJSON("defaultScaleOptions") !== undefined)
-    {
-        var options = Cookies.getJSON("defaultScaleOptions");
-        if ((options.scale !== undefined) && isCorrectScale(options.scale))
-        {
-            defaultScaleItemOptions.scale = options.scale;
-        }
-        if ((options.root !== undefined) && isCorrectNote(options.root))
-        {
-            defaultScaleItemOptions.root = options.root;
-        }
-        if ((options.tuning !== undefined) && isCorrectTuning(options.tuning))
-        {
-            defaultScaleItemOptions.tuning = options.tuning;
-        }
-        if ((options.halfStep !== undefined) && isCorrectHalfStep(options.halfStep))
-        {
-            defaultScaleItemOptions.halfStep = +options.halfStep;
-        }
-        if ((options.stringsTunes !== undefined) && isCorrectTuningNotes(options.stringsTunes))
-        {
-            defaultScaleItemOptions.stringsTunes = options.stringsTunes;
-        }
-        if ((options.stringsNumber !== undefined) && isCorrectStringsNumber(options.stringsNumber))
-        {
-            defaultScaleItemOptions.stringsNumber = +options.stringsNumber;
-        }
-        if ((options.isTriadMode !== undefined) && (typeof options.isTriadMode === 'boolean'))
-        {
-            defaultScaleItemOptions.isTriadMode = options.isTriadMode;
-        }
-        if ((options.normalNotesShowPattern !== undefined) && 
-            isCorrectNotesShowPattern(options.normalNotesShowPattern))
-        {
-            defaultScaleItemOptions.normalNotesShowPattern = options.normalNotesShowPattern;
-        }
-        if ((options.triadsNotesShowPattern !== undefined) && 
-            isCorrectNotesShowPattern(options.triadsNotesShowPattern))
-        {
-            defaultScaleItemOptions.triadsNotesShowPattern = options.triadsNotesShowPattern;
-        }
-        if ((options.boxFirstFret !== undefined) && isCorrectBoxFret(options.boxFirstFret))
-        {
-            defaultScaleItemOptions.boxFirstFret = options.boxFirstFret;
-        }
-    }
-}
-
 function ScalesItem(id, JSONstring)
 {
     this.state = new ScaleItemState(id, JSONstring);
@@ -265,7 +202,8 @@ ScalesItem.prototype.init = function(id, JSONstring)
         $('.' + STRING_NUMBER_CLASS, this.$itemBlock), 
         $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock),
         $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock),
-        $('.' + TUNING_OPTIONS_CLASS, this.$itemBlock));
+        $('.' + TUNING_OPTIONS_CLASS, this.$itemBlock),
+        $('.' + LH_TOGGLE_BLOCK_CLASS, this.$itemBlock));
     this.initTriadsCheckbox();
     this.updateScaleNotesBlock();
     this.selectCurrentScale();

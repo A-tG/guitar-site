@@ -19,6 +19,8 @@ var MAX_TEMPO = 320;
 var DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS = 30;
 var DEFAULT_NOTES_SHOW_PATTERN = [true, true, true, true, true, true, true, true, true, true, true, true];
 var DEFAULT_TRIADS_SHOW_PATTERN = [true, false, true, false, true, false, false, false, false, false, false, false];
+var SECOND_CLICK_FREQ = 880;
+var FIRST_CLICK_FREQ = 1480;
 
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 var DEFAULT_SCALE_SEMITONES = [2, 2, 1, 2, 2, 2, 1];
@@ -114,6 +116,14 @@ var CLOSE_BTN_CLASS = "close_btn";
 var SET_DEFAULT_BTN_CLASS = "set_default_btn";
 var TRIADS_CHECKBOX_CLASS = "triads_checkbox";
 var TRIADS_CHECKBOX_EMPTY_CLASS = "triads_checkbox_empty";
+var LH_TOGGLE_BLOCK_CLASS = "lh_toggle_block";
+var TOGGLE_CHECKBOX_CLASS = "toggle_checkbox";
+var LH_TOGGLE_CLASS = "lh_toggle";
+var RH_TOGGLE_CLASS = "rh_toggle";
+var TOGGLE_SLIDER_CLASS = "toggle_checkbox_slider";
+var SLIDER_LH_CLASS = "slider_lh";
+var SLIDER_RH_CLASS = "slider_rh";
+var LH_CLASS = "lh";
 
 var METRONOME_DISABLED_ID = "metronome_disabled_block";
 var ADD_NEW_ITEM_BTN_ID = "add_new_item_btn";
