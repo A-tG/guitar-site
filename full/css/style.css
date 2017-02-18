@@ -425,6 +425,7 @@ select
 }
 .toggle_checkbox
 {
+    margin: 0 4px;
     position: relative;
     background: #555;
     width: 40px;
@@ -863,7 +864,7 @@ select
 .fret_dot
 {
     display: inline-block;
-    margin: 6px 1%;
+    margin: 6px 2px;
     background: #fff;
     width: 6px;
     height: 6px;
