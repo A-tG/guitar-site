@@ -38,9 +38,9 @@ var metronome = {
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
     $beatVisBlock: $('#' + METR_BEAT_VIS_BLOCK_ID),
     $beatVisNumber: $('#' + METR_BEAT_VIS_NUMBER_ID),
-    $beatVisProgressBar: new ProgressBar.Circle('#' + METR_BEAT_VIS_BLOCK_ID, {
+    beatVisProgressBar: new ProgressBar.Circle('#' + METR_BEAT_VIS_BLOCK_ID, {
         strokeWidth: 15,
-        color: '#0bb',
+        color: '#fc0',
         trailWidth: 0,
         svgStyle: null
     }),
@@ -64,12 +64,23 @@ var metronome = {
     scheduleBeatVisual: function(beat)
     {
         var time = beat.visTime - performance.now();
-        this.$beatVisProgressBar.set(0);
-        this.$beatVisProgressBar.animate(1, {duration: time});
+        if (time < 0)
+        {
+            time = 0;
+        }
+        var color = '#fc0';
+        if ((beat.number == 1) || (this.beats == 1))
+        {
+            color = '#0bb';
+        }
+        this.beatVisProgressBar.path.setAttribute('stroke', color);
+        this.beatVisProgressBar.set(0);
+        this.beatVisProgressBar.animate(1, {duration: time});
         setTimeout(function() 
         {
             if (metronome.isPlaying)
             {
+                metronome.$beatVisNumber.toggleClass(METR_FIRST_BEAT_VIS_NUMBER_CLASS, beat.number == 0);
                 metronome.$beatVisNumber.text(beat.number + 1);
             }
         }, time);
@@ -110,7 +121,7 @@ var metronome = {
                 audioTime: audioCtx.currentTime,
                 visTime: performance.now(),
                 number: 0
-            })
+            });
         }
     },
     
@@ -120,6 +131,7 @@ var metronome = {
         that.isPlaying = true;
         $(this).hide();
         that.$stopBtn.show();
+        that.beatsQueue = [];
         that.nextBeatNumber = 0;
         worker.postMessage('startMetronomeTicking');
     },
@@ -131,9 +143,8 @@ var metronome = {
         $(this).hide();
         that.$playBtn.show();
         that.$beatVisNumber.text("");
-        that.$beatVisProgressBar.set(0);
+        that.beatVisProgressBar.set(0);
         worker.postMessage('stopMetronomeTicking');
-        that.beatsQueue = [];
     },
     
     onVolumeChange: function(event)

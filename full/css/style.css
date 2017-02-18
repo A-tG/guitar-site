@@ -393,6 +393,10 @@ select
     line-height: 40px;
     text-align: center;
 }
+.metronome_first_beat_number_vis
+{
+    color: #0bb;
+}
 
 .item_block
 {
