@@ -141,6 +141,7 @@ var METR_BEAT_VAL_SELECT_ID = "metronome_beat_val_select";
 var METR_BEAT_VAL_LEFT_ARROW_ID = "metronome_beat_val_left_arrow";
 var METR_BEAT_VAL_RIGHT_ARROW_ID = "metronome_beat_val_right_arrow";
 var METR_BEAT_VIS_BLOCK_ID = "metronome_beat_vis_block";
+var METR_BEAT_VIS_NUMBER_ID = "metronome_beat_number_vis";
 
 var WRONG_SEMITONE_NUMBER_MSG = "Wrong sum of semitones, must be equal to " + SCALE_SEMITONES_NUMBER;
 var WRONG_ROOT_NOTE_MSG = "Wrong root note";

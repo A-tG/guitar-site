@@ -37,6 +37,14 @@ var metronome = {
     $beatValLeftArrow: $('#' + METR_BEAT_VAL_LEFT_ARROW_ID),
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
     $beatVisBlock: $('#' + METR_BEAT_VIS_BLOCK_ID),
+    $beatVisNumber: $('#' + METR_BEAT_VIS_NUMBER_ID),
+    $beatVisProgressBar: new ProgressBar.Circle('#' + METR_BEAT_VIS_BLOCK_ID, {
+        strokeWidth: 15,
+        color: '#0bb',
+        trailWidth: 0,
+        svgStyle: null
+    }),
+
 
     scheduleBeatAudio: function(beat)
     {
@@ -56,11 +64,13 @@ var metronome = {
     scheduleBeatVisual: function(beat)
     {
         var time = beat.visTime - performance.now();
+        this.$beatVisProgressBar.set(0);
+        this.$beatVisProgressBar.animate(1, {duration: time});
         setTimeout(function() 
         {
             if (metronome.isPlaying)
             {
-                metronome.$beatVisBlock.text(beat.number + 1);
+                metronome.$beatVisNumber.text(beat.number + 1);
             }
         }, time);
     },
@@ -120,7 +130,8 @@ var metronome = {
         that.isPlaying = false;
         $(this).hide();
         that.$playBtn.show();
-        that.$beatVisBlock.text("");
+        that.$beatVisNumber.text("");
+        that.$beatVisProgressBar.set(0);
         worker.postMessage('stopMetronomeTicking');
         that.beatsQueue = [];
     },
