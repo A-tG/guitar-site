@@ -28,6 +28,7 @@
                 <div class="ticker"></div>
                 <div class="weight"></div>
               </li>
+              <li id="metronome_beat_vis_block" class="metronome_beat_vis_block"></li>
               <li id="metronome_play_btn" class="play_btn material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
               <li id="metronome_stop_btn" class="stop_btn material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
               <li class="volume_block">
@@ -49,9 +50,9 @@
                     <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
                   </li>
                   <li class="tempo_input_block">
-                    <div id="metronome_tempo_left_arrow" class="left_arrow transitional"></div>
+                    <div id="metronome_tempo_left_arrow" class="left_arrow transitional" title="Reduce tempo"></div>
                     <input id="metronome_tempo_input" class="tempo_input" type="text" list="tempos" size="4" maxlength="7">
-                    <div id="metronome_tempo_right_arrow" class="right_arrow transitional"></div>
+                    <div id="metronome_tempo_right_arrow" class="right_arrow transitional" title="Increase tempo"></div>
                     <datalist id="tempos">
                       <option>40</option>
                       <option>45</option>
@@ -121,7 +122,7 @@
                   </li>
                   <li>
                     <div class="signature_option_block">
-                      <div id="metronome_beats_left_arrow" class="left_arrow transitional"></div>
+                      <div id="metronome_beats_left_arrow" class="left_arrow transitional" title="Reduce beats number"></div>
                       <select id="metronome_beats_select" class="signature_select">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -140,10 +141,10 @@
                         <option value="15">15</option>
                         <option value="16">16</option>
                       </select>
-                      <div id="metronome_beats_right_arrow" class="right_arrow transitional"></div>
+                      <div id="metronome_beats_right_arrow" class="right_arrow transitional" title="Increase beats number"></div>
                     </div>
                     <div class="signature_option_block">
-                      <div id="metronome_beat_val_left_arrow" class="left_arrow transitional"></div>
+                      <div id="metronome_beat_val_left_arrow" class="left_arrow transitional" title="Increase beat(note) value"></div>
                       <select id="metronome_beat_val_select" class="signature_select">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -152,7 +153,7 @@
                         <option value="16">16</option>
                         <option value="32">32</option>
                       </select>
-                      <div id="metronome_beat_val_right_arrow" class="right_arrow transitional"></div>
+                      <div id="metronome_beat_val_right_arrow" class="right_arrow transitional" title="Reduce beat(note) value"></div>
                     </div>
                   </li>
                 </ul>
@@ -167,19 +168,19 @@
       <noscript class="noscipt_warning">Please update your browser or enable javascript</noscript>
     </div>
     <script id="scale_notes_tmpl" type="text/plain">
-      <li class="scale_notes">
-        <ul class="scale_note">
-          <span class="scale_note_text transitional">{{=it.root}}</span>
+      <ul class="scale_notes">
+        <li class="scale_note">
+          <span class="scale_note_text transitional" title="Toogle note">{{=it.root}}</span>
           <div class="separator_ver_small"></div>
-        </ul>
+        </li>
         {{~it.semiTones :semiTone:i}}
-          <ul class="semitone_block semitone_width{{=semiTone}}">{{=semiTone}}</ul>
-          <ul class="scale_note">
-            <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
+          <li class="semitone_block semitone_width{{=semiTone}}">{{=semiTone}}</li>
+          <li class="scale_note">
+            <span class="scale_note_text transitional" title="Toogle note">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small"></div>
-          </ul>
+          </li>
         {{~}}
-      </li>
+      </ul>
     </script>
     <script id="string_ver_fret_tmpl" type="text/plain">
       <div class="fret_ver">
@@ -214,7 +215,7 @@
     </script>
     <script id="string_tune_block_tmpl" type="text/plain">
       <li class="string_tune">
-        <div class="left_arrow transitional"></div>
+        <div class="left_arrow transitional" title="Tune lower"></div>
         <select class="string_tune_select">
           <option value="G#">G#</option>
           <option value="G">G</option>
@@ -229,7 +230,7 @@
           <option value="A#">A#</option>
           <option value="A">A</option>
         </select>
-        <div class="right_arrow transitional"></div>
+        <div class="right_arrow transitional" title="Tune higher"></div>
       </li>
     </script>
     <script id="scales_item_tmpl" type="text/plain">
@@ -245,11 +246,11 @@
               <option>Scales</option>
             </select>
             <div class="lh_toggle_block">
-              <div class="lh_toggle transitional">Left handed</div>
-              <div class="toggle_checkbox">
+              <div class="lh_toggle transitional" title="Switch fretboard for lefthanded">Left handed</div>
+              <div class="toggle_checkbox" title="Switch fretboard">
                 <div class="toggle_checkbox_slider slider_rh transitional"></div>
               </div>
-              <div class="rh_toggle transitional">Right handed</div>
+              <div class="rh_toggle transitional" title="Switch fretboard for righthanded">Right handed</div>
             </div>
             <div class="clear"></div>
           </div>
@@ -281,7 +282,7 @@
               <li>
                 <span class="options_text">Half-step:</span>
                 <div class="half_step_block">
-                  <div class="left_arrow transitional"></div>
+                  <div class="left_arrow transitional" title="Half-step lower"></div>
                   <select class="half_step_select">
                     <option value="-11">-11</option>
                     <option value="-10">-10</option>
@@ -307,7 +308,7 @@
                     <option value="10">+10</option>
                     <option value="11">+11</option>
                   </select>
-                  <div class="right_arrow transitional"></div>
+                  <div class="right_arrow transitional" title="Half-step higher"></div>
                 </div>
               </li>
             </ul>
@@ -368,18 +369,18 @@
               </ul>
               <div class="scale_notes_and_semitones_block">
                 <ul>
-                  <li class="root_note transitional selected_text">C</li>
-                  <li class="root_note transitional">C#</li>
-                  <li class="root_note transitional">D</li>
-                  <li class="root_note transitional">D#</li>
-                  <li class="root_note transitional">E</li>
-                  <li class="root_note transitional">F</li>
-                  <li class="root_note transitional">F#</li>
-                  <li class="root_note transitional">G</li>
-                  <li class="root_note transitional">G#</li>
-                  <li class="root_note transitional">A</li>
-                  <li class="root_note transitional">A#</li>
-                  <li class="root_note transitional">B</li>
+                  <li class="root_note transitional selected_text" title="Select root note">C</li>
+                  <li class="root_note transitional" title="Select root note">C#</li>
+                  <li class="root_note transitional" title="Select root note">D</li>
+                  <li class="root_note transitional" title="Select root note">D#</li>
+                  <li class="root_note transitional" title="Select root note">E</li>
+                  <li class="root_note transitional" title="Select root note">F</li>
+                  <li class="root_note transitional" title="Select root note">F#</li>
+                  <li class="root_note transitional" title="Select root note">G</li>
+                  <li class="root_note transitional" title="Select root note">G#</li>
+                  <li class="root_note transitional" title="Select root note">A</li>
+                  <li class="root_note transitional" title="Select root note">A#</li>
+                  <li class="root_note transitional" title="Select root note">B</li>
                   <div class="clear"></div>
                 </ul>
               </div>

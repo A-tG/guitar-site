@@ -15,12 +15,14 @@ catch (err)
 
 
 var metronome = {
+    isPlaying: false,
     beats: DEFAULT_METR_BEATS,
     beatValue: DEFAULT_METR_BEAT_VAL,
     volume: (sliderLogVal(DEFAULT_METR_VOLUME, 1, 100)) / 100,
     tempo: DEFAULT_METR_TEMPO,
-    beatNumber: 0,
+    nextBeatNumber: 0,
     beatsQueue: [],
+
     $playBtn: $('#' + METR_PLAY_BTN_ID),
     $stopBtn: $('#' + METR_STOP_BTN_ID),
     $volumeRange: $('#' + METR_VOLUME_RANGE_ID),
@@ -34,93 +36,117 @@ var metronome = {
     $beatValSelect: $('#' + METR_BEAT_VAL_SELECT_ID),
     $beatValLeftArrow: $('#' + METR_BEAT_VAL_LEFT_ARROW_ID),
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
-    
+    $beatVisBlock: $('#' + METR_BEAT_VIS_BLOCK_ID),
+
+    scheduleBeatAudio: function(beat)
+    {
+        var osc = audioCtx.createOscillator();
+        osc.type = 'square';
+        var freq = SECOND_CLICK_FREQ;
+        if (beat.number == 0)
+        {
+            freq = FIRST_CLICK_FREQ;
+        }
+        osc.frequency.value = freq;
+        osc.connect(this.gainNode);
+        osc.start(beat.audioTime);
+        osc.stop(beat.audioTime + 50 / freq);
+    },
+
+    scheduleBeatVisual: function(beat)
+    {
+        var time = beat.visTime - performance.now();
+        setTimeout(function() 
+        {
+            if (metronome.isPlaying)
+            {
+                metronome.$beatVisBlock.text(beat.number + 1);
+            }
+        }, time);
+    },
+
     scheduleBeatFromQueue: function()
     {
         if (this.beatsQueue.length > 0)
         {
             var beat = this.beatsQueue.shift();
-            var osc = audioCtx.createOscillator();
-            osc.type = 'square';
-            var freq = SECOND_CLICK_FREQ;
-            if (this.beatNumber == 0)
-            {
-                freq = FIRST_CLICK_FREQ;
-            }
-            osc.frequency.value = freq;
-            osc.connect(this.gainNode);
-            osc.start(beat.time);
-            osc.stop(beat.time + 50 / freq);
+            this.scheduleBeatAudio(beat);
+            this.scheduleBeatVisual(beat);
         }
     },
     
     beatsScheduler: function()
     {
-        itemThis = metronome;
-        if (itemThis.beatsQueue.length > 0)
+        that = metronome;
+        if (that.beatsQueue.length > 0)
         {
             var currentAudioTime = audioCtx.currentTime;
-            var lastBeatInQueue = itemThis.beatsQueue[itemThis.beatsQueue.length - 1];
-            var delay = (240 / itemThis.beatValue) / itemThis.tempo;
-            if ((currentAudioTime + delay) >= lastBeatInQueue.time)
+            var lastBeatInQueue = that.beatsQueue[that.beatsQueue.length - 1];
+            var delay = (240 / that.beatValue) / that.tempo;
+            if ((currentAudioTime + delay) >= lastBeatInQueue.audioTime)
             {
-                itemThis.beatsQueue.push({
-                    time: lastBeatInQueue.time + delay, 
-                    number: itemThis.beatNumber
+                that.nextBeatNumber = (that.nextBeatNumber + 1) % that.beats;
+                that.beatsQueue.push({
+                    audioTime: lastBeatInQueue.audioTime + delay,
+                    visTime: lastBeatInQueue.visTime + delay * 1000,
+                    number: that.nextBeatNumber
                 });
-                itemThis.scheduleBeatFromQueue();
-                itemThis.beatNumber = (itemThis.beatNumber + 1) % itemThis.beats;
+                that.scheduleBeatFromQueue();
             }
         }
         else
         {
-            itemThis.beatsQueue.push({
-                time: audioCtx.currentTime, 
-                number: itemThis.beatNumber
+            that.beatsQueue.push({
+                audioTime: audioCtx.currentTime,
+                visTime: performance.now(),
+                number: 0
             })
         }
     },
     
     onPlayBtn: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
+        that.isPlaying = true;
         $(this).hide();
-        itemThis.$stopBtn.show();
-        itemThis.beatNumber = 0;
+        that.$stopBtn.show();
+        that.nextBeatNumber = 0;
         worker.postMessage('startMetronomeTicking');
     },
     
     onStopBtn: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
+        that.isPlaying = false;
         $(this).hide();
-        itemThis.$playBtn.show();
+        that.$playBtn.show();
+        that.$beatVisBlock.text("");
         worker.postMessage('stopMetronomeTicking');
-        itemThis.beatsQueue = [];
+        that.beatsQueue = [];
     },
     
     onVolumeChange: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
         var volume = $(this).val();
         volume = sliderLogVal(+volume, 1, 100);
         volume = volume / 100;
-        itemThis.gainNode.gain.value = volume;
-        itemThis.volume = volume;
+        that.gainNode.gain.value = volume;
+        that.volume = volume;
     },
     
     onTempoChange: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
         var tempo = $(this).val();
-        itemThis.$tempoInput.val(tempo);
+        that.$tempoInput.val(tempo);
         tempo = +tempo;
-        itemThis.tempo = tempo;
+        that.tempo = tempo;
     },
     
     onTempoInputChange: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
         var tempo = $(this).val().replace(/[^,.0-9]/gim, '').replace(/[,.]+/gim, '.');
         tempo = parseFloat(tempo);
         if (tempo < MIN_TEMPO)
@@ -131,108 +157,108 @@ var metronome = {
         {
             tempo = MAX_TEMPO;
         }
-        itemThis.tempo = tempo;
+        that.tempo = tempo;
         $(this).val(tempo);
-        itemThis.$tempoRange.val(tempo);
+        that.$tempoRange.val(tempo);
     },
     
     onTempoLeftArrow: function(event)
     {
-        itemThis = event.data.itemThis;
-        var tempo = itemThis.$tempoInput.val()
+        that = event.data.that;
+        var tempo = that.$tempoInput.val()
         if (tempo > MIN_TEMPO)
         {
             tempo--;
-            itemThis.tempo = tempo;
-            itemThis.$tempoInput.val(tempo);
-            itemThis.$tempoRange.val(tempo);
+            that.tempo = tempo;
+            that.$tempoInput.val(tempo);
+            that.$tempoRange.val(tempo);
         }
     },
     
     onTempoRightArrow: function(event)
     {
-        itemThis = event.data.itemThis;
-        var tempo = itemThis.$tempoInput.val()
+        that = event.data.that;
+        var tempo = that.$tempoInput.val()
         if (tempo < MAX_TEMPO)
         {
             tempo++;
-            itemThis.tempo = tempo;
-            itemThis.$tempoInput.val(tempo);
-            itemThis.$tempoRange.val(tempo);
+            that.tempo = tempo;
+            that.$tempoInput.val(tempo);
+            that.$tempoRange.val(tempo);
         }
     },
     
     onBeatsChange: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
         var beats = $(this).val();
         beats = +beats;
-        itemThis.beats = beats;
+        that.beats = beats;
     },
     
     onBeatsLeftArrow: function(event)
     {
-        itemThis = event.data.itemThis;
-        var beats = itemThis.beats;
+        that = event.data.that;
+        var beats = that.beats;
         if (!(beats <= MIN_BEATS))
         {
             beats--;
-            itemThis.beats = beats;
-            itemThis.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
+            that.beats = beats;
+            that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
         }
     },
     
     onBeatsRightArrow: function(event)
     {
-        itemThis = event.data.itemThis;
-        var beats = itemThis.beats;
+        that = event.data.that;
+        var beats = that.beats;
         if (!(beats >= MAX_BEATS))
         {
             beats++;
-            itemThis.beats = beats;
-            itemThis.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
+            that.beats = beats;
+            that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
         }
     },
     
     onBeatValChange: function(event)
     {
-        itemThis = event.data.itemThis;
+        that = event.data.that;
         var beatVal = $(this).val();
         beatVal = +beatVal;
-        itemThis.beatValue = beatVal;
+        that.beatValue = beatVal;
     },
     
     onBeatValLeftArrow: function(event)
     {
-        itemThis = event.data.itemThis;
-        var beatVal = itemThis.beatValue;
+        that = event.data.that;
+        var beatVal = that.beatValue;
         if (!(beatVal <= MIN_BEAT_VAL))
         {
             beatVal /= 2;
-            itemThis.beatValue = beatVal;
-            itemThis.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
+            that.beatValue = beatVal;
+            that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
         }
     },
     
     onBeatValRightArrow: function(event)
     {
-        itemThis = event.data.itemThis;
-        var beatVal = itemThis.beatValue;
+        that = event.data.that;
+        var beatVal = that.beatValue;
         if (!(beatVal >= MAX_BEAT_VAL))
         {
             beatVal *= 2;
-            itemThis.beatValue = beatVal;
-            itemThis.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
+            that.beatValue = beatVal;
+            that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
         }
     },
     
     workerTick: function(e)
     {
         var action = e.data;
-        var itemThis = metronome;
+        var that = metronome;
         if (action == 'metronomeTick')
         {
-            itemThis.beatsScheduler();
+            that.beatsScheduler();
         }
     },
     
@@ -241,9 +267,9 @@ var metronome = {
         this.$stopBtn.hide();
         if (!isMetronomeCanWork)
         {
-            $('#' + METRONOME_DISABLED_ID).show(0);
             return;
         }
+        $('#' + METRONOME_DISABLED_ID).hide(0);
         this.tempo = +this.$tempoRange.val();
         var initVolume = sliderLogVal(+this.$volumeRange.val(), 1, 100)
         this.volume = initVolume / 100;
@@ -254,20 +280,20 @@ var metronome = {
         this.$tempoInput.val(this.tempo);
         this.beats = this.$beatsSelect.val();
         this.beatValue = this.$beatValSelect.val();
-        this.$playBtn.click({itemThis: this}, this.onPlayBtn);
-        this.$stopBtn.click({itemThis: this}, this.onStopBtn);
-        this.$volumeRange.change({itemThis: this}, this.onVolumeChange);
-        this.$volumeRange.on("input", {itemThis: this}, this.onVolumeChange);
-        this.$tempoRange.change({itemThis: this}, this.onTempoChange);
-        this.$tempoRange.on("input", {itemThis: this}, this.onTempoChange);
-        this.$tempoInput.change({itemThis: this}, this.onTempoInputChange);
-        this.$tempoLeftArrow.click({itemThis: this}, this.onTempoLeftArrow);
-        this.$tempoRightArrow.click({itemThis: this}, this.onTempoRightArrow);
-        this.$beatsSelect.change({itemThis: this}, this.onBeatsChange);
-        this.$beatsLeftArrow.click({itemThis: this}, this.onBeatsLeftArrow);
-        this.$beatsRightArrow.click({itemThis: this}, this.onBeatsRightArrow);
-        this.$beatValSelect.change({itemThis: this}, this.onBeatValChange);
-        this.$beatValLeftArrow.click({itemThis: this}, this.onBeatValLeftArrow);
-        this.$beatValRightArrow.click({itemThis: this}, this.onBeatValRightArrow);
+        this.$playBtn.click({that: this}, this.onPlayBtn);
+        this.$stopBtn.click({that: this}, this.onStopBtn);
+        this.$volumeRange.change({that: this}, this.onVolumeChange);
+        this.$volumeRange.on("input", {that: this}, this.onVolumeChange);
+        this.$tempoRange.change({that: this}, this.onTempoChange);
+        this.$tempoRange.on("input", {that: this}, this.onTempoChange);
+        this.$tempoInput.change({that: this}, this.onTempoInputChange);
+        this.$tempoLeftArrow.click({that: this}, this.onTempoLeftArrow);
+        this.$tempoRightArrow.click({that: this}, this.onTempoRightArrow);
+        this.$beatsSelect.change({that: this}, this.onBeatsChange);
+        this.$beatsLeftArrow.click({that: this}, this.onBeatsLeftArrow);
+        this.$beatsRightArrow.click({that: this}, this.onBeatsRightArrow);
+        this.$beatValSelect.change({that: this}, this.onBeatValChange);
+        this.$beatValLeftArrow.click({that: this}, this.onBeatValLeftArrow);
+        this.$beatValRightArrow.click({that: this}, this.onBeatValRightArrow);
     }
 }
