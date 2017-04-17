@@ -118,15 +118,15 @@ ScalesItem.prototype.onScaleNoteClick = function(event)
     {
         var $noteBlock = $('.' + SCALE_NOTE_CLASS, that.$itemBlock).last().
             find('.' + SCALE_NOTE_TEXT_CLASS);
-        $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
+        $noteBlock.toggleClass(TRANSPARENT_BLOCK_CLASS, !isShowNote);
         $noteBlock = $('.' + SCALE_NOTE_CLASS, that.$itemBlock).first().
             find('.' + SCALE_NOTE_TEXT_CLASS);
-        $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
+        $noteBlock.toggleClass(TRANSPARENT_BLOCK_CLASS, !isShowNote);
     }
     else
     {
         var $noteBlock = $(this).find('.' + SCALE_NOTE_TEXT_CLASS);
-        $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, !isShowNote);
+        $noteBlock.toggleClass(TRANSPARENT_BLOCK_CLASS, !isShowNote);
     }
     that.putNotesOnAllStrings();
     that.state.saveToQuery();

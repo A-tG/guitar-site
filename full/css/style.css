@@ -838,6 +838,7 @@ select
 .transparent_note
 {
     opacity: 0.4;
+    background: #ccc;
 }
 .fret_marker
 {
@@ -1007,6 +1008,10 @@ select
     color: #fff;
 }
 
+.transparent_block
+{
+    opacity: 0.4;
+}
 .scale_options_block
 {
     text-align: justify;

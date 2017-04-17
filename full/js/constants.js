@@ -124,6 +124,7 @@ var TOGGLE_SLIDER_CLASS = "toggle_checkbox_slider";
 var SLIDER_LH_CLASS = "slider_lh";
 var SLIDER_RH_CLASS = "slider_rh";
 var LH_CLASS = "lh";
+var TRANSPARENT_BLOCK_CLASS = "transparent_block";
 
 var METRONOME_DISABLED_ID = "metronome_disabled_block";
 var ADD_NEW_ITEM_BTN_ID = "add_new_item_btn";
