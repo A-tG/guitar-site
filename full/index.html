@@ -171,14 +171,16 @@
     </div>
     <script id="scale_notes_tmpl" type="text/plain">
       <ul class="scale_notes">
-        <li class="scale_note">
-          <span class="scale_note_text transitional" title="Toogle note">{{=it.root}}</span>
+        <li class="scale_note" title="Toogle note">
+          <div class="scale_step">1</div>
+          <span class="scale_note_text transitional">{{=it.root}}</span>
           <div class="separator_ver_small"></div>
         </li>
         {{~it.semiTones :semiTone:i}}
           <li class="semitone_block semitone_width{{=semiTone}}">{{=semiTone}}</li>
-          <li class="scale_note">
-            <span class="scale_note_text transitional" title="Toogle note">{{=it.notes[i + 1]}}</span>
+          <li class="scale_note" title="Toogle note">
+            <div class="scale_step">{{=i + 2}}</div>
+            <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small"></div>
           </li>
         {{~}}
@@ -270,7 +272,7 @@
           <div class="item_options_block">
             <ul class="tuning_options">
               <li>
-                <span class="options_text">Tuning:</span>
+                <span class="options_text">Tuning</span>
                 <select class="tuning_select">
                   <option value="standart_e" selected>Standart E</option>
                   <option value="standart_e_bass">Standart E Bass</option>
@@ -282,7 +284,7 @@
                 </select>
               </li>
               <li>
-                <span class="options_text">Half-step:</span>
+                <span class="options_text">Half-step</span>
                 <div class="half_step_block">
                   <div class="left_arrow transitional" title="Half-step lower"></div>
                   <select class="half_step_select">
@@ -315,7 +317,7 @@
               </li>
             </ul>
             <div class="scale_select_block">
-              <span class="options_text">Scale:</span>
+              <span class="options_text">Scale</span>
               <select class="scale_select">
                 <option value="acoustic">Acoustic Scale</option>
                 <option value="aeolian">Aeolian</option>
@@ -365,7 +367,8 @@
             </div>
             <div class="scale_options_block">
               <ul class="scale_notes_signs">
-                <li>Root:</li>
+                <li>Root</li>
+                <li>Scale Steps</li>
                 <li>Scale Notes</li>
                 <li>Semi-tones</li>
               </ul>
