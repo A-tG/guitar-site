@@ -46,11 +46,11 @@ ScalesItem.prototype.updateScaleNotesBlock = function()
         if (isTransparentNote)
         {
             var $noteBlock = $($scaleNotesBlocks[i]);
-            $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
+            $noteBlock.toggleClass(TRANSPARENT_BLOCK_CLASS, true);
             if (i == 0)
             {
                 $noteBlock = $($scaleNotesBlocks[scaleNotesNumber]);
-                $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
+                $noteBlock.toggleClass(TRANSPARENT_BLOCK_CLASS, true);
             }
         }
     }
