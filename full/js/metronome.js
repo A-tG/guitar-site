@@ -27,6 +27,7 @@ var metronome = {
     $stopBtn: $('#' + METR_STOP_BTN_ID),
     $volumeRange: $('#' + METR_VOLUME_RANGE_ID),
     $tempoRange: $('#' + METR_TEMPO_RANGE_ID),
+    $tempoOptionsBlock: $('#' + METR_TEMPO_OPTIONS_ID),
     $tempoInput: $('#' + METR_TEMPO_INPUT_ID),
     $tempoLeftArrow: $('#' + METR_TEMPO_LEFT_ARROW_ID),
     $tempoRightArrow: $('#' + METR_TEMPO_RIGHT_ARROW_ID),
@@ -44,7 +45,6 @@ var metronome = {
         trailWidth: 0,
         svgStyle: null
     }),
-
 
     scheduleBeatAudio: function(beat)
     {
@@ -122,6 +122,15 @@ var metronome = {
                 visTime: performance.now(),
                 number: 0
             });
+        }
+    },
+
+    initTempoOptionsDatalist: function()
+    {
+        for (var i = MIN_TEMPO; i <= MAX_TEMPO; i += TEMPO_OPTIONS_STEP)
+        {
+            var param = {tempo: i};
+            $(METR_DATALIST_OPTION_TMPL(param)).appendTo(this.$tempoOptionsBlock);
         }
     },
     
@@ -292,6 +301,7 @@ var metronome = {
             return;
         }
         $('#' + METRONOME_DISABLED_ID).hide(0);
+        this.initTempoOptionsDatalist();
         this.tempo = +this.$tempoRange.val();
         var initVolume = sliderLogVal(+this.$volumeRange.val(), 1, 100)
         this.volume = initVolume / 100;

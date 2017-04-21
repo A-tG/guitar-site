@@ -6,6 +6,7 @@ var MIN_STRINGS_NUMBER = 3;
 var MAX_ITEMS_NUMBER = 5;
 var ITEMS_ID_BASE = "menuItem";
 var FRETS_NUMBER = 24;
+
 var DEFAULT_METR_BEATS = 4;
 var DEFAULT_METR_BEAT_VAL = 4;
 var DEFAULT_METR_VOLUME = 50;
@@ -16,11 +17,13 @@ var MIN_BEAT_VAL = 1;
 var MAX_BEAT_VAL = 32;
 var MIN_TEMPO = 40;
 var MAX_TEMPO = 320;
+var TEMPO_OPTIONS_STEP = 5;
+var SECOND_CLICK_FREQ = 880;
+var FIRST_CLICK_FREQ = 1480;
+
 var DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS = 30;
 var DEFAULT_NOTES_SHOW_PATTERN = [true, true, true, true, true, true, true, true, true, true, true, true];
 var DEFAULT_TRIADS_SHOW_PATTERN = [true, false, true, false, true, false, false, false, false, false, false, false];
-var SECOND_CLICK_FREQ = 880;
-var FIRST_CLICK_FREQ = 1480;
 
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 var DEFAULT_SCALE_SEMITONES = [2, 2, 1, 2, 2, 2, 1];
@@ -66,7 +69,7 @@ var SCALES = {
     "spanish": [1, 2, 2, 2, 1, 2, 2],
     "acoustic": [2, 2, 2, 1, 2, 1, 2],
     "bartok": [2, 2, 2, 1, 2, 1, 2]
-}
+};
 var TUNINGS = {
     "standart_e": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
     "standart_e_bass": ["G", "D", "A", "E", "B"],
@@ -74,7 +77,7 @@ var TUNINGS = {
     "drop_d_6": ["E", "B", "G", "D", "A", "D", "B", "F#", "C#", "G#", "D#", "A#"],
     "drop_a_7": ["E", "B", "G", "D", "A", "E", "A", "F#", "C#", "G#", "D#", "A#"],
     "drop_e_8": ["E", "B", "G", "D", "A", "E", "B", "E", "C#", "G#", "D#", "A#"]
-}
+};
 var CUSTOM_TUNING_VALUE = "custom";
 
 var ITEM_CLASS = "item_block";
@@ -132,6 +135,7 @@ var METR_PLAY_BTN_ID = "metronome_play_btn";
 var METR_STOP_BTN_ID = "metronome_stop_btn";
 var METR_VOLUME_RANGE_ID = "metronome_volume_range";
 var METR_TEMPO_RANGE_ID = "metronome_tempo_range";
+var METR_TEMPO_OPTIONS_ID = "tempos";
 var METR_TEMPO_INPUT_ID = "metronome_tempo_input";
 var METR_TEMPO_LEFT_ARROW_ID = "metronome_tempo_left_arrow";
 var METR_TEMPO_RIGHT_ARROW_ID = "metronome_tempo_right_arrow";
@@ -153,6 +157,7 @@ var WRONG_STRING_TUNE_NOTE_MSG = "Wrong string tune note";
 var WRONG_TUNING_NAME = "Wrong tuning name (value)";
 var PARAMS_ATOB_ERROR_MSG = "GET parameter cannot be decoded";
 
+var METR_DATALIST_OPTION_TMPL = doT.template($("#metronome_datalist_option_tmpl").html());
 var SCALE_NOTES_TMPL = doT.template($("#scale_notes_tmpl").html());
 var STRING_VER_FRET_TMPL = doT.template($("#string_ver_fret_tmpl").html());
 var STRING_FRET_TMPL = doT.template($("#string_hor_fret_tmpl").html());

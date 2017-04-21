@@ -1,6 +1,6 @@
 function ScalesItem(id, JSONstring)
 {
-    this.state = new ScaleItemState(id, JSONstring);
+    this.state = new ScalesItemState(id, JSONstring);
 
     this.init(id, JSONstring);
 }

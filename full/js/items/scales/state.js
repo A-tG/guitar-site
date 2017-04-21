@@ -1,4 +1,4 @@
-function ScaleItemState(id, JSONstring)
+function ScalesItemState(id, JSONstring)
 {
     this.id = id;
     this.type = "scales";
@@ -19,7 +19,7 @@ function ScaleItemState(id, JSONstring)
     this.init(JSONstring);
 }
 
-ScaleItemState.prototype.isCorrectSerializedData = function(JSONstring)
+ScalesItemState.prototype.isCorrectSerializedData = function(JSONstring)
 {
     var isCorrect = false;
     var isParsable = true;
@@ -45,13 +45,13 @@ ScaleItemState.prototype.isCorrectSerializedData = function(JSONstring)
     return isCorrect;
 }
 
-ScaleItemState.prototype.saveToQuery = function()
+ScalesItemState.prototype.saveToQuery = function()
 {
     menuItems.updateItemSerializedData(this.id, this.serialize());
     menuItems.updateItemsQueryParams();
 }
 
-ScaleItemState.prototype.serialize = function()
+ScalesItemState.prototype.serialize = function()
 {
     var fieldsToSave =
     [
@@ -72,7 +72,7 @@ ScaleItemState.prototype.serialize = function()
     return JSONstring;
 }
 
-ScaleItemState.prototype.deserialize = function(JSONstring)
+ScalesItemState.prototype.deserialize = function(JSONstring)
 {
     var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
     this.type = parsedArr[0];
@@ -91,7 +91,7 @@ ScaleItemState.prototype.deserialize = function(JSONstring)
     this.isLH = parsedArr[11];
 }
 
-ScaleItemState.prototype.saveToDefaultOptions = function()
+ScalesItemState.prototype.saveToDefaultOptions = function()
 {
     defaults.scales.scale = this.scale;
     defaults.scales.root = this.root;
@@ -106,7 +106,7 @@ ScaleItemState.prototype.saveToDefaultOptions = function()
     Cookies.set("defaultScaleOptions", defaults.scales, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
 }
 
-ScaleItemState.prototype.readFromDefaultOptions = function()
+ScalesItemState.prototype.readFromDefaultOptions = function()
 {
     this.scale = defaults.scales.scale;
     this.root = defaults.scales.root;
@@ -123,7 +123,7 @@ ScaleItemState.prototype.readFromDefaultOptions = function()
     this.isLH = defaults.scales.isLH;
 }
 
-ScaleItemState.prototype.init = function(JSONstring)
+ScalesItemState.prototype.init = function(JSONstring)
 {
     this.readFromDefaultOptions();
     if (JSONstring && this.isCorrectSerializedData(JSONstring))
