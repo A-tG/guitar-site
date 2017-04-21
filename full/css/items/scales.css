@@ -1,0 +1,217 @@
+.tuning_options
+{
+    min-height: 60px;
+    text-align: justify;
+    float: left;
+}
+.tuning_options li
+{
+    margin-bottom: 10px;
+}
+.tuning_options li:last-child
+{
+    margin-bottom: 0;
+}
+.tuning_select
+{
+    display: inline-block;
+    vertical-align: middle;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    text-transform: capitalize;
+    background: #555;
+    height: 25px;
+}
+.half_step_block
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.half_step_select
+{
+    display: inline-block;
+    vertical-align: middle;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    background: #555;
+    text-align: right;
+    line-height: 18px;
+    height: 18px;
+}
+
+.scale_select_block
+{
+    min-height: 60px;
+    text-align: justify;
+    float: right;
+}
+.scale_select
+{
+    display: inline-block;
+    vertical-align: middle;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    text-transform: capitalize;
+    background: #555;
+    height: 25px;
+}
+.triads_mode_block
+{
+    margin-top: 9px;
+}
+.triads_checkbox
+{
+    color: #fc0;
+    vertical-align: middle;
+}
+.triads_checkbox:hover
+{
+    color: #fff;
+}
+.triads_checkbox_empty
+{
+    color: #fc0;
+    vertical-align: middle;
+}
+.triads_checkbox_empty:hover
+{
+    color: #fff;
+}
+
+.transparent_block
+{
+    opacity: 0.4;
+}
+.scale_options_block
+{
+    text-align: justify;
+    display: inline-block;
+}
+.scale_notes_signs
+{
+    float: left;
+    margin: 0px 20px 0 0;
+}
+.scale_notes_signs li
+{
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    text-transform: capitalize;
+    margin-bottom: 1px;
+}
+.root_note
+{
+    cursor: default;
+    float: left;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 0 6.5px 0 8.5px;
+}
+.root_note:first-child
+{
+    padding-left: 0;
+}
+.root_note:hover
+{
+    color: #fff;
+}
+.scale_notes_and_semitones_block
+{
+    float: left;
+}
+.scale_notes
+{
+    position: relative;
+}
+.scale_step
+{
+    font-family: Tahoma, Arial, Verdana;
+    color: #fff;
+    font-size: 18px;
+}
+.scale_note
+{
+    color: #fc0;
+    display: inline-block;
+    text-align: center;
+    min-width: 27px;
+    position: relative;
+}
+.scale_note_text
+{
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    line-height: 27px;
+}
+.scale_note:hover
+{
+    color: #fff;
+}
+.semitone_block
+{
+    position: relative;
+    bottom: -23px;
+    display: inline-block;
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    text-align: center;
+    border-top: 2px solid #666;
+}
+.separator_ver_small
+{
+    position: absolute;
+    bottom: -5px;
+    display: inline-block;
+    height: 8px;
+    width: 2px;
+    background: #666;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.semitone_width1
+{
+    width: 10px;
+}
+.semitone_width2
+{
+    width: 30px;
+}
+.semitone_width3
+{
+    width: 50px;
+}
+.semitone_width4
+{
+    width: 70px;
+}
+.semitone_width5
+{
+    width: 90px;
+}
+.semitone_width6
+{
+    width: 110px;
+}
+.semitone_width7
+{
+    width: 130px;
+}
+.semitone_width8
+{
+    width: 150px;
+}
+
+@media screen and (max-width: 1250px)
+{
+    .scale_notes_signs
+    {
+        margin-right: 5px;
+    }
+}

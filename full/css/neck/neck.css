@@ -1,0 +1,47 @@
+.neck_block
+{
+    width: 100%;
+}
+.tuners_and_fretboard_block
+{
+    display: flex;
+}
+.lh_toggle_block
+{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.lh_toggle_block div
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.slider_rh
+{
+    right: 0;
+}
+.slider_lh
+{
+    left: 0;
+}
+.lh
+{
+    -moz-transform: scaleX(-1);  
+    -o-transform: scaleX(-1); 
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); 
+}
+.lh .note
+{
+    -moz-transform: scaleX(-1);  
+    -o-transform: scaleX(-1); 
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); 
+}
+.lh .string_tune_select
+{
+    -moz-transform: scaleX(-1);  
+    -o-transform: scaleX(-1); 
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); 
+}

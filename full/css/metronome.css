@@ -1,0 +1,270 @@
+.metronome_disabled_block
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: #fff;
+    opacity: 0.9;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 24px;
+    text-align: center;
+    color: #000;
+    vertical-align: middle;
+}
+.metronome_block
+{
+    display: inline-block;
+    position: relative;
+}
+.metronome_block li
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+.metronome_icon
+{
+    position: relative;
+    height: 50px;
+    width: 30px;
+    margin: 0 10px 0 10px;
+}
+.trapezoid_bottom
+{
+    width: 30px;
+    height: 2px;
+    position: absolute;
+    bottom: 5px;
+    background: #fff;
+}
+.trapezoid_leftside
+{
+    width: 2px;
+    height: 38.8px;
+    position: absolute;
+    bottom: 6px;
+    left: 4px;
+    background: #fff;
+    -ms-transform: rotate(12deg);
+    -webkit-transform: rotate(12deg);
+    transform: rotate(12deg);
+}
+.trapezoid_rightside
+{
+    width: 2px;
+    height: 38.8px;
+    position: absolute;
+    bottom: 6px;
+    right: 4px;
+    background: #fff;
+    -ms-transform: rotate(-12deg);
+    -webkit-transform: rotate(-12deg);
+    transform: rotate(-12deg);
+}
+.trapezoid_top
+{
+    width: 14px;
+    height: 2px;
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    background: #fff;
+}
+.dot1
+{
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    background: #fff;
+}
+.dot2
+{
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #fff;
+}
+.dot3
+{
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 18px;
+    left: 14px;
+    background: #fff;
+}
+.dot4
+{
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 22px;
+    left: 14px;
+    background: #fff;
+}
+.dot5
+{
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 26px;
+    left: 14px;
+    background: #fff;
+}
+.ticker
+{
+    width: 2px;
+    height: 29px;
+    position: absolute;
+    bottom: 14px;
+    left: 21px;
+    background: #fff;
+    -ms-transform: rotate(31deg);
+    -webkit-transform: rotate(31deg);
+    transform: rotate(31deg);
+}
+.weight
+{
+    position: absolute;
+    bottom: 34px;
+    right: 0;
+    border-left: 3px solid transparent;
+    border-top: 6px solid #fff;
+    border-right: 3px solid transparent;
+    -ms-transform: rotate(31deg);
+    -webkit-transform: rotate(31deg);
+    transform: rotate(31deg);
+}
+.play_btn
+{
+    color: #fc0;
+}
+.play_btn:hover
+{
+    color: #fff;
+}
+.stop_btn
+{
+    color: #fc0;
+}
+.stop_btn:hover
+{
+    color: #fff;
+}
+.volume_block
+{
+    margin-left: 15px;
+}
+.volume_range, .tempo_range
+{
+    width: 160px;
+    margin: 3px 0;
+    padding: 0;
+}
+.tempo_block
+{
+    margin-left: 15px;
+}
+.metronome_option_head
+{
+    text-align: center;
+    position: relative;
+}
+.option_head_start_val
+{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    color: #999;
+}
+.option_head_end_val
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    color: #999;
+}
+.metronome_options_text
+{
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+.tempo_input_block
+{
+    margin: 22px 0 0 10px;
+}
+.tempo_input
+{
+    display: inline-block;
+    vertical-align: middle;
+    background: #555;
+    height: 18px;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 18px;
+    border: 0;
+    text-align: right;
+}
+.signature_block
+{
+    height: 50px;
+    margin-left: 20px;
+}
+.signature_block li
+{
+    margin-right: 10px;
+}
+.signature_option_block
+{
+    margin-top: 4px;
+}
+.signature_select
+{
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: capitalize;
+    background: #555;
+    line-height: 18px;
+    height: 18px; 
+    text-align: right;
+}
+.metronome_beat_vis_block
+{
+    position: relative;
+    background: #555;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+.metronome_beat_number_vis
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    font-size: 22px;
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    line-height: 40px;
+    text-align: center;
+}
+.metronome_first_beat_number_vis
+{
+    color: #0bb;
+}

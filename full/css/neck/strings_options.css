@@ -1,0 +1,71 @@
+.strings_options_block
+{
+    display: inline-block;
+    margin: 5px 10px 0 0;
+}
+.strings_btns_block
+{
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+}
+.strings_number
+{
+    display: inline-block;
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    width: 20px;
+    vertical-align: middle;
+}
+.string_btn
+{
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.delete_string
+{
+    color: #fc0;
+}
+.add_string
+{
+    color: #fc0;
+}
+.string_btn:hover
+{
+    color: #fff;
+}
+.string_tune
+{
+    margin: 3px auto;
+}
+.string_tune_select
+{
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    color: #fc0;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: capitalize;
+    background: #555;
+    line-height: 18px;
+    height: 18px;
+}
+
+@media screen and (max-width: 1250px)
+{
+    .strings_btns_block
+    {
+        margin-left: 10px;
+    }
+    .strings_options_block
+    {
+        margin-top: 3px;
+    }
+    .string_tune
+    {
+        margin: 6px auto;
+    }
+}

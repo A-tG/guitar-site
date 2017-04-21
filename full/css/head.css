@@ -1,0 +1,24 @@
+.head_block
+{
+    background: #222;
+    width: 100%;
+    min-height: 50px;
+}
+.head_block_content
+{
+    text-align: center;
+}
+.head_items_block
+{
+    vertical-align: middle;
+    display: inline-block;
+}
+.head_item
+{
+    color: #fff;
+    font-family: Tahoma, Arial, Verdana;
+    font-size: 24px;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 0 10px 0 10px;
+}

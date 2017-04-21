@@ -4,14 +4,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Artistic Guitar</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/material_icons.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/head.css">
+    <link rel="stylesheet" type="text/css" href="css/metronome.css">
+    <link rel="stylesheet" type="text/css" href="css/items/items.css">
+    <link rel="stylesheet" type="text/css" href="css/items/scales.css">
+    <link rel="stylesheet" type="text/css" href="css/neck/neck.css">
+    <link rel="stylesheet" type="text/css" href="css/neck/fretboard.css">
+    <link rel="stylesheet" type="text/css" href="css/neck/strings_options.css">
   </head>
   <body>
     <div class="bg_block">
       <div class="content_block">
         <div class="head_block">
           <div class="head_block_content">
-            <div class="logo_block">
-              <a class="logo" href="" title="Artistic Guitar">Artistic Guitar</a>
+            <div class="head_items_block">
+              <a class="logo head_item" href="" title="Artistic Guitar">Artistic Guitar</a>
+              <a class="head_item" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
             </div>
             <ul class="metronome_block">
               <li id="metronome_disabled_block" class="metronome_disabled_block">Update your browser to use metronome</li>
@@ -56,63 +66,6 @@
                     <input id="metronome_tempo_input" class="tempo_input" type="text" list="tempos" size="4" maxlength="7">
                     <div id="metronome_tempo_right_arrow" class="right_arrow transitional" title="Increase tempo"></div>
                     <datalist id="tempos">
-                      <option>40</option>
-                      <option>45</option>
-                      <option>50</option>
-                      <option>55</option>
-                      <option>60</option>
-                      <option>65</option>
-                      <option>70</option>
-                      <option>75</option>
-                      <option>80</option>
-                      <option>85</option>
-                      <option>90</option>
-                      <option>95</option>
-                      <option>100</option>
-                      <option>105</option>
-                      <option>110</option>
-                      <option>115</option>
-                      <option>120</option>
-                      <option>125</option>
-                      <option>130</option>
-                      <option>135</option>
-                      <option>140</option>
-                      <option>145</option>
-                      <option>150</option>
-                      <option>155</option>
-                      <option>160</option>
-                      <option>165</option>
-                      <option>170</option>
-                      <option>175</option>
-                      <option>180</option>
-                      <option>185</option>
-                      <option>190</option>
-                      <option>195</option>
-                      <option>200</option>
-                      <option>205</option>
-                      <option>210</option>
-                      <option>215</option>
-                      <option>220</option>
-                      <option>225</option>
-                      <option>230</option>
-                      <option>235</option>
-                      <option>240</option>
-                      <option>245</option>
-                      <option>250</option>
-                      <option>255</option>
-                      <option>260</option>
-                      <option>265</option>
-                      <option>270</option>
-                      <option>275</option>
-                      <option>280</option>
-                      <option>285</option>
-                      <option>290</option>
-                      <option>295</option>
-                      <option>300</option>
-                      <option>305</option>
-                      <option>310</option>
-                      <option>315</option>
-                      <option>320</option>
                     </datalist>
                   </li>
                 </ul>
@@ -169,6 +122,7 @@
       </div>
       <noscript class="noscipt_warning">Please update your browser or enable javascript</noscript>
     </div>
+    
     <script id="scale_notes_tmpl" type="text/plain">
       <ul class="scale_notes">
         <li class="scale_note" title="Toogle note">
@@ -186,6 +140,7 @@
         {{~}}
       </ul>
     </script>
+
     <script id="string_ver_fret_tmpl" type="text/plain">
       <div class="fret_ver">
         <div class="fret_ver_inner">
@@ -193,30 +148,36 @@
         </div>
       </div>
     </script>
+
     <script id="string_hor_fret_tmpl" type="text/plain">
       <div class="fret_hor">
         <div class="string string{{=it.currentStringNumber}}"></div>
         <div class="note normal_note"></div>
       </div>
     </script>
+
     <script id="fret_dot_tmpl" type="text/plain">
       <div class="fret_double_dot_block">
         <div class="fret_dot"></div>
       </div>
     </script>
+
     <script id="fret_double_dot_tmpl" type="text/plain">
       <div class="fret_double_dot_block">
         <div class="fret_dot"></div>
         <div class="fret_dot"></div>
       </div>
     </script>
+
     <script id="fretboard_single_mark" type="text/plain">
       <div class="fret_marker"></div>
     </script>
+
     <script id="fretboard_double_mark" type="text/plain">
       <div class="fret_marker marker_top"></div>
       <div class="fret_marker marker_bottom"></div>
     </script>
+
     <script id="string_tune_block_tmpl" type="text/plain">
       <li class="string_tune">
         <div class="left_arrow transitional" title="Tune lower"></div>
@@ -237,6 +198,7 @@
         <div class="right_arrow transitional" title="Tune higher"></div>
       </li>
     </script>
+
     <script id="scales_item_tmpl" type="text/plain">
       <div id="{{=it.id}}" class="item_block">
         <div class="item_content">
@@ -398,6 +360,11 @@
         <div class="set_default_btn material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
       </div>
     </script>
+
+    <script id="metronome_datalist_option_tmpl" type="text/plain">
+      <option value="{{=it.tempo}}">{{=it.tempo}}</option>
+    </script>
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/dot.min.js"></script>
     <script type="text/javascript" src="js/progressbar.min.js"></script>
