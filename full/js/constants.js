@@ -70,6 +70,35 @@ var SCALES = {
     "acoustic": [2, 2, 2, 1, 2, 1, 2],
     "bartok": [2, 2, 2, 1, 2, 1, 2]
 };
+var CHORDS = {
+    // minor
+    "min_triad": ['1', 'b3', '5'],
+    "min_6": ['1', 'b3', '5', '6'],
+    "min_b6": ['1', 'b3', '5', 'b6'],
+    "min_7": ['1', 'b3', '5', 'b7'],
+    "min_9": ['1', 'b3', '5', 'b7', 'b9'],
+    "min_11": ['1', 'b3', '5', 'b7', '(9)', '11'],
+    "min_13": ['1', 'b3', '5', 'b7', '(9)', '(11)', '13'],
+    "min_maj_7": ['1', 'b3', '5', '7'],
+    "min_7_f5": ['1', 'b3', 'b5', 'b7'],
+    "full_dim": ['1', 'b3', 'b5', 'bb7'],
+    // major
+    "maj_triad": ['1', '3', '5'],
+    "maj_6": ['1', '3', '5', '6'],
+    "maj_7": ['1', '3', '5', '7'],
+    "maj_9": ['1', '3', '5', '7', '9'],
+    "maj_11": ['1', '3', '5', '7', '(9)', '11'],
+    "maj_13": ['1', '3', '5', '7', '(9)', '(11)', '13'],
+    "sus_2": ['1', '2', '5'],
+    "sus_4": ['1', '4', '5'],
+    // dominant
+    "dom_7": ['1', '3', '5', 'b7'],
+    "dom_9": ['1', '3', '5', 'b7', 'b9'],
+    "dom_11": ['1', '3', '5', 'b7', '(9)', '11'],
+    "dom_13": ['1', '3', '5', 'b7', '(9)', '(11)', '13'],
+    "dim_triad": ['1', 'b3', 'b5'],
+    "aug_triad": ['1', '3', '#5']
+};
 var TUNINGS = {
     "standart_e": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
     "standart_e_bass": ["G", "D", "A", "E", "B"],
@@ -80,7 +109,14 @@ var TUNINGS = {
 };
 var CUSTOM_TUNING_VALUE = "custom";
 
+var SCALES_TYPE = "scales";
+var CHORDS_TYPE = "chords";
+
 var ITEM_CLASS = "item_block";
+var ITEM_CONTENT_CLASS = "item_content";
+var ITEM_HEAD_CLASS = "item_head";
+var ITEM_HEAD_SELECT_CLASS = "item_head_select";
+var ITEM_OPTIONS_BLOCK = "item_options_block";
 var STRING_NUMBER_CLASS = "strings_number";
 var SCALE_SELECT_CLASS = "scale_select";
 var NECK_BLOCK_CLASS = "neck_block";
@@ -149,6 +185,7 @@ var METR_BEAT_VIS_BLOCK_ID = "metronome_beat_vis_block";
 var METR_BEAT_VIS_NUMBER_ID = "metronome_beat_number_vis";
 var METR_FIRST_BEAT_VIS_NUMBER_CLASS = "metronome_first_beat_number_vis";
 
+var WRONG_ITEM_TYPE_MSG = "Wrong item type";
 var WRONG_SEMITONE_NUMBER_MSG = "Wrong sum of semitones, must be equal to " + SCALE_SEMITONES_NUMBER;
 var WRONG_ROOT_NOTE_MSG = "Wrong root note";
 var WRONG_NOTE_MSG = "Wrong note";
@@ -158,6 +195,13 @@ var WRONG_TUNING_NAME = "Wrong tuning name (value)";
 var PARAMS_ATOB_ERROR_MSG = "GET parameter cannot be decoded";
 
 var METR_DATALIST_OPTION_TMPL = doT.template($("#metronome_datalist_option_tmpl").html());
+var ITEM_BASE_BLOCK_TMPL = doT.template($("#item_base_tmpl").html());
+var STRINGS_BTNS_BLOCK_TMPL = doT.template($("#strings_btns_tmpl").html());
+var LH_TOGGLE_BLOCK_TMPL = doT.template($("#lh_toggle_tmpl").html());
+var NECK_BLOCK_TMPL = doT.template($("#neck_tmpl").html());
+var TUNING_OPTIONS_BLOCK_TMPL = doT.template($("#tuning_options_tmpl").html());
+var SCALES_SELECT_BLOCK_TMPL = doT.template($("#scales_select_tmpl").html());
+var SCALES_OPTIONS_BLOCK_TMPL = doT.template($("#scales_options_tmpl").html());
 var SCALE_NOTES_TMPL = doT.template($("#scale_notes_tmpl").html());
 var STRING_VER_FRET_TMPL = doT.template($("#string_ver_fret_tmpl").html());
 var STRING_FRET_TMPL = doT.template($("#string_hor_fret_tmpl").html());
@@ -166,4 +210,3 @@ var STRING_DOUBLE_FRET_MARK_TMPL = doT.template($("#fretboard_double_mark").html
 var FRET_DOT_TMPL = doT.template($("#fret_dot_tmpl").html());
 var FRET_DOUBLE_DOT_TMPL = doT.template($("#fret_double_dot_tmpl").html());
 var STRING_TUNE_BLOCK_TMPL = doT.template($("#string_tune_block_tmpl").html());
-var SCALES_ITEM_BLOCK_TMPL = doT.template($("#scales_item_tmpl").html());

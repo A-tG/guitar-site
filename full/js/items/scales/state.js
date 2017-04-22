@@ -19,32 +19,6 @@ function ScalesItemState(id, JSONstring)
     this.init(JSONstring);
 }
 
-ScalesItemState.prototype.isCorrectSerializedData = function(JSONstring)
-{
-    var isCorrect = false;
-    var isParsable = true;
-    var parsedArr = [];
-    try
-    {
-        parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool); 
-    }
-    catch (err)
-    {
-        isParsable = false;
-    }
-    if (isParsable)
-    {
-        isCorrect = (parsedArr.length == 12) && 
-            (parsedArr[0] == "scales") && isCorrectScale(parsedArr[1]) && 
-            isCorrectNote(parsedArr[2]) && isCorrectTuning(parsedArr[3]) && 
-            isCorrectHalfStep(parsedArr[4]) && isCorrectStringsNumber(parsedArr[5]) && 
-            isCorrectTuningNotes(parsedArr[6]) && (typeof parsedArr[7] === 'boolean') && 
-            isCorrectNotesShowPattern(parsedArr[8]) && isCorrectNotesShowPattern(parsedArr[9]) &&
-            isCorrectBoxFret(parsedArr[10]) && (typeof parsedArr[11] === 'boolean'); 
-    }
-    return isCorrect;
-}
-
 ScalesItemState.prototype.saveToQuery = function()
 {
     menuItems.updateItemSerializedData(this.id, this.serialize());
@@ -103,7 +77,7 @@ ScalesItemState.prototype.saveToDefaultOptions = function()
     defaults.scales.isTriadMode = this.isTriadMode;
     defaults.scales.boxFirstFret = this.boxFirstFret;
     defaults.scales.isLH = this.isLH;
-    Cookies.set("defaultScaleOptions", defaults.scales, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
+    defaults.scales.saveToCookie();
 }
 
 ScalesItemState.prototype.readFromDefaultOptions = function()
@@ -126,7 +100,7 @@ ScalesItemState.prototype.readFromDefaultOptions = function()
 ScalesItemState.prototype.init = function(JSONstring)
 {
     this.readFromDefaultOptions();
-    if (JSONstring && this.isCorrectSerializedData(JSONstring))
+    if (JSONstring)
     {
         this.deserialize(JSONstring);
     }

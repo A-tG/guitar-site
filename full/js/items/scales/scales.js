@@ -1,8 +1,9 @@
 function ScalesItem(id, JSONstring)
 {
     this.state = new ScalesItemState(id, JSONstring);
+    this.$itemBlock = $('#' + id);;
 
-    this.init(id, JSONstring);
+    this.init();
 }
 
 ScalesItem.prototype.putNotesOnAllStrings = function()
@@ -132,25 +133,6 @@ ScalesItem.prototype.onScaleNoteClick = function(event)
     that.state.saveToQuery();
 }
 
-ScalesItem.prototype.deleteItem = function()
-{
-    var $itemBlock = $(this);
-    menuItems.deleteItem($itemBlock.attr("id"));
-    $itemBlock.remove();
-}
-
-ScalesItem.prototype.onCloseButton = function(event)
-{
-    var that = event.data.that;
-    that.$itemBlock.hide(200, that.deleteItem);
-}
-
-ScalesItem.prototype.onSetDefaultButton = function(event)
-{
-    var that = event.data.that;
-    that.state.saveToDefaultOptions();
-}
-
 ScalesItem.prototype.onTriadsCheckboxClick = function(event)
 {
     var that = event.data.that;
@@ -187,23 +169,26 @@ ScalesItem.prototype.initTriadsCheckbox = function()
     this.$triadsCheckboxEmpty.click({that: this}, this.onTriadsCheckboxClick);
 }
 
-ScalesItem.prototype.initAnimation = function()
+ScalesItem.prototype.initDOM = function()
 {
-    this.$itemBlock.hide(0);
-    this.$itemBlock.show(200);
+    this.$itemOptionsBlock = $('.' + ITEM_OPTIONS_BLOCK, this.$itemBlock);
+    this.$stringsBtnsBlock = $(STRINGS_BTNS_BLOCK_TMPL()).insertBefore($('.' + ITEM_HEAD_SELECT_CLASS, this.$itemBlock));
+    this.$lhToggleBlock = $(LH_TOGGLE_BLOCK_TMPL()).insertAfter($('.' + ITEM_HEAD_SELECT_CLASS, this.$itemBlock));
+    this.$neckBlock = $(NECK_BLOCK_TMPL()).insertAfter($('.' + ITEM_HEAD_CLASS, this.$itemBlock));
+    this.$scalesOptionsBlock = $(SCALES_OPTIONS_BLOCK_TMPL()).prependTo(this.$itemOptionsBlock);
+    this.$scalesSelectBlock = $(SCALES_SELECT_BLOCK_TMPL()).prependTo(this.$itemOptionsBlock);
+    this.$TuningOptionsBlock = $(TUNING_OPTIONS_BLOCK_TMPL()).prependTo(this.$itemOptionsBlock);
 }
 
-ScalesItem.prototype.init = function(id, JSONstring)
+ScalesItem.prototype.init = function()
 {
-    menuItems.$addNewItemBtn.before(SCALES_ITEM_BLOCK_TMPL({id: id}));
-    this.$itemBlock = $('#' + id);
-    this.initAnimation();
-    this.neck = new Neck(this.state, $('.' + NECK_BLOCK_CLASS, this.$itemBlock), 
+    this.initDOM();
+    this.neck = new Neck(this.state, this.$neckBlock, 
         $('.' + STRING_NUMBER_CLASS, this.$itemBlock), 
         $('.' + ADD_STRING_BTN_CLASS, this.$itemBlock),
         $('.' + DEL_STRING_BTN_CLASS, this.$itemBlock),
         $('.' + TUNING_OPTIONS_CLASS, this.$itemBlock),
-        $('.' + LH_TOGGLE_BLOCK_CLASS, this.$itemBlock));
+        this.$lhToggleBlock);
     this.initTriadsCheckbox();
     this.updateScaleNotesBlock();
     this.selectCurrentScale();
@@ -211,6 +196,4 @@ ScalesItem.prototype.init = function(id, JSONstring)
     $('.' + SCALE_SELECT_CLASS, this.$itemBlock).change({that: this}, this.onScaleChange);
     $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).
         on("click", '.' + ROOT_NOTE_CLASS, {that: this}, this.onRootNoteChange);
-    $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({that: this}, this.onCloseButton);
-    $('.' + SET_DEFAULT_BTN_CLASS, this.$itemBlock).click({that: this}, this.onSetDefaultButton);
 }

@@ -35,7 +35,7 @@ var menuItems = {
             var id = ITEMS_ID_BASE + i;
             if (this.itemsSerializedStates[id] !== undefined)
             {
-                var encodedParameter = btoa(this.itemsSerializedStates[id]);
+                var encodedParameter = btoa(this.itemsSerializedStates[id].getJSON());
                 urlString += 'i' + i + '=' + encodedParameter;
                 if (i < this.itemsNumber)
                 {
@@ -48,7 +48,11 @@ var menuItems = {
     
     updateItemSerializedData: function(id, data)
     {
-        this.itemsSerializedStates[id] = data;
+        if (!this.itemsSerializedStates[id])
+        {
+            this.itemsSerializedStates[id] = new ItemSerializedState(data);
+        }
+        this.itemsSerializedStates[id].setJSON(data);
     },
 
     createNewItem: function()
@@ -56,7 +60,7 @@ var menuItems = {
         var id = this.getIDforNewItem();
         if (this.itemsNumber < MAX_ITEMS_NUMBER)
         {
-            this.items[id] = new ScalesItem(id);
+            this.items[id] = new ItemBase(id);
             this.itemsNumber++;
         }
         else
@@ -70,7 +74,7 @@ var menuItems = {
         for (var i = 0; (i < itemsSerializedStates.length) && (i < MAX_ITEMS_NUMBER); i++)
         {
             var id = this.getIDforNewItem();
-            this.items[id] = new ScalesItem(id, itemsSerializedStates[i]);
+            this.items[id] = new ItemBase(id, itemsSerializedStates[i].getJSON());
             this.itemsNumber++;
         }
         if (this.itemsNumber >= MAX_ITEMS_NUMBER)
@@ -99,7 +103,7 @@ var menuItems = {
                     try
                     {
                         parameter = atob(parameter);
-                        itemsSerializedStates.push(parameter);
+                        itemsSerializedStates.push(new ItemSerializedState(parameter));
                     }
                     catch (err)
                     {

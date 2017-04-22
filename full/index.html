@@ -199,165 +199,184 @@
       </li>
     </script>
 
-    <script id="scales_item_tmpl" type="text/plain">
+    <script id="item_base_tmpl" type="text/plain">
       <div id="{{=it.id}}" class="item_block">
         <div class="item_content">
           <div class="item_head">
-            <li class="strings_btns_block">
-              <div class="material-icons md-24 string_btn delete_string transitional" title="Delete string">&#xE15D;</div>
-              <div class="strings_number">0</div>
-              <div class="material-icons md-24 string_btn add_string transitional" title="Add string">&#xE148;</div>
-            </li>
             <select class="item_head_select">
-              <option>Scales</option>
+              <option value="scales">Scales</option>
+              <option value="chords">Chords</option>
             </select>
-            <div class="lh_toggle_block">
-              <div class="lh_toggle transitional" title="Switch fretboard for lefthanded">Left handed</div>
-              <div class="toggle_checkbox" title="Switch fretboard">
-                <div class="toggle_checkbox_slider slider_rh transitional"></div>
-              </div>
-              <div class="rh_toggle transitional" title="Switch fretboard for righthanded">Right handed</div>
-            </div>
             <div class="clear"></div>
           </div>
-          <div class="neck_block">
-            <div class="tuners_and_fretboard_block">
-              <ul class="strings_options_block"></ul>
-              <div class="fretboard">
-                <div class="fret_null">
-                  <div class="fret_ver_hover"></div>
-                </div>
-                <div class="clear"></div>
-              </div>
-            </div>
-          </div>
           <div class="item_options_block">
-            <ul class="tuning_options">
-              <li>
-                <span class="options_text">Tuning</span>
-                <select class="tuning_select">
-                  <option value="standart_e" selected>Standart E</option>
-                  <option value="standart_e_bass">Standart E Bass</option>
-                  <option value="standart_e_bass_6">Standart E Bass 6 strings</option>
-                  <option value="drop_d_6">Drop D 6 strings</option>
-                  <option value="drop_a_7">Drop A 7 strings</option>
-                  <option value="drop_e_8">Drop E 8 strings</option>
-                  <option value="custom">Custom</option>
-                </select>
-              </li>
-              <li>
-                <span class="options_text">Half-step</span>
-                <div class="half_step_block">
-                  <div class="left_arrow transitional" title="Half-step lower"></div>
-                  <select class="half_step_select">
-                    <option value="-11">-11</option>
-                    <option value="-10">-10</option>
-                    <option value="-9">-9</option>
-                    <option value="-8">-8</option>
-                    <option value="-7">-7</option>
-                    <option value="-6">-6</option>
-                    <option value="-5">-5</option>
-                    <option value="-4">-4</option>
-                    <option value="-3">-3</option>
-                    <option value="-2">-2</option>
-                    <option value="-1">-1</option>
-                    <option value="0" selected>0</option>
-                    <option value="1">+1</option>
-                    <option value="2">+2</option>
-                    <option value="3">+3</option>
-                    <option value="4">+4</option>
-                    <option value="5">+5</option>
-                    <option value="6">+6</option>
-                    <option value="7">+7</option>
-                    <option value="8">+8</option>
-                    <option value="9">+9</option>
-                    <option value="10">+10</option>
-                    <option value="11">+11</option>
-                  </select>
-                  <div class="right_arrow transitional" title="Half-step higher"></div>
-                </div>
-              </li>
-            </ul>
-            <div class="scale_select_block">
-              <span class="options_text">Scale</span>
-              <select class="scale_select">
-                <option value="acoustic">Acoustic Scale</option>
-                <option value="aeolian">Aeolian</option>
-                <option value="aeolian_pent">Aeolian Pentatonic</option>
-                <option value="alt_dom">Altered Dominant</option>
-                <option value="alt_scale">Altered Scale</option>
-                <option value="bartok">Bartok</option>
-                <option value="blues">Blues (add M7)</option>
-                <option value="blues_min_hex">Blues Minor Hexatonic</option>
-                <option value="blues_pent">Blues Pentatonic</option>
-                <option value="chromatic">Chromatic</option>
-                <option value="dim">Diminished</option>
-                <option value="dim_whole_tone">Diminished Whole-tone</option>
-                <option value="dom_beb">Dominant Bebop</option>
-                <option value="dom_dim">Dominant Diminished</option>
-                <option value="dorian">Dorian</option>
-                <option value="dorian_beb">Dorian Bebop</option>
-                <option value="dorian_pent">Dorian Pentatonic</option>
-                <option value="half_whole_tone">Half-whole tone</option>
-                <option value="harmonic_min">Harmonic Minor</option>
-                <option value="ionian">Ionian</option>
-                <option value="major" selected>Major</option>
-                <option value="major_beb">Major Bebop</option>
-                <option value="major_pent">Major Pentatonic</option>
-                <option value="melodic_min">Melodic Minor</option>
-                <option value="minor">Minor</option>
-                <option value="minor_beb">Minor Bebop</option>
-                <option value="minor_pent">Minor Pentatonic</option>
-                <option value="myxolydian">Myxolydian</option>
-                <option value="myxolydian_pent">Myxolydian Pentatonic</option>
-                <option value="locrian">Locrian</option>
-                <option value="lydian">Lydian</option>
-                <option value="phrygian">Phrygian</option>
-                <option value="phrygian_pent">Phrygian Pentatonic</option>
-                <option value="spanish">Spanish Mode</option>
-                <option value="sup_locrian">Super Locrian</option>
-                <option value="suspended_pent">Suspended Pentatonic</option>
-                <option value="symm_dim">Symmetrical Diminished</option>
-                <option value="whole_half_tone">Whole-half Tone</option>
-                <option value="whole_tone">Whole-tone</option>
-              </select>
-              <div class="triads_mode_block">
-                <span class="options_text">Triads</span>
-                <div class="triads_checkbox material-icons md-24  transitional" title="Show notes">&#xE834;</div>
-                <div class="triads_checkbox_empty material-icons md-24  transitional" title="Show triads">&#xE835;</div>
-              </div>
-            </div>
-            <div class="scale_options_block">
-              <ul class="scale_notes_signs">
-                <li>Root</li>
-                <li>Scale Steps</li>
-                <li>Scale Notes</li>
-                <li>Semi-tones</li>
-              </ul>
-              <div class="scale_notes_and_semitones_block">
-                <ul>
-                  <li class="root_note transitional selected_text" title="Select root note">C</li>
-                  <li class="root_note transitional" title="Select root note">C#</li>
-                  <li class="root_note transitional" title="Select root note">D</li>
-                  <li class="root_note transitional" title="Select root note">D#</li>
-                  <li class="root_note transitional" title="Select root note">E</li>
-                  <li class="root_note transitional" title="Select root note">F</li>
-                  <li class="root_note transitional" title="Select root note">F#</li>
-                  <li class="root_note transitional" title="Select root note">G</li>
-                  <li class="root_note transitional" title="Select root note">G#</li>
-                  <li class="root_note transitional" title="Select root note">A</li>
-                  <li class="root_note transitional" title="Select root note">A#</li>
-                  <li class="root_note transitional" title="Select root note">B</li>
-                  <div class="clear"></div>
-                </ul>
-              </div>
-              <div class="clear"></div>
-            </div>
             <div class="clear"></div>
           </div>
         </div>
         <div class="close_btn material-icons md-36 transitional" title="Close">&#xE5C9;</div>
         <div class="set_default_btn material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
+      </div>
+    </script>
+
+    <script id="neck_tmpl" type="text/plain">
+      <div class="neck_block">
+        <div class="tuners_and_fretboard_block">
+          <ul class="strings_options_block"></ul>
+          <div class="fretboard">
+            <div class="fret_null">
+              <div class="fret_ver_hover"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="strings_btns_tmpl" type="text/plain">
+      <li class="strings_btns_block">
+        <div class="material-icons md-24 string_btn delete_string transitional" title="Delete string">&#xE15D;</div>
+        <div class="strings_number">0</div>
+        <div class="material-icons md-24 string_btn add_string transitional" title="Add string">&#xE148;</div>
+      </li>
+    </script>
+
+    <script id="lh_toggle_tmpl" type="text/plain">
+      <div class="lh_toggle_block">
+        <div class="lh_toggle transitional" title="Switch fretboard for lefthanded">Left handed</div>
+        <div class="toggle_checkbox" title="Switch fretboard">
+          <div class="toggle_checkbox_slider slider_rh transitional"></div>
+        </div>
+        <div class="rh_toggle transitional" title="Switch fretboard for righthanded">Right handed</div>
+      </div>
+    </script>
+
+    <script id="tuning_options_tmpl" type="text/plain">
+      <ul class="tuning_options">
+        <li>
+          <span class="options_text">Tuning</span>
+          <select class="tuning_select">
+            <option value="standart_e" selected>Standart E</option>
+            <option value="standart_e_bass">Standart E Bass</option>
+            <option value="standart_e_bass_6">Standart E Bass 6 strings</option>
+            <option value="drop_d_6">Drop D 6 strings</option>
+            <option value="drop_a_7">Drop A 7 strings</option>
+            <option value="drop_e_8">Drop E 8 strings</option>
+            <option value="custom">Custom</option>
+          </select>
+        </li>
+        <li>
+          <span class="options_text">Half-step</span>
+          <div class="half_step_block">
+            <div class="left_arrow transitional" title="Half-step lower"></div>
+            <select class="half_step_select">
+              <option value="-11">-11</option>
+              <option value="-10">-10</option>
+              <option value="-9">-9</option>
+              <option value="-8">-8</option>
+              <option value="-7">-7</option>
+              <option value="-6">-6</option>
+              <option value="-5">-5</option>
+              <option value="-4">-4</option>
+              <option value="-3">-3</option>
+              <option value="-2">-2</option>
+              <option value="-1">-1</option>
+              <option value="0" selected>0</option>
+              <option value="1">+1</option>
+              <option value="2">+2</option>
+              <option value="3">+3</option>
+              <option value="4">+4</option>
+              <option value="5">+5</option>
+              <option value="6">+6</option>
+              <option value="7">+7</option>
+              <option value="8">+8</option>
+              <option value="9">+9</option>
+              <option value="10">+10</option>
+              <option value="11">+11</option>
+            </select>
+            <div class="right_arrow transitional" title="Half-step higher"></div>
+          </div>
+        </li>
+      </ul>
+    </script>
+
+    <script id="scales_select_tmpl" type="text/plain">
+      <div class="scale_select_block">
+        <span class="options_text">Scale</span>
+        <select class="scale_select">
+          <option value="acoustic">Acoustic Scale</option>
+          <option value="aeolian">Aeolian</option>
+          <option value="aeolian_pent">Aeolian Pentatonic</option>
+          <option value="alt_dom">Altered Dominant</option>
+          <option value="alt_scale">Altered Scale</option>
+          <option value="bartok">Bartok</option>
+          <option value="blues">Blues (add M7)</option>
+          <option value="blues_min_hex">Blues Minor Hexatonic</option>
+          <option value="blues_pent">Blues Pentatonic</option>
+          <option value="chromatic">Chromatic</option>
+          <option value="dim">Diminished</option>
+          <option value="dim_whole_tone">Diminished Whole-tone</option>
+          <option value="dom_beb">Dominant Bebop</option>
+          <option value="dom_dim">Dominant Diminished</option>
+          <option value="dorian">Dorian</option>
+          <option value="dorian_beb">Dorian Bebop</option>
+          <option value="dorian_pent">Dorian Pentatonic</option>
+          <option value="half_whole_tone">Half-whole tone</option>
+          <option value="harmonic_min">Harmonic Minor</option>
+          <option value="ionian">Ionian</option>
+          <option value="major" selected>Major</option>
+          <option value="major_beb">Major Bebop</option>
+          <option value="major_pent">Major Pentatonic</option>
+          <option value="melodic_min">Melodic Minor</option>
+          <option value="minor">Minor</option>
+          <option value="minor_beb">Minor Bebop</option>
+          <option value="minor_pent">Minor Pentatonic</option>
+          <option value="myxolydian">Myxolydian</option>
+          <option value="myxolydian_pent">Myxolydian Pentatonic</option>
+          <option value="locrian">Locrian</option>
+          <option value="lydian">Lydian</option>
+          <option value="phrygian">Phrygian</option>
+          <option value="phrygian_pent">Phrygian Pentatonic</option>
+          <option value="spanish">Spanish Mode</option>
+          <option value="sup_locrian">Super Locrian</option>
+          <option value="suspended_pent">Suspended Pentatonic</option>
+          <option value="symm_dim">Symmetrical Diminished</option>
+          <option value="whole_half_tone">Whole-half Tone</option>
+          <option value="whole_tone">Whole-tone</option>
+        </select>
+        <div class="triads_mode_block">
+          <span class="options_text">Triads</span>
+          <div class="triads_checkbox material-icons md-24  transitional" title="Show notes">&#xE834;</div>
+          <div class="triads_checkbox_empty material-icons md-24  transitional" title="Show triads">&#xE835;</div>
+        </div>
+      </div>
+    </script>
+
+    <script id="scales_options_tmpl" type="text/plain">
+      <div class="scale_options_block">
+        <ul class="scale_notes_signs">
+          <li>Root</li>
+          <li>Scale Steps</li>
+          <li>Scale Notes</li>
+          <li>Semi-tones</li>
+        </ul>
+        <div class="scale_notes_and_semitones_block">
+          <ul>
+            <li class="root_note transitional selected_text" title="Select root note">C</li>
+            <li class="root_note transitional" title="Select root note">C#</li>
+            <li class="root_note transitional" title="Select root note">D</li>
+            <li class="root_note transitional" title="Select root note">D#</li>
+            <li class="root_note transitional" title="Select root note">E</li>
+            <li class="root_note transitional" title="Select root note">F</li>
+            <li class="root_note transitional" title="Select root note">F#</li>
+            <li class="root_note transitional" title="Select root note">G</li>
+            <li class="root_note transitional" title="Select root note">G#</li>
+            <li class="root_note transitional" title="Select root note">A</li>
+            <li class="root_note transitional" title="Select root note">A#</li>
+            <li class="root_note transitional" title="Select root note">B</li>
+            <div class="clear"></div>
+          </ul>
+        </div>
+        <div class="clear"></div>
       </div>
     </script>
 
@@ -374,12 +393,15 @@
     <script type="text/javascript" src="js/defaults/defaults.js"></script>
     <script type="text/javascript" src="js/defaults/scales.js"></script>
     <script type="text/javascript" src="js/metronome.js"></script>
+    <script type="text/javascript" src="js/items/item_base.js"></script>
     <script type="text/javascript" src="js/items/parts/strings_tunings.js"></script>
     <script type="text/javascript" src="js/items/parts/fretboard.js"></script>
     <script type="text/javascript" src="js/items/parts/neck.js"></script>
     <script type="text/javascript" src="js/items/scales/state.js"></script>
     <script type="text/javascript" src="js/items/scales/scales.js"></script>
-    <script type="text/javascript" src="js/items/items.js"></script>
+    <script type="text/javascript" src="js/items/creator.js"></script>
+    <script type="text/javascript" src="js/items/items_managment.js"></script>
+    <script type="text/javascript" src="js/items/states_serialization.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

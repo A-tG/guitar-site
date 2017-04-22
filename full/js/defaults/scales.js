@@ -65,6 +65,11 @@ defaults.scales = {
         }
     },
 
+    saveToCookie: function()
+    {
+        Cookies.set("defaultScaleOptions", this, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
+    },
+
     init: function()
     {
         this.readFromCookie();

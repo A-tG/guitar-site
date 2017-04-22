@@ -1,13 +1,16 @@
 var metronome = {
     tickIntervalID: null,
+    
     tick: function()
     {
         postMessage('metronomeTick');
     },
+
     start: function()
     {
         this.tickIntervalID = setInterval(this.tick, 1000 / 60);
     },
+
     stop: function()
     {
         if (this.tickIntervalID != undefined)
