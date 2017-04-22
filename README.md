@@ -2,12 +2,14 @@
 * Everything in one tab
 * Minimum response time - website works completly on client side
 * Possibility to share your link with others
+## What already works:
 ### Metronome
 * High click precise
 * Logarithmic volume control
 * Tempo range is 40 - 320
 * 1 - 16 note per measure
 * 1 - 1/32 note duration
+### Scales calculator:
 * Up to 12 strings
 * Ready tunings presets or custom tuning for each string
 * Triads support
