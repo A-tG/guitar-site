@@ -39,7 +39,12 @@
                 <div class="weight"></div>
               </li>
               <li id="metronome_beat_vis_block" class="metronome_beat_vis_block">
-                <span id="metronome_beat_number_vis" class="metronome_beat_number_vis"></span>
+                <div class="metronome_pointer_wrap">
+                  <div class="metronome_pointer_block" id="metronome_pointer_block">
+                    <div class="metronome_pointer" id="metronome_pointer"></div>
+                  </div>
+                </div>
+                <div id="metronome_beat_number_vis" class="metronome_beat_number_vis"></div>
               </li>
               <li id="metronome_play_btn" class="play_btn material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
               <li id="metronome_stop_btn" class="stop_btn material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
@@ -386,7 +391,7 @@
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/dot.min.js"></script>
-    <script type="text/javascript" src="js/progressbar.min.js"></script>
+    <script type="text/javascript" src="js/jqueryrotate.min.js"></script>
     <script type="text/javascript" src="js/js.cookie.js"></script>
     <script type="text/javascript" src="js/constants.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>

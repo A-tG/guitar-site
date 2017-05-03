@@ -39,12 +39,7 @@ var metronome = {
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
     $beatVisBlock: $('#' + METR_BEAT_VIS_BLOCK_ID),
     $beatVisNumber: $('#' + METR_BEAT_VIS_NUMBER_ID),
-    beatVisProgressBar: new ProgressBar.Circle('#' + METR_BEAT_VIS_BLOCK_ID, {
-        strokeWidth: 15,
-        color: '#fc0',
-        trailWidth: 0,
-        svgStyle: null
-    }),
+    $beatVisPointer: $('#' + METR_BEAT_VIS_POINTER_ID),
 
     scheduleBeatAudio: function(beat)
     {
@@ -68,16 +63,16 @@ var metronome = {
         {
             time = 0;
         }
-        var color = '#fc0';
-        if ((beat.number == 1) || (this.beats == 1))
-        {
-            color = '#0bb';
-        }
-        this.beatVisProgressBar.path.setAttribute('stroke', color);
-        this.beatVisProgressBar.set(0);
-        this.beatVisProgressBar.animate(1, {duration: time});
-        setTimeout(function() 
-        {
+        var isFirstBeat = (beat.number == 1) || (this.beats == 1);
+        this.$beatVisPointer.toggleClass(METR_BEAT_VIS_POINTER_OTHER_CLASS, !isFirstBeat).
+            toggleClass(METR_BEAT_VIS_POINTER_FIRST_CLASS, isFirstBeat);
+        this.$beatVisPointer.rotate({
+            duration: time,
+            angle: 0,
+            animateTo: 360,
+            easing: function (x,t,b,c,d){ return c*(t/d)+b;} // linear
+        });
+        setTimeout(function() {
             if (metronome.isPlaying)
             {
                 metronome.$beatVisNumber.toggleClass(METR_FIRST_BEAT_VIS_NUMBER_CLASS, beat.number == 0);
@@ -140,6 +135,7 @@ var metronome = {
         that.isPlaying = true;
         $(this).hide();
         that.$stopBtn.show();
+        that.$beatVisPointer.show();
         that.beatsQueue = [];
         that.nextBeatNumber = 0;
         worker.postMessage('startMetronomeTicking');
@@ -151,8 +147,8 @@ var metronome = {
         that.isPlaying = false;
         $(this).hide();
         that.$playBtn.show();
+        that.$beatVisPointer.hide();
         that.$beatVisNumber.text("");
-        that.beatVisProgressBar.set(0);
         worker.postMessage('stopMetronomeTicking');
     },
     
@@ -296,6 +292,7 @@ var metronome = {
     init: function()
     {
         this.$stopBtn.hide();
+        this.$beatVisPointer.hide();
         if (!isMetronomeCanWork)
         {
             return;

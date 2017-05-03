@@ -253,6 +253,36 @@
     width: 40px;
     border-radius: 20px;
 }
+.metronome_pointer_wrap
+{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 8px;
+}
+.metronome_pointer_block
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.metronome_pointer
+{
+    height: 25%;
+    width: 100%;
+    -moz-border-radius: 20px/4px;
+    -webkit-border-radius: 20px/4px;
+    border-radius: 20px/4px;
+}
+.metronome_pointer_first .metronome_pointer
+{
+    background: #0bb;
+}
+.metronome_pointer_other .metronome_pointer
+{
+    background: #fc0;
+}
 .metronome_beat_number_vis
 {
     width: 100%;
