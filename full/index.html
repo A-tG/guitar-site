@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/material_icons.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
     <link rel="stylesheet" type="text/css" href="css/head.css">
     <link rel="stylesheet" type="text/css" href="css/metronome.css">
     <link rel="stylesheet" type="text/css" href="css/items/items.css">
@@ -20,23 +21,23 @@
         <div class="head_block">
           <div class="head_block_content">
             <div class="head_items_block">
-              <a class="logo head_item" href="" title="Artistic Guitar">Artistic Guitar</a>
-              <a class="head_item" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
+              <a class="logo head_item light_white" href="" title="Artistic Guitar">Artistic Guitar</a>
+              <a class="head_item light_white" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
             </div>
             <ul class="metronome_block">
               <li id="metronome_disabled_block" class="metronome_disabled_block">Update your browser to use metronome</li>
               <li class="metronome_icon">
-                <div class="trapezoid_bottom"></div>
-                <div class="trapezoid_leftside"></div>
-                <div class="trapezoid_rightside"></div>
-                <div class="trapezoid_top"></div>
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-                <div class="dot3"></div>
-                <div class="dot4"></div>
-                <div class="dot5"></div>
-                <div class="ticker"></div>
-                <div class="weight"></div>
+                <div class="trapezoid_bottom light_white_bg"></div>
+                <div class="trapezoid_leftside light_white_bg"></div>
+                <div class="trapezoid_rightside light_white_bg"></div>
+                <div class="trapezoid_top light_white_bg"></div>
+                <div class="dot1 light_white_bg"></div>
+                <div class="dot2 light_white_bg"></div>
+                <div class="dot3 light_white_bg"></div>
+                <div class="dot4 light_white_bg"></div>
+                <div class="dot5 light_white_bg"></div>
+                <div class="ticker light_white_bg"></div>
+                <div class="weight light_white_bg"></div>
               </li>
               <li id="metronome_beat_vis_block" class="metronome_beat_vis_block">
                 <div class="metronome_pointer_wrap">
@@ -52,7 +53,7 @@
                 <div class="metronome_option_head">
                   <span class="option_head_start_val">0%</span>
                   <span class="option_head_end_val">100%</span>
-                  <span class="metronome_options_text">Volume</span>
+                  <span class="metronome_options_text light_white">Volume</span>
                 </div>
                 <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
               </li>
@@ -62,7 +63,7 @@
                     <div class="metronome_option_head">
                       <span class="option_head_start_val">40</span>
                       <span class="option_head_end_val">320</span>
-                      <span class="metronome_options_text">Tempo</span>
+                      <span class="metronome_options_text light_white">Tempo</span>
                     </div>
                     <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
                   </li>
@@ -78,7 +79,7 @@
               <li class="signature_block">
                 <ul>
                   <li>
-                    <span class="metronome_options_text">Signature</span>
+                    <span class="metronome_options_text light_white">Signature</span>
                   </li>
                   <li>
                     <div class="signature_option_block">
@@ -131,14 +132,14 @@
     <script id="scale_notes_tmpl" type="text/plain">
       <ul class="scale_notes">
         <li class="scale_note" title="Toogle note">
-          <div class="scale_step">1</div>
+          <div class="scale_step light_white">1</div>
           <span class="scale_note_text transitional">{{=it.root}}</span>
           <div class="separator_ver_small"></div>
         </li>
         {{~it.semiTones :semiTone:i}}
-          <li class="semitone_block semitone_width{{=semiTone}}">{{=semiTone}}</li>
+          <li class="semitone_block light_white semitone_width{{=semiTone}}">{{=semiTone}}</li>
           <li class="scale_note" title="Toogle note">
-            <div class="scale_step">{{=i + 2}}</div>
+            <div class="scale_step light_white">{{=i + 2}}</div>
             <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small"></div>
           </li>
@@ -240,25 +241,25 @@
     <script id="strings_btns_tmpl" type="text/plain">
       <li class="strings_btns_block">
         <div class="material-icons md-24 string_btn delete_string transitional" title="Delete string">&#xE15D;</div>
-        <div class="strings_number">0</div>
+        <div class="strings_number light_white">0</div>
         <div class="material-icons md-24 string_btn add_string transitional" title="Add string">&#xE148;</div>
       </li>
     </script>
 
     <script id="lh_toggle_tmpl" type="text/plain">
       <div class="lh_toggle_block">
-        <div class="lh_toggle transitional" title="Switch fretboard for lefthanded">Left handed</div>
+        <div class="lh_toggle light_white transitional" title="Switch fretboard for lefthanded">Left handed</div>
         <div class="toggle_checkbox" title="Switch fretboard">
           <div class="toggle_checkbox_slider slider_rh transitional"></div>
         </div>
-        <div class="rh_toggle transitional" title="Switch fretboard for righthanded">Right handed</div>
+        <div class="rh_toggle light_white transitional" title="Switch fretboard for righthanded">Right handed</div>
       </div>
     </script>
 
     <script id="tuning_options_tmpl" type="text/plain">
       <ul class="tuning_options">
         <li>
-          <span class="options_text">Tuning</span>
+          <span class="options_text light_white">Tuning</span>
           <select class="tuning_select">
             <option value="standart_e" selected>Standart E</option>
             <option value="standart_e_bass">Standart E Bass</option>
@@ -270,7 +271,7 @@
           </select>
         </li>
         <li>
-          <span class="options_text">Half-step</span>
+          <span class="options_text light_white">Half-step</span>
           <div class="half_step_block">
             <div class="left_arrow transitional" title="Half-step lower"></div>
             <select class="half_step_select">
@@ -306,7 +307,7 @@
 
     <script id="scales_select_tmpl" type="text/plain">
       <div class="scale_select_block">
-        <span class="options_text">Scale</span>
+        <span class="options_text light_white">Scale</span>
         <select class="scale_select">
           <option value="acoustic">Acoustic Scale</option>
           <option value="aeolian">Aeolian</option>
@@ -349,7 +350,7 @@
           <option value="whole_tone">Whole-tone</option>
         </select>
         <div class="triads_mode_block">
-          <span class="options_text">Triads</span>
+          <span class="options_text light_white">Triads</span>
           <div class="triads_checkbox material-icons md-24  transitional" title="Show notes">&#xE834;</div>
           <div class="triads_checkbox_empty material-icons md-24  transitional" title="Show triads">&#xE835;</div>
         </div>
@@ -359,10 +360,10 @@
     <script id="scales_options_tmpl" type="text/plain">
       <div class="scale_options_block">
         <ul class="scale_notes_signs">
-          <li>Root</li>
-          <li>Scale Steps</li>
-          <li>Scale Notes</li>
-          <li>Semi-tones</li>
+          <li class="light_white">Root</li>
+          <li class="light_white">Scale Steps</li>
+          <li class="light_white">Scale Notes</li>
+          <li class="light_white">Semi-tones</li>
         </ul>
         <div class="scale_notes_and_semitones_block">
           <ul>

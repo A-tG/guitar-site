@@ -97,7 +97,6 @@
 }
 .scale_notes_signs li
 {
-    color: #fff;
     font-family: Tahoma, Arial, Verdana;
     font-size: 18px;
     text-transform: capitalize;
@@ -132,7 +131,6 @@
 .scale_step
 {
     font-family: Tahoma, Arial, Verdana;
-    color: #fff;
     font-size: 18px;
 }
 .scale_note
@@ -158,7 +156,6 @@
     position: relative;
     bottom: -23px;
     display: inline-block;
-    color: #fff;
     font-family: Tahoma, Arial, Verdana;
     font-size: 14px;
     text-align: center;

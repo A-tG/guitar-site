@@ -8,7 +8,7 @@
 .fret_hor
 {
     box-sizing: border-box;
-    border-right: 4px solid #fff;
+    border-right: 4px solid #eee;
     height: 21px;
     position: relative;
 }
@@ -215,15 +215,16 @@
 .string
 {
     z-index: 2;
-    background: #ccc;
+    background: #ddd;
     width: 100%;
-    border-right: 4px solid #ccc;
+    border-right: 4px solid #ddd;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
 .note
 {
+    color: #222;
     cursor: default;
     position: absolute;
     left: 50%;
@@ -234,7 +235,6 @@
     line-height: 20px;
     text-align: center;
     font-size: 15px;
-    text-decoration: none;
     text-transform: uppercase;
     width: 20px;
     height: 20px;
@@ -262,6 +262,7 @@
 {
     opacity: 0.4;
     background: #ccc;
+    color: #000;
 }
 .fret_marker
 {
@@ -270,7 +271,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
+    background: #eee;
     width: 18px;
     height: 18px;
     -moz-border-radius: 18px;
@@ -293,7 +294,7 @@
 {
     display: inline-block;
     margin: 6px 2px;
-    background: #fff;
+    background: #eee;
     width: 6px;
     height: 6px;
     -moz-border-radius: 6px;
