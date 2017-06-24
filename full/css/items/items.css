@@ -4,7 +4,7 @@
     display: inline-block;
     text-align: justify;
     position: relative;
-    margin: 70px auto 0;
+    margin: 70px 35px 0;
     width: 90%;
     min-width: 1250px;
     max-width: 1780px;
@@ -70,6 +70,7 @@
     .item_block
     {
         min-width: 600px;
+        margin: 70px auto 0;
         width: 100%;
     }
 }
