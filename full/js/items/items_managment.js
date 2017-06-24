@@ -17,7 +17,7 @@ var menuItems = {
     {
         if (this.itemsNumber == MAX_ITEMS_NUMBER)
         {
-            $addNewItemBtn.show(200);
+            this.$addNewItemBtn.show(200);
         }
         if (delete(this.items[id]))
         {
@@ -65,7 +65,7 @@ var menuItems = {
         }
         else
         {
-            $addNewItemBtn.hide(200);
+            this.$addNewItemBtn.hide(200);
         }
     },
     
