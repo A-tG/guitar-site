@@ -8,6 +8,33 @@ function Fretboard(state, $fretboardBlock)
     this.init();
 }
 
+Fretboard.prototype.putNote = function(note, fretNumber, stringNumber, boxSize)
+{
+    var $noteBlock = $(this.notesBlocks[stringNumber][fretNumber]);
+    $noteBlock.toggleClass(HIDDEN_NOTE_CLASS, false);
+    var noteStep = this.state.scaleNotes.indexOf(note);
+    var isTransparentNote = false;
+    var isInBox = (fretNumber >= this.state.boxFirstFret) && 
+        (fretNumber <= (this.state.boxFirstFret + boxSize)) || 
+        (this.state.boxFirstFret == -1);
+    if (this.state.isTriadMode)
+    {
+        isTransparentNote = !this.state.triadsNotesShowPattern[noteStep];
+        $noteBlock.text(noteStep + 1);
+    }
+    else
+    {
+        isTransparentNote = !this.state.normalNotesShowPattern[noteStep];
+        $noteBlock.text(note);
+    }
+    if (isTransparentNote || !isInBox)
+    {
+        $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
+    }
+    var isRoot = (note == this.state.root);
+    $noteBlock.toggleClass(NORMAL_NOTE_CLASS, !isRoot).toggleClass(HIGHLIGHTED_NOTE_CLASS, isRoot);
+}
+
 Fretboard.prototype.putNotesOnString = function(stringNumber)
 {
     var boxSize = this.calculateNotesBoxSize(stringNumber);
@@ -20,31 +47,10 @@ Fretboard.prototype.putNotesOnString = function(stringNumber)
     var stringTuneOffset = semiTonesPattern.shift();
     var note = nextNoteAfterSemiTones(stringTune, stringTuneOffset);
     var k = 0;
-    for (var i = stringTuneOffset; i < $notesBlocks.length;)
+    for (var fretNumber = stringTuneOffset; fretNumber < $notesBlocks.length;)
     {
-        var $noteBlock = $(this.notesBlocks[stringNumber][i]);
-        $noteBlock.toggleClass(HIDDEN_NOTE_CLASS, false);
-        var noteStep = this.state.scaleNotes.indexOf(note);
-        var isTransparentNote = false;
-        var isInBox = (i >= this.state.boxFirstFret) && (i <= (this.state.boxFirstFret + boxSize)) || 
-            (this.state.boxFirstFret == -1);
-        if (this.state.isTriadMode)
-        {
-            isTransparentNote = !this.state.triadsNotesShowPattern[noteStep];
-            $noteBlock.text(noteStep + 1);
-        }
-        else
-        {
-            isTransparentNote = !this.state.normalNotesShowPattern[noteStep];
-            $noteBlock.text(note);
-        }
-        if (isTransparentNote || !isInBox)
-        {
-            $noteBlock.toggleClass(TRANSPARENT_NOTE_CLASS, true);
-        }
-        var isRoot = (note == this.state.root);
-        $noteBlock.toggleClass(NORMAL_NOTE_CLASS, !isRoot).toggleClass(HIGHLIGHTED_NOTE_CLASS, isRoot);
-        i = i + semiTonesPattern[k];
+        this.putNote(note, fretNumber, stringNumber, boxSize);
+        fretNumber = fretNumber + semiTonesPattern[k];
         note = nextNoteAfterSemiTones(note, semiTonesPattern[k]);
         k = ++k % semiTonesPattern.length;
     }
@@ -165,10 +171,9 @@ Fretboard.prototype.addString = function(stringNumber)
 
 Fretboard.prototype.delLastString = function()
 {
-    var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_CLASS, this.$fretboardBlock);
-    for (var i = 0; i < verFrets.length; i++)
+    for (var i = 0; i < this.verFrets.length; i++)
     {
-        $('.' + HOR_FRET_CLASS, $(verFrets[i])).last().remove();
+        $('.' + HOR_FRET_CLASS, $(this.verFrets[i])).last().remove();
     }
 }
 

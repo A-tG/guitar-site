@@ -1,5 +1,7 @@
 function ItemBase(id, JSONstring)
 {
+    this.$itemBlock;
+    this.item;
     this.init(id, JSONstring);
 }
 
