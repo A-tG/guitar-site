@@ -3,6 +3,7 @@ function Fretboard(state, $fretboardBlock)
     this.state = state;
     this.$fretboardBlock = $fretboardBlock;
     this.notesBlocks = [];
+    this.verFrets = [];
 
     this.init();
 }
@@ -130,7 +131,7 @@ Fretboard.prototype.isBoxFit = function(fretNumber, boxSize)
 Fretboard.prototype.addString = function(stringNumber)
 {
     var param = {currentStringNumber: stringNumber + 1}
-    var verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, this.$fretboardBlock);
+    var verFrets = this.verFrets;
     var isFretWithMarker = false;
     var isFretWithDoubleMarker = false;
     for (var i = 0; i < verFrets.length; i++)
@@ -232,6 +233,7 @@ Fretboard.prototype.init = function()
     {
         this.$fretboardBlock.children().last().before(STRING_VER_FRET_TMPL());
     }
+    this.verFrets = $('.' + NULL_VER_FRET_CLASS + ', .' + VER_FRET_INNER_CLASS, this.$fretboardBlock);
     for (var i = 0; i < this.state.stringsNumber; i++)
     {
         this.addString(i);
