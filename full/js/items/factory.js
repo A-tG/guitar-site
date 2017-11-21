@@ -1,4 +1,4 @@
-itemsCreator = {
+itemsFactory = {
     getItem: function(id, JSONstring)
     {
         var item = {};

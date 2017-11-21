@@ -64,7 +64,6 @@ ItemSerializedState.prototype.scalesStateValidate = function()
     } 
     if (!ParsingUt.isCorrectStringsNumber(parsedArr[5]))
     {
-        console.log(parsedArr)
         isValid = false;
         parsedArr[5] = defaults.scales.stringsNumber;
     } 

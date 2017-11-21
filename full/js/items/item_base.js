@@ -41,7 +41,7 @@ ItemBase.prototype.init = function(id, JSONstring)
 {
     menuItems.$addNewItemBtn.before(ITEM_BASE_BLOCK_TMPL({id: id}));
     this.$itemBlock = $('#' + id);
-    this.item = itemsCreator.getItem(id, JSONstring);
+    this.item = itemsFactory.getItem(id, JSONstring);
     this.initAnimation();
     $('.' + ITEM_HEAD_SELECT_CLASS, this.$itemBlock).change({that: this}, this.onItemTypeChange);
     $('.' + CLOSE_BTN_CLASS, this.$itemBlock).click({that: this}, this.onCloseButton);
