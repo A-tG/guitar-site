@@ -271,7 +271,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #eee;
     width: 18px;
     height: 18px;
     -moz-border-radius: 18px;
@@ -286,15 +285,14 @@
 {
     top: 75%;
 }
-.fret_double_dot_block
+.fret_dot_block
 {
     text-align: center;
 }
 .fret_dot
 {
     display: inline-block;
-    margin: 6px 2px;
-    background: #eee;
+    margin: 6px 0px;
     width: 6px;
     height: 6px;
     -moz-border-radius: 6px;
@@ -310,7 +308,6 @@
 {
     .fret_null
     {
-        /*width: 0.625%;*/
         width: 2%
     }
     .fret_ver:nth-child(2)
