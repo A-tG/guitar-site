@@ -72,11 +72,11 @@ ScalesItem.prototype.onScaleChange = function(event)
 {
     var that = event.data.that;
     var scaleName = $(this).val().toLowerCase();
-    if (isCorrectScale(scaleName))
+    if (Scale.isCorrect(scaleName))
     {
         that.state.scale = scaleName;
-        that.state.semiTones = getScaleSemitones(scaleName);
-        that.state.scaleNotes = getNotesFromSemiTones(that.state.root, that.state.semiTones);
+        that.state.semiTones = Scale.getSemitones(scaleName);
+        that.state.scaleNotes = Note.getNotesFromSemiTones(that.state.root, that.state.semiTones);
         that.putNotesOnAllStrings();
         that.updateScaleNotesBlock();
         that.state.saveToQuery();
@@ -87,11 +87,11 @@ ScalesItem.prototype.onRootNoteChange = function(event)
 {
     var that = event.data.that;
     var note = $(this).text();
-    if (isCorrectNote(note))
+    if (Note.isCorrect(note))
     {
         that.state.root = note.toUpperCase();
         that.selectCurrentRootNote();
-        that.state.scaleNotes = getNotesFromSemiTones(that.state.root, that.state.semiTones);
+        that.state.scaleNotes = Note.getNotesFromSemiTones(that.state.root, that.state.semiTones);
         that.updateScaleNotesBlock();
         that.putNotesOnAllStrings();
         that.state.saveToQuery();

@@ -15,7 +15,7 @@ function ScalesItemState(id, JSONstring)
     this.normalNotesShowPattern = DEFAULT_NOTES_SHOW_PATTERN;
     this.triadsNotesShowPattern = DEFAULT_TRIADS_SHOW_PATTERN;
     this.isLH = false;
-
+    
     this.init(JSONstring);
 }
 
@@ -42,13 +42,13 @@ ScalesItemState.prototype.serialize = function()
         this.boxFirstFret,
         this.isLH
     ];
-    var JSONstring = JSON.stringify(fieldsToSave, semiTonesPatternBoolToInt);
+    var JSONstring = JSON.stringify(fieldsToSave, ParsingUt.semiTonesPatternBoolToInt);
     return JSONstring;
 }
 
 ScalesItemState.prototype.deserialize = function(JSONstring)
 {
-    var parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
+    var parsedArr = JSON.parse(JSONstring, ParsingUt.semiTonesPatternIntToBool);
     this.type = parsedArr[0];
     this.scale = parsedArr[1];
     this.root = parsedArr[2];
@@ -59,8 +59,8 @@ ScalesItemState.prototype.deserialize = function(JSONstring)
     this.isTriadMode = parsedArr[7];
     this.normalNotesShowPattern = parsedArr[8];
     this.triadsNotesShowPattern = parsedArr[9];
-    this.semiTones = getScaleSemitones(this.scale);
-    this.scaleNotes = getNotesFromSemiTones(this.root, this.semiTones);
+    this.semiTones = Scale.getSemitones(this.scale);
+    this.scaleNotes = Note.getNotesFromSemiTones(this.root, this.semiTones);
     this.boxFirstFret = parsedArr[10];
     this.isLH = parsedArr[11];
 }
@@ -84,8 +84,8 @@ ScalesItemState.prototype.readFromDefaultOptions = function()
 {
     this.scale = defaults.scales.scale;
     this.root = defaults.scales.root;
-    this.semiTones = getScaleSemitones(this.scale);
-    this.scaleNotes =  getNotesFromSemiTones(this.root, this.semiTones);
+    this.semiTones = Scale.getSemitones(this.scale);
+    this.scaleNotes =  Note.getNotesFromSemiTones(this.root, this.semiTones);
     this.tuning = defaults.scales.tuning;
     this.halfStep = defaults.scales.halfStep;
     this.stringsTunes = defaults.scales.stringsTunes;

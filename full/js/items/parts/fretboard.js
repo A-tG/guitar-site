@@ -38,20 +38,20 @@ Fretboard.prototype.putNote = function(note, fretNumber, stringNumber, boxSize)
 Fretboard.prototype.putNotesOnString = function(stringNumber)
 {
     var boxSize = this.calculateNotesBoxSize(stringNumber);
-    var stringTune = this.getStringTune(stringNumber);
+    var stringTune = Tuning.getStringTune(this.state.stringsTunes, stringNumber);
     var semiTonesPattern = getSemiTonesPatternForString(this.state.scaleNotes, 
         this.state.semiTones, stringTune);
     var $notesBlocks = $(this.notesBlocks[stringNumber]);
     $notesBlocks.toggleClass(HIDDEN_NOTE_CLASS, true);
     $notesBlocks.toggleClass(TRANSPARENT_NOTE_CLASS, false);
     var stringTuneOffset = semiTonesPattern.shift();
-    var note = nextNoteAfterSemiTones(stringTune, stringTuneOffset);
+    var note = Note.nextSemiTones(stringTune, stringTuneOffset);
     var k = 0;
     for (var fretNumber = stringTuneOffset; fretNumber < $notesBlocks.length;)
     {
         this.putNote(note, fretNumber, stringNumber, boxSize);
         fretNumber = fretNumber + semiTonesPattern[k];
-        note = nextNoteAfterSemiTones(note, semiTonesPattern[k]);
+        note = Note.nextSemiTones(note, semiTonesPattern[k]);
         k = ++k % semiTonesPattern.length;
     }
 }
@@ -81,11 +81,6 @@ Fretboard.prototype.putNotesOnNearStrings = function(stringNumber)
     }
 }
 
-Fretboard.prototype.getStringTune = function(stringNumber)
-{
-    return this.state.stringsTunes[stringNumber % this.state.stringsTunes.length];
-}
-
 Fretboard.prototype.calculateNotesBoxSize = function(stringNumber, fretNumber)
 {
     if (arguments.length > 1)
@@ -95,13 +90,13 @@ Fretboard.prototype.calculateNotesBoxSize = function(stringNumber, fretNumber)
     var boxSize = 0;
     if (stringNumber > 0)
     {
-        var higherStringNote = this.getStringTune(stringNumber - 1);
-        var currentStringNote = this.getStringTune(stringNumber);
-        higherStringNote = nextNoteAfterSemiTones(higherStringNote, fretNumber);
-        currentStringNote = nextNoteAfterSemiTones(currentStringNote, fretNumber);
+        var higherStringNote = Tuning.getStringTune(this.state.stringsTunes, stringNumber - 1);
+        var currentStringNote = Tuning.getStringTune(this.state.stringsTunes, stringNumber);
+        higherStringNote = Note.nextSemiTones(higherStringNote, fretNumber);
+        currentStringNote = Note.nextSemiTones(currentStringNote, fretNumber);
         while (currentStringNote != higherStringNote)
         {
-            currentStringNote = nextNote(currentStringNote);
+            currentStringNote = Note.next(currentStringNote);
             if (currentStringNote != higherStringNote)
             {
                 boxSize++;

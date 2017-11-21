@@ -27,7 +27,7 @@ var DEFAULT_TRIADS_SHOW_PATTERN = [true, false, true, false, true, false, false,
 
 var NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 var DEFAULT_SCALE_SEMITONES = [2, 2, 1, 2, 2, 2, 1];
-var DEFAULT_STRING_TUNES = ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"]; // number of elements must be equal MAX_STRINGS_NUMBER
+var DEFAULT_STRING_TUNES = ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"];
 var DEFAULT_SCALE_NOTES = ["C", "D", "E", "F", "G", "A", "B"];
 var SCALES = {
     "major": [2, 2, 1, 2, 2, 2, 1],

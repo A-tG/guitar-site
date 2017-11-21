@@ -6,10 +6,10 @@ itemsCreator = {
         var type = SCALES_TYPE;
         try
         {
-            parsedArr = JSON.parse(JSONstring, semiTonesPatternIntToBool);
+            parsedArr = JSON.parse(JSONstring, ParsingUt.semiTonesPatternIntToBool);
             type = parsedArr[0];
         }
-        catch (err) {}
+        catch (err) {console.log(err)}
         switch (type)
         {
             case SCALES_TYPE:

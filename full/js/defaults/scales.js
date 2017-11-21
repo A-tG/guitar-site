@@ -16,27 +16,27 @@ defaults.scales = {
         if (Cookies.getJSON("defaultScaleOptions") !== undefined)
         {
             var options = Cookies.getJSON("defaultScaleOptions");
-            if ((options.scale !== undefined) && isCorrectScale(options.scale))
+            if ((options.scale !== undefined) && Scale.isCorrect(options.scale))
             {
                 this.scale = options.scale;
             }
-            if ((options.root !== undefined) && isCorrectNote(options.root))
+            if ((options.root !== undefined) && Note.isCorrect(options.root))
             {
                 this.root = options.root;
             }
-            if ((options.tuning !== undefined) && isCorrectTuning(options.tuning))
+            if ((options.tuning !== undefined) && Tuning.isCorrect(options.tuning))
             {
                 this.tuning = options.tuning;
             }
-            if ((options.halfStep !== undefined) && isCorrectHalfStep(options.halfStep))
+            if ((options.halfStep !== undefined) && Halfstep.isCorrect(options.halfStep))
             {
                 this.halfStep = +options.halfStep;
             }
-            if ((options.stringsTunes !== undefined) && isCorrectTuningNotes(options.stringsTunes))
+            if ((options.stringsTunes !== undefined) && Tuning.isCorrectNotes(options.stringsTunes))
             {
                 this.stringsTunes = options.stringsTunes;
             }
-            if ((options.stringsNumber !== undefined) && isCorrectStringsNumber(options.stringsNumber))
+            if ((options.stringsNumber !== undefined) && ParsingUt.isCorrectStringsNumber(options.stringsNumber))
             {
                 this.stringsNumber = +options.stringsNumber;
             }
@@ -45,16 +45,16 @@ defaults.scales = {
                 this.isTriadMode = options.isTriadMode;
             }
             if ((options.normalNotesShowPattern !== undefined) && 
-                isCorrectNotesShowPattern(options.normalNotesShowPattern))
+                ParsingUt.isCorrectNotesShowPattern(options.normalNotesShowPattern))
             {
                 this.normalNotesShowPattern = options.normalNotesShowPattern;
             }
             if ((options.triadsNotesShowPattern !== undefined) && 
-                isCorrectNotesShowPattern(options.triadsNotesShowPattern))
+                ParsingUt.isCorrectNotesShowPattern(options.triadsNotesShowPattern))
             {
                 this.triadsNotesShowPattern = options.triadsNotesShowPattern;
             }
-            if ((options.boxFirstFret !== undefined) && isCorrectBoxFret(options.boxFirstFret))
+            if ((options.boxFirstFret !== undefined) && ParsingUt.isCorrectBoxFret(options.boxFirstFret))
             {
                 this.boxFirstFret = options.boxFirstFret;
             }

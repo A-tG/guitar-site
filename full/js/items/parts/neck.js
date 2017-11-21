@@ -35,16 +35,11 @@ Neck.prototype.putNotesOnAllStrings = function()
     this.fretboard.putNotesOnAllStrings();
 }
 
-Neck.prototype.getStringTune = function(stringNumber)
-{
-    return this.state.stringsTunes[stringNumber % this.state.stringsTunes.length];
-}
-
 Neck.prototype.moveTuning = function(halfSteps)
 {
     for (var k = 0; k < this.state.stringsTunes.length; k++)
     {
-        this.state.stringsTunes[k] = nextNoteAfterSemiTones(this.state.stringsTunes[k], halfSteps);
+        this.state.stringsTunes[k] = Note.nextSemiTones(this.state.stringsTunes[k], halfSteps);
     }
 }
 
@@ -83,10 +78,10 @@ Neck.prototype.onTuningChange = function(event)
     }
     else
     {
-        if (isCorrectTuning(tuningName))
+        if (Tuning.isCorrect(tuningName))
         {
             that.state.tuning = tuningName;
-            that.state.stringsTunes = getTuneNotes(tuningName);
+            that.state.stringsTunes = Tuning.getStringsTunes(tuningName);
             that.moveTuning(that.state.halfStep);
             that.putNotesOnAllStrings();
             that.selectCurrentStringsTunes();
@@ -121,7 +116,7 @@ Neck.prototype.onLeftArrowHalfStepClick = function(event)
     var halfStep =  that.state.halfStep;
     if (halfStep != -MAX_HALF_STEP)
     {
-        halfStep = prevHalfStep(halfStep);
+        halfStep = Halfstep.prev(halfStep);
         that.state.halfStep = halfStep;
         that.moveTuning(-1);
         that.selectCurrentStringsTunes();
@@ -137,7 +132,7 @@ Neck.prototype.onRightArrowHalfStepCLick = function(event)
     var halfStep = that.state.halfStep;
     if (halfStep != MAX_HALF_STEP)
     {
-        halfStep = nextHalfStep(halfStep);
+        halfStep = Halfstep.next(halfStep);
         that.state.halfStep = halfStep;
         that.moveTuning(1);
         that.selectCurrentStringsTunes();
@@ -153,7 +148,8 @@ Neck.prototype.onAddStringButton = function(event)
     if (that.state.stringsNumber < MAX_STRINGS_NUMBER) 
     {    
         that.fretboard.addString(that.state.stringsNumber);
-        that.stringsTunings.addStringTuning(that.getStringTune(that.state.stringsNumber));
+        var stringTune = Tuning.getStringTune(that.state.stringsTunes, that.state.stringsNumber);
+        that.stringsTunings.addStringTuning(stringTune);
         that.state.stringsNumber++;
         that.$stringsNumberBlock.text('' + that.state.stringsNumber);
         that.state.saveToQuery();
