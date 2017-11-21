@@ -14,9 +14,8 @@ Fretboard.prototype.putNote = function(note, fretNumber, stringNumber, boxSize)
     $noteBlock.toggleClass(HIDDEN_NOTE_CLASS, false);
     var noteStep = this.state.scaleNotes.indexOf(note);
     var isTransparentNote = false;
-    var isInBox = (fretNumber >= this.state.boxFirstFret) && 
-        (fretNumber <= (this.state.boxFirstFret + boxSize)) || 
-        (this.state.boxFirstFret == -1);
+    var isInBox = (this.state.boxFirstFret == -1) || (fretNumber >= this.state.boxFirstFret) && 
+        (fretNumber <= (this.state.boxFirstFret + boxSize));
     if (this.state.isTriadMode)
     {
         isTransparentNote = !this.state.triadsNotesShowPattern[noteStep];
@@ -37,7 +36,7 @@ Fretboard.prototype.putNote = function(note, fretNumber, stringNumber, boxSize)
 
 Fretboard.prototype.putNotesOnString = function(stringNumber)
 {
-    var boxSize = this.calculateNotesBoxSize(stringNumber);
+    var boxSize = this.calculateNotesBoxSize(stringNumber, this.state.boxFirstFret);
     var stringTune = Tuning.getStringTune(this.state.stringsTunes, stringNumber);
     var semiTonesPattern = getSemiTonesPatternForString(this.state.scaleNotes, 
         this.state.semiTones, stringTune);
@@ -83,10 +82,6 @@ Fretboard.prototype.putNotesOnNearStrings = function(stringNumber)
 
 Fretboard.prototype.calculateNotesBoxSize = function(stringNumber, fretNumber)
 {
-    if (arguments.length > 1)
-    {
-        var fretNumber = this.state.boxFirstFret;
-    }
     var boxSize = 0;
     if (stringNumber > 0)
     {

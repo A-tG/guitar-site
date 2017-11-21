@@ -16,7 +16,6 @@ ItemBase.prototype.onItemTypeChange = function(event)
 {
     var that = event.data.that;
     var newType = $(this).val().toLowerCase();
-    console.log(newType);
 }
 
 ItemBase.prototype.onCloseButton = function(event)
