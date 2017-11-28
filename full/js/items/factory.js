@@ -4,12 +4,15 @@ itemsFactory = {
         var item = {};
         var parsedArr = [];
         var type = SCALES_TYPE;
-        try
-        {
-            parsedArr = JSON.parse(JSONstring, ParsingUt.semiTonesPatternIntToBool);
-            type = parsedArr[0];
+        if (JSONstring)
+        {  
+            try
+            {
+                parsedArr = JSON.parse(JSONstring, ParsingUt.semiTonesPatternIntToBool);
+                type = parsedArr[0];
+            } 
+            catch (err) {console.log(err)}
         }
-        catch (err) {console.log(err)}
         switch (type)
         {
             case SCALES_TYPE:
