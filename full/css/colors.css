@@ -6,3 +6,15 @@
 {
     background: #eee;
 }
+.light_white_stroke
+{
+    stroke: #eee;
+}
+.light_white_fill
+{
+    fill: #eee;
+}
+.no_fill
+{
+    fill: none;
+}
