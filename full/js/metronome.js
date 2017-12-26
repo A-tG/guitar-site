@@ -58,7 +58,7 @@ var metronome = {
 
     scheduleBeatVisual: function(beat)
     {
-        var time = beat.visTime - performance.now();
+        var time = beat.audioTime - audioCtx.currentTime;
         if (time < 0)
         {
             time = 0;
@@ -104,7 +104,6 @@ var metronome = {
                 that.nextBeatNumber = (that.nextBeatNumber + 1) % that.beats;
                 that.beatsQueue.push({
                     audioTime: lastBeatInQueue.audioTime + delay,
-                    visTime: lastBeatInQueue.visTime + delay * 1000,
                     number: that.nextBeatNumber
                 });
                 that.scheduleBeatFromQueue();
@@ -114,7 +113,6 @@ var metronome = {
         {
             that.beatsQueue.push({
                 audioTime: audioCtx.currentTime,
-                visTime: performance.now(),
                 number: 0
             });
         }
