@@ -20,3 +20,20 @@
     text-transform: capitalize;
     padding: 0 10px 0 10px;
 }
+
+#common_settings_wrapper, #common_settings_btn
+{
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+}
+#settings_block
+{
+    position: absolute;
+    z-index: 10;
+    top: 2px;
+}
+.settings_block_hide
+{
+    display: none;
+}

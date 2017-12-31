@@ -109,9 +109,12 @@ var TUNINGS = {
 };
 var CUSTOM_TUNING_VALUE = "custom";
 
+var COLOR_SCHEMES_CLASSES = ["day", "night"];
+
 var SCALES_TYPE = "scales";
 var CHORDS_TYPE = "chords";
 
+var BG_BLOCK_CLASS = "bg_block";
 var ITEM_CLASS = "item_block";
 var ITEM_CONTENT_CLASS = "item_content";
 var ITEM_HEAD_CLASS = "item_head";
@@ -187,6 +190,13 @@ var METR_BEAT_VIS_POINTER_ID = "metronome_pointer_block";
 var METR_BEAT_VIS_POINTER_FIRST_CLASS = "metronome_pointer_first";
 var METR_BEAT_VIS_POINTER_OTHER_CLASS = "metronome_pointer_other";
 var METR_FIRST_BEAT_VIS_NUMBER_CLASS = "metronome_first_beat_number_vis";
+
+var COMMON_SETTINGS_BTN_ID = "common_settings_btn";
+var COMMON_SETTINGS_BLOCK_ID = "settings_block";
+var COMMON_SETTINGS_BLOCK_HIDE_CLASS = "settings_block_hide";
+var COMMON_SETTINGS_BLOCK_CLOSE_BTN_ID = "settings_close_btn";
+var COMMON_SETTINGS_BLOCK_NIGHT_COLOR_BTN_ID = "color_scheme_switch_night_btn";
+var COMMON_SETTINGS_BLOCK_DAY_COLOR_BTN_ID = "color_scheme_switch_day_btn";
 
 var WRONG_ITEM_TYPE_MSG = "Wrong item type";
 var WRONG_SEMITONE_NUMBER_MSG = "Wrong sum of semitones, must be equal to " + SCALE_SEMITONES_NUMBER;

@@ -21,7 +21,7 @@
     <div class="bg_block night">
       <div class="content_block normal_bg2">
         <div class="head_block normal_bg1">
-          <div class="head_block_content">
+          <ul class="head_block_content">
             <div class="head_items_block">
               <a class="logo head_item normal_color" href="" title="Artistic Guitar">Artistic Guitar</a>
               <a class="head_item normal_color" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
@@ -117,10 +117,18 @@
                 </ul>
               </li>
             </ul>
-          </div>
+            <div id="common_settings_wrapper">
+              <div id="common_settings_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Open settings">&#xE8B8;</div>
+              <div id="settings_block" class="normal_bg1 settings_block_hide">
+                <div id="settings_close_btn" class="element_color hover_element_color material-icons md-36 transitional">&#xE5CE;</div>
+                <div id="color_scheme_switch_night_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Switch to night color palette">&#xE3A7;</div>
+                <div id="color_scheme_switch_day_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Switch to day color palette">&#xE3AA;</div>
+              </div>
+            </div>
+          </ul>
         </div>
         <div id="add_new_item_btn" class="add_new_item" title="Add item">
-          <i class="material-icons element_color hover_element_color md-82 transitional">&#xE147;</i>
+          <i class="material-icons element_color hover_element_color md-82 transitional">&#xE146;</i>
         </div>
       </div>
       <noscript class="noscipt_warning normal_color">Please update your browser or enable javascript</noscript>
@@ -208,7 +216,6 @@
           <div class="item_head">
             <select class="item_head_select element_color normal_bg3">
               <option value="scales">Scales</option>
-              <option value="chords">Chords</option>
             </select>
             <div class="clear"></div>
           </div>
@@ -216,7 +223,7 @@
             <div class="clear"></div>
           </div>
         </div>
-        <div class="close_btn element_color hover_element_color material-icons md-36 transitional" title="Close">&#xE5C9;</div>
+        <div class="close_btn element_color hover_element_color material-icons md-36 transitional" title="Close">&#xE5CD;</div>
         <div class="set_default_btn element_color hover_element_color material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
       </div>
     </script>
@@ -401,6 +408,7 @@
     <script type="text/javascript" src="js/defaults/defaults.js"></script>
     <script type="text/javascript" src="js/defaults/scales.js"></script>
     <script type="text/javascript" src="js/metronome.js"></script>
+    <script type="text/javascript" src="js/common_settings.js"></script>
     <script type="text/javascript" src="js/items/item_base.js"></script>
     <script type="text/javascript" src="js/items/parts/strings_tunings.js"></script>
     <script type="text/javascript" src="js/items/parts/fretboard.js"></script>

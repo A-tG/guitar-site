@@ -53,6 +53,11 @@
     -ms-user-select: none;
 }
 
+.dummy_checkbox
+{
+    display: none;
+}
+
 @media screen and (max-width: 1250px)
 {
     .left_arrow
