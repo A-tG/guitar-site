@@ -58,11 +58,7 @@ var metronome = {
 
     scheduleBeatVisual: function(beat)
     {
-        var time = beat.audioTime - audioCtx.currentTime;
-        if (time < 0)
-        {
-            time = 0;
-        }
+        var time = (beat.audioTime - audioCtx.currentTime) * 1000;
         var isFirstBeat = (beat.number == 1) || (this.beats == 1);
         this.$beatVisPointer.toggleClass(METR_BEAT_VIS_POINTER_OTHER_CLASS, !isFirstBeat).
             toggleClass(METR_BEAT_VIS_POINTER_FIRST_CLASS, isFirstBeat);
