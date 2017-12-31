@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Learn your musical instrument, Improve your skill - Artistic Guitar</title>
-    <meta name="description" content="Experience fast user interface. Learn guitar scales on customizable fretboard. Practice with high precise metronome.">
+    <meta name="description" content="Experience fast user interface. Learn guitar scales on customizable fretboard. Practice with highly precise metronome.">
     <link rel="canonical" href="https://a-tg.github.io" />
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/material_icons.css">
@@ -18,39 +18,39 @@
     <link rel="stylesheet" type="text/css" href="css/neck/strings_options.css">
   </head>
   <body>
-    <div class="bg_block">
-      <div class="content_block">
-        <div class="head_block">
+    <div class="bg_block night">
+      <div class="content_block normal_bg2">
+        <div class="head_block normal_bg1">
           <div class="head_block_content">
             <div class="head_items_block">
-              <a class="logo head_item light_white" href="" title="Artistic Guitar">Artistic Guitar</a>
-              <a class="head_item light_white" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
+              <a class="logo head_item normal_color" href="" title="Artistic Guitar">Artistic Guitar</a>
+              <a class="head_item normal_color" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
             </div>
             <ul class="metronome_block">
-              <li id="metronome_disabled_block" class="metronome_disabled_block">Update your browser to use metronome</li>
+              <li id="metronome_disabled_block" class="metronome_disabled_block negative_bg negative_color">Update your browser to use metronome</li>
               <li class="metronome_icon">
-                <svg class="light_white_stroke no_fill metronome_medium_stoke" height="50" width="30">
+                <svg class="svg_normal_stroke svg_no_fill metronome_svg_medium_stoke" height="50" width="30">
                   <polygon points="8,5 22,5 28,45 2,45" />
-                  <path class="metronome_dasharay" d="M15 10 L15 28" />
+                  <path class="metronome_svg_dasharay" d="M15 10 L15 28" />
                   <path d="M15 34 L27 10" />
-                  <polygon class="light_white_fill metronome_light_stoke" points="24.5,12.5 28.5,12.5 27.5,10.5 25.5,10.5" transform=rotate(210,26.5,11.5) />
+                  <polygon class="svg_normal_fill metronome_svg_light_stoke" points="24.5,12.5 28.5,12.5 27.5,10.5 25.5,10.5" transform=rotate(210,26.5,11.5) />
                 </svg>
               </li>
-              <li id="metronome_beat_vis_block" class="metronome_beat_vis_block">
+              <li id="metronome_beat_vis_block" class="metronome_beat_vis_block normal_bg3">
                 <div class="metronome_pointer_wrap">
                   <div class="metronome_pointer_block" id="metronome_pointer_block">
                     <div class="metronome_pointer" id="metronome_pointer"></div>
                   </div>
                 </div>
-                <div id="metronome_beat_number_vis" class="metronome_beat_number_vis"></div>
+                <div id="metronome_beat_number_vis" class="metronome_beat_number_vis normal_text"></div>
               </li>
-              <li id="metronome_play_btn" class="play_btn material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
-              <li id="metronome_stop_btn" class="stop_btn material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
+              <li id="metronome_play_btn" class="play_btn element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
+              <li id="metronome_stop_btn" class="stop_btn element_color hover_element_color material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
               <li class="volume_block">
                 <div class="metronome_option_head">
-                  <span class="option_head_start_val">0%</span>
-                  <span class="option_head_end_val">100%</span>
-                  <span class="metronome_options_text light_white">Volume</span>
+                  <span class="option_head_start_val weak_color">0%</span>
+                  <span class="option_head_end_val weak_color">100%</span>
+                  <span class="metronome_options_text normal_color">Volume</span>
                 </div>
                 <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
               </li>
@@ -58,16 +58,16 @@
                 <ul>
                   <li>
                     <div class="metronome_option_head">
-                      <span class="option_head_start_val">40</span>
-                      <span class="option_head_end_val">320</span>
-                      <span class="metronome_options_text light_white">Tempo</span>
+                      <span class="option_head_start_val weak_color">40</span>
+                      <span class="option_head_end_val weak_color">320</span>
+                      <span class="metronome_options_text normal_color">Tempo</span>
                     </div>
                     <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
                   </li>
                   <li class="tempo_input_block">
-                    <div id="metronome_tempo_left_arrow" class="left_arrow transitional" title="Reduce tempo"></div>
-                    <input id="metronome_tempo_input" class="tempo_input" type="text" list="tempos" size="4" maxlength="7">
-                    <div id="metronome_tempo_right_arrow" class="right_arrow transitional" title="Increase tempo"></div>
+                    <div id="metronome_tempo_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce tempo"></div>
+                    <input id="metronome_tempo_input" class="tempo_input element_color normal_bg3" type="text" list="tempos" size="4" maxlength="7">
+                    <div id="metronome_tempo_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Increase tempo"></div>
                     <datalist id="tempos">
                     </datalist>
                   </li>
@@ -76,12 +76,12 @@
               <li class="signature_block">
                 <ul>
                   <li>
-                    <span class="metronome_options_text light_white">Signature</span>
+                    <span class="metronome_options_text normal_color">Signature</span>
                   </li>
                   <li>
                     <div class="signature_option_block">
-                      <div id="metronome_beats_left_arrow" class="left_arrow transitional" title="Reduce beats number"></div>
-                      <select id="metronome_beats_select" class="signature_select">
+                      <div id="metronome_beats_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce beats number"></div>
+                      <select id="metronome_beats_select" class="signature_select element_color normal_bg3">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -99,11 +99,11 @@
                         <option value="15">15</option>
                         <option value="16">16</option>
                       </select>
-                      <div id="metronome_beats_right_arrow" class="right_arrow transitional" title="Increase beats number"></div>
+                      <div id="metronome_beats_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Increase beats number"></div>
                     </div>
                     <div class="signature_option_block">
-                      <div id="metronome_beat_val_left_arrow" class="left_arrow transitional" title="Increase beat(note) value"></div>
-                      <select id="metronome_beat_val_select" class="signature_select">
+                      <div id="metronome_beat_val_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Increase beat(note) value"></div>
+                      <select id="metronome_beat_val_select" class="signature_select element_color normal_bg3">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="4" selected>4</option>
@@ -111,7 +111,7 @@
                         <option value="16">16</option>
                         <option value="32">32</option>
                       </select>
-                      <div id="metronome_beat_val_right_arrow" class="right_arrow transitional" title="Reduce beat(note) value"></div>
+                      <div id="metronome_beat_val_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Reduce beat(note) value"></div>
                     </div>
                   </li>
                 </ul>
@@ -119,24 +119,24 @@
             </ul>
           </div>
         </div>
-        <div id="add_new_item_btn" class="add_new_item transitional" title="Add item">
-          <i class="material-icons md-82">&#xE147;</i>
+        <div id="add_new_item_btn" class="add_new_item" title="Add item">
+          <i class="material-icons element_color hover_element_color md-82 transitional">&#xE147;</i>
         </div>
       </div>
-      <noscript class="noscipt_warning">Please update your browser or enable javascript</noscript>
+      <noscript class="noscipt_warning normal_color">Please update your browser or enable javascript</noscript>
     </div>
     
     <script id="scale_notes_tmpl" type="text/plain">
       <ul class="scale_notes">
-        <li class="scale_note" title="Toogle note">
-          <div class="scale_step light_white">1</div>
+        <li class="scale_note element_color hover_element_color" title="Toogle note">
+          <div class="scale_step normal_color">1</div>
           <span class="scale_note_text transitional">{{=it.root}}</span>
           <div class="separator_ver_small"></div>
         </li>
         {{~it.semiTones :semiTone:i}}
-          <li class="semitone_block light_white semitone_width{{=semiTone}}">{{=semiTone}}</li>
-          <li class="scale_note" title="Toogle note">
-            <div class="scale_step light_white">{{=i + 2}}</div>
+          <li class="semitone_block normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
+          <li class="scale_note element_color hover_element_color" title="Toogle note">
+            <div class="scale_step normal_color">{{=i + 2}}</div>
             <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small"></div>
           </li>
@@ -146,7 +146,7 @@
 
     <script id="string_ver_fret_tmpl" type="text/plain">
       <div class="fret_ver">
-        <div class="fret_ver_inner">
+        <div class="fret_ver_inner fretboard_bg">
           <div class="fret_ver_hover"></div>
         </div>
       </div>
@@ -161,30 +161,30 @@
 
     <script id="fret_dot_tmpl" type="text/plain">
       <div class="fret_dot_block">
-        <div class="fret_dot light_white_bg"></div>
+        <div class="fret_dot negative_bg"></div>
       </div>
     </script>
 
     <script id="fret_double_dot_tmpl" type="text/plain">
       <div class="fret_dot_block">
-        <div class="fret_dot light_white_bg"></div>
-        <div class="fret_dot light_white_bg"></div>
+        <div class="fret_dot negative_bg"></div>
+        <div class="fret_dot negative_bg"></div>
       </div>
     </script>
 
     <script id="fretboard_single_mark" type="text/plain">
-      <div class="fret_marker light_white_bg"></div>
+      <div class="fret_marker negative_bg"></div>
     </script>
 
     <script id="fretboard_double_mark" type="text/plain">
-      <div class="fret_marker marker_top light_white_bg"></div>
-      <div class="fret_marker marker_bottom light_white_bg"></div>
+      <div class="fret_marker marker_top negative_bg"></div>
+      <div class="fret_marker marker_bottom negative_bg"></div>
     </script>
 
     <script id="string_tune_block_tmpl" type="text/plain">
       <li class="string_tune">
-        <div class="left_arrow transitional" title="Tune lower"></div>
-        <select class="string_tune_select">
+        <div class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Tune lower"></div>
+        <select class="string_tune_select element_color normal_bg3">
           <option value="G#">G#</option>
           <option value="G">G</option>
           <option value="F#">F#</option>
@@ -198,15 +198,15 @@
           <option value="A#">A#</option>
           <option value="A">A</option>
         </select>
-        <div class="right_arrow transitional" title="Tune higher"></div>
+        <div class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Tune higher"></div>
       </li>
     </script>
 
     <script id="item_base_tmpl" type="text/plain">
-      <div id="{{=it.id}}" class="item_block">
+      <div id="{{=it.id}}" class="item_block normal_bg1">
         <div class="item_content">
           <div class="item_head">
-            <select class="item_head_select">
+            <select class="item_head_select element_color normal_bg3">
               <option value="scales">Scales</option>
               <option value="chords">Chords</option>
             </select>
@@ -216,8 +216,8 @@
             <div class="clear"></div>
           </div>
         </div>
-        <div class="close_btn material-icons md-36 transitional" title="Close">&#xE5C9;</div>
-        <div class="set_default_btn material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
+        <div class="close_btn element_color hover_element_color material-icons md-36 transitional" title="Close">&#xE5C9;</div>
+        <div class="set_default_btn element_color hover_element_color material-icons md-36 transitional" title="Set current options as default">&#xE838;</div>
       </div>
     </script>
 
@@ -237,27 +237,27 @@
 
     <script id="strings_btns_tmpl" type="text/plain">
       <li class="strings_btns_block">
-        <div class="material-icons md-24 string_btn delete_string transitional" title="Delete string">&#xE15D;</div>
-        <div class="strings_number light_white">0</div>
-        <div class="material-icons md-24 string_btn add_string transitional" title="Add string">&#xE148;</div>
+        <div class="material-icons md-24 string_btn delete_string element_color hover_element_color transitional" title="Delete string">&#xE15D;</div>
+        <div class="strings_number normal_color">0</div>
+        <div class="material-icons md-24 string_btn add_string element_color hover_element_color transitional" title="Add string">&#xE148;</div>
       </li>
     </script>
 
     <script id="lh_toggle_tmpl" type="text/plain">
       <div class="lh_toggle_block">
-        <div class="lh_toggle light_white transitional" title="Switch fretboard for lefthanded">Left handed</div>
-        <div class="toggle_checkbox" title="Switch fretboard">
-          <div class="toggle_checkbox_slider slider_rh transitional"></div>
+        <div class="lh_toggle normal_color transitional" title="Switch fretboard for lefthanded">Left handed</div>
+        <div class="toggle_checkbox hover_parent normal_bg3 " title="Switch fretboard">
+          <div class="toggle_checkbox_slider slider_rh element_bg hover_child_color transitional"></div>
         </div>
-        <div class="rh_toggle light_white transitional" title="Switch fretboard for righthanded">Right handed</div>
+        <div class="rh_toggle normal_color transitional" title="Switch fretboard for righthanded">Right handed</div>
       </div>
     </script>
 
     <script id="tuning_options_tmpl" type="text/plain">
       <ul class="tuning_options">
         <li>
-          <span class="options_text light_white">Tuning</span>
-          <select class="tuning_select">
+          <span class="options_text normal_color">Tuning</span>
+          <select class="tuning_select element_color normal_bg3">
             <option value="standart_e" selected>Standart E</option>
             <option value="standart_e_bass">Standart E Bass</option>
             <option value="standart_e_bass_6">Standart E Bass 6 strings</option>
@@ -268,10 +268,10 @@
           </select>
         </li>
         <li>
-          <span class="options_text light_white">Half-step</span>
+          <span class="options_text normal_color">Half-step</span>
           <div class="half_step_block">
-            <div class="left_arrow transitional" title="Half-step lower"></div>
-            <select class="half_step_select">
+            <div class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Half-step lower"></div>
+            <select class="half_step_select element_color normal_bg3">
               <option value="-11">-11</option>
               <option value="-10">-10</option>
               <option value="-9">-9</option>
@@ -296,7 +296,7 @@
               <option value="10">+10</option>
               <option value="11">+11</option>
             </select>
-            <div class="right_arrow transitional" title="Half-step higher"></div>
+            <div class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Half-step higher"></div>
           </div>
         </li>
       </ul>
@@ -304,8 +304,8 @@
 
     <script id="scales_select_tmpl" type="text/plain">
       <div class="scale_select_block">
-        <span class="options_text light_white">Scale</span>
-        <select class="scale_select">
+        <span class="options_text normal_color">Scale</span>
+        <select class="scale_select element_color normal_bg3">
           <option value="acoustic">Acoustic Scale</option>
           <option value="aeolian">Aeolian</option>
           <option value="aeolian_pent">Aeolian Pentatonic</option>
@@ -347,9 +347,9 @@
           <option value="whole_tone">Whole-tone</option>
         </select>
         <div class="triads_mode_block">
-          <span class="options_text light_white">Triads</span>
-          <div class="triads_checkbox material-icons md-24  transitional" title="Show notes">&#xE834;</div>
-          <div class="triads_checkbox_empty material-icons md-24  transitional" title="Show triads">&#xE835;</div>
+          <span class="options_text normal_color">Triads</span>
+          <div class="triads_checkbox material-icons md-24 element_color hover_element_color transitional" title="Show notes">&#xE834;</div>
+          <div class="triads_checkbox_empty material-icons md-24 element_color hover_element_color transitional" title="Show triads">&#xE835;</div>
         </div>
       </div>
     </script>
@@ -357,25 +357,25 @@
     <script id="scales_options_tmpl" type="text/plain">
       <div class="scale_options_block">
         <ul class="scale_notes_signs">
-          <li class="light_white">Root</li>
-          <li class="light_white">Scale Steps</li>
-          <li class="light_white">Scale Notes</li>
-          <li class="light_white">Semi-tones</li>
+          <li class="normal_color">Root</li>
+          <li class="normal_color">Scale Steps</li>
+          <li class="normal_color">Scale Notes</li>
+          <li class="normal_color">Semi-tones</li>
         </ul>
         <div class="scale_notes_and_semitones_block">
           <ul>
-            <li class="root_note transitional selected_text" title="Select root note">C</li>
-            <li class="root_note transitional" title="Select root note">C#</li>
-            <li class="root_note transitional" title="Select root note">D</li>
-            <li class="root_note transitional" title="Select root note">D#</li>
-            <li class="root_note transitional" title="Select root note">E</li>
-            <li class="root_note transitional" title="Select root note">F</li>
-            <li class="root_note transitional" title="Select root note">F#</li>
-            <li class="root_note transitional" title="Select root note">G</li>
-            <li class="root_note transitional" title="Select root note">G#</li>
-            <li class="root_note transitional" title="Select root note">A</li>
-            <li class="root_note transitional" title="Select root note">A#</li>
-            <li class="root_note transitional" title="Select root note">B</li>
+            <li class="root_note element_color hover_element_color transitional selected_text" title="Select root note">C</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">C#</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">D</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">D#</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">E</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">F</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">F#</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">G</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">G#</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">A</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">A#</li>
+            <li class="root_note element_color hover_element_color transitional" title="Select root note">B</li>
             <div class="clear"></div>
           </ul>
         </div>

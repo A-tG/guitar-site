@@ -31,7 +31,6 @@
 .fret_ver_hover
 {
     position: absolute;
-    border-color: #0bb;
     border-style: solid;
     border-width: 0;
     z-index: 3;
@@ -64,7 +63,6 @@
 }
 .fret_ver_inner
 {
-    background: #000;
     position: relative;
     width: 100%;
 }
@@ -224,7 +222,6 @@
 }
 .note
 {
-    color: #222;
     cursor: default;
     position: absolute;
     left: 50%;
@@ -261,8 +258,6 @@
 .transparent_note
 {
     opacity: 0.4;
-    background: #ccc;
-    color: #000;
 }
 .fret_marker
 {

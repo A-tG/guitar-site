@@ -14,6 +14,7 @@
     display: inline-block;
     font-family: Tahoma, Arial, Verdana;
     font-size: 14px;
+    font-weight: bold;
     width: 20px;
     vertical-align: middle;
 }
@@ -21,18 +22,6 @@
 {
     box-sizing: border-box;
     vertical-align: middle;
-}
-.delete_string
-{
-    color: #fc0;
-}
-.add_string
-{
-    color: #fc0;
-}
-.string_btn:hover
-{
-    color: #fff;
 }
 .string_tune
 {
@@ -43,12 +32,10 @@
     margin: 0 auto;
     display: inline-block;
     vertical-align: middle;
-    color: #fc0;
     font-family: Tahoma, Arial, Verdana;
     font-size: 14px;
     text-decoration: none;
     text-transform: capitalize;
-    background: #555;
     line-height: 18px;
     height: 18px;
 }

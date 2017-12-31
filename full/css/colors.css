@@ -1,20 +1,232 @@
-.light_white
+.night .normal_bg1
+{
+    background: #222;
+}
+.day .normal_bg1
+{
+    background: #ddd;
+}
+.night .normal_bg2
+{
+    background: #333;
+}
+.day .normal_bg2
+{
+    background: #ccc;
+}
+.night .normal_bg3
+{
+    background: #555;
+}
+.day .normal_bg3
+{
+    background: #bbb;
+}
+.night .normal_color
 {
     color: #eee;
 }
-.light_white_bg
+.day .normal_color
+{
+    color: #111;
+}
+
+.night .negative_bg
 {
     background: #eee;
 }
-.light_white_stroke
+.day .negative_bg
+{
+    background: #111;
+}
+
+.night .negative_color
+{
+    color: #111;
+}
+.day .negative_color
+{
+    color: #eee;
+}
+
+.night .weak_color
+{
+    color: #999;
+}
+.day .weak_color
+{
+    color: #555;
+}
+
+.night .element_color
+{
+    color: #fc0;
+}
+.day .element_color
+{
+    color: #0078d7;
+}
+.night .element_color.selected_text
+{
+    color: #fff;
+}
+.day .element_color.selected_text
+{
+    color: #ee7600;
+}
+.night .element_bg, .night .metronome_pointer_other .metronome_pointer
+{
+    background: #fc0;
+}
+.day .element_bg, .day .metronome_pointer_other .metronome_pointer
+{
+    background: #0078d7;
+}
+.night .highlighted_element_color
+{
+    color: #0bb;
+}
+.day .highlighted_element_color
+{
+    color: #fc0;
+}
+.night .highlighted_element_bg, .night .metronome_pointer_first .metronome_pointer
+{
+    background: #0bb;
+}
+.day .highlighted_element_bg, .day .metronome_pointer_first .metronome_pointer
+{
+    background: #fc0;
+}
+.night .left_arrow_element_color
+{
+    border-right-color: #fc0;
+}
+.day .left_arrow_element_color
+{
+    border-right-color: #0078d7;
+}
+.night .right_arrow_element_color
+{
+    border-left-color: #fc0;
+}
+.day .right_arrow_element_color
+{
+    border-left-color: #0078d7;
+}
+
+.night .hover_element_color:hover
+{
+    color: #fff
+}
+.day .hover_element_color:hover
+{
+    color: #ee7600;
+}
+.night .hover_element_bg:hover
+{
+    background: #fff
+}
+.day .hover_element_bg:hover
+{
+    background: #ee7600;
+}
+.night .hover_parent:hover .hover_child_color
+{
+    background: #fff
+}
+.day .hover_parent:hover .hover_child_color
+{
+    background: #ee7600;
+}
+.night .left_arrow_element_hover:hover
+{
+    border-right-color: #fff;
+}
+.day .left_arrow_element_hover:hover
+{
+    border-right-color: #ee7600;
+}
+.night .right_arrow_element_hover:hover
+{
+    border-left-color: #fff;
+}
+.day .right_arrow_element_hover:hover
+{
+    border-left-color: #ee7600;
+}
+
+.night .fretboard_bg
+{
+    background: #111;
+}
+.day .fretboard_bg
+{
+    background: #ebbb70;
+}
+.night .note
+{
+    color: #222;
+    background: #fc0;
+}
+.day .note
+{
+    color: #ddd;
+    background: #0078d7;
+}
+.night .normal_note
+{
+    background: #fc0;
+}
+.day .normal_note
+{
+    background: #0078d7;
+}
+.night .highlighted_note
+{
+    background: #0bb;
+}
+.day .highlighted_note
+{
+    background: #ee7600;
+}
+.night .transparent_note
+{
+    background: #eee;
+    color: #111;
+}
+.day .transparent_note
+{
+    background: #111;
+    color: #eee;
+}
+.night .fret_ver_hover
+{
+    border-color: #0bb;
+}
+.day .fret_ver_hover
+{
+    border-color: #ee7600;
+}
+
+.night .svg_normal_stroke
 {
     stroke: #eee;
 }
-.light_white_fill
+.day .svg_normal_stroke
+{
+    stroke: #111;
+}
+.night .svg_normal_fill
 {
     fill: #eee;
 }
-.no_fill
+.day .svg_normal_fill
+{
+    fill: #111;
+}
+.svg_no_fill
 {
     fill: none;
 }
+

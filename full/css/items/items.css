@@ -8,8 +8,14 @@
     width: 90%;
     min-width: 1250px;
     max-width: 1780px;
-    background: #222;
+}
+.night .item_block
+{
     box-shadow: 0 0 5px #000;
+}
+.day .item_block
+{
+    box-shadow: 0 0 5px #aaa;
 }
 .item_content
 {
@@ -19,12 +25,10 @@
 .item_head_select
 {
     float: left;
-    color: #fc0;
     font-family: Tahoma, Arial, Verdana;
     font-size: 18px;
     text-decoration: none;
     text-transform: capitalize;
-    background: #555;
     height: 25px;
 }
 .item_options_block
@@ -45,11 +49,6 @@
     position: absolute;
     top: 0;
     right: 0;
-    color: #fc0;
-}
-.close_btn:hover
-{
-    color: #fff;
 }
 .set_default_btn
 {
@@ -58,13 +57,12 @@
     right: 0px;
     margin: auto 0 0 auto;
     box-sizing: border-box;
-    color: #fc0;
 }
-.set_default_btn:hover
+.add_new_item
 {
-    color: #fff;
+    margin: 70px auto;
+    width: 82px;
 }
-
 @media screen and (max-width: 1250px)
 {
     .item_block

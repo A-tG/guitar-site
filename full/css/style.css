@@ -25,14 +25,12 @@ select
 }
 .bg_block
 {
-    background: #333;
     min-height: 100vh;
     height: 100vh;
 }
 .content_block
 {
     text-align: center;
-    background: #333;
     margin: 0 auto;
     min-height: 100vh;
     min-width: 1250px;
@@ -42,23 +40,12 @@ select
     box-sizing: border-box;
 }
 
-.add_new_item
-{
-    margin: 70px auto;
-    color: #fc0;
-    width: 82px;
-}
-.add_new_item:hover
-{
-    color: #fff;
-}
 .noscipt_warning
 {
     width: 100%;
     position: absolute;
     bottom: 50%;
     text-align: center;
-    color: #fff;
     font-family: Tahoma, Arial, Verdana;
     font-size: 25px;
     font-weight: bold;

@@ -2,7 +2,6 @@
 {
     margin: 0 4px;
     position: relative;
-    background: #555;
     width: 40px;
     height: 18px;
     border-radius: 2px;
@@ -18,12 +17,7 @@
     top: 0;
     width: 18px;
     height: 18px;
-    background: #fc0;
     border-radius: 2px;
-}
-.toggle_checkbox:hover .toggle_checkbox_slider
-{
-    background: #fff;
 }
 
 .left_arrow
@@ -32,7 +26,7 @@
     display: inline-block;
     vertical-align: middle;
     border-top: 6px solid transparent;
-    border-right: 12px solid #fc0;
+    border-right: 12px solid;
     border-bottom: 6px solid transparent;
 }
 .right_arrow
@@ -41,18 +35,9 @@
     display: inline-block;
     vertical-align: middle;
     border-top: 6px solid transparent;
-    border-left: 12px solid #fc0;
+    border-left: 12px solid;
     border-bottom: 6px solid transparent;
 }
-.left_arrow:hover
-{
-    border-right-color: #fff;
-}
-.right_arrow:hover
-{
-    border-left-color: #fff;
-}
-
 .selected_text
 {
     color: #fff;
@@ -74,14 +59,14 @@
     {
         margin-right: 6px;
         border-top: 9px solid transparent;
-        border-right: 18px solid #fc0;
+        border-right: 18px solid;
         border-bottom: 9px solid transparent;
     }
     .right_arrow
     {
         margin-left: 6px;
         border-top: 9px solid transparent;
-        border-left: 18px solid #fc0;
+        border-left: 18px solid;
         border-bottom: 9px solid transparent;
     }
 }
