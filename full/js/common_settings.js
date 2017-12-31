@@ -100,6 +100,9 @@ var commonSettings = {
     {
         this.$settingsBlock.toggleClass(COMMON_SETTINGS_BLOCK_HIDE_CLASS, false);
         this.$settingsBlock.hide();
+        this.$openBtn.click({that: this}, this.onOpenBtnClick);
+        this.$closeBtn.click({that: this}, this.onCloseBtnClick);
+        this.colorSchemeSwitcher.init();
         if (this.colorSchemeSwitcher.schemeClass == "day")
         {
             this.$switchToDayColorBtn.hide();
@@ -108,9 +111,6 @@ var commonSettings = {
         {
             this.$switchToNightColorBtn.hide();
         }
-        this.$openBtn.click({that: this}, this.onOpenBtnClick);
-        this.$closeBtn.click({that: this}, this.onCloseBtnClick);
-        this.colorSchemeSwitcher.init();
         this.$switchToDayColorBtn.click({that: this}, this.onSwitchToDayColorBtn);
         this.$switchToNightColorBtn.click({that: this}, this.onSwitchToNightColorBtn);
     }
