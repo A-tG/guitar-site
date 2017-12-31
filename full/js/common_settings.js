@@ -5,10 +5,10 @@ function ColorSchemeSwitcher()
 
     function resetScheme()
     {
-        COLOR_SCHEMES_CLASSES.forEach(function(item) {$blockToSwitchClass.toggleClass(item,false)});
+        COLOR_SCHEMES_CLASSES.forEach(function(item) {$blockToSwitchClass.toggleClass(item, false)});
     }
 
-    function saveToCookies()
+    this.saveToCookies = function()
     {
         Cookies.set("colorScheme", this.schemeClass);
     }
@@ -18,6 +18,7 @@ function ColorSchemeSwitcher()
         var schemeExist = COLOR_SCHEMES_CLASSES.indexOf(name) >= 0;
         if (schemeExist)
         { 
+            this.schemeClass = name;
             resetScheme();
             switch (name)
             {
@@ -32,7 +33,7 @@ function ColorSchemeSwitcher()
                     break;
                 }
             }
-            saveToCookies();
+            this.saveToCookies();
         }
     }
 
