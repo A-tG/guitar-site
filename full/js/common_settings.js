@@ -42,9 +42,9 @@ function ColorSchemeSwitcher()
         if (Cookies.getJSON("colorScheme") !== undefined)
         {
             this.schemeClass = Cookies.getJSON("colorScheme");
-            this.switchScheme(this.schemeClass);
 
         }
+        this.switchScheme(this.schemeClass);
     }
 }
 
