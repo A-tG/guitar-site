@@ -102,6 +102,7 @@ var commonSettings = {
         this.$settingsBlock.hide();
         this.$openBtn.click({that: this}, this.onOpenBtnClick);
         this.$closeBtn.click({that: this}, this.onCloseBtnClick);
+        this.$settingsBlock.parent().on("clickoutside", {that: this}, this.onCloseBtnClick);
         this.colorSchemeSwitcher.init();
         if (this.colorSchemeSwitcher.schemeClass == "day")
         {
