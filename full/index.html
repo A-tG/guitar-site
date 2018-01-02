@@ -55,7 +55,7 @@
                     <span class="option_head_end_val weak_color">100%</span>
                     <span class="metronome_options_text normal_color">Volume</span>
                   </div>
-                  <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
+                  <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1">
                 </li>
                 <li class="tempo_block">
                   <div class="metronome_element">
@@ -64,7 +64,7 @@
                       <span class="option_head_end_val weak_color">320</span>
                       <span class="metronome_options_text normal_color">Tempo</span>
                     </div>
-                    <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
+                    <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1">
                   </div>
                   <div class="tempo_input_block metronome_element">
                     <div id="metronome_tempo_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce tempo"></div>
@@ -118,7 +118,7 @@
                   </ul>
                 </li>
               </ul>
-            <li>
+            </li>
             <li id="common_settings_wrapper">
               <div id="common_settings_btn" class="element_color hover_element_color material-icons md-36 transitional" title="Open settings">&#xE8B8;</div>
               <ul id="settings_block" class="normal_bg1 settings_block_hide">
@@ -138,14 +138,14 @@
     
     <script id="scale_notes_tmpl" type="text/plain">
       <ul class="scale_notes">
-        <li class="scale_note element_color hover_element_color" title="Toogle note">
+        <li class="scale_note element_color hover_element_color" title="Toggle note">
           <div class="scale_step normal_color">1</div>
           <span class="scale_note_text transitional">{{=it.root}}</span>
           <div class="separator_ver_small"></div>
         </li>
         {{~it.semiTones :semiTone:i}}
           <li class="semitone_block normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
-          <li class="scale_note element_color hover_element_color" title="Toogle note">
+          <li class="scale_note element_color hover_element_color" title="Toggle note">
             <div class="scale_step normal_color">{{=i + 2}}</div>
             <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small"></div>
