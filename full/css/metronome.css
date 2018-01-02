@@ -16,7 +16,7 @@
     display: inline-block;
     position: relative;
 }
-.metronome_block li
+.metronome_element
 {
     display: inline-block;
     vertical-align: middle;
@@ -84,7 +84,7 @@
 }
 .tempo_input_block
 {
-    margin: 22px 0 0 10px;
+    margin: 17px 0 0 10px;
 }
 .tempo_input
 {

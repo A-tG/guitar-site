@@ -22,109 +22,111 @@
       <div class="content_block normal_bg2">
         <div class="head_block normal_bg1">
           <ul class="head_block_content">
-            <div class="head_items_block">
-              <a class="logo head_item normal_color" href="" title="Artistic Guitar">Artistic Guitar</a>
-              <a class="head_item normal_color" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a>
-            </div>
-            <ul class="metronome_block">
-              <li id="metronome_disabled_block" class="metronome_disabled_block negative_bg negative_color">Update your browser to use metronome</li>
-              <li class="metronome_icon">
-                <svg class="svg_normal_stroke svg_no_fill metronome_svg_medium_stoke" height="50" width="30">
-                  <polygon points="8,5 22,5 28,45 2,45" />
-                  <path class="metronome_svg_dasharay" d="M15 10 L15 28" />
-                  <path d="M15 34 L27 10" />
-                  <polygon class="svg_normal_fill metronome_svg_light_stoke" points="24.5,12.5 28.5,12.5 27.5,10.5 25.5,10.5" transform=rotate(210,26.5,11.5) />
-                </svg>
-              </li>
-              <li id="metronome_beat_vis_block" class="metronome_beat_vis_block normal_bg3">
-                <div class="metronome_pointer_wrap">
-                  <div class="metronome_pointer_block" id="metronome_pointer_block">
-                    <div class="metronome_pointer" id="metronome_pointer"></div>
+            <li>
+              <ul class="head_links_block">
+                <li><a class="head_item normal_color" href="" title="Artistic Guitar">Artistic Guitar</a></li>
+                <li><a class="head_item normal_color" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" title="Donate">Donate</a></li>
+              </ul>
+            </li>
+            <li>
+              <ul class="metronome_block">
+                <li id="metronome_disabled_block" class="metronome_disabled_block negative_bg negative_color">Update your browser to use metronome</li>
+                <li class="metronome_icon">
+                  <svg class="svg_normal_stroke svg_no_fill metronome_svg_medium_stoke" height="50" width="30">
+                    <polygon points="8,5 22,5 28,45 2,45" />
+                    <path class="metronome_svg_dasharay" d="M15 10 L15 28" />
+                    <path d="M15 34 L27 10" />
+                    <polygon class="svg_normal_fill metronome_svg_light_stoke" points="24.5,12.5 28.5,12.5 27.5,10.5 25.5,10.5" transform="rotate(210,26.5,11.5)" />
+                  </svg>
+                </li>
+                <li id="metronome_beat_vis_block" class="metronome_beat_vis_block normal_bg3">
+                  <div class="metronome_pointer_wrap">
+                    <div class="metronome_pointer_block" id="metronome_pointer_block">
+                      <div class="metronome_pointer" id="metronome_pointer"></div>
+                    </div>
                   </div>
-                </div>
-                <div id="metronome_beat_number_vis" class="metronome_beat_number_vis normal_color"></div>
-              </li>
-              <li id="metronome_play_btn" class="play_btn element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
-              <li id="metronome_stop_btn" class="stop_btn element_color hover_element_color material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
-              <li class="volume_block">
-                <div class="metronome_option_head">
-                  <span class="option_head_start_val weak_color">0%</span>
-                  <span class="option_head_end_val weak_color">100%</span>
-                  <span class="metronome_options_text normal_color">Volume</span>
-                </div>
-                <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
-              </li>
-              <li class="tempo_block">
-                <ul>
-                  <li>
+                  <div id="metronome_beat_number_vis" class="metronome_beat_number_vis normal_color"></div>
+                </li>
+                <li id="metronome_play_btn" class="play_btn element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
+                <li id="metronome_stop_btn" class="stop_btn element_color hover_element_color material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
+                <li class="volume_block">
+                  <div class="metronome_option_head">
+                    <span class="option_head_start_val weak_color">0%</span>
+                    <span class="option_head_end_val weak_color">100%</span>
+                    <span class="metronome_options_text normal_color">Volume</span>
+                  </div>
+                  <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1"/>
+                </li>
+                <li class="tempo_block">
+                  <div class="metronome_element">
                     <div class="metronome_option_head">
                       <span class="option_head_start_val weak_color">40</span>
                       <span class="option_head_end_val weak_color">320</span>
                       <span class="metronome_options_text normal_color">Tempo</span>
                     </div>
                     <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1"/>
-                  </li>
-                  <li class="tempo_input_block">
+                  </div>
+                  <div class="tempo_input_block metronome_element">
                     <div id="metronome_tempo_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce tempo"></div>
                     <input id="metronome_tempo_input" class="tempo_input element_color normal_bg3" type="text" list="tempos" size="4" maxlength="7">
                     <div id="metronome_tempo_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Increase tempo"></div>
                     <datalist id="tempos">
                     </datalist>
-                  </li>
-                </ul>
-              </li>
-              <li class="signature_block">
-                <ul>
-                  <li>
-                    <span class="metronome_options_text normal_color">Signature</span>
-                  </li>
-                  <li>
-                    <div class="signature_option_block">
-                      <div id="metronome_beats_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce beats number"></div>
-                      <select id="metronome_beats_select" class="signature_select element_color normal_bg3">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4" selected>4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                      </select>
-                      <div id="metronome_beats_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Increase beats number"></div>
-                    </div>
-                    <div class="signature_option_block">
-                      <div id="metronome_beat_val_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Increase beat(note) value"></div>
-                      <select id="metronome_beat_val_select" class="signature_select element_color normal_bg3">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="4" selected>4</option>
-                        <option value="8">8</option>
-                        <option value="16">16</option>
-                        <option value="32">32</option>
-                      </select>
-                      <div id="metronome_beat_val_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Reduce beat(note) value"></div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <div id="common_settings_wrapper">
+                  </div>
+                </li>
+                <li class="signature_block">
+                  <ul>
+                    <li>
+                      <span class="metronome_options_text normal_color">Signature</span>
+                    </li>
+                    <li>
+                      <div class="signature_option_block">
+                        <div id="metronome_beats_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce beats number"></div>
+                        <select id="metronome_beats_select" class="signature_select element_color normal_bg3">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4" selected>4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                        </select>
+                        <div id="metronome_beats_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Increase beats number"></div>
+                      </div>
+                      <div class="signature_option_block">
+                        <div id="metronome_beat_val_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Increase beat(note) value"></div>
+                        <select id="metronome_beat_val_select" class="signature_select element_color normal_bg3">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="4" selected>4</option>
+                          <option value="8">8</option>
+                          <option value="16">16</option>
+                          <option value="32">32</option>
+                        </select>
+                        <div id="metronome_beat_val_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Reduce beat(note) value"></div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            <li>
+            <li id="common_settings_wrapper">
               <div id="common_settings_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Open settings">&#xE8B8;</div>
-              <div id="settings_block" class="normal_bg1 settings_block_hide">
-                <div id="settings_close_btn" class="element_color hover_element_color material-icons md-36 transitional">&#xE5CE;</div>
-                <div id="color_scheme_switch_night_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Switch to night color palette">&#xE3A7;</div>
-                <div id="color_scheme_switch_day_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Switch to day color palette">&#xE3AA;</div>
-              </div>
-            </div>
+              <ul id="settings_block" class="normal_bg1 settings_block_hide">
+                <li id="settings_close_btn" class="element_color hover_element_color material-icons md-36 transitional">&#xE5CE;</li>
+                <li id="color_scheme_switch_night_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Switch to night color palette">&#xE3A7;</li>
+                <li id="color_scheme_switch_day_btn" class="element_color hover_element_color material-icons md-48 transitional" title="Switch to day color palette">&#xE3AA;</li>
+              </ul>
+            </li>
           </ul>
         </div>
         <div id="add_new_item_btn" class="add_new_item" title="Add item">
