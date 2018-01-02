@@ -19,7 +19,7 @@ ItemBase.prototype.onItemTypeChange = function(event)
 ItemBase.prototype.onCloseButton = function(event)
 {
     var that = event.data.that;
-    that.$itemBlock.hide(200, that.deleteItem);
+    that.$itemBlock.slideUp(200, that.deleteItem);
 }
 
 ItemBase.prototype.onSetDefaultButton = function(event)
@@ -30,8 +30,8 @@ ItemBase.prototype.onSetDefaultButton = function(event)
 
 ItemBase.prototype.initAnimation = function()
 {
-    this.$itemBlock.hide(0);
-    this.$itemBlock.show(200);
+    this.$itemBlock.hide();
+    this.$itemBlock.slideDown(200);
 }
 
 ItemBase.prototype.init = function(id, JSONstring)

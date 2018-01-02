@@ -139,14 +139,14 @@ ScalesItem.prototype.onTriadsCheckboxClick = function(event)
     if (that.state.isTriadMode)
     {
         that.state.isTriadMode = false;
-        that.$triadsCheckbox.hide(0);
-        that.$triadsCheckboxEmpty.show(0);
+        that.$triadsCheckbox.hide();
+        that.$triadsCheckboxEmpty.show();
     }
     else
     {
         that.state.isTriadMode = true;
-        that.$triadsCheckboxEmpty.hide(0);
-        that.$triadsCheckbox.show(0);
+        that.$triadsCheckboxEmpty.hide();
+        that.$triadsCheckbox.show();
     }
     that.updateScaleNotesBlock();
     that.putNotesOnAllStrings();
@@ -159,11 +159,11 @@ ScalesItem.prototype.initTriadsCheckbox = function()
     this.$triadsCheckboxEmpty = $('.' + TRIADS_CHECKBOX_EMPTY_CLASS, this.$itemBlock);
     if (this.state.isTriadMode)
     {
-        this.$triadsCheckboxEmpty.hide(0);
+        this.$triadsCheckboxEmpty.hide();
     }
     else
     {
-        this.$triadsCheckbox.hide(0);
+        this.$triadsCheckbox.hide();
     }
     this.$triadsCheckbox.click({that: this}, this.onTriadsCheckboxClick);
     this.$triadsCheckboxEmpty.click({that: this}, this.onTriadsCheckboxClick);
