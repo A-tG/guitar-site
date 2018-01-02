@@ -1,7 +1,11 @@
 function ColorSchemeSwitcher()
 {
     var $blockToSwitchClass = $('.' + BG_BLOCK_CLASS);
-    this.schemeClass = "night";
+    var buttons = {
+        "day": $('#' + COMMON_SETTINGS_BLOCK_DAY_COLOR_BTN_ID),
+        "night": $('#' + COMMON_SETTINGS_BLOCK_NIGHT_COLOR_BTN_ID)
+    };
+    var currentScheme = "night";
 
     function resetScheme()
     {
@@ -10,41 +14,60 @@ function ColorSchemeSwitcher()
 
     this.saveToCookies = function()
     {
-        Cookies.set("colorScheme", this.schemeClass);
+        Cookies.set("colorScheme", currentScheme);
     }
 
-    this.switchScheme = function(name)
+    this.switchScheme = function(scheme)
     {
-        var schemeExist = COLOR_SCHEMES_CLASSES.indexOf(name) >= 0;
-        if (schemeExist)
+        var isSchemeExist = COLOR_SCHEMES_CLASSES.indexOf(scheme) >= 0;
+        if (isSchemeExist)
         { 
-            this.schemeClass = name;
+            currentScheme = scheme;
             resetScheme();
-            switch (name)
-            {
-                case "day":
-                {
-                    $blockToSwitchClass.toggleClass("day", true);
-                    break;
-                }
-                case "night":
-                {
-                    $blockToSwitchClass.toggleClass("night", true);
-                    break;
-                }
-            }
+            $blockToSwitchClass.toggleClass(currentScheme, true);
             this.saveToCookies();
         }
+    }
+
+    this.onSwitchToDayColorBtn = function(event)
+    {
+        var that = event.data.that;
+        $(this).hide();
+        buttons["night"].show();
+        that.switchScheme("day");
+    }
+
+    this.onSwitchToNightColorBtn = function(event)
+    {
+        var that = event.data.that;
+        $(this).hide();
+        buttons["day"].show();
+        that.switchScheme("night");
+    }
+
+    this.initButtons = function()
+    {
+        if (currentScheme == "day")
+        {
+            buttons["day"].hide();
+        }
+        else
+        {
+            buttons["night"].hide();
+        }
+
+        buttons["day"].click({that: this}, this.onSwitchToDayColorBtn);
+        buttons["night"].click({that: this}, this.onSwitchToNightColorBtn);
     }
 
     this.init = function()
     {
         if (Cookies.getJSON("colorScheme") !== undefined)
         {
-            this.schemeClass = Cookies.getJSON("colorScheme");
-
+            currentScheme = Cookies.getJSON("colorScheme");
         }
-        this.switchScheme(this.schemeClass);
+        this.switchScheme(currentScheme);
+        this.initButtons();
     }
 }
 
@@ -52,48 +75,33 @@ var commonSettings = {
     $openBtn: $('#' + COMMON_SETTINGS_BTN_ID),
     $closeBtn: $('#' + COMMON_SETTINGS_BLOCK_CLOSE_BTN_ID),
     $settingsBlock: $('#' + COMMON_SETTINGS_BLOCK_ID),
-    $switchToDayColorBtn: $('#' + COMMON_SETTINGS_BLOCK_DAY_COLOR_BTN_ID),
-    $switchToNightColorBtn: $('#' + COMMON_SETTINGS_BLOCK_NIGHT_COLOR_BTN_ID),
     colorSchemeSwitcher: new ColorSchemeSwitcher(),
+    isShown: false,
 
     showMenuToggle: function(isShow)
     {
         if (isShow)
         {
-            this.$settingsBlock.show(100, "linear");
+            this.$settingsBlock.slideDown(100);
         } 
         else
         {
-            this.$settingsBlock.hide(100, "linear");
+            this.$settingsBlock.slideUp(100);
         }
     },
 
     onOpenBtnClick: function(event)
     {
         var that = event.data.that;
-        that.showMenuToggle(true);
+        that.isShown = !that.isShown;
+        that.showMenuToggle(that.isShown);
     },
 
     onCloseBtnClick: function(event)
     {
         var that = event.data.that;
-        that.showMenuToggle(false);
-    },
-
-    onSwitchToDayColorBtn: function(event)
-    {
-        var that = event.data.that;
-        that.colorSchemeSwitcher.switchScheme("day");
-        $(this).hide();
-        that.$switchToNightColorBtn.show();
-    },
-
-    onSwitchToNightColorBtn: function(event)
-    {
-        var that = event.data.that;
-        that.colorSchemeSwitcher.switchScheme("night");
-        $(this).hide();
-        that.$switchToDayColorBtn.show();
+        that.isShown = false;
+        that.showMenuToggle(that.isShown);
     },
 
     init: function()
@@ -104,15 +112,5 @@ var commonSettings = {
         this.$closeBtn.click({that: this}, this.onCloseBtnClick);
         this.$settingsBlock.parent().on("clickoutside", {that: this}, this.onCloseBtnClick);
         this.colorSchemeSwitcher.init();
-        if (this.colorSchemeSwitcher.schemeClass == "day")
-        {
-            this.$switchToDayColorBtn.hide();
-        }
-        else
-        {
-            this.$switchToNightColorBtn.hide();
-        }
-        this.$switchToDayColorBtn.click({that: this}, this.onSwitchToDayColorBtn);
-        this.$switchToNightColorBtn.click({that: this}, this.onSwitchToNightColorBtn);
     }
 }
