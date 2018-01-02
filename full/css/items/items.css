@@ -11,9 +11,11 @@
 }
 .night .item_block
 {
+    box-shadow: 0 0 5px #222;
 }
 .day .item_block
 {
+    box-shadow: 0 0 5px #bbb;
 }
 .item_content
 {
