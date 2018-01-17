@@ -7,6 +7,8 @@
 * High-precision click 
 * Logarithmic volume control
 * Tempo range from 40 to 320
+* Notes per measure from 1 to 16
+* Duration from whole note to 32nd
 ### Scales calculator
 * Up to 12 strings
 * Ready tunings presets or custom for each string
