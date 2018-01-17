@@ -1,12 +1,12 @@
-# Website for guitar practicing
-* Everything in one tab
-* Minimum response time - website works completly on the client side
-* Possibility to share your link with others
+# [Website for guitar practicing](https://a-tg.github.io)
+* All tools in one browser tab
+* Minimal response time - website works completly on the client side
+* Share your link with others
 ## What already works:
 ### Metronome
-* High click precise
+* High precise
 * Logarithmic volume control
-* Tempo range is 40 - 320
+* Tempo range from 40 to 320
 * 1 - 16 note per measure
 * 1 - 1/32 note duration
 ### Scales calculator
@@ -18,7 +18,8 @@
 ## Planned:
  * Chords
  * Chord finder
- * Chord progression
+ * Chord progressions
+ * And other useful tools
 
- ## Support the development
- [![donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_donate_cc_147x47.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X7SSCWLUS5DS2&lc=GB&item_name=Atg%20guitar%20site%20development&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+ ## Support developer
+ [![Paypal Logo](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)](https://www.paypal.me/atgDeveloperMusician/5)
