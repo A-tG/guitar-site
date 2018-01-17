@@ -4,11 +4,9 @@
 * Share your link with others
 ## What already works:
 ### Metronome
-* High precise
+* High-precision click 
 * Logarithmic volume control
 * Tempo range from 40 to 320
-* 1 - 16 note per measure
-* 1 - 1/32 note duration
 ### Scales calculator
 * Up to 12 strings
 * Ready tunings presets or custom for each string
