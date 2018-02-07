@@ -100,7 +100,7 @@ Neck.prototype.onHalfStepChange = function(event)
 {
     var that = event.data.that;
     var oldValue = that.state.halfStep;
-    var newValue = $(that).val().replace(/[^-0-9]/gim, '');
+    var newValue = $(this).val().replace(/[^-0-9]/gim, '');
     newValue = +newValue;
     that.state.halfStep = newValue;
     var valuesDiff = newValue - oldValue;
