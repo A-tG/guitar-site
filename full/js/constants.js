@@ -31,9 +31,9 @@ var DEFAULT_STRING_TUNES = ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#",
 var DEFAULT_SCALE_NOTES = ["C", "D", "E", "F", "G", "A", "B"];
 var SCALES = {
     "major": [2, 2, 1, 2, 2, 2, 1],
-    "aeolian": [2, 2, 1, 2, 2, 2, 1],
+    "aeolian": [2, 1, 2, 2, 1, 2, 2],
     "minor": [2, 1, 2, 2, 1, 2, 2],
-    "ionian": [2, 1, 2, 2, 1, 2, 2],
+    "ionian": [2, 2, 1, 2, 2, 2, 1],
     "harmonic_min": [2, 1, 2, 2, 1, 3, 1],
     "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     "dorian": [2, 1, 2, 2, 2, 1, 2],
