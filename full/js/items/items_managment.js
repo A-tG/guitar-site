@@ -35,12 +35,12 @@ var menuItems = {
             var id = ITEMS_ID_BASE + i;
             if (this.itemsSerializedStates[id] !== undefined)
             {
-                var encodedParameter = btoa(this.itemsSerializedStates[id].getJSON());
-                urlString += 'i' + i + '=' + encodedParameter;
-                if (i < this.itemsNumber)
+                if (i != 0)
                 {
                     urlString += '&';
                 }
+                var encodedParameter = this.itemsSerializedStates[id].getJSON();
+                urlString += 'i' + i + '=' + this.encodeQueryParamString(encodedParameter);
             }
         }
         history.replaceState({}, "", urlString);
@@ -99,20 +99,38 @@ var menuItems = {
                 if (index != -1)
                 {
                     var parameter = parameters[i].slice(index + 1);
-                    parameter = decodeURI(parameter);
-                    try
-                    {
-                        parameter = atob(parameter);
-                        itemsSerializedStates.push(new ItemSerializedState(parameter));
-                    }
-                    catch (err)
-                    {
-                        console.log(PARAMS_ATOB_ERROR_MSG + '\n' + err);
-                    }
+                    parameter = this.decodeQueryParamString(parameter);
+                    itemsSerializedStates.push(new ItemSerializedState(parameter));
                 }
             }
         }
         return itemsSerializedStates;
+    },
+
+    encodeQueryParamString: function(str)
+    {
+        var result = "";
+        var firstCh = str[0];
+        var lastCh = str[str.length - 1];
+        if ((firstCh == '[') && (lastCh == ']'))
+        {
+            // remove quotes
+            result = str.replace(/["']/g, "");
+        }
+        return result;
+    },
+
+    decodeQueryParamString: function(str)
+    {
+        var result = "";
+        var firstCh = str[0];
+        var lastCh = str[str.length - 1];
+        if ((firstCh == '[') && (lastCh == ']'))
+        {
+            // add quotes
+            result = str.replace(/[^\d,\[\]"'-]\w*#*/g, function(match) {return '"' + match + '"'});
+        }
+        return result;
     },
 
     onNewItemButton: function(event)

@@ -1,7 +1,8 @@
 var SCALE_SEMITONES_NUMBER = 12;
 var MAX_HALF_STEP = 11;
 var MIN_HALF_STEP = -11;
-var MAX_STRINGS_NUMBER = 12;
+var MAX_STRINGS_STYLE = 12;
+var MAX_STRINGS_NUMBER = 18;
 var MIN_STRINGS_NUMBER = 3;
 var MAX_ITEMS_NUMBER = 5;
 var ITEMS_ID_BASE = "menuItem";
@@ -205,7 +206,7 @@ var WRONG_NOTE_MSG = "Wrong note";
 var WRONG_SCALE_NAME_MSG = "Wrong scale name (value)";
 var WRONG_STRING_TUNE_NOTE_MSG = "Wrong string tune note";
 var WRONG_TUNING_NAME = "Wrong tuning name (value)";
-var PARAMS_ATOB_ERROR_MSG = "GET parameter cannot be decoded";
+var QUERY_PARAMS_READ_ERROR_MSG = "GET parameter cannot be decoded";
 
 var METR_DATALIST_OPTION_TMPL = doT.template($("#metronome_datalist_option_tmpl").html());
 var ITEM_BASE_BLOCK_TMPL = doT.template($("#item_base_tmpl").html());

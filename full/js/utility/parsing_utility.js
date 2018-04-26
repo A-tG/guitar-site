@@ -25,38 +25,33 @@ var ParsingUt = {
         return (Number.isInteger(fretNumber)) && (fretNumber >= -1) && (fretNumber <= FRETS_NUMBER);
     },
 
-    semiTonesPatternBoolToInt: function(field, value) 
+    arrToBoolArr: function(item, i, arr)
     {
-        if (ParsingUt.isCorrectStringsNumber(value))
-        {
-            for (var i = 0; i < value.length; i++)
-            {
-                value[i] = value[i] ? 1 : 0;
-            }
-        }    
-        return value;
+        return !!+item;
     },
-    
-    semiTonesPatternIntToBool: function(field, value)
-    { 
-        var isArray = (typeof value === "object") && (Array.isArray(value));
-        if (!isArray)
+
+    boolArrToNumberArr: function(item, i, arr)
+    {
+        return +item;
+    },
+
+    boolArrToNumber: function(arr)
+    {
+        var numberArr = arr.map(ParsingUt.boolArrToNumberArr);
+        return parseInt(numberArr.join(''), 2);
+    },
+
+    numberToBoolArr: function(number, minSize)
+    {
+        var binArr = number.toString(2).split('');
+        if (binArr.length < minSize)
         {
-            return value;
-        }
-        var isEveryElementIntType = value.every(function(arrElement) {return Number.isInteger(arrElement)});
-        if (!isEveryElementIntType)
-        {
-            return value;
-        }
-        var isCorrectLength = (value.length == 12);
-        if (isArray && isEveryElementIntType && isCorrectLength)
-        {
-            for (var i = 0; i < value.length; i++)
+            var lengthDiff = minSize - binArr.length;
+            for (var i = 0; i < lengthDiff; i++)
             {
-                value[i] = value[i] !== 0;
+                binArr.unshift(0);
             }
         }
-        return value;
+        return binArr.map(ParsingUt.arrToBoolArr);
     }
 }

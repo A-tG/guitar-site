@@ -8,7 +8,7 @@ itemsFactory = {
         {  
             try
             {
-                parsedArr = JSON.parse(JSONstring, ParsingUt.semiTonesPatternIntToBool);
+                parsedArr = JSON.parse(JSONstring);
                 type = parsedArr[0];
             } 
             catch (err) {console.log(err)}
@@ -22,7 +22,7 @@ itemsFactory = {
                 item = new ChordsItem(id, JSONstring);
                 break;
             default:
-                item = new ScalesItem(id, JSONstring);
+                item = new ScalesItem(id);
                 console.log(WRONG_ITEM_TYPE_MSG + ' ' + type);
         }
         return item;

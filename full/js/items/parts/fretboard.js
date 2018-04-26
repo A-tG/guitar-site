@@ -126,7 +126,8 @@ Fretboard.prototype.isBoxFit = function(fretNumber, boxSize)
 
 Fretboard.prototype.addString = function(stringNumber)
 {
-    var param = {currentStringNumber: stringNumber + 1}
+    var stringNumberStyle = Math.min(stringNumber + 1, MAX_STRINGS_STYLE);
+    var param = {currentStringNumber: stringNumberStyle};
     var verFrets = this.verFrets;
     var isFretWithMarker = false;
     var isFretWithDoubleMarker = false;

@@ -6,7 +6,7 @@ var Note = {
             return false;
         }
         var isCorrect = false;
-        if (NOTES.indexOf(note.toUpperCase()) >= 0)
+        if (NOTES.indexOf(note) >= 0)
         {
             isCorrect = true;
         }
@@ -14,7 +14,7 @@ var Note = {
         {
             console.log(note + ': ' + WRONG_NOTE_MSG);
         }
-    return isCorrect;
+        return isCorrect;
     },
 
     next: function(note)

@@ -21,7 +21,7 @@ ItemSerializedState.prototype.getItemType = function()
     var type = "";
     try
     {
-        var parsedArr = JSON.parse(this.JSON, ParsingUt.semiTonesPatternIntToBool);
+        var parsedArr = JSON.parse(this.JSON);
         type = parsedArr[0];
     }
     catch (err) {}
@@ -33,74 +33,73 @@ ItemSerializedState.prototype.scalesStateValidate = function()
     var parsedArr = [];
     try
     {
-        parsedArr = JSON.parse(this.JSON, ParsingUt.semiTonesPatternIntToBool);
+        parsedArr = JSON.parse(this.JSON);
     }
     catch (err) {}
-    var isValid = true;
     parsedArr[0] = SCALES_TYPE;
     if (parsedArr.length != 12)
     {
-        isValid = false;
+        parsedArr.slice(0, 11)
     }
     if (!Scale.isCorrect(parsedArr[1]))
     {
-        isValid = false;
         parsedArr[1] = defaults.scales.scale;
     }
     if (!Note.isCorrect(parsedArr[2]))
     {
-        isValid = false;
         parsedArr[2] = defaults.scales.root;
     }
     if (!Tuning.isCorrect(parsedArr[3]))
     {
-        isValid = false;
         parsedArr[3] = defaults.scales.tuning;
     }
     if (!Halfstep.isCorrect(parsedArr[4]))
     {
-        isValid = false;
         parsedArr[4] = defaults.scales.halfStep;
     } 
     if (!ParsingUt.isCorrectStringsNumber(parsedArr[5]))
     {
-        isValid = false;
         parsedArr[5] = defaults.scales.stringsNumber;
     } 
     if (!Tuning.isCorrectNotes(parsedArr[6]))
     {
-        isValid = false;
         parsedArr[6] = defaults.scales.stringsTunes;
     }
-    if (typeof parsedArr[7] !== 'boolean')
+    if (typeof parsedArr[7] !== 'number')
     {
-        isValid = false;
-        parsedArr[7] = defaults.scales.isTriadMode;
+        parsedArr[7] = +defaults.scales.isTriadMode;
     }
-    if (!ParsingUt.isCorrectNotesShowPattern(parsedArr[8]))
+    if (typeof parsedArr[8] == 'number')
     {
-        isValid = false;
-        parsedArr[8] = defaults.scales.normalNotesShowPattern;
+        var parameter = ParsingUt.numberToBoolArr(parsedArr[8], 12);
+        if (!ParsingUt.isCorrectNotesShowPattern(parameter))
+        {
+            parsedArr[8] = ParsingUt.boolArrToNumber(defaults.scales.normalNotesShowPattern);
+        }
+    } else
+    {
+        parsedArr[8] = ParsingUt.boolArrToNumber(defaults.scales.normalNotesShowPattern);
     }
-    if (!ParsingUt.isCorrectNotesShowPattern(parsedArr[9]))
+    if (typeof parsedArr[9] == 'number')
     {
-        isValid = false;
-        parsedArr[9] = defaults.scales.triadsNotesShowPattern;
+        var parameter = ParsingUt.numberToBoolArr(parsedArr[9], 12);
+        if (!ParsingUt.isCorrectNotesShowPattern(parameter))
+        {
+            parsedArr[9] = ParsingUt.boolArrToNumber(defaults.scales.triadsNotesShowPattern);
+        }
+    } else
+    {
+        parsedArr[9] = ParsingUt.boolArrToNumber(defaults.scales.triadsNotesShowPattern);
     }
     if (!ParsingUt.isCorrectBoxFret(parsedArr[10]))
     {
-        isValid = false;
         parsedArr[10] = defaults.scales.boxFirstFret;
     }
-    if (typeof parsedArr[11] !== 'boolean')
+    if (typeof parsedArr[11] !== 'number')
     {
-        isValid = false;
-        parsedArr[11] = defaults.scales.isLH;
+        parsedArr[11] = +defaults.scales.isLH;
     }
-    if (!isValid)
-    {
-        this.JSON = JSON.stringify(parsedArr, ParsingUt.semiTonesPatternBoolToInt);
-    }
+    this.JSON = JSON.stringify(parsedArr);
 }
 
 ItemSerializedState.prototype.validateJSON = function()
@@ -112,7 +111,7 @@ ItemSerializedState.prototype.validateJSON = function()
             this.scalesStateValidate();
             break;
         case CHORDS_TYPE:
-            this.chordsStateValidate();
+            //this.chordsStateValidate();
             break;
         default:
             this.scalesStateValidate();

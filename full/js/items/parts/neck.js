@@ -149,6 +149,11 @@ Neck.prototype.onAddStringButton = function(event)
     {    
         that.fretboard.addString(that.state.stringsNumber);
         var stringTune = Tuning.getStringTune(that.state.stringsTunes, that.state.stringsNumber);
+        if (that.state.stringsNumber == that.state.stringsTunes.length)
+        {
+            stringTune = Tuning.getStringTune(Tuning.getStringsTunes(that.state.tuning), that.state.stringsNumber);
+            that.state.stringsTunes.push(stringTune);
+        }
         that.stringsTunings.addStringTuning(stringTune);
         that.state.stringsNumber++;
         that.$stringsNumberBlock.text('' + that.state.stringsNumber);
