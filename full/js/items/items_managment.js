@@ -39,7 +39,7 @@ var menuItems = {
                 {
                     urlString += '&';
                 }
-                var encodedParameter = this.itemsSerializedStates[id].getJSON();
+                var encodedParameter = this.itemsSerializedStates[id];
                 urlString += 'i' + i + '=' + this.encodeQueryParamString(encodedParameter);
             }
         }
@@ -48,11 +48,7 @@ var menuItems = {
     
     updateItemSerializedData: function(id, data)
     {
-        if (!this.itemsSerializedStates[id])
-        {
-            this.itemsSerializedStates[id] = new ItemSerializedState(data);
-        }
-        this.itemsSerializedStates[id].setJSON(data);
+        this.itemsSerializedStates[id] = data;
     },
 
     createNewItem: function()
@@ -74,7 +70,7 @@ var menuItems = {
         for (var i = 0; (i < itemsSerializedStates.length) && (i < MAX_ITEMS_NUMBER); i++)
         {
             var id = this.getIDforNewItem();
-            this.items[id] = new ItemBase(id, itemsSerializedStates[i].getJSON());
+            this.items[id] = new ItemBase(id, itemsSerializedStates[i]);
             this.itemsNumber++;
         }
         if (this.itemsNumber >= MAX_ITEMS_NUMBER)
@@ -88,7 +84,7 @@ var menuItems = {
         var url = window.location.href;
         var index = url.indexOf('?');
         var parameters = [];
-        var itemsSerializedStates = [];
+        var serializedStates = [];
         if (index != -1)
         {
             var parametersStr = url.slice(index + 1);
@@ -100,11 +96,11 @@ var menuItems = {
                 {
                     var parameter = parameters[i].slice(index + 1);
                     parameter = this.decodeQueryParamString(parameter);
-                    itemsSerializedStates.push(new ItemSerializedState(parameter));
+                    serializedStates.push(parameter);
                 }
             }
         }
-        return itemsSerializedStates;
+        return serializedStates;
     },
 
     encodeQueryParamString: function(str)
@@ -114,8 +110,7 @@ var menuItems = {
         var lastCh = str[str.length - 1];
         if ((firstCh == '[') && (lastCh == ']'))
         {
-            // remove quotes
-            result = str.replace(/["']/g, "");
+            result = str.replace(/["']/g, ""); // remove quotes
         }
         return result;
     },
@@ -143,14 +138,14 @@ var menuItems = {
     {
         this.$addNewItemBtn = $('#' + ADD_NEW_ITEM_BTN_ID);
         this.$addNewItemBtn.click({that: this}, this.onNewItemButton);
-        var itemsSerializedStates = this.readItemsQueryParams();
-        if (itemsSerializedStates.length == 0)
+        var serializedStates = this.readItemsQueryParams();
+        if (serializedStates.length == 0)
         {
             this.createNewItem();
         }
         else
         {
-            this.createItemsFromQueryParams(itemsSerializedStates);
+            this.createItemsFromQueryParams(serializedStates);
         }
     }
 }

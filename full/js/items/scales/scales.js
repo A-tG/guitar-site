@@ -18,28 +18,30 @@ ScalesItem.prototype.selectCurrentStringsTunes = function()
 
 ScalesItem.prototype.selectCurrentScale = function()
 {
-    $('.' + SCALE_SELECT_CLASS + " [value='" + this.state.scale + "']", this.$itemBlock).
+    $('.' + SCALE_SELECT_CLASS + " [value='" + this.state.scale.getName() + "']", this.$itemBlock).
         prop("selected", true);
 }
 
 ScalesItem.prototype.updateScaleNotesBlock = function()
 {
     $('.' + SCALE_NOTES_CLASS, this.$itemBlock).remove();
-    var notes = this.state.scaleNotes.slice();
-    notes.push(this.state.root);
+    var notes = this.state.scale.getNotes();
+    var rootNote = this.state.scale.getRoot();
+    notes.push(rootNote);
+    notes = notes.map(function (note) {return note.getName()});
     var param = {
-        root: this.state.root, 
-        semiTones: this.state.semiTones, 
+        root: notes[0], 
+        semiTones: this.state.scale.getSemiTones(), 
         notes: notes
     }
     $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).append(SCALE_NOTES_TMPL(param));
     var $scaleNotesBlocks = $('.' + SCALE_NOTES_CLASS, this.$itemBlock).
         find('.' + SCALE_NOTE_TEXT_CLASS);
     var scaleNotesNumber = $scaleNotesBlocks.length - 1;
-    var notesShowPattern = this.state.normalNotesShowPattern;
+    var notesShowPattern = this.state.normalNotesShowPattern.getArr();
     if (this.state.isTriadMode)
     {
-        notesShowPattern = this.state.triadsNotesShowPattern;
+        notesShowPattern = this.state.triadsNotesShowPattern.getArr();
     }
     for (var i = 0; i < scaleNotesNumber; i++)
     {
@@ -63,7 +65,7 @@ ScalesItem.prototype.selectCurrentRootNote = function()
 {
     $('.' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, this.$itemBlock).
         toggleClass(SELECTED_TEXT_CLASS, false);
-    var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.state.root + "')", 
+    var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.state.scale.getRoot() + "')", 
         this.$itemBlock).first();
     $rootNoteToSelect.toggleClass(SELECTED_TEXT_CLASS, true);
 }
@@ -72,47 +74,38 @@ ScalesItem.prototype.onScaleChange = function(event)
 {
     var that = event.data.that;
     var scaleName = $(this).val().toLowerCase();
-    if (Scale.isCorrect(scaleName))
-    {
-        that.state.scale = scaleName;
-        that.state.semiTones = Scale.getSemitones(scaleName);
-        that.state.scaleNotes = Note.getNotesFromSemiTones(that.state.root, that.state.semiTones);
-        that.putNotesOnAllStrings();
-        that.updateScaleNotesBlock();
-        that.state.saveToQuery();
-    }
+    that.state.scale.setName(scaleName);
+    that.putNotesOnAllStrings();
+    that.updateScaleNotesBlock();
+    that.state.saveToQuery();
 }
 
 ScalesItem.prototype.onRootNoteChange = function(event)
 {
     var that = event.data.that;
     var note = $(this).text();
-    if (Note.isCorrect(note))
-    {
-        that.state.root = note.toUpperCase();
-        that.selectCurrentRootNote();
-        that.state.scaleNotes = Note.getNotesFromSemiTones(that.state.root, that.state.semiTones);
-        that.updateScaleNotesBlock();
-        that.putNotesOnAllStrings();
-        that.state.saveToQuery();
-    }
+    that.state.scale.setRoot(note);
+    that.selectCurrentRootNote();
+    that.updateScaleNotesBlock();
+    that.putNotesOnAllStrings();
+    that.state.saveToQuery();
 }
 
 ScalesItem.prototype.onScaleNoteClick = function(event)
 {
     var that = event.data.that;
     var scaleNoteNumber = $('.' + SCALE_NOTE_CLASS, that.$itemBlock).index(this);
-    scaleNoteNumber = scaleNoteNumber % that.state.scaleNotes.length;
+    scaleNoteNumber = scaleNoteNumber % that.state.scale.getNotes().length;
     var isShowNote = false;
     if (that.state.isTriadMode)
     {
-        isShowNote = !that.state.triadsNotesShowPattern[scaleNoteNumber];
-        that.state.triadsNotesShowPattern[scaleNoteNumber] = isShowNote;
+        isShowNote = !that.state.triadsNotesShowPattern.get(scaleNoteNumber);
+        that.state.triadsNotesShowPattern.set(scaleNoteNumber, isShowNote);
     }
     else
     {
-        isShowNote = !that.state.normalNotesShowPattern[scaleNoteNumber];
-        that.state.normalNotesShowPattern[scaleNoteNumber] = isShowNote;
+        isShowNote = !that.state.normalNotesShowPattern.get(scaleNoteNumber);
+        that.state.normalNotesShowPattern.set(scaleNoteNumber, isShowNote);
     }
     var isRootNote = (scaleNoteNumber == 0);
     if (isRootNote)

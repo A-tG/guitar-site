@@ -11,7 +11,7 @@ itemsFactory = {
                 parsedArr = JSON.parse(JSONstring);
                 type = parsedArr[0];
             } 
-            catch (err) {console.log(err)}
+            catch (err) {}
         }
         switch (type)
         {
@@ -23,7 +23,6 @@ itemsFactory = {
                 break;
             default:
                 item = new ScalesItem(id);
-                console.log(WRONG_ITEM_TYPE_MSG + ' ' + type);
         }
         return item;
     }

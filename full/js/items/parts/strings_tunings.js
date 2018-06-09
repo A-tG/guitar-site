@@ -28,9 +28,9 @@ StringsTuning.prototype.selectCurrentStringsTunes = function()
 {
     for (var i = 0; i < this.state.stringsNumber; i++)
     {
-        var stringTune = Tuning.getStringTune(this.state.stringsTunes, i);
+        var stringTune = this.state.tuning.getStringTuning(i);
         this.$stringsTuningBlock.find("." + STRING_TUNE_SELECT_CLASS + ":eq(" + i + ")" + 
-            " :contains('" + stringTune + "')").
+            " :contains('" + stringTune.getName() + "')").
             prop("selected", true);
     }
 }
@@ -40,8 +40,7 @@ StringsTuning.prototype.onStringTuneChange = function(event)
     var that = event.data.that;
     var stringTune = $(this).val();
     var stringNumber = $('.' + STRING_TUNE_SELECT_CLASS, that.$stringsTuningBlock).index(this);
-    that.state.stringsTunes[stringNumber] = stringTune;
-    that.state.tuning = Tuning.getTuningName(that.state.stringsTunes);
+    that.state.tuning.setStringTuning(stringNumber, new Note(stringTune));
     that.tuneChangeEventAction(stringNumber);
     that.state.saveToQuery();
 }
@@ -50,13 +49,11 @@ StringsTuning.prototype.onLeftArrowTuneClick = function(event)
 {
     var that = event.data.that;
     var stringNumber = $('.' + LEFT_ARROW_CLASS, that.$stringsTuningBlock).index(this);
-    var note = that.state.stringsTunes[stringNumber];
-    note = Note.prev(note);
-    that.state.stringsTunes[stringNumber] = note;
+    var note = that.state.tuning.getStringTuning(stringNumber);
+    that.state.tuning.setStringTuning(stringNumber, note.lower());
     $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + stringNumber + ")" + 
-        " :contains('" + note + "')", that.$stringsTuningBlock).
+        " :contains('" + note.getName() + "')", that.$stringsTuningBlock).
         prop("selected", true);
-    that.state.tuning = Tuning.getTuningName(that.state.stringsTunes);;
     that.tuneChangeEventAction(stringNumber);
     that.state.saveToQuery();
 }
@@ -65,13 +62,11 @@ StringsTuning.prototype.onRightArrowTuneClick = function(event)
 {
     var that = event.data.that;
     var stringNumber = $('.' + RIGHT_ARROW_CLASS, that.$stringsTuningBlock).index(this);
-    var note = that.state.stringsTunes[stringNumber];
-    note = Note.next(note);
-    that.state.stringsTunes[stringNumber] = note;
+    var note = that.state.tuning.getStringTuning(stringNumber);
+    that.state.tuning.setStringTuning(stringNumber, note.higher());
     $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + stringNumber + ")" + 
-        " :contains('" + note + "')", that.$stringsTuningBlock).        
+        " :contains('" + note.getName() + "')", that.$stringsTuningBlock).        
         prop("selected", true);
-    that.state.tuning = Tuning.getTuningName(that.state.stringsTunes);;
     that.tuneChangeEventAction(stringNumber);
     that.state.saveToQuery();
 }
@@ -80,7 +75,7 @@ StringsTuning.prototype.init = function()
 {
     for (var i = 0; i < this.state.stringsNumber; i++)
     {
-        var stringTunes = this.state.stringsTunes;
-        this.addStringTuning(Tuning.getStringTune(stringTunes, i));
+        this.addStringTuning(this.state.tuning.getStringTuning(i));
     }
+    this.selectCurrentStringsTunes();
 }

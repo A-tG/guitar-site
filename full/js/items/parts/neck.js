@@ -35,14 +35,6 @@ Neck.prototype.putNotesOnAllStrings = function()
     this.fretboard.putNotesOnAllStrings();
 }
 
-Neck.prototype.moveTuning = function(halfSteps)
-{
-    for (var k = 0; k < this.state.stringsTunes.length; k++)
-    {
-        this.state.stringsTunes[k] = Note.nextSemiTones(this.state.stringsTunes[k], halfSteps);
-    }
-}
-
 Neck.prototype.selectCurrentStringsTunes = function()
 {
     this.stringsTunings.selectCurrentStringsTunes();
@@ -50,7 +42,7 @@ Neck.prototype.selectCurrentStringsTunes = function()
 
 Neck.prototype.selectCurrentTuning = function()
 {
-    this.$tuningOptionsBlock.find('.' + TUNING_SELECT_CLASS + " [value='" + this.state.tuning + "']").
+    this.$tuningOptionsBlock.find('.' + TUNING_SELECT_CLASS + " [value='" + this.state.tuning.getName() + "']").
         prop("selected", true);
 }
 
@@ -72,39 +64,23 @@ Neck.prototype.onTuningChange = function(event)
 {
     var that = event.data.that;
     var tuningName = $(this).val().toLowerCase();
-    if (tuningName == CUSTOM_TUNING_VALUE)
-    {
-        that.state.tuning = tuningName;
-    }
-    else
-    {
-        if (Tuning.isCorrect(tuningName))
-        {
-            that.state.tuning = tuningName;
-            that.state.stringsTunes = Tuning.getStringsTunes(tuningName);
-            that.moveTuning(that.state.halfStep);
-            that.putNotesOnAllStrings();
-            that.selectCurrentStringsTunes();
-        }
-    }
+    that.state.tuning.setName(tuningName);
+    that.putNotesOnAllStrings();
+    that.selectCurrentStringsTunes();
     that.state.saveToQuery();
 }
 
 Neck.prototype.selectCurrentHalfStep = function()
 {
-    $('.' + HALF_STEP_SELECT_CLASS + " [value='" + this.state.halfStep + "']", this.$tuningOptionsBlock).
+    $('.' + HALF_STEP_SELECT_CLASS + " [value='" + this.state.tuning.getHS() + "']", this.$tuningOptionsBlock).
         prop("selected", true);
 }
 
 Neck.prototype.onHalfStepChange = function(event)
 {
     var that = event.data.that;
-    var oldValue = that.state.halfStep;
-    var newValue = $(this).val().replace(/[^-0-9]/gim, '');
-    newValue = +newValue;
-    that.state.halfStep = newValue;
-    var valuesDiff = newValue - oldValue;
-    that.moveTuning(valuesDiff);
+    newValue = +($(this).val());
+    that.state.tuning.setHS(newValue);
     that.selectCurrentStringsTunes();
     that.putNotesOnAllStrings();
     that.state.saveToQuery();
@@ -113,33 +89,21 @@ Neck.prototype.onHalfStepChange = function(event)
 Neck.prototype.onLeftArrowHalfStepClick = function(event)
 {
     var that = event.data.that;
-    var halfStep =  that.state.halfStep;
-    if (halfStep != -MAX_HALF_STEP)
-    {
-        halfStep = Halfstep.prev(halfStep);
-        that.state.halfStep = halfStep;
-        that.moveTuning(-1);
-        that.selectCurrentStringsTunes();
-        that.putNotesOnAllStrings();
-        that.selectCurrentHalfStep();
-        that.state.saveToQuery();
-    }
+    that.state.tuning.decHS();
+    that.selectCurrentStringsTunes();
+    that.putNotesOnAllStrings();
+    that.selectCurrentHalfStep();
+    that.state.saveToQuery();
 }
 
 Neck.prototype.onRightArrowHalfStepCLick = function(event)
 {
     var that = event.data.that;
-    var halfStep = that.state.halfStep;
-    if (halfStep != MAX_HALF_STEP)
-    {
-        halfStep = Halfstep.next(halfStep);
-        that.state.halfStep = halfStep;
-        that.moveTuning(1);
-        that.selectCurrentStringsTunes();
-        that.putNotesOnAllStrings();
-        that.selectCurrentHalfStep();
-        that.state.saveToQuery();
-    }
+    that.state.tuning.incHS();
+    that.selectCurrentStringsTunes();
+    that.putNotesOnAllStrings();
+    that.selectCurrentHalfStep();
+    that.state.saveToQuery();
 }
 
 Neck.prototype.onAddStringButton = function(event)
@@ -148,12 +112,7 @@ Neck.prototype.onAddStringButton = function(event)
     if (that.state.stringsNumber < MAX_STRINGS_NUMBER) 
     {    
         that.fretboard.addString(that.state.stringsNumber);
-        var stringTune = Tuning.getStringTune(that.state.stringsTunes, that.state.stringsNumber);
-        if (that.state.stringsNumber == that.state.stringsTunes.length)
-        {
-            stringTune = Tuning.getStringTune(Tuning.getStringsTunes(that.state.tuning), that.state.stringsNumber);
-            that.state.stringsTunes.push(stringTune);
-        }
+        var stringTune = that.state.tuning.getStringTuning(that.state.stringsNumber);
         that.stringsTunings.addStringTuning(stringTune);
         that.state.stringsNumber++;
         that.$stringsNumberBlock.text('' + that.state.stringsNumber);

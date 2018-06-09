@@ -95,18 +95,19 @@ GuitarTuning.prototype.getDefaultTunings = function()
 GuitarTuning.prototype.getStringTuning = function(stringNumber)
 {
     var index = stringNumber % this._stringsTuning.length;
-    return this._stringsTuning[index];
+    return this._stringsTuning[index].getCopy().higherST(this._HS);
 }
 
 GuitarTuning.prototype.setStringTuning = function(stringNumber, note)
 {
+    note.higherST(-this._HS);
     if (stringNumber >= this._stringsTuning.length)
     {
         for (var i = this._stringsTuning.length; i < stringNumber; i++)
         {
             this._stringsTuning.push(this.getStringTuning(i));
         }
-        this._stringsTuning.push(note)
+        this._stringsTuning.push(note);
     } else
     {
         this._stringsTuning[stringNumber] = note;
@@ -126,9 +127,14 @@ GuitarTuning.prototype.setName = function(tuningName)
     if (this.isValidTuningName(tuningName))
     {
         this._name = tuningName;
-        this._stringsTuning = this._TUNINGS[tuningName];
+        this._stringsTuning = this._TUNINGS[tuningName].map(function(item) {return new Note(item)});
     }
     return this;
+}
+
+GuitarTuning.prototype.getName = function()
+{
+    return this._name;
 }
 
 GuitarTuning.prototype.setTuning = function(stringsTuning)
@@ -150,6 +156,11 @@ GuitarTuning.prototype.setHS = function(halfStep)
     return this;
 }
 
+GuitarTuning.prototype.getHS = function()
+{
+    return this._HS;
+}
+
 GuitarTuning.prototype.set = function(tuningName, halfStep, stringsTuning)
 {
     if (tuningName === this._CUSTOM_NAME)
@@ -169,22 +180,25 @@ GuitarTuning.prototype.set = function(tuningName, halfStep, stringsTuning)
 
 GuitarTuning.prototype.setFromArr = function(arr)
 {
-    switch (arr.length)
+    if (arr)
     {
-        case 1:
-            this.set(arr[0]);
-            break;
-        case 2:
-            this.set(arr[0], arr[1]);
-            break;
-        case 3:
-            this.set(arr[0], arr[1], arr[3]);
-            break;
-        default:
-            if (this._IS_DEBUG)
-            {
-                console.error("Ivalid argument length: " + arr);
-            }
+        switch (arr.length)
+        {
+            case 1:
+                this.set(arr[0]);
+                break;
+            case 2:
+                this.set(arr[0], arr[1]);
+                break;
+            case 3:
+                this.set(arr[0], arr[1], arr[3]);
+                break;
+            default:
+                if (this._IS_DEBUG)
+                {
+                    console.error("Ivalid argument length: " + arr);
+                }
+        } 
     }
     return this;
 }

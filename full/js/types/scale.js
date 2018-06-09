@@ -123,6 +123,11 @@ Scale.prototype.setRoot = function(noteName)
     return this;
 }
 
+Scale.prototype.getName = function()
+{
+    return this._name;
+}
+
 Scale.prototype.getRoot = function()
 {
     return this._root;
@@ -151,6 +156,31 @@ Scale.prototype.getNotesNames = function()
 {
     var notes = this.getNotes();
     return notes.map(function(item) {return item.getName()});
+}
+
+Scale.prototype.getSemiTonesPatternForString = function(stringTuning)
+{
+    var semiTones = this.getSemiTones();
+    var scaleNotes = this.getNotesNames();
+    var pattern = [];
+    var stringTuneOffset = 0;
+    var stringTuneIndex = scaleNotes.indexOf(stringTuning.getName());
+    while (stringTuneIndex < 0)
+    {
+        stringTuning.higher();
+        stringTuneIndex = scaleNotes.indexOf(stringTuning.getName());
+        stringTuneOffset++;
+    }
+    pattern.push(stringTuneOffset);
+    for (var i = stringTuneIndex; i < semiTones.length; i++)
+    {
+        pattern.push(semiTones[i]);
+    }
+    for (var i = 0; i < stringTuneIndex; i++)
+    {
+        pattern.push(semiTones[i]);
+    }
+    return pattern;
 }
 
 Scale.prototype.serialize = function()

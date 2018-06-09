@@ -1,6 +1,4 @@
-var SCALE_SEMITONES_NUMBER = 12;
-var MAX_HALF_STEP = 11;
-var MIN_HALF_STEP = -11;
+var IS_DEBUG = true;
 var MAX_STRINGS_STYLE = 12;
 var MAX_STRINGS_NUMBER = 18;
 var MIN_STRINGS_NUMBER = 3;
@@ -32,9 +30,9 @@ var DEFAULT_STRING_TUNES = ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#",
 var DEFAULT_SCALE_NOTES = ["C", "D", "E", "F", "G", "A", "B"];
 var SCALES = {
     "major": [2, 2, 1, 2, 2, 2, 1],
+    "ionian": [2, 2, 1, 2, 2, 2, 1],
     "aeolian": [2, 1, 2, 2, 1, 2, 2],
     "minor": [2, 1, 2, 2, 1, 2, 2],
-    "ionian": [2, 2, 1, 2, 2, 2, 1],
     "harmonic_min": [2, 1, 2, 2, 1, 3, 1],
     "chromatic": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     "dorian": [2, 1, 2, 2, 2, 1, 2],
@@ -199,14 +197,8 @@ var COMMON_SETTINGS_BLOCK_CLOSE_BTN_ID = "settings_close_btn";
 var COMMON_SETTINGS_BLOCK_NIGHT_COLOR_BTN_ID = "color_scheme_switch_night_btn";
 var COMMON_SETTINGS_BLOCK_DAY_COLOR_BTN_ID = "color_scheme_switch_day_btn";
 
-var WRONG_ITEM_TYPE_MSG = "Wrong item type";
-var WRONG_SEMITONE_NUMBER_MSG = "Wrong sum of semitones, must be equal to " + SCALE_SEMITONES_NUMBER;
-var WRONG_ROOT_NOTE_MSG = "Wrong root note";
-var WRONG_NOTE_MSG = "Wrong note";
-var WRONG_SCALE_NAME_MSG = "Wrong scale name (value)";
-var WRONG_STRING_TUNE_NOTE_MSG = "Wrong string tune note";
-var WRONG_TUNING_NAME = "Wrong tuning name (value)";
 var QUERY_PARAMS_READ_ERROR_MSG = "GET parameter cannot be decoded";
+
 
 var METR_DATALIST_OPTION_TMPL = doT.template($("#metronome_datalist_option_tmpl").html());
 var ITEM_BASE_BLOCK_TMPL = doT.template($("#item_base_tmpl").html());

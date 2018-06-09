@@ -134,13 +134,13 @@ Note.prototype._lower = function()
 
 Note.prototype._higherST = function(semiTones)
 {
-    this._noteName = this.higherSTName(_noteName);
+    this._noteName = this.higherSTName(semiTones, this._noteName);
     return this;
 }
 
 Note.prototype._lowerST = function(semiTones)
 {
-    this._noteName = this.lowerSTName(_noteName);
+    this._noteName = this.lowerSTName(semiTones, this._noteName);
     return this;
 }
 
@@ -267,6 +267,7 @@ Note.prototype.validateNoteName = function(noteName)
 
 Note.prototype.flatToNormal = function(noteName)
 {
+    noteName = this._noteNameArg(noteName);
     var result = this.defaultNoteName();
     if (this.isValidFlat(noteName))
     {
@@ -277,6 +278,7 @@ Note.prototype.flatToNormal = function(noteName)
 
 Note.prototype.sharpToFlat = function(noteName)
 {
+    noteName = this._noteNameArg(noteName);
     var result = this.defaultNoteName();
     if (this.isValidSharp(noteName))
     {
@@ -288,6 +290,7 @@ Note.prototype.sharpToFlat = function(noteName)
 
 Note.prototype.sharpToNormal = function(noteName)
 {
+    noteName = this._noteNameArg(noteName);
     var result = this.defaultNoteName();
     if (this.isAltSharp(noteName))
     {
@@ -342,6 +345,7 @@ Note.prototype.higherSTName = function(semiTones, noteName)
     semiTones = this._validateSemiTonesArg(semiTones);
     if (semiTones < 0)
     {
+        semiTones = -semiTones;
         return this.lowerSTName(semiTones, noteName);
     }
     for (var i = 0; i < semiTones; i++)
@@ -366,7 +370,8 @@ Note.prototype.lowerSTName = function(semiTones, noteName)
     semiTones = this._validateSemiTonesArg(semiTones);
     if (semiTones < 0)
     {
-        return this.higherSTNames(semiTones, noteName);
+        semiTones = -semiTones;
+        return this.higherSTName(semiTones, noteName);
     }
     for (var i = 0; i < semiTones; i++)
     {

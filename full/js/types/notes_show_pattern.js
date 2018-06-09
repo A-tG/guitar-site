@@ -46,7 +46,7 @@ NotesShowPattern.prototype.fromInt = function(number)
         {
             console.error("Invalid number");
         }
-        return;
+        return this;
     }
     var binArr = number.toString(2).split('');
     if (binArr.length < this._SIZE)
