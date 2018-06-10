@@ -1,6 +1,6 @@
 function ScalesStateBase()
 {
-    this.type = "scales";
+    this.type = SCALES_TYPE;
     this.scale = new Scale();
     this.tuning = new GuitarTuning();
     this.stringsNumber = 6;
@@ -47,10 +47,9 @@ ScalesStateBase.prototype.deserialize = function(JSONstring)
         }
         catch (err)
         {
-            console.error(err);
+            console.error("Invalid JSON: " + JSONstring);
         }
     }
-    this.type = parsedArr[0];
     this.scale = new Scale().deserialize(parsedArr[1]);
     this.tuning = new GuitarTuning().deserialize(parsedArr[2]);
     this.stringsNumber = ParsingUt.validateStringsNumber(parsedArr[3]);
