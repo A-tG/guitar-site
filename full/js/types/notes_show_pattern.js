@@ -66,6 +66,13 @@ NotesShowPattern.prototype.fromInt = function(number)
 
 NotesShowPattern.prototype.serialize = NotesShowPattern.prototype.toInt;
 
-NotesShowPattern.prototype.deserialize = NotesShowPattern.prototype.fromInt;
+NotesShowPattern.prototype.deserialize = function(number)
+{
+    if (number !== undefined)
+    {
+        this.fromInt(number);
+    }
+    return this;
+};
 
 NotesShowPattern.prototype.toJSON = NotesShowPattern.prototype.serialize;
