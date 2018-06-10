@@ -15,7 +15,7 @@ Fretboard.prototype.putNote = function(noteName, fretNumber, stringNumber, boxSi
     var noteStep = this.state.scale.getNotesNames().indexOf(noteName);
     var isTransparentNote = false;
     var isInBox = (this.state.boxFirstFret == -1) || (fretNumber >= this.state.boxFirstFret) && 
-        (fretNumber <= (this.state.boxFirstFret + boxSize));
+        (fretNumber < (this.state.boxFirstFret + boxSize));
     if (this.state.isTriadMode)
     {
         isTransparentNote = !this.state.triadsNotesShowPattern.get(noteStep);
@@ -88,6 +88,10 @@ Fretboard.prototype.calculateNotesBoxSize = function(stringNumber, fretNumber)
         var currentStringNote = this.state.tuning.getStringTuning(stringNumber);
         higherStringNote.higherST(fretNumber);
         currentStringNote.higherST(fretNumber);
+        if (currentStringNote.getName() == higherStringNote.getName())
+        {
+            return 1;
+        }
         while (currentStringNote.getName() != higherStringNote.getName())
         {
             currentStringNote.higher();
@@ -107,7 +111,7 @@ Fretboard.prototype.calculateNotesBoxSize = function(stringNumber, fretNumber)
 Fretboard.prototype.calculateNotesBoxSizeForAllStrings = function(fretNumber)
 {
     var maxBoxSize = 0;
-    for (var i = 0; i < this.state.stringsNumber; i++)
+    for (var i = this.state.stringsNumber - 1; i >= 0 ; i--)
     {
         var boxSize = this.calculateNotesBoxSize(i, fretNumber);
         if (boxSize > maxBoxSize)
@@ -197,14 +201,14 @@ Fretboard.prototype.onFretHoverIn = function(event)
     if (that.isBoxFit(fretNumber, boxSize))
     {
         var $fretsHovers = $('.' + FRET_HOVER_CLASS, that.$fretboardBlock);
-        for (var i = 0; i <= boxSize; i++)
+        for (var i = 0; i < boxSize; i++)
         {
             var hoverClass = FRET_HOVER_ACTIVE_CENTER_CLASS;
             if (i == 0)
             {
                 hoverClass = FRET_HOVER_ACTIVE_START_CLASS;
             }
-            else if (i == boxSize) 
+            else if (i == boxSize - 1) 
             {
                 hoverClass = FRET_HOVER_ACTIVE_END_CLASS;
             }
