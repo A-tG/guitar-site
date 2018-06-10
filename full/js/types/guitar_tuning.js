@@ -191,7 +191,7 @@ GuitarTuning.prototype.setFromArr = function(arr)
                 this.set(arr[0], arr[1]);
                 break;
             case 3:
-                this.set(arr[0], arr[1], arr[3]);
+                this.set(arr[0], arr[1], arr[2].map(function (item) {return new Note(item)}));
                 break;
             default:
                 if (this._IS_DEBUG)
