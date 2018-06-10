@@ -191,8 +191,11 @@ Scale.prototype.serialize = function()
 
 Scale.prototype.deserialize = function(arr)
 {
-    this.setRoot(arr[0]);
-    this.setName(arr[1]);
+    if (arr)
+    {  
+        this.setRoot(arr[0]);
+        this.setName(arr[1]);
+    }
     return this;
 }
 
