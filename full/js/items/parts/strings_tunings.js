@@ -11,7 +11,7 @@ function StringsTuning(state, $stringsTuningBlock, eventAction)
 StringsTuning.prototype.addStringTuning = function(stringTune)
 {
     var $addedStringTuneBlock = $(STRING_TUNE_BLOCK_TMPL()).appendTo(this.$stringsTuningBlock);
-    $('.' + STRING_TUNE_SELECT_CLASS + " :contains('" + stringTune + "')", $addedStringTuneBlock).
+    $('.' + STRING_TUNE_SELECT_CLASS + " :contains('" + stringTune.getName() + "')", $addedStringTuneBlock).
         prop("selected", true);
     $('.' + STRING_TUNE_SELECT_CLASS, $addedStringTuneBlock).change({that: this}, this.onStringTuneChange);
     $('.' + LEFT_ARROW_CLASS, $addedStringTuneBlock).click({that: this}, this.onLeftArrowTuneClick);
