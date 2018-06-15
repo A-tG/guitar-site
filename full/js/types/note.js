@@ -1,9 +1,10 @@
 /*
- * Class representation of musical note with useful methods
+ * Class representation of musical note with useful methods.
  *
- * Methods returns result even with invalid parameters, error is printed in console (_IS_DEBUG = true)
+ * Methods returns result even with invalid parameters, error is printed in console (if _IS_DEBUG = true).
  *
- * JSON.Stringify(new Note("C#")) will return "Db" - for better query params and html links compability
+ * JSON.Stringify(new Note("C#")) will return "Db", flat notes instead of sharps
+ * for better query params and html links compability.
  *
  * Methods:
 set("D#")                         sets note name, return this object
@@ -28,27 +29,30 @@ flatToNormal("Db")                return "C#"
 
 sharpToFlat("C#")                 return "Db"
 
-sharpToNormal("E#")               returns "F"
+sharpToNormal("E#")               return "F"
 
-higherName("F")                   return "F#"
+higherName("F")                   return "F#" - higher on semitone note name
 higherName()                      same, object's note name used
 higher("F")                       returns new object
 higher()                          returns this object
 
-lowerName("F")                    return "E"
+lowerName("F")                    return "E" - lower on semitone note name
 lowerName()                       same, object's note name used
 lower("F")                        returns new object
 lower()                           returns this object
 
-higherSTName(3, "G")              return "A#"
+higherSTName(3, "G")              return "A#" - higher note name by number of semitones
 higherSTName(3)                   same, object's note name used
 higherST(3, "G")                  returns new object
 higherST(3)                       returns this object
 
-lowerSTName(3, "G")               return "E"
+lowerSTName(3, "G")               return "E" - lower note name by number of semitones
 lowerSTName(3)                    same, object's note name used
 lowerST(3, "G")                   returns new object
 lowerST(3)                        returns this object
+
+serialize()                       returns note name but sharp replaced with flat, used in toJSON()
+deserialize()                     same as set()
 */
 
 function Note(noteName)
@@ -401,3 +405,5 @@ Note.prototype.serialize = function()
 Note.prototype.deserialize = Note.prototype.set;
 
 Note.prototype.toJSON = Note.prototype.serialize;
+
+Note.prototype.toString = Note.prototype.getName;
