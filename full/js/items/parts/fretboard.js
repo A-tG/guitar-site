@@ -64,18 +64,15 @@ Fretboard.prototype.putNotesOnAllStrings = function()
 
 Fretboard.prototype.putNotesOnNearStrings = function(stringNumber)
 {
-    if (stringNumber == 0)
+    var lowerStringNumber = stringNumber - 1;
+    var higherStringNumber = stringNumber + 1;
+    if (lowerStringNumber >= 0)
     {
-        this.putNotesOnString(1);
+        this.putNotesOnString(lowerStringNumber);
     }
-    else if (stringNumber == this.state.stringsNumber)
+    if (higherStringNumber < this.state.stringsNumber)
     {
-        this.putNotesOnString(stringNumber - 1);
-    }
-    else
-    {
-        this.putNotesOnString(stringNumber - 1);
-        this.putNotesOnString(stringNumber + 1);
+        this.putNotesOnString(higherStringNumber);
     }
 }
 
