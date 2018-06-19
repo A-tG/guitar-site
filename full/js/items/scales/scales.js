@@ -65,7 +65,7 @@ ScalesItem.prototype.selectCurrentRootNote = function()
 {
     $('.' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, this.$itemBlock).
         toggleClass(SELECTED_TEXT_CLASS, false);
-    var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.state.scale.getRoot() + "')", 
+    var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.state.scale.getRoot().getName() + "')", 
         this.$itemBlock).first();
     $rootNoteToSelect.toggleClass(SELECTED_TEXT_CLASS, true);
 }
