@@ -160,6 +160,7 @@ Scale.prototype.getNotesNames = function()
 
 Scale.prototype.getSemiTonesPatternForString = function(stringTuning)
 {
+    stringTuning = stringTuning.getCopy();
     var semiTones = this.getSemiTones();
     var scaleNotes = this.getNotesNames();
     var pattern = [];
