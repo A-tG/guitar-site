@@ -22,9 +22,17 @@
  * Chord progressions
  * And other useful tools
 
-### For developers:
+## Used:
+ [jquery](https://jquery.com/)
+ 
+ [jqueryrotate](http://jqueryrotate.com)
+ 
+ [doT.js](https://github.com/olado/doT)
+ 
+ [js-cookie](https://github.com/js-cookie/js-cookie)
+
+## For developers:
 Check out [full/js/types/](full/js/types/) for useful classes
 
-
- ## Support developer
- [![Paypal Logo](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)](https://www.paypal.me/atgDeveloperMusician/5)
+## Support developer
+[![Paypal Logo](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)](https://www.paypal.me/atgDeveloperMusician/5)
