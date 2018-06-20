@@ -15,8 +15,7 @@ function Scale(scaleName, rootNote)
 }
 
 Scale.prototype._IS_DEBUG = IS_DEBUG;
-// associative array "scale_name" => semitones_array
-Scale.prototype._ALL_SCALES = SCALES;
+Scale.prototype._ALL_SCALES = SCALES; // associative array "scale_name" => semitones_array
 Scale.prototype._ST_SUM = 12;
 
 Scale.prototype._isArgReceived = function(arg)
@@ -201,3 +200,8 @@ Scale.prototype.deserialize = function(arr)
 }
 
 Scale.prototype.toJSON = Scale.prototype.serialize;
+
+Scale.prototype.toString = function()
+{
+    return this._name + ' ' + this.getNotesNames().join();
+}

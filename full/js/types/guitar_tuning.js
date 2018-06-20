@@ -11,8 +11,7 @@ function GuitarTuning(tuningName)
 }
 
 GuitarTuning.prototype._IS_DEBUG = IS_DEBUG;
-// associative array "tuning_name" => tunings_array
-GuitarTuning.prototype._TUNINGS = TUNINGS;
+GuitarTuning.prototype._TUNINGS = TUNINGS; // associative array "tuning_name" => tunings_array
 GuitarTuning.prototype._CUSTOM_NAME = "custom";
 GuitarTuning.prototype._MIN_HS = -12;
 GuitarTuning.prototype._MAX_HS = 12;
@@ -259,3 +258,8 @@ GuitarTuning.prototype.serialize = function()
 GuitarTuning.prototype.deserialize = GuitarTuning.prototype.setFromArr;
 
 GuitarTuning.prototype.toJSON = GuitarTuning.prototype.serialize;
+
+GuitarTuning.prototype.toString = function()
+{
+    return this._name + ' ' + String(this._stringsTuning) + " Half-steps: " +  this._HS;
+}

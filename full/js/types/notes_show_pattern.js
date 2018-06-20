@@ -31,9 +31,14 @@ NotesShowPattern.prototype.getArr = function()
     return this._arr.slice();
 }
 
+NotesShowPattern.prototype.getBinArr = function()
+{
+    return this._arr.map(function(item) {return +item});
+}
+
 NotesShowPattern.prototype.toInt = function()
 {
-    var numberArr = this._arr.map(function(item) {return +item});
+    var numberArr = this.getBinArr();
     return parseInt(numberArr.join(''), 2);
 }
 
@@ -76,3 +81,11 @@ NotesShowPattern.prototype.deserialize = function(number)
 };
 
 NotesShowPattern.prototype.toJSON = NotesShowPattern.prototype.serialize;
+
+NotesShowPattern.prototype.toString = function()
+{
+    var binArr = this.getBinArr()
+    return binArr.join('')
+}
+
+NotesShowPattern.prototype.valueOf = NotesShowPattern.prototype.toInt;

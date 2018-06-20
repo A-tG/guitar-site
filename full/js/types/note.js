@@ -8,7 +8,9 @@
  *
  * Methods:
 set("D#")                         sets note name, return this object
+setName("D#")                     same
 getName()                         returns note name
+get()                             same
 getCopy()                         returns copy of object
 
 defaultNoteName()
@@ -156,10 +158,12 @@ Note.prototype.set = function(noteName)
 
 Note.prototype.setName = Note.prototype.set;
 
-Note.prototype.getName = function()
+Note.prototype.get = function()
 {
     return this._noteName;
 }
+
+Note.prototype.getName = Note.prototype.get;
 
 Note.prototype.getCopy = function()
 {
@@ -407,3 +411,8 @@ Note.prototype.deserialize = Note.prototype.set;
 Note.prototype.toJSON = Note.prototype.serialize;
 
 Note.prototype.toString = Note.prototype.getName;
+
+Note.prototype.valueOf = function()
+{
+    return this._ALL_NOTES.indexOf(this._noteName) + 1;
+}
