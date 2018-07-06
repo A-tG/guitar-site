@@ -7,18 +7,24 @@
 {
     text-align: center;
 }
-.head_links_block a
+.head_block a
 {
     font-family: Tahoma, Arial, Verdana;
     font-size: 24px;
     text-decoration: none;
     text-transform: capitalize;
-    padding: 0 10px 0 10px;
 }
-.head_block_content li
+.head_item
 {
+    padding: 0 15px;
     vertical-align: middle;
     display: inline-block;
+}
+.head_separator
+{
+    padding: 0;
+    width: 2px;
+    height: 30px;
 }
 
 #common_settings_wrapper, #common_settings_btn
@@ -33,8 +39,32 @@
     z-index: 10;
     top: 36px;
     right: 0px;
+    padding-bottom: 5px;
+}
+.night #settings_block
+{
+    box-shadow: 0 0 8px #222;
+}
+.day #settings_block
+{
+    box-shadow: 0 0 8px #bbb;
 }
 .settings_block_hide
 {
     display: none;
+}
+
+@media screen and (max-width: 1250px)
+{
+    .head_item
+    {
+        display: block;
+        padding: 10px 0;
+    }
+    .head_separator
+    {
+        width: 100%;
+        height: 2px;
+        padding: 0;
+    }
 }

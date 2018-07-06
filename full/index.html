@@ -32,16 +32,14 @@
       <div class="content_block normal_bg2">
         <div class="head_block normal_bg1">
           <ul class="head_block_content">
-            <li>
-              <ul class="head_links_block">
-                <li><a class="head_item normal_color" href="" title="Artistic Guitar">Artistic Guitar</a></li>
-                <li><a class="head_item normal_color" href="https://www.paypal.me/atgDeveloperMusician/5" title="Donate">Donate</a></li>
-              </ul>
-            </li>
-            <li>
+            <li class="head_item"><a class="element_color hover_element_color transitional" href="" title="Artistic Guitar">Artistic Guitar</a></li>
+            <li class="head_item head_separator normal_bg2"></li>
+            <li class="head_item"><a class="element_color hover_element_color transitional" href="https://www.paypal.me/atgDeveloperMusician/5" title="Donate">Donate</a></li>
+            <li class="head_item head_separator normal_bg2"></li>
+            <li class="head_item">
               <ul class="metronome_block">
                 <li id="metronome_disabled_block" class="metronome_disabled_block negative_bg negative_color">Update your browser to use metronome</li>
-                <li class="metronome_icon">
+                <li class="metronome_icon metronome_element">
                   <svg class="svg_normal_stroke svg_no_fill metronome_svg_medium_stoke" height="50" width="30">
                     <polygon points="8,5 22,5 28,45 2,45" />
                     <path class="metronome_svg_dasharay" d="M15 10 L15 28" />
@@ -49,7 +47,7 @@
                     <polygon class="svg_normal_fill metronome_svg_light_stoke" points="24.5,12.5 28.5,12.5 27.5,10.5 25.5,10.5" transform="rotate(210,26.5,11.5)" />
                   </svg>
                 </li>
-                <li id="metronome_beat_vis_block" class="metronome_beat_vis_block normal_bg3">
+                <li id="metronome_beat_vis_block" class="metronome_beat_vis_block metronome_element normal_bg3">
                   <div class="metronome_pointer_wrap">
                     <div class="metronome_pointer_block" id="metronome_pointer_block">
                       <div class="metronome_pointer" id="metronome_pointer"></div>
@@ -57,9 +55,9 @@
                   </div>
                   <div id="metronome_beat_number_vis" class="metronome_beat_number_vis normal_color"></div>
                 </li>
-                <li id="metronome_play_btn" class="play_btn element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
-                <li id="metronome_stop_btn" class="stop_btn element_color hover_element_color material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
-                <li class="volume_block">
+                <li id="metronome_play_btn" class="play_btn metronome_element element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
+                <li id="metronome_stop_btn" class="stop_btn metronome_element element_color hover_element_color material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
+                <li class="volume_block metronome_element">
                   <div class="metronome_option_head">
                     <span class="option_head_start_val weak_color">0%</span>
                     <span class="option_head_end_val weak_color">100%</span>
@@ -67,7 +65,7 @@
                   </div>
                   <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1">
                 </li>
-                <li class="tempo_block">
+                <li class="tempo_block metronome_element">
                   <div class="metronome_element">
                     <div class="metronome_option_head">
                       <span class="option_head_start_val weak_color">40</span>
@@ -84,12 +82,12 @@
                     </datalist>
                   </div>
                 </li>
-                <li class="signature_block">
+                <li class="signature_block metronome_element">
                   <ul>
-                    <li>
+                    <li class="metronome_element">
                       <span class="metronome_options_text normal_color">Signature</span>
                     </li>
-                    <li>
+                    <li class="metronome_element">
                       <div class="signature_option_block">
                         <div id="metronome_beats_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce beats number"></div>
                         <select id="metronome_beats_select" class="signature_select element_color normal_bg3">
@@ -129,8 +127,9 @@
                 </li>
               </ul>
             </li>
+            <li class="head_item head_separator normal_bg2"></li>
             <li id="common_settings_wrapper">
-              <div id="common_settings_btn" class="element_color hover_element_color material-icons md-36 transitional" title="Open settings">&#xE8B8;</div>
+              <div id="common_settings_btn" class="head_item element_color hover_element_color material-icons md-36 transitional" title="Open settings">&#xE8B8;</div>
               <ul id="settings_block" class="normal_bg1 settings_block_hide">
                 <li id="settings_close_btn" class="element_color hover_element_color material-icons md-36 transitional" title="Close settings">&#xE5CE;</li>
                 <li id="color_scheme_switch_night_btn" class="element_color hover_element_color material-icons md-36 transitional" title="Switch to night color palette">&#xE3A7;</li>
@@ -151,14 +150,14 @@
         <li class="scale_note element_color hover_element_color" title="Toggle note">
           <div class="scale_step normal_color">1</div>
           <span class="scale_note_text transitional">{{=it.root}}</span>
-          <div class="separator_ver_small"></div>
+          <div class="separator_ver_small middle_gray_bg"></div>
         </li>
         {{~it.semiTones :semiTone:i}}
-          <li class="semitone_block normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
+          <li class="semitone_block middle_gray_border normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
           <li class="scale_note element_color hover_element_color" title="Toggle note">
             <div class="scale_step normal_color">{{=i + 2}}</div>
             <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
-            <div class="separator_ver_small"></div>
+            <div class="separator_ver_small middle_gray_bg"></div>
           </li>
         {{~}}
       </ul>
