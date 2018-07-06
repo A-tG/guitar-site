@@ -209,6 +209,15 @@
     border-color: #ee7600;
 }
 
+.middle_gray_bg
+{
+    background: #777;
+}
+.middle_gray_border
+{
+    border-color: #777;
+}
+
 .night .svg_normal_stroke
 {
     stroke: #eee;
