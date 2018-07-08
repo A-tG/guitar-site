@@ -14,11 +14,18 @@
     text-decoration: none;
     text-transform: capitalize;
 }
+
 .head_item
 {
     padding: 0 15px;
     vertical-align: middle;
     display: inline-block;
+}
+.head_subitem
+{
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 15px;
 }
 .head_separator
 {

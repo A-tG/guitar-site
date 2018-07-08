@@ -117,7 +117,7 @@
 
 .night .hover_element_color:hover
 {
-    color: #fff
+    color: #fff;
 }
 .day .hover_element_color:hover
 {
@@ -239,3 +239,30 @@
     fill: none;
 }
 
+.night .svg_element_stroke
+{
+    stroke: #fc0;
+}
+.day .svg_element_stroke
+{
+    stroke: #0078d7;
+}
+.night .svg_element_fill
+{
+    fill: #fc0;
+}
+.day .svg_element_fill
+{
+    fill: #0078d7;
+}
+
+.night .hover_element_color:hover .hover_svg_color
+{
+    stroke: #fff;
+    fill: #fff;
+}
+.day .hover_element_color:hover .hover_svg_color
+{
+    stroke: #ee7600;
+    fill: #ee7600;
+}
