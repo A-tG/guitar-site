@@ -30,6 +30,8 @@
  [doT.js](https://github.com/olado/doT)
  
  [js-cookie](https://github.com/js-cookie/js-cookie)
+ 
+ [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
 
 ## For developers:
 Check out [full/js/types/](full/js/types/) for useful classes
