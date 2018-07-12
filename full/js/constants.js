@@ -99,9 +99,9 @@ var CHORDS = {
     "aug_triad": ['1', '3', '#5']
 };
 var TUNINGS = {
-    "standart_e": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
-    "standart_e_bass": ["G", "D", "A", "E", "B"],
-    "standart_e_bass_6": ["C", "G", "D", "A", "E", "B"],
+    "standard_e": ["E", "B", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#"],
+    "standard_e_bass": ["G", "D", "A", "E", "B"],
+    "standard_e_bass_6": ["C", "G", "D", "A", "E", "B"],
     "drop_d_6": ["E", "B", "G", "D", "A", "D", "B", "F#", "C#", "G#", "D#", "A#"],
     "drop_a_7": ["E", "B", "G", "D", "A", "E", "A", "F#", "C#", "G#", "D#", "A#"],
     "drop_e_8": ["E", "B", "G", "D", "A", "E", "B", "E", "C#", "G#", "D#", "A#"]
