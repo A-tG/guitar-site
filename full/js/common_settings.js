@@ -75,7 +75,6 @@ var IS_FLAT_NOTATION = false;
 
 function NotationSwitcher()
 {
-    var itemsManager = menuItems;
     var $toFlatBtn = $("#to_flat_notation_btn");
     var $toSharpBtn = $("#to_sharp_notation_btn");
     var isFlat = false;
@@ -86,7 +85,7 @@ function NotationSwitcher()
         IS_FLAT_NOTATION = true;
         $toFlatBtn.hide();
         $toSharpBtn.show();
-        itemsManager.updateNoteNotation();
+        menuItems.updateNoteNotation();
     }
 
     this.toSharp = function()
@@ -107,7 +106,7 @@ function NotationSwitcher()
         var that = event.data.that;
         that.toFlat();
         that.saveToCookies();
-        itemsManager.updateNoteNotation();
+        menuItems.updateNoteNotation();
     }
 
     this.onToSharpClick = function(event)
@@ -115,7 +114,7 @@ function NotationSwitcher()
         var that = event.data.that;
         that.toSharp();
         that.saveToCookies();
-        itemsManager.updateNoteNotation();
+        menuItems.updateNoteNotation();
     }
 
     this.initButtons = function()
@@ -149,7 +148,7 @@ function NotationSwitcher()
         {
             this.toSharp();
         }
-        itemsManager.updateNoteNotation();
+        menuItems.updateNoteNotation();
     }
 }
 
