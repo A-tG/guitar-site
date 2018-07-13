@@ -1,3 +1,8 @@
+function ToggleBtn(firstBtnId, secondBtnId)
+{
+
+}
+
 function ColorSchemeSwitcher()
 {
     var $blockToSwitchClass = $('.' + BG_BLOCK_CLASS);
@@ -75,8 +80,8 @@ var commonSettings = {
     $openBtn: $('#' + COMMON_SETTINGS_BTN_ID),
     $closeBtn: $('#' + COMMON_SETTINGS_BLOCK_CLOSE_BTN_ID),
     $settingsBlock: $('#' + COMMON_SETTINGS_BLOCK_ID),
-    colorSchemeSwitcher: new ColorSchemeSwitcher(),
     isShown: false,
+    colorSchemeSwitcher: new ColorSchemeSwitcher(),
 
     showMenuToggle: function(isShow)
     {

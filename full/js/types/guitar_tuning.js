@@ -93,7 +93,7 @@ GuitarTuning.prototype.isValidHS = function(halfStep)
 
 GuitarTuning.prototype.getDefaultName = function()
 {
-    return "standart_e";
+    return "standard_e";
 }
 
 GuitarTuning.prototype.getDefaultTunings = function()
