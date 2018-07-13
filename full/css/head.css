@@ -69,7 +69,7 @@
 }
 .settings_block_hide
 {
-    display: none;
+    display: none !important;
 }
 
 @media screen and (max-width: 1250px)
