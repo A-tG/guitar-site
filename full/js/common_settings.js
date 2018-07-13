@@ -1,8 +1,3 @@
-function ToggleBtn(firstBtnId, secondBtnId)
-{
-
-}
-
 function ColorSchemeSwitcher()
 {
     var $blockToSwitchClass = $('.' + BG_BLOCK_CLASS);
@@ -60,7 +55,6 @@ function ColorSchemeSwitcher()
         {
             buttons["night"].hide();
         }
-
         buttons["day"].click({that: this}, this.onSwitchToDayColorBtn);
         buttons["night"].click({that: this}, this.onSwitchToNightColorBtn);
     }
@@ -76,12 +70,89 @@ function ColorSchemeSwitcher()
     }
 }
 
+function NotationSwitcher()
+{
+    var itemsManager = menuItems;
+    var $toFlatBtn = $("#to_flat_notation_btn");
+    var $toSharpBtn = $("#to_sharp_notation_btn");
+    var isFlat = false;
+
+    this.toFlat = function()
+    {
+        isFlat = true;
+        $toFlatBtn.hide();
+        $toSharpBtn.show();
+        itemsManager.toFlat();
+    }
+
+    this.toSharp = function()
+    {
+        isFlat = false;
+        $toSharpBtn.hide();
+        $toFlatBtn.show();
+        itemsManager.toSharp();
+    }
+
+    this.saveToCookies = function()
+    {
+        Cookies.set("isFlatNotation", !!isFlat);
+    }
+
+    this.onToFlatClick = function(event)
+    {
+        var that = event.data.that;
+        that.toFlat();
+        that.saveToCookies();
+    }
+
+    this.onToSharpClick = function(event)
+    {
+        var that = event.data.that;
+        that.toSharp();
+        that.saveToCookies();
+    }
+
+    this.initButtons = function()
+    {
+        if (isFlat)
+        {
+            $toFlatBtn.hide();
+            $toSharpBtn.show();
+        }
+        else
+        {
+            $toFlatBtn.show();
+            $toSharpBtn.hide();
+        }
+        $toFlatBtn.click({that: this}, this.onToFlatClick);
+        $toSharpBtn.click({that: this}, this.onToSharpClick);
+    }
+
+    this.init = function()
+    {
+        if (Cookies.getJSON("isFlatNotation") !== undefined)
+        {
+            isFlat = !!Cookies.getJSON("isFlatNotation");
+        }
+        this.initButtons();
+        if (isFlat)
+        {
+            this.toFlat();   
+        }
+        else
+        {
+            this.toSharp();
+        }
+    }
+}
+
 var commonSettings = {
     $openBtn: $('#' + COMMON_SETTINGS_BTN_ID),
     $closeBtn: $('#' + COMMON_SETTINGS_BLOCK_CLOSE_BTN_ID),
     $settingsBlock: $('#' + COMMON_SETTINGS_BLOCK_ID),
     isShown: false,
     colorSchemeSwitcher: new ColorSchemeSwitcher(),
+    notationSwitcher: new NotationSwitcher(),
 
     showMenuToggle: function(isShow)
     {
@@ -117,5 +188,6 @@ var commonSettings = {
         this.$closeBtn.click({that: this}, this.onCloseBtnClick);
         this.$settingsBlock.parent().on("clickoutside", {that: this}, this.onCloseBtnClick);
         this.colorSchemeSwitcher.init();
+        this.notationSwitcher.init();
     }
 }

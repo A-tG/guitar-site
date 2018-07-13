@@ -20,6 +20,12 @@
     border-radius: 2px;
 }
 
+.font_element
+{
+    font-family: Tahoma, Arial, Verdana;
+    line-height: 1;
+}
+
 .left_arrow
 {
     margin-right: 3px;

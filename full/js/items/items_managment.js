@@ -134,6 +134,24 @@ var menuItems = {
         that.createNewItem();
     },
 
+    toFlat: function()
+    {
+        return;
+        for (id in this.items)
+        {
+            this.items[id].toFlat();
+        }
+    },
+
+    toSharp: function()
+    {
+        return;
+        for (id in this.items)
+        {
+            this.items[id].toSharp();
+        }
+    },
+
     init: function()
     {
         this.$addNewItemBtn = $('#' + ADD_NEW_ITEM_BTN_ID);
