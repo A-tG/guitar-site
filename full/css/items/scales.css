@@ -53,8 +53,9 @@
     float: left;
     font-family: Tahoma, Arial, Verdana;
     font-size: 18px;
-    text-transform: uppercase;
-    padding: 0 6.5px 0 8.5px;
+    min-width: 27px;
+    text-align: center;
+    padding: 0 3px;
 }
 .root_note:first-child
 {
