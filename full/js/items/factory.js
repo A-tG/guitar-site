@@ -25,7 +25,10 @@ itemsFactory = {
                 item = new ChordsItem(id, JSONstring);
                 break;
             default:
-                console.error("Invalid item type: " + type);
+                if (type)
+                {
+                    console.error("Invalid item type: " + type);
+                }
                 item = new ScalesItem(id);
         }
         return item;
