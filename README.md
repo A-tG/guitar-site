@@ -26,6 +26,8 @@
  [jquery](https://jquery.com/)
  
  [jqueryrotate](http://jqueryrotate.com)
+
+ [jquery-outside-events-plugin](http://benalman.com/projects/jquery-outside-events-plugin/)
  
  [doT.js](https://github.com/olado/doT)
  
