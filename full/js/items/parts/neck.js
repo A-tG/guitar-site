@@ -42,8 +42,7 @@ Neck.prototype.selectCurrentStringsTunes = function()
 
 Neck.prototype.selectCurrentTuning = function()
 {
-    this.$tuningOptionsBlock.find('.' + TUNING_SELECT_CLASS + " [value='" + this.state.tuning.getName() + "']").
-        prop("selected", true);
+    this.$tuningOptionsBlock.find('.' + TUNING_SELECT_CLASS).val(this.state.tuning.getName());
 }
 
 Neck.prototype.switchLH = function()
@@ -72,8 +71,7 @@ Neck.prototype.onTuningChange = function(event)
 
 Neck.prototype.selectCurrentHalfStep = function()
 {
-    $('.' + HALF_STEP_SELECT_CLASS + " [value='" + this.state.tuning.getHS() + "']", this.$tuningOptionsBlock).
-        prop("selected", true);
+    $('.' + HALF_STEP_SELECT_CLASS, this.$tuningOptionsBlock).val(this.state.tuning.getHS());
 }
 
 Neck.prototype.onHalfStepChange = function(event)
@@ -155,6 +153,12 @@ Neck.prototype.onRhToggleClick =function(event)
     {
         that.switchLHevent();
     }
+}
+
+Neck.prototype.updateNoteNotation = function()
+{
+    this.fretboard.updateNoteNotation();
+    this.stringsTunings.updateNoteNotation()
 }
 
 Neck.prototype.init = function()

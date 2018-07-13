@@ -70,6 +70,9 @@ function ColorSchemeSwitcher()
     }
 }
 
+
+var IS_FLAT_NOTATION = false;
+
 function NotationSwitcher()
 {
     var itemsManager = menuItems;
@@ -80,17 +83,18 @@ function NotationSwitcher()
     this.toFlat = function()
     {
         isFlat = true;
+        IS_FLAT_NOTATION = true;
         $toFlatBtn.hide();
         $toSharpBtn.show();
-        itemsManager.toFlat();
+        itemsManager.updateNoteNotation();
     }
 
     this.toSharp = function()
     {
         isFlat = false;
+        IS_FLAT_NOTATION = false;
         $toSharpBtn.hide();
         $toFlatBtn.show();
-        itemsManager.toSharp();
     }
 
     this.saveToCookies = function()
@@ -103,6 +107,7 @@ function NotationSwitcher()
         var that = event.data.that;
         that.toFlat();
         that.saveToCookies();
+        itemsManager.updateNoteNotation();
     }
 
     this.onToSharpClick = function(event)
@@ -110,6 +115,7 @@ function NotationSwitcher()
         var that = event.data.that;
         that.toSharp();
         that.saveToCookies();
+        itemsManager.updateNoteNotation();
     }
 
     this.initButtons = function()
@@ -143,6 +149,7 @@ function NotationSwitcher()
         {
             this.toSharp();
         }
+        itemsManager.updateNoteNotation();
     }
 }
 

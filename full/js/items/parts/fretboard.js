@@ -24,7 +24,12 @@ Fretboard.prototype.putNote = function(noteName, fretNumber, stringNumber, boxSi
     else
     {
         isTransparentNote = !this.state.normalNotesShowPattern.get(noteStep);
-        $noteBlock.text(noteName);
+        var noteText = noteName;
+        if (IS_FLAT_NOTATION)
+        {
+            noteText = new Note(noteName).normalSharpToFlat();
+        }
+        $noteBlock.text(noteText);
     }
     if (isTransparentNote || !isInBox)
     {
@@ -222,6 +227,8 @@ Fretboard.prototype.onFretHoverOut = function(event)
         toggleClass(FRET_HOVER_ACTIVE_CENTER_CLASS, false).
         toggleClass(FRET_HOVER_ACTIVE_END_CLASS, false);
 }
+
+Fretboard.prototype.updateNoteNotation = Fretboard.prototype.putNotesOnAllStrings;
 
 Fretboard.prototype.init = function()
 {

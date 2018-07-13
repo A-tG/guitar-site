@@ -11,8 +11,7 @@ function StringsTuning(state, $stringsTuningBlock, eventAction)
 StringsTuning.prototype.addStringTuning = function(stringTune)
 {
     var $addedStringTuneBlock = $(STRING_TUNE_BLOCK_TMPL()).appendTo(this.$stringsTuningBlock);
-    $('.' + STRING_TUNE_SELECT_CLASS + " :contains('" + stringTune.getName() + "')", $addedStringTuneBlock).
-        prop("selected", true);
+    $('.' + STRING_TUNE_SELECT_CLASS, $addedStringTuneBlock).val(stringTune.getName());
     $('.' + STRING_TUNE_SELECT_CLASS, $addedStringTuneBlock).change({that: this}, this.onStringTuneChange);
     $('.' + LEFT_ARROW_CLASS, $addedStringTuneBlock).click({that: this}, this.onLeftArrowTuneClick);
     $('.' + RIGHT_ARROW_CLASS, $addedStringTuneBlock).click({that: this}, this.onRightArrowTuneClick);
@@ -26,12 +25,10 @@ StringsTuning.prototype.delLastString = function()
 
 StringsTuning.prototype.selectCurrentStringsTunes = function()
 {
-    for (var i = 0; i < this.state.stringsNumber; i++)
+    for (var i = 0; i < this.tuneBlocks.length; i++)
     {
-        var stringTune = this.state.tuning.getStringTuning(i);
-        this.$stringsTuningBlock.find("." + STRING_TUNE_SELECT_CLASS + ":eq(" + i + ")" + 
-            " :contains('" + stringTune.getName() + "')").
-            prop("selected", true);
+        var noteName = this.state.tuning.getStringTuning(i).getName();
+        this.tuneBlocks[i].find("." + STRING_TUNE_SELECT_CLASS).val(noteName);
     }
 }
 
@@ -51,9 +48,7 @@ StringsTuning.prototype.onLeftArrowTuneClick = function(event)
     var stringNumber = $('.' + LEFT_ARROW_CLASS, that.$stringsTuningBlock).index(this);
     var note = that.state.tuning.getStringTuning(stringNumber);
     that.state.tuning.setStringTuning(stringNumber, note.lower());
-    $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + stringNumber + ")" + 
-        " :contains('" + note.getName() + "')", that.$stringsTuningBlock).
-        prop("selected", true);
+    that.tuneBlocks[stringNumber].find("." + STRING_TUNE_SELECT_CLASS, that.$stringsTuningBlock).val(note.getName());
     that.tuneChangeEventAction(stringNumber);
     that.state.saveToQuery();
 }
@@ -64,11 +59,26 @@ StringsTuning.prototype.onRightArrowTuneClick = function(event)
     var stringNumber = $('.' + RIGHT_ARROW_CLASS, that.$stringsTuningBlock).index(this);
     var note = that.state.tuning.getStringTuning(stringNumber);
     that.state.tuning.setStringTuning(stringNumber, note.higher());
-    $("." + STRING_TUNE_SELECT_CLASS + ":eq(" + stringNumber + ")" + 
-        " :contains('" + note.getName() + "')", that.$stringsTuningBlock).        
-        prop("selected", true);
+    that.tuneBlocks[stringNumber].find("." + STRING_TUNE_SELECT_CLASS).val(note.getName());
     that.tuneChangeEventAction(stringNumber);
     that.state.saveToQuery();
+}
+
+StringsTuning.prototype.updateNoteNotation = function()
+{
+    for (var i = 0; i < this.tuneBlocks.length; i++)
+    {
+        var $options = this.tuneBlocks[i].find("." + STRING_TUNE_SELECT_CLASS + " option");
+        $options.each(function() {
+            var $option = $(this);
+            var noteName = $option.text();
+            if (IS_FLAT_NOTATION)
+            {
+                noteName = new Note(noteName).normalSharpToFlat();
+            }
+            $option.text(noteName);
+        });
+    }
 }
 
 StringsTuning.prototype.init = function()

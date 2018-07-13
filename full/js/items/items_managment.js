@@ -110,6 +110,7 @@ var menuItems = {
         var lastCh = str[str.length - 1];
         if ((firstCh == '[') && (lastCh == ']'))
         {
+            str = str.replace(/\[/g, '(').replace(/\]/g, ')'); // square brackets to round
             result = str.replace(/["']/g, ""); // remove quotes
         }
         return result;
@@ -120,10 +121,10 @@ var menuItems = {
         var result = "";
         var firstCh = str[0];
         var lastCh = str[str.length - 1];
-        if ((firstCh == '[') && (lastCh == ']'))
+        if ((firstCh == '(') && (lastCh == ')'))
         {
-            // add quotes
-            result = str.replace(/[^\d,\[\]"'-]\w*#*/g, function(match) {return '"' + match + '"'});
+            str = str.replace(/\(/g, '[').replace(/\)/g, ']'); // round brackets to square
+            result = str.replace(/[^\d,\[\]"'-]\w*#*/g, function(match) {return '"' + match + '"'}); // add quotes
         }
         return result;
     },
@@ -134,21 +135,11 @@ var menuItems = {
         that.createNewItem();
     },
 
-    toFlat: function()
+    updateNoteNotation: function()
     {
-        return;
         for (id in this.items)
         {
-            this.items[id].toFlat();
-        }
-    },
-
-    toSharp: function()
-    {
-        return;
-        for (id in this.items)
-        {
-            this.items[id].toSharp();
+            this.items[id].updateNoteNotation();
         }
     },
 

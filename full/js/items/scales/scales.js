@@ -28,7 +28,14 @@ ScalesItem.prototype.updateScaleNotesBlock = function()
     var notes = this.state.scale.getNotes();
     var rootNote = this.state.scale.getRoot();
     notes.push(rootNote);
-    notes = notes.map(function (note) {return note.getName()});
+    if (IS_FLAT_NOTATION)
+    {
+        notes = notes.map(function (note) {return note.normalSharpToFlat()});
+    }
+    else
+    {
+        notes = notes.map(function (note) {return note.get()});
+    }
     var param = {
         root: notes[0], 
         semiTones: this.state.scale.getSemiTones(), 
@@ -65,7 +72,12 @@ ScalesItem.prototype.selectCurrentRootNote = function()
 {
     $('.' + ROOT_NOTE_CLASS + '.' + SELECTED_TEXT_CLASS, this.$itemBlock).
         toggleClass(SELECTED_TEXT_CLASS, false);
-    var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + this.state.scale.getRoot().getName() + "')", 
+    var rootName = this.state.scale.getRoot().getName();
+    if (IS_FLAT_NOTATION)
+    {
+        rootName = new Note(rootName).normalSharpToFlat();
+    }
+    var $rootNoteToSelect = $('.' + ROOT_NOTE_CLASS + ":contains('" + rootName + "')", 
         this.$itemBlock).first();
     $rootNoteToSelect.toggleClass(SELECTED_TEXT_CLASS, true);
 }
@@ -171,6 +183,22 @@ ScalesItem.prototype.initDOM = function()
     this.$scalesOptionsBlock = $(SCALES_OPTIONS_BLOCK_TMPL()).prependTo(this.$itemOptionsBlock);
     this.$scalesSelectBlock = $(SCALES_SELECT_BLOCK_TMPL()).prependTo(this.$itemOptionsBlock);
     this.$TuningOptionsBlock = $(TUNING_OPTIONS_BLOCK_TMPL()).prependTo(this.$itemOptionsBlock);
+    this.$rootNotesBlocks = $('.' + ROOT_NOTE_CLASS, '.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock);
+}
+
+ScalesItem.prototype.updateNoteNotation = function()
+{
+    this.$rootNotesBlocks.each(function() {
+        var $element = $(this);
+        var noteName = new Note($element.text());
+        if (IS_FLAT_NOTATION)
+        {
+            noteName = new Note($element.text()).normalSharpToFlat();
+        }
+        $element.text(noteName);
+    });
+    this.updateScaleNotesBlock();
+    this.neck.updateNoteNotation();
 }
 
 ScalesItem.prototype.init = function()

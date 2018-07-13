@@ -34,6 +34,11 @@ ItemBase.prototype.initAnimation = function()
     this.$itemBlock.slideDown(200);
 }
 
+ItemBase.prototype.updateNoteNotation = function()
+{
+    this.item.updateNoteNotation();
+}
+
 ItemBase.prototype.init = function(id, JSONstring)
 {
     menuItems.$addNewItemBtn.before(ITEM_BASE_BLOCK_TMPL({id: id}));
