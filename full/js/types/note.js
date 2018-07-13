@@ -37,11 +37,17 @@ isAltSharp("E#")                  return true
 
 validateNoteName("F")             return "F"
 
+normalSharpToFlat("F#")           return "Gb"
+normalSharpToFlat()               same, object's note name used
+
 flatToNormal("Db")                return "C#"
+flatToNormal()                    same, object's note name used
 
 sharpToFlat("C#")                 return "Db"
+sharpToFlat()                     same, object's note name used
 
 sharpToNormal("E#")               return "F"
+sharpToNormal()                   same, object's note name used
 
 higherName("F")                   return "F#" - higher on semitone note name
 higherName()                      same, object's note name used
@@ -283,6 +289,16 @@ Note.prototype.validateNoteName = function(noteName)
     return resultNoteName;
 }
 
+Note.prototype.normalSharpToFlat = function(noteName)
+{
+    noteName = this._noteNameArg(noteName);
+    if (this._isValidSharp(noteName))
+    {
+        return this.sharpToFlat(noteName);
+    }
+    return noteName;
+}
+
 Note.prototype.flatToNormal = function(noteName)
 {
     noteName = this._noteNameArg(noteName);
@@ -409,11 +425,7 @@ Note.prototype.lowerST = function(semiTones, noteName)
 
 Note.prototype.serialize = function()
 {
-    if (this._isValidSharp(this._noteName))
-    {
-        return this.sharpToFlat();
-    }
-    return this._noteName;
+    return this.normalSharpToFlat();
 }
 
 Note.prototype.deserialize = Note.prototype.set;
