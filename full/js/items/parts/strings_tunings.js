@@ -15,6 +15,7 @@ StringsTuning.prototype.addStringTuning = function(stringTune)
     $('.' + STRING_TUNE_SELECT_CLASS, $addedStringTuneBlock).change({that: this}, this.onStringTuneChange);
     $('.' + LEFT_ARROW_CLASS, $addedStringTuneBlock).click({that: this}, this.onLeftArrowTuneClick);
     $('.' + RIGHT_ARROW_CLASS, $addedStringTuneBlock).click({that: this}, this.onRightArrowTuneClick);
+    this.updateTuneNoteNotation($addedStringTuneBlock);
     this.tuneBlocks.push($addedStringTuneBlock);
 }
 
@@ -64,20 +65,25 @@ StringsTuning.prototype.onRightArrowTuneClick = function(event)
     that.state.saveToQuery();
 }
 
+StringsTuning.prototype.updateTuneNoteNotation = function(tuneBlock)
+{
+    var $options = tuneBlock.find("." + STRING_TUNE_SELECT_CLASS + " option");
+    $options.each(function() {
+        var $option = $(this);
+        var noteName = $option.val();
+        if (IS_FLAT_NOTATION)
+        {
+            noteName = new Note(noteName).normalSharpToFlat();
+        }
+        $option.text(noteName);
+    });
+}
+
 StringsTuning.prototype.updateNoteNotation = function()
 {
     for (var i = 0; i < this.tuneBlocks.length; i++)
     {
-        var $options = this.tuneBlocks[i].find("." + STRING_TUNE_SELECT_CLASS + " option");
-        $options.each(function() {
-            var $option = $(this);
-            var noteName = $option.text();
-            if (IS_FLAT_NOTATION)
-            {
-                noteName = new Note(noteName).normalSharpToFlat();
-            }
-            $option.text(noteName);
-        });
+        this.updateTuneNoteNotation(this.tuneBlocks[i]);
     }
 }
 
