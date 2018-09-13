@@ -25,7 +25,7 @@
 ## Used:
  [jquery](https://jquery.com/)
  
- [jqueryrotate](http://jqueryrotate.com)
+ [SVG.js](http://svgjs.com)
 
  [jquery-outside-events-plugin](http://benalman.com/projects/jquery-outside-events-plugin/)
  
