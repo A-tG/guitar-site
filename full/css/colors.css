@@ -74,11 +74,11 @@
 {
     color: #ee7600;
 }
-.night .element_bg, .night .metronome_pointer_other .metronome_pointer
+.night .element_bg
 {
     background: #fc0;
 }
-.day .element_bg, .day .metronome_pointer_other .metronome_pointer
+.day .element_bg
 {
     background: #0078d7;
 }
@@ -90,11 +90,11 @@
 {
     color: #fc0;
 }
-.night .highlighted_element_bg, .night .metronome_pointer_first .metronome_pointer
+.night .highlighted_element_bg
 {
     background: #0bb;
 }
-.day .highlighted_element_bg, .day .metronome_pointer_first .metronome_pointer
+.day .highlighted_element_bg
 {
     background: #ee7600;
 }
@@ -265,4 +265,35 @@
 {
     stroke: #ee7600;
     fill: #ee7600;
+}
+
+.night .metronome_pointer_other .metronome_pointer
+{
+    stroke: #eee;
+    fill: #eee;
+}
+.day .metronome_pointer_other .metronome_pointer
+{
+    stroke: #111;
+    fill: #111;
+}
+
+.night .metronome_pointer_first .metronome_pointer
+{
+    stroke: #0bb;
+    fill: #0bb;
+}
+.day .metronome_pointer_first .metronome_pointer
+{
+    stroke: #ee7600;
+    fill: #ee7600;
+}
+
+.night .metronome_first_beat_number_vis
+{
+    color: #0bb;
+}
+.day .metronome_first_beat_number_vis
+{
+    color: #ee7600;
 }
