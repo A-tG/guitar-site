@@ -24,14 +24,38 @@ function MetrAudio(audioCtx, worker)
         var osc = this.ctx.createOscillator();
         osc.type = 'square';
         var freq = SECOND_CLICK_FREQ;
+        var duration = this.secondClickDur;
         if (beat.number == 0)
         {
             freq = FIRST_CLICK_FREQ;
+            duration = this.firstClickDur;
+        }
+        if (duration > beat.maxDur)
+        {
+            duration = this.getDurationForFreq(freq, beat.maxDur)
         }
         osc.frequency.value = freq;
         osc.connect(this.dummyNode);
         osc.start(beat.audioTime);
-        osc.stop(beat.audioTime + 50 / freq);
+        osc.stop(beat.audioTime + duration);
+        this.rampAudio(beat.audioTime, duration)
+    }
+
+    this.getDurationForFreq = function(freq, closeDuration)
+    {
+        var desiredDuration = closeDuration;
+        var cycleDuration = 1 / freq;
+        var completedCycles = Math.floor(desiredDuration / cycleDuration);
+        return completedCycles * cycleDuration;
+    }
+
+    this.rampAudio = function(time, soundDur)
+    {
+        var transitionDur = soundDur * 0.25;
+        this.rampNode.gain.setTargetAtTime(0, time + transitionDur, transitionDur * 0.6);
+        var transitionDur = soundDur + 0.001;
+        this.rampNode.gain.setTargetAtTime(1, time + transitionDur, 0);
+
     }
 
     this.getTime = function()
@@ -57,19 +81,33 @@ function MetrAudio(audioCtx, worker)
         this.initDummyNode();
     }
 
-    this.initDummyNode = function()
+    this.initRampNode = function()
     {
-        this.dummyNode = this.ctx.createGain();
-        this.dummyNode.connect(this.gainNode);
-        this.gainNode.connect(this.ctx.destination);
+        this.rampNode = this.ctx.createGain();
+        this.rampNode.connect(this.ctx.destination);
     }
 
-    this.init = function()
+    this.initGainNode = function()
     {
         this.gainNode = this.ctx.createGain();
         this.setVolumePercent(DEFAULT_METR_VOLUME);
         this.gainNode.gain.value = this.volume;
+        this.gainNode.connect(this.rampNode);
+    }
+
+    this.initDummyNode = function()
+    {
+        this.dummyNode = this.ctx.createGain();
+        this.dummyNode.connect(this.gainNode);
+    }
+
+    this.init = function()
+    {
+        this.initRampNode();
+        this.initGainNode();
         this.initDummyNode();
+        this.firstClickDur = this.getDurationForFreq(FIRST_CLICK_FREQ, 0.05);
+        this.secondClickDur = this.getDurationForFreq(SECOND_CLICK_FREQ, 0.05);
     }
 
     this.init();
@@ -121,6 +159,13 @@ function MetrAnimation()
     this.$beatVisPointer.hide();
 }
 
+function MetrBeat(time, number, maxDur)
+{
+    this.audioTime = time;
+    this.number = number;
+    this.maxDur = maxDur;
+}
+
 var metronome = {
     audioCtx: audioCtx,
     worker: worker,
@@ -146,9 +191,9 @@ var metronome = {
     $beatValLeftArrow: $('#' + METR_BEAT_VAL_LEFT_ARROW_ID),
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
 
-    scheduleBeatFromQueue: function()
+    scheduleBeatsToAudio: function()
     {
-        if (this.beatsQueue.length > 0)
+        while (this.beatsQueue.length > 1)
         {
             var beat = this.beatsQueue.shift();
             this.audio.scheduleBeat(beat);
@@ -162,24 +207,28 @@ var metronome = {
         {
             var currentAudioTime = this.audio.getTime();
             var lastBeatInQueue = this.beatsQueue[this.beatsQueue.length - 1];
-            var delay = (240 / this.beatValue) / this.tempo;
+            var delay = this.getDurBetweenBeats();
             if ((currentAudioTime + delay) >= lastBeatInQueue.audioTime)
             {
                 this.nextBeatNumber = (this.nextBeatNumber + 1) % this.beats;
-                this.beatsQueue.push({
-                    audioTime: lastBeatInQueue.audioTime + delay,
-                    number: this.nextBeatNumber
-                });
-                this.scheduleBeatFromQueue();
+                var beat = new MetrBeat(lastBeatInQueue.audioTime + delay, this.nextBeatNumber, delay / 2);
+                this.beatsQueue.push(beat);
+                this.scheduleBeatsToAudio();
             }
         }
-        else
-        {
-            this.beatsQueue.push({
-                audioTime: this.audio.getTime(),
-                number: 0
-            });
-        }
+    },
+
+    beatsSchedulerStart: function()
+    {
+        this.beatsQueue = [];
+        this.nextBeatNumber = 0;
+        var beat = new MetrBeat(this.audio.getTime(), 0, this.getDurBetweenBeats() / 2);
+        this.beatsQueue.push(beat);
+    },
+
+    getDurBetweenBeats: function()
+    {
+        return (240 / this.beatValue) / this.tempo;
     },
 
     initTempoOptionsDatalist: function()
@@ -198,8 +247,7 @@ var metronome = {
         $(this).hide();
         that.$stopBtn.show();
         that.metrAnimation.play();
-        that.beatsQueue = [];
-        that.nextBeatNumber = 0;
+        that.beatsSchedulerStart();
         that.worker.postMessage('startMetronomeTicking');
     },
     

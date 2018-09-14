@@ -18,7 +18,7 @@ var MIN_TEMPO = 40;
 var MAX_TEMPO = 320;
 var TEMPO_OPTIONS_STEP = 5;
 var SECOND_CLICK_FREQ = 880;
-var FIRST_CLICK_FREQ = 1480;
+var FIRST_CLICK_FREQ = 1479.98;
 
 var DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS = 30;
 var DEFAULT_NOTES_SHOW_PATTERN = [true, true, true, true, true, true, true, true, true, true, true, true];
