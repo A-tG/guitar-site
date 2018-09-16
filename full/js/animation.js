@@ -9,21 +9,20 @@ function AnimationQ(timeCtx)
     {
         if (this.Q.length > 0)
         {
-            var animation = this.Q[0];
-            var startTime = animation.time;
-            var targetTime = startTime + animation.duration;
-            var currentTime = this.getCurrentTime();
-            var isCurrentAnim = (currentTime >= startTime) && (currentTime <= targetTime);
-            var isTooSoon = currentTime < startTime;
-            while (!isCurrentAnim && !isTooSoon && (this.Q.length > 1))
-            {
-                this.Q.shift();
-                animation = this.Q[0];
-                startTime = animation.time;
-                targetTime = startTime + animation.duration;
-                currentTime = this.getCurrentTime();
-                isCurrentAnim = (currentTime >= startTime) && (currentTime <= targetTime);
-            }
+            var animation, startTime, targetTime, currentTime, isCurrentAnim, isTooSoon;
+            // shifting queue
+            do {
+                var animation = this.Q[0];
+                var startTime = animation.time;
+                var targetTime = startTime + animation.duration;
+                var currentTime = this.getCurrentTime();
+                var isCurrentAnim = (currentTime >= startTime) && (currentTime <= targetTime);
+                var isTooSoon = currentTime < startTime;
+                if (!isTooSoon && !isCurrentAnim)
+                {
+                    this.Q.shift()
+                }
+            } while (!isCurrentAnim && !isTooSoon && (this.Q.length > 1))
             if (isCurrentAnim)
             {
                 this.callBegin(animation);
