@@ -6,14 +6,14 @@
 ## What already works:
 ### Metronome
 * High-precision click 
-* Logarithmic volume control - smooth volume increase for click
+* Logarithmic volume control - smooth click volume control
 * Tempo range from 40 to 320
 * Notes per measure from 1 to 16
 * Duration from whole note to 32nd
 ### Scales calculator
 * Ability to choose number of strings
 * Ready tunings presets or custom for each string
-* Triads support
+* Triads, can show intervals instead of notes
 * Toggle hiding any scale note
 * Scale box on any fret
 ## Planned:
