@@ -3,7 +3,7 @@ function AnimationQ(timeCtx)
     this.ctx = timeCtx; // for time checking
     this.Q = [];
     this.handle = null;
-    this.maxQlength = 50;
+    this.maxQlength = 25;
 
     this.update = function(timestamp)
     {
@@ -14,7 +14,8 @@ function AnimationQ(timeCtx)
             var targetTime = startTime + animation.duration;
             var currentTime = this.getCurrentTime();
             var isCurrentAnim = (currentTime >= startTime) && (currentTime <= targetTime);
-            while (!isCurrentAnim && (this.Q.length > 1))
+            var isTooSoon = currentTime < startTime;
+            while (!isCurrentAnim && !isTooSoon && (this.Q.length > 1))
             {
                 this.Q.shift();
                 animation = this.Q[0];
@@ -25,11 +26,7 @@ function AnimationQ(timeCtx)
             }
             if (isCurrentAnim)
             {
-                if (animation.begin && !animation.isBeginDone)
-                {
-                    animation.isBeginDone = true;
-                    animation.begin();
-                }
+                this.callBegin(animation);
                 var progress = this.getAnimationProgress(currentTime, startTime, targetTime);
                 switch (animation.type)
                 {
@@ -40,6 +37,15 @@ function AnimationQ(timeCtx)
             }
         }
         this.handle = requestAnimationFrame(this.update.bind(this));
+    }
+
+    this.callBegin = function(animation)
+    {
+        if (animation.begin && !animation.isBeginDone)
+        {
+            animation.isBeginDone = true;
+            animation.begin();
+        }
     }
 
     this.rotaton360cw = function(el, progress)
