@@ -24,8 +24,6 @@
 
 ## Used:
  [jquery](https://jquery.com/)
- 
- [SVG.js](http://svgjs.com)
 
  [jquery-outside-events-plugin](http://benalman.com/projects/jquery-outside-events-plugin/)
  
