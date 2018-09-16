@@ -64,6 +64,11 @@
     display: none;
 }
 
+.center_origin
+{
+    transform-origin: center;
+}
+
 @media screen and (max-width: 1250px)
 {
     .left_arrow

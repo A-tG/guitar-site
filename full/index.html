@@ -44,7 +44,7 @@
           <ul class="head_block_content">
             <li class="head_item">
               <a class="element_color hover_element_color transitional" href="" title="Artistic Guitar">
-                <svg class="head_subitem svg_element_stroke svg_element_fill hover_svg_color transitional" height="45" width="45" viewBox="0 0 210 297">
+                <svg class="head_subitem svg_element_stroke svg_element_fill hover_svg_color transitional" height="35" width="35" viewBox="0 0 210 297">
                   <ellipse transform="matrix(.93093 -.3652 .21607 .97638 0 0)" cx="19.418" cy="236.87" rx="80.642" ry="49.289"/>
                   <g stroke-linecap="round" stroke-linejoin="round">
                    <path d="m136.41 198.68-0.75004-174.01z" stroke-width="17.82"/>
@@ -69,13 +69,13 @@
                   </svg>
                 </li>
                 <li id="metronome_beat_vis_block" class="metronome_beat_vis_block metronome_element normal_bg3">
-                  <svg id="metronome_pointer_block" class="metronome_pointer_block" viewBox="0 0 100 100">
+                  <svg id="metronome_pointer_block" class="metronome_pointer_block metronome_pointer_first" viewBox="0 0 100 100">
                     <defs>
                       <clipPath id="metr_pointer_cutoff">
                         <polygon points="50,0 65,20 35,20" />
                       </clipPath>
                     </defs>
-                    <rect id="metronome_pointer" class="metronome_pointer" height="100%" width="16%" x="42%" clip-path="url(#metr_pointer_cutoff)" />
+                    <rect id="metronome_pointer" class="metronome_pointer center_origin" height="100%" width="16%" x="42%" clip-path="url(#metr_pointer_cutoff)" />
                   </svg>
                   <div id="metronome_beat_number_vis" class="metronome_beat_number_vis normal_color"></div>
                 </li>
@@ -436,7 +436,6 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/dot.min.js"></script>
     <script type="text/javascript" src="js/jquery.ba-outside-events.min.js"></script>
-    <script type="text/javascript" src="js/svg.min.js"></script>
     <script type="text/javascript" src="js/js.cookie.js"></script>
     <script type="text/javascript" src="js/constants.js"></script>
     <script type="text/javascript" src="js/types/note.js"></script>
@@ -447,6 +446,7 @@
     <script type="text/javascript" src="js/utility/others.js"></script>
     <script type="text/javascript" src="js/defaults/defaults.js"></script>
     <script type="text/javascript" src="js/defaults/scales.js"></script>
+    <script type="text/javascript" src="js/worker_msg.js"></script>
     <script type="text/javascript" src="js/metronome.js"></script>
     <script type="text/javascript" src="js/items/item_base.js"></script>
     <script type="text/javascript" src="js/items/parts/strings_tunings.js"></script>
