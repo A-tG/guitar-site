@@ -64,8 +64,8 @@ function AnimationQ(timeCtx)
 
     this.setAngle = function(el, deg)
     {
-        el.setAttribute("style", "transform: rotate(" + deg + "deg);");
         deg = deg % 360;
+        el.style.transform = "rotateZ(" + deg + "deg)";
     }
 
     this.push = function(anim)
