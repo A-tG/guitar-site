@@ -40,7 +40,7 @@ function MetrAudio(audioCtx, worker)
         var transitionDur = soundDur * 0.05;
         this.rampNode.gain.setTargetAtTime(0, time + transitionDur, transitionDur * 2);
         var transitionDur = soundDur + soundDur * 0.25;
-        this.rampNode.gain.setTargetAtTime(1, time + transitionDur, 0);
+        this.rampNode.gain.setTargetAtTime(1, time + transitionDur, 0.001);
 
     }
 
