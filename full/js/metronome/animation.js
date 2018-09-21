@@ -56,7 +56,7 @@ function MetrCanvPointerAnimation(timeCtx)
     {
         this.ctx.fillStyle = this.strokeColor;
         var x = this.cnv.width * 0.5;
-        var y = this.cnv.height * 0.5 + 0.05 * parseInt(this.fontSize);
+        var y = this.cnv.height * 0.5 + parseInt(this.fontSize) * 0.36;
         this.ctx.fillText(this.beatNumber + 1, x, y);
     }
 
@@ -83,7 +83,6 @@ function MetrCanvPointerAnimation(timeCtx)
         this.fontSize = (fontSizeNumber * this.scaleC) + "px";
         this.ctx.font = this.fontSize + " " + this.fontFamily;
         this.ctx.textAlign = "center";
-        this.ctx.textBaseline = "middle";
     }
 
     this.initCanvasScale = function()
