@@ -2,7 +2,6 @@ function MetrCanvPointerAnimation(timeCtx)
 {
     this.$beatVisNumber = $('#' + METR_BEAT_VIS_NUMBER_ID);
     this.$beatVisBlock = $('#' + METR_BEAT_VIS_POINTER_BLOCK_ID);
-    this.pointerProgress = 0;
     this.animationQ = new AnimationQ(timeCtx);
     this.cnv = this.$beatVisBlock[0];
     this.ctx = this.cnv.getContext('2d');
@@ -10,7 +9,7 @@ function MetrCanvPointerAnimation(timeCtx)
     this.scheduleBeatVisual = function(beat, duration)
     {
         var isFirstBeat = beat.number == 0;
-        var animation = {anim: this.setProgress.bind(this), type: "custom", time: beat.audioTime, duration: duration};
+        var animation = {anim: this.animate.bind(this), type: "custom", time: beat.audioTime, duration: duration};
         var beginFunc = function()
         {
             this.$beatVisBlock.toggleClass(METR_FIRST_BEAT_VIS_NUMBER_CLASS, isFirstBeat);
@@ -21,7 +20,7 @@ function MetrCanvPointerAnimation(timeCtx)
         this.animationQ.push(animation);
     }
 
-    this.setProgress = function(progress)
+    this.animate = function(progress)
     {
         var angle = 2 * Math.PI * progress;
         this.clearCnv();
@@ -38,7 +37,7 @@ function MetrCanvPointerAnimation(timeCtx)
 
     this.drawArc = function(endAngle)
     {
-        this.ctx.lineWidth = 5;
+        this.ctx.lineWidth = 6;
         this.ctx.strokeStyle = this.getColor();
         this.ctx.beginPath();
         var x = this.cnv.width * 0.5;
@@ -60,6 +59,7 @@ function MetrCanvPointerAnimation(timeCtx)
     {
         this.animationQ.stop();
         this.clearCnv();
+        this.$beatVisNumber.text("");
     }
 
     this.play = function()
