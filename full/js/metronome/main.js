@@ -23,15 +23,13 @@ function MetrBeat(time, number, maxDur)
 var metronome = {
     audioCtx: audioCtx,
     worker: metronomeWorker,
-    msgEnum: msgActionEnum.metr,
-    isPlaying: false,
-    beats: DEFAULT_METR_BEATS,
-    beatValue: DEFAULT_METR_BEAT_VAL,
-    tempo: DEFAULT_METR_TEMPO,
-    nextBeatNumber: 0,
-    beatsQueue: [],
-    lookAheadNumber: 1,
-
+    state: {
+        isPlaying: false,
+        volume: 50,
+        beats: DEFAULT_METR_BEATS,
+        beatValue: DEFAULT_METR_BEAT_VAL,
+        tempo: DEFAULT_METR_TEMPO,
+    },
     $playBtn: $('#' + METR_PLAY_BTN_ID),
     $stopBtn: $('#' + METR_STOP_BTN_ID),
     $volumeRange: $('#' + METR_VOLUME_RANGE_ID),
@@ -47,64 +45,6 @@ var metronome = {
     $beatValLeftArrow: $('#' + METR_BEAT_VAL_LEFT_ARROW_ID),
     $beatValRightArrow: $('#' + METR_BEAT_VAL_RIGHT_ARROW_ID),
 
-    scheduleBeats: function()
-    {
-        while (this.beatsQueue.length > 1)
-        {
-            var beat = this.beatsQueue.shift();
-            this.audio.scheduleBeat(beat);
-            this.metrAnimation.scheduleBeatVisual(beat, this.getDurBetweenBeats());
-        }
-    },
-
-    addBeatsToQ: function(number)
-    {
-        var delay = this.getDurBetweenBeats();
-        var lastBeatTime = this.beatsQueue[this.beatsQueue.length - 1].audioTime;
-        if ((this.audio.getTime() + delay * number) >= lastBeatTime)
-        {
-            for (var i = this.beatsQueue.length; i < number; i++)
-            {
-                this.nextBeatNumber = (this.nextBeatNumber + 1) % this.beats;
-                var beat = new MetrBeat(lastBeatTime + delay, this.nextBeatNumber, delay / 2);
-                this.beatsQueue.push(beat);
-                lastBeatTime = this.beatsQueue[this.beatsQueue.length - 1].audioTime;
-            }
-            this.scheduleBeats();
-        }
-    },
-    
-    beatsSchedulerTick: function()
-    {
-        if (this.beatsQueue.length > 0)
-        {
-            var tickTime = 1 / this.ticksPerSecond;
-            var lookAheadNumber = Math.ceil((tickTime * 2) / this.getDurBetweenBeats()) + 1;
-            this.lookAheadNumber = lookAheadNumber;
-            this.addBeatsToQ(lookAheadNumber);
-        } else
-        {
-            var beat = new MetrBeat(this.audio.getTime(), this.nextBeatNumber, this.getDurBetweenBeats() / 2);
-            this.beatsQueue.push(beat);
-        }
-    },
-
-    beatsSchedulerStart: function()
-    {
-        this.clearQ();
-        this.nextBeatNumber = 0;
-    },
-
-    clearQ: function()
-    {
-        this.beatsQueue = [];
-    },
-
-    getDurBetweenBeats: function()
-    {
-        return (240 / this.beatValue) / this.tempo;
-    },
-
     initTempoOptionsDatalist: function()
     {
         for (var i = MIN_TEMPO; i <= MAX_TEMPO; i += TEMPO_OPTIONS_STEP)
@@ -113,47 +53,33 @@ var metronome = {
             $(METR_DATALIST_OPTION_TMPL(param)).appendTo(this.$tempoOptionsBlock);
         }
     },
-
-    onRateChange: function()
-    {
-        if (!this.isPlaying) {return;}
-        this.audio.clearAudioQ();
-        if (this.getDurBetweenBeats() * this.lookAheadNumber > 0.5)
-        {
-            this.clearQ();
-            this.metrAnimation.animationQ.clear();
-        }
-    },
     
     onPlayBtn: function(event)
     {
         that = event.data.that;
-        that.isPlaying = true;
+        if (that.state.isPlaying) {return;}
+        that.state.isPlaying = true;
         $(this).hide();
         that.$stopBtn.show();
-        that.beatsSchedulerStart();
-        that.metrAnimation.play();
-        var msg = new workerMsg(that.msgEnum.startTicking);
-        that.worker.postMessage(msg);
+        that.scheduler.start();
     },
     
     onStopBtn: function(event)
     {
         that = event.data.that;
-        that.isPlaying = false;
-        that.audio.clearAudioQ();
+        if (!that.state.isPlaying) {return;}
+        that.state.isPlaying = false;
         $(this).hide();
         that.$playBtn.show();
-        that.metrAnimation.stop();
-        var msg = new workerMsg(that.msgEnum.stopTicking);
-        that.worker.postMessage(msg);
+        that.scheduler.stop();
     },
     
     onVolumeChange: function(event)
     {
         that = event.data.that;
         var volume = $(this).val();
-        that.audio.setVolumePercent(volume);
+        that.state.volume = volume;
+        that.scheduler.updateVolume();
     },
     
     onTempoChange: function(event)
@@ -162,8 +88,8 @@ var metronome = {
         var tempo = $(this).val();
         that.$tempoInput.val(tempo);
         tempo = +tempo;
-        that.tempo = tempo;
-        that.onRateChange();
+        that.state.tempo = tempo;
+        that.scheduler.onRateChange();
     },
     
     onTempoInputChange: function(event)
@@ -179,10 +105,10 @@ var metronome = {
         {
             tempo = MAX_TEMPO;
         }
-        that.tempo = tempo;
+        that.state.tempo = tempo;
         $(this).val(tempo);
         that.$tempoRange.val(tempo);
-        that.onRateChange();
+        that.scheduler.onRateChange();
     },
     
     onTempoLeftArrow: function(event)
@@ -192,10 +118,10 @@ var metronome = {
         if (tempo > MIN_TEMPO)
         {
             tempo--;
-            that.tempo = tempo;
+            that.state.tempo = tempo;
             that.$tempoInput.val(tempo);
             that.$tempoRange.val(tempo);
-            that.onRateChange();
+            that.scheduler.onRateChange();
         }
     },
     
@@ -206,10 +132,10 @@ var metronome = {
         if (tempo < MAX_TEMPO)
         {
             tempo++;
-            that.tempo = tempo;
+            that.state.tempo = tempo;
             that.$tempoInput.val(tempo);
             that.$tempoRange.val(tempo);
-            that.onRateChange();
+            that.scheduler.onRateChange();
         }
     },
     
@@ -218,17 +144,17 @@ var metronome = {
         that = event.data.that;
         var beats = $(this).val();
         beats = +beats;
-        that.beats = beats;
+        that.state.beats = beats;
     },
     
     onBeatsLeftArrow: function(event)
     {
         that = event.data.that;
-        var beats = that.beats;
+        var beats = that.state.beats;
         if (!(beats <= MIN_BEATS))
         {
             beats--;
-            that.beats = beats;
+            that.state.beats = beats;
             that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
         }
     },
@@ -236,11 +162,11 @@ var metronome = {
     onBeatsRightArrow: function(event)
     {
         that = event.data.that;
-        var beats = that.beats;
+        var beats = that.state.beats;
         if (!(beats >= MAX_BEATS))
         {
             beats++;
-            that.beats = beats;
+            that.state.beats = beats;
             that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
         }
     },
@@ -250,54 +176,33 @@ var metronome = {
         that = event.data.that;
         var beatVal = $(this).val();
         beatVal = +beatVal;
-        that.beatValue = beatVal;
-        that.onRateChange();
+        that.state.beatValue = beatVal;
+        that.scheduler.onRateChange();
     },
     
     onBeatValLeftArrow: function(event)
     {
         that = event.data.that;
-        var beatVal = that.beatValue;
+        var beatVal = that.state.beatValue;
         if (!(beatVal <= MIN_BEAT_VAL))
         {
             beatVal /= 2;
-            that.beatValue = beatVal;
+            that.state.beatValue = beatVal;
             that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
-            that.onRateChange();
+            that.scheduler.onRateChange();
         }
     },
     
     onBeatValRightArrow: function(event)
     {
         that = event.data.that;
-        var beatVal = that.beatValue;
+        var beatVal = that.state.beatValue;
         if (!(beatVal >= MAX_BEAT_VAL))
         {
             beatVal *= 2;
-            that.beatValue = beatVal;
+            that.state.beatValue = beatVal;
             that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
-            that.onRateChange();
-        }
-    },
-
-    getWorkerTickrate: function()
-    {
-        var msg = new workerMsg(this.msgEnum.getTickrate);
-        this.worker.postMessage(msg);
-    },
-    
-    onWorkerMessage: function(e)
-    {
-        var action = e.data.action;
-        var data = e.data.data;
-        switch (action)
-        {
-            case this.msgEnum.tick:
-                this.beatsSchedulerTick();
-                break;
-            case this.msgEnum.tickrate:
-                this.ticksPerSecond = data;
-                break;
+            that.scheduler.onRateChange();
         }
     },
     
@@ -311,16 +216,14 @@ var metronome = {
         $('#' + METRONOME_DISABLED_ID).hide(0);
         this.initTempoOptionsDatalist();
 
-        this.audio = new MetrAudio(this.audioCtx, this.worker);
-        this.audio.setVolumePercent(+this.$volumeRange.val());
-        this.metrAnimation = new MetrCanvPointerAnimation(this.audioCtx);
-        this.tempo = +this.$tempoRange.val();
-        this.worker.onmessage = this.onWorkerMessage.bind(this);
-        this.getWorkerTickrate();
-        
-        this.$tempoInput.val(this.tempo);
-        this.beats = this.$beatsSelect.val();
-        this.beatValue = this.$beatValSelect.val();
+        this.state.tempo = +this.$tempoRange.val();
+        this.state.volume = +this.$volumeRange.val();
+        this.$tempoInput.val(this.state.tempo);
+        this.state.beats = this.$beatsSelect.val();
+        this.state.beatValue = this.$beatValSelect.val();
+
+        this.scheduler = new MetrScheduler(this.state, this.audioCtx, this.worker);
+
         this.$playBtn.click({that: this}, this.onPlayBtn);
         this.$stopBtn.click({that: this}, this.onStopBtn);
         this.$volumeRange.change({that: this}, this.onVolumeChange);

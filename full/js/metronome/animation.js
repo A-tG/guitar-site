@@ -1,6 +1,6 @@
-function MetrCanvPointerAnimation(timeCtx)
+function MetrCanvPointerAnimation(timeCtx, cnvBlock)
 {
-    this.$beatVisBlock = $('#' + METR_BEAT_VIS_POINTER_BLOCK_ID);
+    this.$beatVisBlock = cnvBlock;
     this.animationQ = new AnimationQ(timeCtx);
     this.cnv = this.$beatVisBlock[0];
     this.ctx = this.cnv.getContext('2d');

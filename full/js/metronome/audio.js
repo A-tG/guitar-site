@@ -1,9 +1,10 @@
-function MetrAudio(audioCtx, worker)
+function MetrAudio(state, audioCtx, worker)
 {
-    // graphs:  oscilator(click) -> dummyNode -> gainNode (volume) -> rampNode (fadeOut for click) -> destination
+    // audio nodes:  
+    // oscilator(click) -> dummyNode(for removing scheduled clicks) -> gainNode (volume) -> rampNode (fadeOut for click) -> destination
+    this.metrState = state;
     this.ctx = audioCtx;
     this.worker = worker;
-    this.volume = 0;
     this.clickOscType = "square";
 
     this.scheduleBeat = function(beat)
@@ -50,15 +51,9 @@ function MetrAudio(audioCtx, worker)
         return this.ctx.currentTime;
     }
 
-    this.setVolumePercent = function(vol)
+    this.updateVolume = function()
     {
-        this.volume = sliderLogVal(vol, 1, 100) / 100;
-        this.gainNode.gain.value = this.volume;
-    }
-
-    this.getVolumePercent = function()
-    {
-        return this.volume * 100;
+        this.gainNode.gain.value = sliderLogVal(this.metrState.volume, 1, 100) / 100;
     }
 
     this.clearAudioQ = function()
@@ -81,8 +76,7 @@ function MetrAudio(audioCtx, worker)
     this.initGainNode = function()
     {
         this.gainNode = this.ctx.createGain();
-        this.setVolumePercent(DEFAULT_METR_VOLUME);
-        this.gainNode.gain.value = this.volume;
+        this.updateVolume();
         this.gainNode.connect(this.rampNode);
     }
 
