@@ -187,8 +187,6 @@ var METR_BEAT_VIS_BLOCK_ID = "metronome_beat_vis_block";
 var METR_BEAT_VIS_NUMBER_ID = "metronome_beat_number_vis";
 var METR_BEAT_VIS_POINTER_BLOCK_ID = "metronome_pointer_block";
 var METR_BEAT_VIS_POINTER_ID = "metronome_pointer";
-var METR_BEAT_VIS_POINTER_FIRST_CLASS = "metronome_pointer_first";
-var METR_BEAT_VIS_POINTER_OTHER_CLASS = "metronome_pointer_other";
 var METR_FIRST_BEAT_VIS_NUMBER_CLASS = "metronome_first_beat_number_vis";
 
 var COMMON_SETTINGS_BTN_ID = "common_settings_btn";

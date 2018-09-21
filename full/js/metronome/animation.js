@@ -1,10 +1,11 @@
 function MetrCanvPointerAnimation(timeCtx)
 {
-    this.$beatVisNumber = $('#' + METR_BEAT_VIS_NUMBER_ID);
     this.$beatVisBlock = $('#' + METR_BEAT_VIS_POINTER_BLOCK_ID);
     this.animationQ = new AnimationQ(timeCtx);
     this.cnv = this.$beatVisBlock[0];
     this.ctx = this.cnv.getContext('2d');
+    this.beatNumber = 0;
+    this.scaleC = 2;
 
     this.scheduleBeatVisual = function(beat, duration)
     {
@@ -13,8 +14,8 @@ function MetrCanvPointerAnimation(timeCtx)
         var beginFunc = function()
         {
             this.$beatVisBlock.toggleClass(METR_FIRST_BEAT_VIS_NUMBER_CLASS, isFirstBeat);
-            this.$beatVisNumber.toggleClass(METR_FIRST_BEAT_VIS_NUMBER_CLASS, isFirstBeat);
-            this.$beatVisNumber.text(beat.number + 1);
+            this.setStrokeColor();
+            this.beatNumber = beat.number;
         }
         animation.begin = beginFunc.bind(this);
         this.animationQ.push(animation);
@@ -25,6 +26,7 @@ function MetrCanvPointerAnimation(timeCtx)
         var angle = 2 * Math.PI * progress;
         this.clearCnv();
         this.drawArc(angle);
+        this.drawBeatNumber();
     }
 
     this.clearCnv = function()
@@ -37,8 +39,8 @@ function MetrCanvPointerAnimation(timeCtx)
 
     this.drawArc = function(endAngle)
     {
-        this.ctx.lineWidth = 6;
-        this.ctx.strokeStyle = this.getColor();
+        this.ctx.lineWidth = 6 * this.scaleC;
+        this.ctx.strokeStyle = this.strokeColor;
         this.ctx.beginPath();
         var x = this.cnv.width * 0.5;
         var y = this.cnv.height * 0.5;
@@ -50,20 +52,53 @@ function MetrCanvPointerAnimation(timeCtx)
         this.ctx.stroke();
     }
 
-    this.getColor = function()
+    this.drawBeatNumber = function()
     {
-        return this.$beatVisBlock.css("color");
+        this.ctx.fillStyle = this.strokeColor;
+        var x = this.cnv.width * 0.5;
+        var y = this.cnv.height * 0.5 + 0.05 * parseInt(this.fontSize);
+        this.ctx.fillText(this.beatNumber + 1, x, y);
+    }
+
+    this.setStrokeColor = function()
+    {
+        this.strokeColor = this.$beatVisBlock.css("color");
     }
 
     this.stop = function()
     {
         this.animationQ.stop();
         this.clearCnv();
-        this.$beatVisNumber.text("");
     }
 
     this.play = function()
     {
         this.animationQ.start();
     }
+
+    this.initFont = function()
+    {
+        this.fontFamily = this.$beatVisBlock.css("font-family");
+        var fontSizeNumber = parseInt(this.$beatVisBlock.css("font-size"));
+        this.fontSize = (fontSizeNumber * this.scaleC) + "px";
+        this.ctx.font = this.fontSize + " " + this.fontFamily;
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+    }
+
+    this.initCanvasScale = function()
+    {
+        var width = +this.$beatVisBlock.attr("width") * this.scaleC;
+        var height = +this.$beatVisBlock.attr("height") * this.scaleC;
+        this.$beatVisBlock.attr("width", width);
+        this.$beatVisBlock.attr("height", height);
+    }
+
+    this.init = function()
+    {
+        this.initCanvasScale();
+        this.initFont();
+    }
+
+    this.init();
 }

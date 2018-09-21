@@ -267,28 +267,6 @@
     fill: #ee7600;
 }
 
-.night .metronome_pointer_other .metronome_pointer
-{
-    stroke: #eee;
-    fill: #eee;
-}
-.day .metronome_pointer_other .metronome_pointer
-{
-    stroke: #111;
-    fill: #111;
-}
-
-.night .metronome_pointer_first .metronome_pointer
-{
-    stroke: #0bb;
-    fill: #0bb;
-}
-.day .metronome_pointer_first .metronome_pointer
-{
-    stroke: #ee7600;
-    fill: #ee7600;
-}
-
 .night .metronome_first_beat_number_vis
 {
     color: #0bb;
