@@ -1,4 +1,4 @@
-/*!
+/*
  * JavaScript Cookie v2.1.2
  * https://github.com/js-cookie/js-cookie
  *
