@@ -32,6 +32,9 @@ function AnimationQ(timeCtx)
                     case "rotaton360cw":
                         this.rotaton360cw(animation.el, progress);
                         break;
+                    case "custom":
+                        animation.anim(progress);
+                        break;
                 }
             }
         }

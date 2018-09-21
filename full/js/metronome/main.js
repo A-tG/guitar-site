@@ -296,7 +296,7 @@ var metronome = {
 
         this.audio = new MetrAudio(this.audioCtx, this.worker);
         this.audio.setVolumePercent(+this.$volumeRange.val());
-        this.metrAnimation = new MetrAnimation(this.audioCtx);
+        this.metrAnimation = new MetrCanvPointerAnimation(this.audioCtx);
         this.tempo = +this.$tempoRange.val();
         this.worker.onmessage = this.onWorkerMessage.bind(this);
         this.getWorkerTickrate();

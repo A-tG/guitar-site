@@ -70,14 +70,7 @@
                   </svg>
                 </li>
                 <li id="metronome_beat_vis_block" class="metronome_beat_vis_block metronome_element normal_bg3">
-                  <svg id="metronome_pointer_block" class="metronome_pointer_block metronome_pointer_first" viewBox="0 0 100 100">
-                    <defs>
-                      <clipPath id="metr_pointer_cutoff">
-                        <polygon points="50,0 65,20 35,20" />
-                      </clipPath>
-                    </defs>
-                    <rect id="metronome_pointer" class="metronome_pointer center_origin" height="100%" width="16%" x="42%" clip-path="url(#metr_pointer_cutoff)" />
-                  </svg>
+                  <canvas id="metronome_pointer_block" class="metronome_pointer_block normal_color" width="40" height="40"></canvas>
                   <div id="metronome_beat_number_vis" class="metronome_beat_number_vis normal_color"></div>
                 </li>
                 <li id="metronome_play_btn" class="play_btn metronome_element element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
