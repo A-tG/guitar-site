@@ -1,5 +1,6 @@
 function MetrAudio(audioCtx, worker)
 {
+    // graphs:  oscilator(click) -> dummyNode -> gainNode (volume) -> rampNode (fadeOut for click) -> destination
     this.ctx = audioCtx;
     this.worker = worker;
     this.volume = 0;
@@ -65,6 +66,10 @@ function MetrAudio(audioCtx, worker)
         this.dummyNode.disconnect();
         this.dummyNode = {};
         this.initDummyNode();
+        this.rampNode.disconnect();
+        this.rampNode = {};
+        this.initRampNode();
+        this.gainNode.connect(this.rampNode);
     }
 
     this.initRampNode = function()
