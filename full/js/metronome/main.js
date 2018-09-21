@@ -30,6 +30,7 @@ var metronome = {
     tempo: DEFAULT_METR_TEMPO,
     nextBeatNumber: 0,
     beatsQueue: [],
+    lookAheadNumber: 1,
 
     $playBtn: $('#' + METR_PLAY_BTN_ID),
     $stopBtn: $('#' + METR_STOP_BTN_ID),
@@ -79,16 +80,24 @@ var metronome = {
         {
             var tickTime = 1 / this.ticksPerSecond;
             var lookAheadNumber = Math.ceil((tickTime * 2) / this.getDurBetweenBeats()) + 1;
+            this.lookAheadNumber = lookAheadNumber;
             this.addBeatsToQ(lookAheadNumber);
+        } else
+        {
+            var beat = new MetrBeat(this.audio.getTime(), this.nextBeatNumber, this.getDurBetweenBeats() / 2);
+            this.beatsQueue.push(beat);
         }
     },
 
     beatsSchedulerStart: function()
     {
-        this.beatsQueue = [];
+        this.clearQ();
         this.nextBeatNumber = 0;
-        var beat = new MetrBeat(this.audio.getTime(), 0, this.getDurBetweenBeats() / 2);
-        this.beatsQueue.push(beat);
+    },
+
+    clearQ: function()
+    {
+        this.beatsQueue = [];
     },
 
     getDurBetweenBeats: function()
@@ -102,6 +111,17 @@ var metronome = {
         {
             var param = {tempo: i};
             $(METR_DATALIST_OPTION_TMPL(param)).appendTo(this.$tempoOptionsBlock);
+        }
+    },
+
+    onRateChange: function()
+    {
+        if (!this.isPlaying) {return;}
+        this.audio.clearAudioQ();
+        if (this.getDurBetweenBeats() * this.lookAheadNumber > 0.5)
+        {
+            this.clearQ();
+            this.metrAnimation.animationQ.clear();
         }
     },
     
@@ -143,7 +163,7 @@ var metronome = {
         that.$tempoInput.val(tempo);
         tempo = +tempo;
         that.tempo = tempo;
-        that.audio.clearAudioQ();
+        that.onRateChange();
     },
     
     onTempoInputChange: function(event)
@@ -162,7 +182,7 @@ var metronome = {
         that.tempo = tempo;
         $(this).val(tempo);
         that.$tempoRange.val(tempo);
-        that.audio.clearAudioQ();
+        that.onRateChange();
     },
     
     onTempoLeftArrow: function(event)
@@ -175,7 +195,7 @@ var metronome = {
             that.tempo = tempo;
             that.$tempoInput.val(tempo);
             that.$tempoRange.val(tempo);
-            that.audio.clearAudioQ();
+            that.onRateChange();
         }
     },
     
@@ -189,7 +209,7 @@ var metronome = {
             that.tempo = tempo;
             that.$tempoInput.val(tempo);
             that.$tempoRange.val(tempo);
-            that.audio.clearAudioQ();
+            that.onRateChange();
         }
     },
     
@@ -199,7 +219,6 @@ var metronome = {
         var beats = $(this).val();
         beats = +beats;
         that.beats = beats;
-        that.audio.clearAudioQ();
     },
     
     onBeatsLeftArrow: function(event)
@@ -211,7 +230,6 @@ var metronome = {
             beats--;
             that.beats = beats;
             that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
-            that.audio.clearAudioQ();
         }
     },
     
@@ -224,7 +242,6 @@ var metronome = {
             beats++;
             that.beats = beats;
             that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
-            that.audio.clearAudioQ();
         }
     },
     
@@ -234,7 +251,7 @@ var metronome = {
         var beatVal = $(this).val();
         beatVal = +beatVal;
         that.beatValue = beatVal;
-        that.audio.clearAudioQ();
+        that.onRateChange();
     },
     
     onBeatValLeftArrow: function(event)
@@ -246,7 +263,7 @@ var metronome = {
             beatVal /= 2;
             that.beatValue = beatVal;
             that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
-            that.audio.clearAudioQ();
+            that.onRateChange();
         }
     },
     
@@ -259,7 +276,7 @@ var metronome = {
             beatVal *= 2;
             that.beatValue = beatVal;
             that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
-            that.audio.clearAudioQ();
+            that.onRateChange();
         }
     },
 
