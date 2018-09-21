@@ -64,9 +64,6 @@
 {
     display: inline-block;
     vertical-align: middle;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
-    text-transform: capitalize;
     height: 25px;
 }
 .half_step_block
@@ -78,8 +75,6 @@
 {
     display: inline-block;
     vertical-align: middle;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
     text-align: right;
     line-height: 20px;
     height: 20px;

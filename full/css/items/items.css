@@ -25,8 +25,6 @@
 .item_head_select
 {
     float: left;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
     text-decoration: none;
     text-transform: capitalize;
     height: 25px;
@@ -40,8 +38,6 @@
     display: inline-block;
     vertical-align: middle;
     margin-right: 3px;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
     text-transform: capitalize;
 }
 .close_btn

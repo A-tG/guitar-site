@@ -6,8 +6,6 @@
     left: 0;
     z-index: 1;
     opacity: 0.9;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 24px;
     text-align: center;
     vertical-align: middle;
 }
@@ -65,21 +63,15 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
 }
 .option_head_end_val
 {
     position: absolute;
     right: 0;
     bottom: 0;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
 }
 .metronome_options_text
 {
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
     text-transform: capitalize;
 }
 .tempo_input_block
@@ -91,8 +83,6 @@
     display: inline-block;
     vertical-align: middle;
     height: 18px;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
     text-decoration: none;
     line-height: 18px;
     border: 0;
@@ -116,8 +106,6 @@
     margin: 0 auto;
     display: inline-block;
     vertical-align: middle;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
     text-decoration: none;
     text-transform: capitalize;
     line-height: 18px;
@@ -137,6 +125,4 @@
     left: 0;
     height: 100%;
     width: 100%;
-    font-size: 26px;
-    font-family: Tahoma, Arial, Verdana;
 }

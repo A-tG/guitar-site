@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/material_icons.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/colors.css">
     <link rel="stylesheet" type="text/css" href="css/head.css">
     <link rel="stylesheet" type="text/css" href="css/metronome.css">
@@ -43,7 +44,7 @@
         <div class="head_block normal_bg1">
           <ul class="head_block_content">
             <li class="head_item">
-              <a class="element_color hover_element_color transitional" href="" title="Artistic Guitar">
+              <a class="element_color font_main font_24 hover_element_color transitional" href="" title="Artistic Guitar">
                 <svg class="head_subitem svg_element_stroke svg_element_fill hover_svg_color transitional" height="35" width="35" viewBox="0 0 210 297">
                   <ellipse transform="matrix(.93093 -.3652 .21607 .97638 0 0)" cx="19.418" cy="236.87" rx="80.642" ry="49.289"/>
                   <g stroke-linecap="round" stroke-linejoin="round">
@@ -56,11 +57,11 @@
               </a>
             </li>
             <li class="head_item head_separator normal_bg2"></li>
-            <li class="head_item"><a class="element_color hover_element_color transitional" href="https://www.paypal.me/atgDeveloperMusician/5" title="Donate">Donate</a></li>
+            <li class="head_item"><a class="element_color font_main font_24 hover_element_color transitional" href="https://www.paypal.me/atgDeveloperMusician/5" title="Donate">Donate</a></li>
             <li class="head_item head_separator normal_bg2"></li>
             <li class="head_item">
               <ul class="metronome_block">
-                <li id="metronome_disabled_block" class="metronome_disabled_block negative_bg negative_color">Update your browser to use metronome</li>
+                <li id="metronome_disabled_block" class="metronome_disabled_block font_main font_24 negative_bg negative_color">Update your browser to use metronome</li>
                 <li class="metronome_icon metronome_element">
                   <svg class="svg_normal_stroke svg_no_fill metronome_svg_medium_stoke" height="50" width="30">
                     <polygon points="8,5 22,5 28,45 2,45" />
@@ -70,30 +71,30 @@
                   </svg>
                 </li>
                 <li id="metronome_beat_vis_block" class="metronome_beat_vis_block metronome_element normal_bg3">
-                  <canvas id="metronome_pointer_block" class="metronome_pointer_block normal_color" width="40" height="40"></canvas>
+                  <canvas id="metronome_pointer_block" class="metronome_pointer_block normal_color font_main font_26" width="40" height="40"></canvas>
                 </li>
                 <li id="metronome_play_btn" class="play_btn metronome_element element_color hover_element_color material-icons md-48 transitional" title="Start metronome">&#xE037;</li>
                 <li id="metronome_stop_btn" class="stop_btn metronome_element element_color hover_element_color material-icons md-48 transitional" title="Stop metronome">&#xE034;</li>
                 <li class="volume_block metronome_element">
                   <div class="metronome_option_head">
-                    <span class="option_head_start_val weak_color">0%</span>
-                    <span class="option_head_end_val weak_color">100%</span>
-                    <span class="metronome_options_text normal_color">Volume</span>
+                    <span class="option_head_start_val font_main font_14 weak_color">0%</span>
+                    <span class="option_head_end_val font_main font_14 weak_color">100%</span>
+                    <span class="metronome_options_text font_main font_18 normal_color">Volume</span>
                   </div>
                   <input id="metronome_volume_range" class="volume_range" type="range" value="50" min="0" max="100" step="1">
                 </li>
                 <li class="tempo_block metronome_element">
                   <div class="metronome_element">
                     <div class="metronome_option_head">
-                      <span class="option_head_start_val weak_color">40</span>
-                      <span class="option_head_end_val weak_color">320</span>
-                      <span class="metronome_options_text normal_color">Tempo</span>
+                      <span class="option_head_start_val font_main font_14 weak_color">40</span>
+                      <span class="option_head_end_val font_main font_14 weak_color">320</span>
+                      <span class="metronome_options_text font_main font_18 normal_color">Tempo</span>
                     </div>
                     <input id="metronome_tempo_range" class="tempo_range" type="range" value="120" min="40" max="320" step="1">
                   </div>
                   <div class="tempo_input_block metronome_element">
                     <div id="metronome_tempo_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce tempo"></div>
-                    <input id="metronome_tempo_input" class="tempo_input element_color normal_bg3" type="text" list="tempos" size="4" maxlength="7">
+                    <input id="metronome_tempo_input" class="tempo_input element_color normal_bg3 font_main font_14" type="text" list="tempos" size="4" maxlength="7">
                     <div id="metronome_tempo_right_arrow" class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Increase tempo"></div>
                     <datalist id="tempos">
                     </datalist>
@@ -102,12 +103,12 @@
                 <li class="signature_block metronome_element">
                   <ul>
                     <li class="metronome_element">
-                      <span class="metronome_options_text normal_color">Signature</span>
+                      <span class="metronome_options_text normal_color font_main font_18">Signature</span>
                     </li>
                     <li class="metronome_element">
                       <div class="signature_option_block">
                         <div id="metronome_beats_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Reduce beats number"></div>
-                        <select id="metronome_beats_select" class="signature_select element_color normal_bg3">
+                        <select id="metronome_beats_select" class="signature_select element_color normal_bg3 font_main font_14">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -129,7 +130,7 @@
                       </div>
                       <div class="signature_option_block">
                         <div id="metronome_beat_val_left_arrow" class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Increase beat(note) value"></div>
-                        <select id="metronome_beat_val_select" class="signature_select element_color normal_bg3">
+                        <select id="metronome_beat_val_select" class="signature_select element_color normal_bg3 font_main font_14">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="4" selected>4</option>
@@ -153,8 +154,8 @@
                 <li id="color_scheme_switch_night_btn" class="settings_item element_color hover_element_color material-icons md-36 transitional" title="Switch to night color palette">&#xE3A7;</li>
                 <li id="color_scheme_switch_day_btn" class="settings_item element_color hover_element_color material-icons md-36 transitional" title="Switch to day color palette">&#xE3AA;</li>
                 <li class="settings_item settings_separator normal_bg2"></li>
-                <li id="to_flat_notation_btn" class="settings_item font_element element_color hover_element_color md-36 transitional" title="Switch to flat notation">&#9837;</li>
-                <li id="to_sharp_notation_btn" class="settings_item font_element element_color hover_element_color md-36 transitional" title="Switch to sharp notation">&#9839;</li>
+                <li id="to_flat_notation_btn" class="settings_item font_element font_main element_color hover_element_color md-36 transitional" title="Switch to flat notation">&#9837;</li>
+                <li id="to_sharp_notation_btn" class="settings_item font_element font_main element_color hover_element_color md-36 transitional" title="Switch to sharp notation">&#9839;</li>
               </ul>
             </li>
           </ul>
@@ -163,21 +164,21 @@
           <i class="material-icons element_color hover_element_color md-82 transitional">&#xE146;</i>
         </div>
       </div>
-      <noscript class="noscipt_warning normal_color">Please update your browser or enable javascript</noscript>
+      <noscript class="noscipt_warning font_main font_25 font_bold normal_color">Please update your browser or enable javascript</noscript>
     </div>
     
     <script id="scale_notes_tmpl" type="text/plain">
       <ul class="scale_notes">
         <li class="scale_note element_color hover_element_color" title="Toggle note">
-          <div class="scale_step normal_color">1</div>
-          <span class="scale_note_text transitional">{{=it.root}}</span>
+          <div class="scale_step font_main font_18 normal_color">1</div>
+          <span class="scale_note_text font_main font_18 transitional">{{=it.root}}</span>
           <div class="separator_ver_small middle_gray_bg"></div>
         </li>
         {{~it.semiTones :semiTone:i}}
-          <li class="semitone_block middle_gray_border normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
+          <li class="semitone_block font_main font_14 middle_gray_border normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
           <li class="scale_note element_color hover_element_color" title="Toggle note">
-            <div class="scale_step normal_color">{{=i + 2}}</div>
-            <span class="scale_note_text transitional">{{=it.notes[i + 1]}}</span>
+            <div class="scale_step font_main font_18 normal_color">{{=i + 2}}</div>
+            <span class="scale_note_text font_main font_18 transitional">{{=it.notes[i + 1]}}</span>
             <div class="separator_ver_small middle_gray_bg"></div>
           </li>
         {{~}}
@@ -195,7 +196,7 @@
     <script id="string_hor_fret_tmpl" type="text/plain">
       <div class="fret_hor">
         <div class="string string{{=it.currentStringNumber}}"></div>
-        <div class="note normal_note"></div>
+        <div class="note font_main font_16 normal_note"></div>
       </div>
     </script>
 
@@ -224,7 +225,7 @@
     <script id="string_tune_block_tmpl" type="text/plain">
       <li class="string_tune">
         <div class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Tune lower"></div>
-        <select class="string_tune_select element_color normal_bg3">
+        <select class="string_tune_select font_main font_14 capitalized element_color normal_bg3">
           <option value="G#">G#</option>
           <option value="G">G</option>
           <option value="F#">F#</option>
@@ -246,7 +247,7 @@
       <div id="{{=it.id}}" class="item_block normal_bg1">
         <div class="item_content">
           <div class="item_head">
-            <select class="item_head_select element_color normal_bg3">
+            <select class="item_head_select font_main font_18 element_color normal_bg3">
               <option value="scales">Scales</option>
             </select>
             <div class="clear"></div>
@@ -277,26 +278,26 @@
     <script id="strings_btns_tmpl" type="text/plain">
       <li class="strings_btns_block">
         <div class="material-icons md-24 string_btn delete_string element_color hover_element_color transitional" title="Delete string">&#xE15D;</div>
-        <div class="strings_number normal_color">0</div>
+        <div class="strings_number font_main font_14 font_bold normal_color">0</div>
         <div class="material-icons md-24 string_btn add_string element_color hover_element_color transitional" title="Add string">&#xE148;</div>
       </li>
     </script>
 
     <script id="lh_toggle_tmpl" type="text/plain">
       <div class="lh_toggle_block">
-        <div class="lh_toggle normal_color transitional" title="Switch fretboard for lefthanded">Left handed</div>
+        <div class="lh_toggle font_main font_18 normal_color transitional" title="Switch fretboard for lefthanded">Left handed</div>
         <div class="toggle_checkbox hover_parent normal_bg3 " title="Switch fretboard">
           <div class="toggle_checkbox_slider slider_rh element_bg hover_child_color transitional"></div>
         </div>
-        <div class="rh_toggle normal_color transitional" title="Switch fretboard for righthanded">Right handed</div>
+        <div class="rh_toggle font_main font_18 normal_color transitional" title="Switch fretboard for righthanded">Right handed</div>
       </div>
     </script>
 
     <script id="tuning_options_tmpl" type="text/plain">
       <ul class="tuning_options">
         <li>
-          <span class="options_text normal_color">Tuning</span>
-          <select class="tuning_select element_color normal_bg3">
+          <span class="options_text font_main font_18 normal_color">Tuning</span>
+          <select class="tuning_select font_main font_18 capitalized element_color normal_bg3">
             <option value="standard_e" selected>Standard E</option>
             <option value="standard_e_bass">Standard E Bass</option>
             <option value="standard_e_bass_6">Standard E Bass 6 strings</option>
@@ -307,10 +308,10 @@
           </select>
         </li>
         <li>
-          <span class="options_text normal_color">Half-step</span>
+          <span class="options_text font_main font_18 normal_color">Half-step</span>
           <div class="half_step_block">
             <div class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Half-step lower"></div>
-            <select class="half_step_select element_color normal_bg3">
+            <select class="half_step_select font_main font_14 element_color normal_bg3">
               <option value="-11">-11</option>
               <option value="-10">-10</option>
               <option value="-9">-9</option>
@@ -343,8 +344,8 @@
 
     <script id="scales_select_tmpl" type="text/plain">
       <div class="scale_select_block">
-        <span class="options_text normal_color">Scale</span>
-        <select class="scale_select element_color normal_bg3">
+        <span class="options_text font_main font_18 normal_color">Scale</span>
+        <select class="scale_select font_main font_18 element_color normal_bg3">
           <option value="acoustic">Acoustic Scale</option>
           <option value="aeolian">Aeolian</option>
           <option value="aeolian_pent">Aeolian Pentatonic</option>
@@ -386,7 +387,7 @@
           <option value="whole_tone">Whole-tone</option>
         </select>
         <div class="triads_mode_block">
-          <span class="options_text normal_color">Triads</span>
+          <span class="options_text font_main font_18 normal_color">Triads</span>
           <div class="triads_checkbox material-icons md-24 element_color hover_element_color transitional" title="Show notes">&#xE834;</div>
           <div class="triads_checkbox_empty material-icons md-24 element_color hover_element_color transitional" title="Show triads">&#xE835;</div>
         </div>
@@ -395,26 +396,26 @@
 
     <script id="scales_options_tmpl" type="text/plain">
       <div class="scale_options_block">
-        <ul class="scale_notes_signs">
-          <li class="normal_color">Root</li>
-          <li class="normal_color">Scale Steps</li>
-          <li class="normal_color">Scale Notes</li>
-          <li class="normal_color">Semi-tones</li>
+        <ul class="scale_notes_signs font_main font_18">
+          <li class="font_main font_18 normal_color">Root</li>
+          <li class="font_main font_18 normal_color">Scale Steps</li>
+          <li class="font_main font_18 normal_color">Scale Notes</li>
+          <li class="font_main font_18 normal_color">Semi-tones</li>
         </ul>
         <div class="scale_notes_and_semitones_block">
           <ul>
-            <li class="root_note element_color hover_element_color transitional selected_text" title="Select root note">C</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">C#</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">D</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">D#</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">E</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">F</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">F#</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">G</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">G#</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">A</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">A#</li>
-            <li class="root_note element_color hover_element_color transitional" title="Select root note">B</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional selected_text" title="Select root note">C</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">C#</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">D</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">D#</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">E</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">F</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">F#</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">G</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">G#</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">A</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">A#</li>
+            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">B</li>
             <div class="clear"></div>
           </ul>
         </div>

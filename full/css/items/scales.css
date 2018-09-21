@@ -8,8 +8,6 @@
 {
     display: inline-block;
     vertical-align: middle;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
     text-transform: capitalize;
     height: 25px;
 }
@@ -42,17 +40,12 @@
 }
 .scale_notes_signs li
 {
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
-    text-transform: capitalize;
     margin-bottom: 1px;
 }
 .root_note
 {
     cursor: default;
     float: left;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
     min-width: 27px;
     text-align: center;
     padding: 0 3px;
@@ -69,11 +62,6 @@
 {
     position: relative;
 }
-.scale_step
-{
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
-}
 .scale_note
 {
     display: inline-block;
@@ -83,8 +71,6 @@
 }
 .scale_note_text
 {
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 18px;
     line-height: 27px;
 }
 .semitone_block
@@ -92,8 +78,6 @@
     position: relative;
     bottom: -23px;
     display: inline-block;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
     text-align: center;
     border-top-width: 2px;
     border-top-style: solid;

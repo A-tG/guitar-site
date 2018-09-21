@@ -12,9 +12,6 @@
 .strings_number
 {
     display: inline-block;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
-    font-weight: bold;
     width: 20px;
     vertical-align: middle;
 }
@@ -32,10 +29,7 @@
     margin: 0 auto;
     display: inline-block;
     vertical-align: middle;
-    font-family: Tahoma, Arial, Verdana;
-    font-size: 14px;
     text-decoration: none;
-    text-transform: capitalize;
     line-height: 18px;
     height: 18px;
     width: 40px;

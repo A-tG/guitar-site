@@ -1,0 +1,36 @@
+.font_main
+{
+    font-family: Tahoma, Arial, Verdana;
+}
+.font_14
+{
+    font-size: 14px;
+}
+.font_16
+{
+    font-size: 16px;
+}
+.font_18
+{
+    font-size: 18px;
+}
+.font_24
+{
+    font-size: 24px;
+}
+.font_25
+{
+    font-size: 25px;
+}
+.font_26
+{
+    font-size: 26px;
+}
+.font_bold
+{
+    font-weight: bold;
+}
+.capitalized
+{
+    text-transform: capitalize;
+}
