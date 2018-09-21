@@ -5,7 +5,7 @@ function MetrCanvPointerAnimation(timeCtx)
     this.cnv = this.$beatVisBlock[0];
     this.ctx = this.cnv.getContext('2d');
     this.beatNumber = 0;
-    this.scaleC = 2;
+    this.scaleCoeff = 2;
 
     this.scheduleBeatVisual = function(beat, duration)
     {
@@ -39,7 +39,7 @@ function MetrCanvPointerAnimation(timeCtx)
 
     this.drawArc = function(endAngle)
     {
-        this.ctx.lineWidth = 6 * this.scaleC;
+        this.ctx.lineWidth = 6 * this.scaleCoeff;
         this.ctx.strokeStyle = this.strokeColor;
         this.ctx.beginPath();
         var x = this.cnv.width * 0.5;
@@ -80,15 +80,15 @@ function MetrCanvPointerAnimation(timeCtx)
     {
         this.fontFamily = this.$beatVisBlock.css("font-family");
         var fontSizeNumber = parseInt(this.$beatVisBlock.css("font-size"));
-        this.fontSize = (fontSizeNumber * this.scaleC) + "px";
+        this.fontSize = (fontSizeNumber * this.scaleCoeff) + "px";
         this.ctx.font = this.fontSize + " " + this.fontFamily;
         this.ctx.textAlign = "center";
     }
 
     this.initCanvasScale = function()
     {
-        var width = +this.$beatVisBlock.attr("width") * this.scaleC;
-        var height = +this.$beatVisBlock.attr("height") * this.scaleC;
+        var width = +this.$beatVisBlock.attr("width") * this.scaleCoeff;
+        var height = +this.$beatVisBlock.attr("height") * this.scaleCoeff;
         this.$beatVisBlock.attr("width", width);
         this.$beatVisBlock.attr("height", height);
     }
