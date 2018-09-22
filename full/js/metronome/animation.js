@@ -59,7 +59,7 @@ MetrCanvPointerAnimation.prototype.drawBeatNumber = function()
 {
     this.ctx.fillStyle = this.strokeColor;
     var x = this.cnv.width * 0.5;
-    var y = this.cnv.height * 0.5 + parseInt(this.fontSize) * 0.36;
+    var y = this.cnv.height * 0.5 + parseInt(this.fontSize) * 0.37;
     this.ctx.fillText(this.beatNumber + 1, x, y);
 }
 
