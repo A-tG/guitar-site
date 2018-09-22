@@ -43,10 +43,27 @@ MetrAudio.prototype.getDurationForFreq = function(freq, closeDuration)
 MetrAudio.prototype.rampAudio = function(time, soundDur)
 {
     var transitionDur = soundDur * 0.05;
-    this.rampNode.gain.setTargetAtTime(0, time + transitionDur, transitionDur * 2);
+    this.rampNode.gain.setTargetAtTime(0, time + transitionDur, this.getTimeConstForClick(transitionDur));
     var transitionDur = soundDur + soundDur * 0.25;
-    this.rampNode.gain.setTargetAtTime(1, time + transitionDur, 0.001);
+    this.rampNode.gain.setTargetAtTime(1, time + transitionDur, Number.MIN_VALUE);
+}
 
+MetrAudio.prototype.getTimeConstForClick = function(dur)
+{
+    var timeConst = dur * 2;
+    if (dur < 0.002)
+    {
+        timeConst = dur * 1.5;
+    }
+    if (dur < 0.0015)
+    {
+        timeConst *= 1.5;
+    }
+    if (dur < 0.001)
+    {
+        timeConst *= 1.5;
+    }
+    return timeConst;
 }
 
 MetrAudio.prototype.getTime = function()
