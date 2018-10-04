@@ -3,7 +3,7 @@ function AnimationQ(timeCtx)
     this.ctx = timeCtx; // for time checking
     this.Q = [];
     this.handle = null;
-    this.maxQlength = 25;
+    this.maxQlength = 16;
 }
 
 AnimationQ.prototype.update = function(timestamp)
