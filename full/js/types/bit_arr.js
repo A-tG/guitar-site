@@ -9,7 +9,7 @@
  *
  * Dmitriy Kurbatov https://github.com/A-tG
 */
-function NotesShowPattern()
+function BitArr()
 {
     this._arr = new Array(this._SIZE);
     for (var i = 0; i < this._arr.length; i++)
@@ -18,10 +18,10 @@ function NotesShowPattern()
     }
 }
 
-NotesShowPattern.prototype._IS_DEBUG = IS_DEBUG;
-NotesShowPattern.prototype._SIZE = 12;
+BitArr.prototype._IS_DEBUG = IS_DEBUG;
+BitArr.prototype._SIZE = 12;
 
-NotesShowPattern.prototype.set = function(i, value)
+BitArr.prototype.set = function(i, value)
 {
     i = Math.abs(i) % this._SIZE;
     if (!isNaN(i))
@@ -31,29 +31,29 @@ NotesShowPattern.prototype.set = function(i, value)
     return this;
 }
 
-NotesShowPattern.prototype.get = function(i)
+BitArr.prototype.get = function(i)
 {
     i = Math.abs(i) % this._SIZE;
     return this._arr[i];
 }
 
-NotesShowPattern.prototype.getArr = function()
+BitArr.prototype.getArr = function()
 {
     return this._arr.slice();
 }
 
-NotesShowPattern.prototype.getBinArr = function()
+BitArr.prototype.getBinArr = function()
 {
     return this._arr.map(function(item) {return +item});
 }
 
-NotesShowPattern.prototype.toInt = function()
+BitArr.prototype.toInt = function()
 {
     var numberArr = this.getBinArr();
     return parseInt(numberArr.join(''), 2);
 }
 
-NotesShowPattern.prototype.fromInt = function(number)
+BitArr.prototype.fromInt = function(number)
 {
     number = Math.abs(number);
     if (isNaN(number))
@@ -80,9 +80,9 @@ NotesShowPattern.prototype.fromInt = function(number)
     return this;
 }
 
-NotesShowPattern.prototype.serialize = NotesShowPattern.prototype.toInt;
+BitArr.prototype.serialize = BitArr.prototype.toInt;
 
-NotesShowPattern.prototype.deserialize = function(number)
+BitArr.prototype.deserialize = function(number)
 {
     if (number !== undefined)
     {
@@ -91,12 +91,12 @@ NotesShowPattern.prototype.deserialize = function(number)
     return this;
 };
 
-NotesShowPattern.prototype.toJSON = NotesShowPattern.prototype.serialize;
+BitArr.prototype.toJSON = BitArr.prototype.serialize;
 
-NotesShowPattern.prototype.toString = function()
+BitArr.prototype.toString = function()
 {
     var binArr = this.getBinArr()
     return binArr.join('')
 }
 
-NotesShowPattern.prototype.valueOf = NotesShowPattern.prototype.toInt;
+BitArr.prototype.valueOf = BitArr.prototype.toInt;

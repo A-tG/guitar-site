@@ -5,8 +5,8 @@ function ScalesStateBase()
     this.tuning = new GuitarTuning();
     this.stringsNumber = 6;
     this.isTriadMode = false;
-    this.normalNotesShowPattern = new NotesShowPattern();
-    this.triadsNotesShowPattern = new NotesShowPattern().deserialize(2688); // triad pattern
+    this.normalNotesShowPattern = new BitArr();
+    this.triadsNotesShowPattern = new BitArr().deserialize(2688); // triad pattern
     this.boxFirstFret = -1;
     this.isLH = false;
 }
