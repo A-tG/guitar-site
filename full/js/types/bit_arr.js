@@ -9,9 +9,13 @@
  *
  * Dmitriy Kurbatov https://github.com/A-tG
 */
-function BitArr()
+function BitArr(size)
 {
-    this._arr = new Array(this._SIZE);
+    if (!(size > 0))
+    {
+        size = this._DEFAULT_SIZE;
+    }
+    this._arr = new Array(size);
     for (var i = 0; i < this._arr.length; i++)
     {
         this._arr[i] = true;
@@ -19,11 +23,11 @@ function BitArr()
 }
 
 BitArr.prototype._IS_DEBUG = IS_DEBUG;
-BitArr.prototype._SIZE = 12;
+BitArr.prototype._DEFAULT_SIZE = 12;
 
 BitArr.prototype.set = function(i, value)
 {
-    i = Math.abs(i) % this._SIZE;
+    i = Math.abs(i) % this._arr.length;
     if (!isNaN(i))
     { 
         this._arr[i] = !!value;
@@ -33,7 +37,7 @@ BitArr.prototype.set = function(i, value)
 
 BitArr.prototype.get = function(i)
 {
-    i = Math.abs(i) % this._SIZE;
+    i = Math.abs(i) % this._arr.length;
     return this._arr[i];
 }
 
@@ -65,16 +69,16 @@ BitArr.prototype.fromInt = function(number)
         return this;
     }
     var binArr = number.toString(2).split('');
-    if (binArr.length < this._SIZE)
+    if (binArr.length < this._arr.length)
     {
-        var lengthDiff = this._SIZE - binArr.length;
+        var lengthDiff = this._arr.length - binArr.length;
         for (var i = 0; i < lengthDiff; i++)
         {
             binArr.unshift("0");
         }
     } else
     {
-        binArr =  binArr.slice(binArr.length - this._SIZE);
+        binArr =  binArr.slice(binArr.length - this._arr.length);
     }
     this._arr = binArr.map(function(item) {return !!+item});
     return this;
