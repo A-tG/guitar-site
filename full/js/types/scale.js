@@ -28,6 +28,7 @@ function Scale(scaleName, rootNote)
 Scale.prototype._IS_DEBUG = IS_DEBUG;
 Scale.prototype._ALL_SCALES = SCALES; // associative array "scale_name" => semitones_array
 Scale.prototype._ST_SUM = 12;
+Scale.prototype._RELATIVE_MAJOR_FULL_STEPS = ["1","b2/b9","2/9","b3/#9","3/b11","4/11","b5/#11","5","#5/b13","6/13","b7/#13","7"];
 
 Scale.prototype._isArgReceived = function(arg)
 {
@@ -192,6 +193,18 @@ Scale.prototype.getSemiTonesPatternForString = function(stringTuning)
         pattern.push(semiTones[i]);
     }
     return pattern;
+}
+
+Scale.prototype.getRelativeMajorSteps = function()
+{
+    var steps = [this._RELATIVE_MAJOR_FULL_STEPS[0]];
+    var k = 0;
+    for (var i = 0; i < this._semiTones.length - 1; i++)
+    {
+        k += this._semiTones[i];
+        steps.push(this._RELATIVE_MAJOR_FULL_STEPS[k]);
+    }
+    return steps;
 }
 
 Scale.prototype.serialize = function()

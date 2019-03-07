@@ -36,11 +36,15 @@ ScalesItem.prototype.updateScaleNotesBlock = function()
     {
         notes = notes.map(function (note) {return note.get()});
     }
+    var relativeSteps = this.state.scale.getRelativeMajorSteps();
+    var step = relativeSteps[0];
+    relativeSteps.push(step);
     var param = {
         root: notes[0], 
-        semiTones: this.state.scale.getSemiTones(), 
+        semiTones: this.state.scale.getSemiTones(),
+        relativeSteps: relativeSteps,
         notes: notes
-    }
+    };
     $('.' + SCALE_NOTES_BLOCK_CLASS, this.$itemBlock).append(SCALE_NOTES_TMPL(param));
     var $scaleNotesBlocks = $('.' + SCALE_NOTES_CLASS, this.$itemBlock).
         find('.' + SCALE_NOTE_TEXT_CLASS);
