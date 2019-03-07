@@ -166,24 +166,6 @@
       </div>
       <noscript class="noscipt_warning font_main font_25 font_bold normal_color">Please update your browser or enable javascript</noscript>
     </div>
-    
-    <script id="scale_notes_tmpl" type="text/plain">
-      <ul class="scale_notes">
-        <li class="scale_note element_color hover_element_color" title="Toggle note">
-          <div class="scale_step font_main font_18 normal_color">1</div>
-          <span class="scale_note_text font_main font_18 transitional">{{=it.root}}</span>
-          <div class="separator_ver_small middle_gray_bg"></div>
-        </li>
-        {{~it.semiTones :semiTone:i}}
-          <li class="semitone_block font_main font_14 middle_gray_border normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
-          <li class="scale_note element_color hover_element_color" title="Toggle note">
-            <div class="scale_step font_main font_18 normal_color">{{=i + 2}}</div>
-            <span class="scale_note_text font_main font_18 transitional">{{=it.notes[i + 1]}}</span>
-            <div class="separator_ver_small middle_gray_bg"></div>
-          </li>
-        {{~}}
-      </ul>
-    </script>
 
     <script id="string_ver_fret_tmpl" type="text/plain">
       <div class="fret_ver">
@@ -393,12 +375,33 @@
         </div>
       </div>
     </script>
+    
+    <script id="scale_notes_tmpl" type="text/plain">
+      <ul class="scale_notes">
+        <li class="scale_note normal_bg2 element_color hover_element_color" title="Toggle note">
+          <div class="scale_step font_main font_18 normal_color">1</div>
+          <div class="scale_rel_step font_main font_12 normal_color">{{=it.relativeSteps[0]}}</div>
+          <span class="scale_note_text font_main font_18 transitional">{{=it.root}}</span>
+          <div class="separator_ver_small middle_gray_bg"></div>
+        </li>
+        {{~it.semiTones :semiTone:i}}
+          <li class="semitone_block font_main font_14 middle_gray_border normal_color semitone_width{{=semiTone}}">{{=semiTone}}</li>
+          <li class="scale_note normal_bg2 element_color hover_element_color" title="Toggle note">
+            <div class="scale_step font_main font_18 normal_color">{{=i + 2}}</div>
+            <div class="scale_rel_step font_main font_12 normal_color">{{=it.relativeSteps[i + 1]}}</div>
+            <span class="scale_note_text font_main font_18 transitional">{{=it.notes[i + 1]}}</span>
+            <div class="separator_ver_small middle_gray_bg"></div>
+          </li>
+        {{~}}
+      </ul>
+    </script>
 
     <script id="scales_options_tmpl" type="text/plain">
       <div class="scale_options_block">
         <ul class="scale_notes_signs font_main font_18">
           <li class="font_main font_18 normal_color">Root</li>
           <li class="font_main font_18 normal_color">Scale Steps</li>
+          <li class="font_main font_18 normal_color">Relative to Major</li>
           <li class="font_main font_18 normal_color">Scale Notes</li>
           <li class="font_main font_18 normal_color">Semi-tones</li>
         </ul>

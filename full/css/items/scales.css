@@ -38,9 +38,9 @@
     float: left;
     margin: 0px 20px 0 0;
 }
-.scale_notes_signs li
+.scale_notes_signs li:first-child
 {
-    margin-bottom: 1px;
+    margin-bottom: 6px;
 }
 .root_note
 {
@@ -50,13 +50,13 @@
     text-align: center;
     padding: 0 3px;
 }
-.root_note:first-child
-{
-    padding-left: 0;
-}
 .scale_notes_and_semitones_block
 {
     float: left;
+}
+.scale_notes_and_semitones_block ul:first-child
+{
+    margin-bottom: 6px;
 }
 .scale_notes
 {
@@ -64,10 +64,17 @@
 }
 .scale_note
 {
+    border-radius: 2px;
     display: inline-block;
     text-align: center;
-    min-width: 27px;
+    width: 40px;
     position: relative;
+}
+.scale_rel_step
+{
+    line-height: 23px;
+    margin-left: -100%;
+    margin-right: -100%;
 }
 .scale_note_text
 {
@@ -85,7 +92,7 @@
 .separator_ver_small
 {
     position: absolute;
-    bottom: -5px;
+    bottom: -4px;
     display: inline-block;
     height: 8px;
     width: 2px;
@@ -98,11 +105,11 @@
 }
 .semitone_width2
 {
-    width: 30px;
+    width: 35px;
 }
 .semitone_width3
 {
-    width: 50px;
+    width: 55px;
 }
 .semitone_width4
 {
