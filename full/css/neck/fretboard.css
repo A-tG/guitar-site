@@ -252,10 +252,6 @@
 {
     display: none;
 }
-.transparent_note
-{
-    opacity: 0.45;
-}
 .fret_marker
 {
     z-index: 1;

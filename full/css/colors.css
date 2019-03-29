@@ -192,13 +192,13 @@
 }
 .night .transparent_note
 {
-    background: #eee;
-    color: #111;
+    background: #c8c8c8;
+    color: #222;
 }
 .day .transparent_note
 {
-    background: #111;
-    color: #eee;
+    background: #383838;
+    color: #ddd;
 }
 .night .fret_ver_hover
 {
