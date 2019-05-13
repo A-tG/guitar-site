@@ -205,6 +205,15 @@ var metronome = {
             that.scheduler.onRateChange();
         }
     },
+
+    initUI: function()
+    {
+        this.$tempoRange.val(this.state.tempo);
+        this.$volumeRange.val(this.state.volume);
+        this.$tempoInput.val(this.state.tempo);
+        this.$beatsSelect.val(this.state.beats);
+        this.$beatValSelect.val(this.state.beatValue);
+    },
     
     init: function()
     {
@@ -215,12 +224,7 @@ var metronome = {
         }
         $('#' + METRONOME_DISABLED_ID).hide(0);
         this.initTempoOptionsDatalist();
-
-        this.state.tempo = +this.$tempoRange.val();
-        this.state.volume = +this.$volumeRange.val();
-        this.$tempoInput.val(this.state.tempo);
-        this.state.beats = this.$beatsSelect.val();
-        this.state.beatValue = this.$beatValSelect.val();
+        this.initUI();
 
         this.scheduler = new MetrScheduler(this.state, this.audioCtx, this.worker);
 
