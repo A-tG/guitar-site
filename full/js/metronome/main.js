@@ -155,7 +155,7 @@ var metronome = {
         {
             beats--;
             that.state.beats = beats;
-            that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
+            that.$beatsSelect.val(beats).prop("selected", true);
         }
     },
     
@@ -167,7 +167,7 @@ var metronome = {
         {
             beats++;
             that.state.beats = beats;
-            that.$beatsSelect.find("[value='" + beats + "']").prop("selected", true);
+            that.$beatsSelect.val(beats).prop("selected", true);
         }
     },
     
@@ -188,7 +188,7 @@ var metronome = {
         {
             beatVal /= 2;
             that.state.beatValue = beatVal;
-            that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
+            that.$beatValSelect.val(beatVal).prop("selected", true);
             that.scheduler.onRateChange();
         }
     },
@@ -201,7 +201,7 @@ var metronome = {
         {
             beatVal *= 2;
             that.state.beatValue = beatVal;
-            that.$beatValSelect.find("[value='" + beatVal + "']").prop("selected", true);
+            that.$beatValSelect.val(beatVal).prop("selected", true);
             that.scheduler.onRateChange();
         }
     },
@@ -211,8 +211,8 @@ var metronome = {
         this.$tempoRange.val(this.state.tempo);
         this.$volumeRange.val(this.state.volume);
         this.$tempoInput.val(this.state.tempo);
-        this.$beatsSelect.val(this.state.beats);
-        this.$beatValSelect.val(this.state.beatValue);
+        this.$beatsSelect.val(this.state.beats).prop("selected", true);
+        this.$beatValSelect.val(this.state.beatValue).prop("selected", true);
     },
     
     init: function()
