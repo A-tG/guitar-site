@@ -39,6 +39,11 @@
     stroke-width: 1;
 }
 
+.beat_type_select_block
+{
+    margin: 3px 0;
+}
+
 .volume_block
 {
     margin-left: 15px;

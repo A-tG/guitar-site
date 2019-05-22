@@ -32,6 +32,7 @@ var metronome = {
     },
     $playBtn: $('#' + METR_PLAY_BTN_ID),
     $stopBtn: $('#' + METR_STOP_BTN_ID),
+    $clickTypeSelect: $('#' + METR_BEAT_TYPE_SELECT_ID),
     $volumeRange: $('#' + METR_VOLUME_RANGE_ID),
     $tempoRange: $('#' + METR_TEMPO_RANGE_ID),
     $tempoOptionsBlock: $('#' + METR_TEMPO_OPTIONS_ID),
@@ -72,6 +73,12 @@ var metronome = {
         $(this).hide();
         that.$playBtn.show();
         that.scheduler.stop();
+    },
+
+    onClickTypeChange: function(event)
+    {
+        that = event.data.that;
+        that.scheduler.audio.setClickType($(this).val());
     },
     
     onVolumeChange: function(event)
@@ -208,11 +215,12 @@ var metronome = {
 
     initUI: function()
     {
-        this.$tempoRange.val(this.state.tempo);
-        this.$volumeRange.val(this.state.volume);
-        this.$tempoInput.val(this.state.tempo);
-        this.$beatsSelect.val(this.state.beats)
-        this.$beatValSelect.val(this.state.beatValue);
+        this.state.tempo = this.$tempoRange.val();
+        this.state.volume = this.$volumeRange.val();
+        this.state.tempo = this.$tempoInput.val();
+        this.state.beats = this.$beatsSelect.val()
+        this.state.beatValue = this.$beatValSelect.val();
+        this.scheduler.audio.setClickType(this.$clickTypeSelect.val());
     },
     
     init: function()
@@ -223,13 +231,13 @@ var metronome = {
             return;
         }
         $('#' + METRONOME_DISABLED_ID).hide(0);
+        this.scheduler = new MetrScheduler(this.state, this.audioCtx, this.worker);
         this.initTempoOptionsDatalist();
         this.initUI();
 
-        this.scheduler = new MetrScheduler(this.state, this.audioCtx, this.worker);
-
         this.$playBtn.click({that: this}, this.onPlayBtn);
         this.$stopBtn.click({that: this}, this.onStopBtn);
+        this.$clickTypeSelect.change({that: this}, this.onClickTypeChange);
         this.$volumeRange.change({that: this}, this.onVolumeChange);
         this.$volumeRange.on("input", {that: this}, this.onVolumeChange);
         this.$tempoRange.change({that: this}, this.onTempoChange);

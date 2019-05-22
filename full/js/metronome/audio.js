@@ -6,6 +6,7 @@ function MetrAudio(state, audioCtx, worker)
     this.ctx = audioCtx;
     this.worker = worker;
     this.clickOscType = "square";
+    this.validOscTypes = ["sine", "square", "saw", "triangle"]
 
     this.init();
 }
@@ -64,6 +65,15 @@ MetrAudio.prototype.getTimeConstForClick = function(dur)
         timeConst *= 1.5;
     }
     return timeConst;
+}
+
+MetrAudio.prototype.setClickType = function(type)
+{
+    var isValidType = this.validOscTypes.indexOf(type) !== -1;
+    if (isValidType)
+    {
+        this.clickOscType = type;
+    }
 }
 
 MetrAudio.prototype.getTime = function()
