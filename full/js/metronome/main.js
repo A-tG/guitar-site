@@ -217,7 +217,8 @@ var metronome = {
     {
         this.state.tempo = this.$tempoRange.val();
         this.state.volume = this.$volumeRange.val();
-        this.state.tempo = this.$tempoInput.val();
+        this.state.tempo = this.$tempoRange.val();
+        this.$tempoInput.val(this.state.tempo);
         this.state.beats = this.$beatsSelect.val()
         this.state.beatValue = this.$beatValSelect.val();
         this.scheduler.audio.setClickType(this.$clickTypeSelect.val());
@@ -231,8 +232,8 @@ var metronome = {
             return;
         }
         $('#' + METRONOME_DISABLED_ID).hide(0);
-        this.scheduler = new MetrScheduler(this.state, this.audioCtx, this.worker);
         this.initTempoOptionsDatalist();
+        this.scheduler = new MetrScheduler(this.state, this.audioCtx, this.worker);
         this.initUI();
 
         this.$playBtn.click({that: this}, this.onPlayBtn);
