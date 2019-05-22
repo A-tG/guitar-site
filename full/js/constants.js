@@ -6,20 +6,6 @@ var MAX_ITEMS_NUMBER = 5;
 var ITEMS_ID_BASE = "menuItem";
 var FRETS_NUMBER = 24;
 
-var DEFAULT_METR_BEATS = 4;
-var DEFAULT_METR_BEAT_VAL = 4;
-var DEFAULT_METR_VOLUME = 50;
-var DEFAULT_METR_TEMPO = 120;
-var MIN_BEATS = 1;
-var MAX_BEATS = 16;
-var MIN_BEAT_VAL = 1;
-var MAX_BEAT_VAL = 32;
-var MIN_TEMPO = 40;
-var MAX_TEMPO = 320;
-var TEMPO_OPTIONS_STEP = 5;
-var SECOND_CLICK_FREQ = 880;
-var FIRST_CLICK_FREQ = 1479.98;
-
 var DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS = 30;
 var DEFAULT_NOTES_SHOW_PATTERN = [true, true, true, true, true, true, true, true, true, true, true, true];
 var DEFAULT_TRIADS_SHOW_PATTERN = [true, false, true, false, true, false, false, false, false, false, false, false];

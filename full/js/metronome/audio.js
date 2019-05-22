@@ -14,11 +14,11 @@ MetrAudio.prototype.scheduleBeat = function(beat)
 {
     var osc = this.ctx.createOscillator();
     osc.type = this.clickOscType;
-    var freq = SECOND_CLICK_FREQ;
+    var freq = NORMAL_CLICK_FREQ;
     var duration = this.secondClickDur;
     if (beat.number == 0)
     {
-        freq = FIRST_CLICK_FREQ;
+        freq = ACCENT_CLICK_FREQ;
         duration = this.firstClickDur;
     }
     if (duration > beat.maxDur)
@@ -111,6 +111,6 @@ MetrAudio.prototype.init = function()
     this.initRampNode();
     this.initGainNode();
     this.initDummyNode();
-    this.firstClickDur = this.getDurationForFreq(FIRST_CLICK_FREQ, 0.05);
-    this.secondClickDur = this.getDurationForFreq(SECOND_CLICK_FREQ, 0.05);
+    this.firstClickDur = this.getDurationForFreq(ACCENT_CLICK_FREQ, 0.05);
+    this.secondClickDur = this.getDurationForFreq(NORMAL_CLICK_FREQ, 0.05);
 }
