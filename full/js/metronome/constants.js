@@ -9,8 +9,8 @@ var MAX_BEAT_VAL = 32;
 var MIN_TEMPO = 40;
 var MAX_TEMPO = 320;
 var TEMPO_OPTIONS_STEP = 5;
-var NORMAL_CLICK_FREQ = 880;
-var ACCENT_CLICK_FREQ = 1479.98;
+var NORMAL_CLICK_FREQ = 1046.50;
+var ACCENT_CLICK_FREQ = 1567.98;
 
 var METRONOME_DISABLED_ID = "metronome_disabled_block";
 var ADD_NEW_ITEM_BTN_ID = "add_new_item_btn";
