@@ -6,7 +6,7 @@ function MetrAudio(state, audioCtx, worker)
     this.ctx = audioCtx;
     this.worker = worker;
     this.clickOscType = "square";
-    this.validOscTypes = ["sine", "square", "saw", "triangle"]
+    this.validOscTypes = ["sine", "square", "sawtooth", "triangle"]
 
     this.init();
 }
