@@ -94,12 +94,11 @@ MetrAudio.prototype.updateVolume = function()
 MetrAudio.prototype.clearAudioQ = function()
 {
     this.rampNode.disconnect();
-    this.rampNode = {};
     this.dummyNode.disconnect();
+    this.rampNode = {};
     this.dummyNode = {};
     this.initRampNode();
     this.initDummyNode();
-    this.gainNode.connect(this.rampNode);
 }
 
 MetrAudio.prototype.initRampNode = function()
