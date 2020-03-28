@@ -1,12 +1,17 @@
 function MetrAudio(state, audioCtx, worker)
 {
     // audio nodes:  
-    // oscilator(click) -> dummyNode(for removing scheduled clicks) -> gainNode (volume) -> rampNode (fadeOut for click) -> destination
+    // oscilator(click) -> dummyNode(for removing scheduled clicks) -> rampNode (fadeOut for click) -> 
+    //     gainNode (volume) -> EQ lowpass (to reduce possible fatigue) -> destination
     this.metrState = state;
     this.ctx = audioCtx;
     this.worker = worker;
     this.clickOscType = "square";
     this.validOscTypes = ["sine", "square", "sawtooth", "triangle"]
+    this.dummyNode = {};
+    this.rampNode = {};
+    this.gainNode = {};
+    this.eqNode = {};
 
     this.init();
 }
@@ -51,7 +56,7 @@ MetrAudio.prototype.rampAudio = function(time, soundDur)
 
 MetrAudio.prototype.getTimeConstForClick = function(dur)
 {
-    var timeConst = dur * 2;
+    var timeConst = dur * 3;
     if (dur < 0.002)
     {
         timeConst = dur * 1.5;
@@ -88,38 +93,47 @@ MetrAudio.prototype.updateVolume = function()
 
 MetrAudio.prototype.clearAudioQ = function()
 {
-    this.dummyNode.disconnect();
-    this.dummyNode = {};
-    this.initDummyNode();
     this.rampNode.disconnect();
     this.rampNode = {};
+    this.dummyNode.disconnect();
+    this.dummyNode = {};
     this.initRampNode();
+    this.initDummyNode();
     this.gainNode.connect(this.rampNode);
 }
 
 MetrAudio.prototype.initRampNode = function()
 {
     this.rampNode = this.ctx.createGain();
-    this.rampNode.connect(this.ctx.destination);
+    this.rampNode.connect(this.gainNode);
 }
 
 MetrAudio.prototype.initGainNode = function()
 {
     this.gainNode = this.ctx.createGain();
     this.updateVolume();
-    this.gainNode.connect(this.rampNode);
+    this.gainNode.connect(this.eqNode);
+}
+
+MetrAudio.prototype.initEqNode = function()
+{
+    this.eqNode = this.ctx.createBiquadFilter();
+    this.eqNode.type = "lowpass";
+    this.eqNode.frequency.value = 6000;
+    this.eqNode.connect(this.ctx.destination);
 }
 
 MetrAudio.prototype.initDummyNode = function()
 {
     this.dummyNode = this.ctx.createGain();
-    this.dummyNode.connect(this.gainNode);
+    this.dummyNode.connect(this.rampNode);
 }
 
 MetrAudio.prototype.init = function()
 {
-    this.initRampNode();
+    this.initEqNode();
     this.initGainNode();
+    this.initRampNode();
     this.initDummyNode();
     this.firstClickDur = this.getDurationForFreq(ACCENT_CLICK_FREQ, 0.05);
     this.secondClickDur = this.getDurationForFreq(NORMAL_CLICK_FREQ, 0.05);
