@@ -11,6 +11,7 @@ var MAX_TEMPO = 320;
 var TEMPO_OPTIONS_STEP = 5;
 var NORMAL_CLICK_FREQ = 1046.50;
 var ACCENT_CLICK_FREQ = 1567.98;
+var LOWPASS_FILTER_FREQ = 6000;
 
 var METRONOME_DISABLED_ID = "metronome_disabled_block";
 var ADD_NEW_ITEM_BTN_ID = "add_new_item_btn";

@@ -119,7 +119,7 @@ MetrAudio.prototype.initEqNode = function()
 {
     this.eqNode = this.ctx.createBiquadFilter();
     this.eqNode.type = "lowpass";
-    this.eqNode.frequency.value = 6000;
+    this.eqNode.frequency.value = LOWPASS_FILTER_FREQ;
     this.eqNode.connect(this.ctx.destination);
 }
 
