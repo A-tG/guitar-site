@@ -35,7 +35,8 @@ MetrAudio.prototype.scheduleBeat = function(beat)
     osc.connect(this.dummyNode);
     osc.start(beat.audioTime);
     osc.stop(beat.audioTime + duration);
-    this.rampAudio(beat.audioTime, duration)
+    this.rampAudio(beat.audioTime, duration);
+    osc.onended = function() {osc.disconnect()};
 }
 
 MetrAudio.prototype.getDurationForFreq = function(freq, closeDuration)
