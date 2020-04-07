@@ -4,7 +4,7 @@
     display: inline-block;
     text-align: justify;
     position: relative;
-    margin: 70px 35px 0;
+    margin-top: 70px;
     width: 90%;
     min-width: 1250px;
     max-width: 1780px;
@@ -49,8 +49,8 @@
 .set_default_btn
 {
     position: absolute;
-    bottom: 0px;
-    right: 0px;
+    bottom: 0;
+    right: 0;
     margin: auto 0 0 auto;
     box-sizing: border-box;
 }
@@ -66,5 +66,23 @@
         min-width: 850px;
         margin: 70px auto 0;
         width: 100%;
+    }
+
+    .close_btn
+    {
+        right: 10px;
+    }
+
+    .set_default_btn
+    {
+        right: 10px;
+    }
+}
+
+@media screen and (min-width: 1920px)
+{
+    .item_block
+    {
+        margin-right: 30px;
     }
 }

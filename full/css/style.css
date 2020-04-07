@@ -60,11 +60,3 @@ select
     }
     
 }
-
-@media screen and (min-width: 1920px)
-{
-    .item_block
-    {
-        margin-right: 30px;
-    }
-}
