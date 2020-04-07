@@ -17,13 +17,21 @@ var menuItems = {
     {
         if (this.itemsNumber == MAX_ITEMS_NUMBER)
         {
-            this.$addNewItemBtn.show(200);
+            this.$addNewItemBtn.show(0);
         }
         if (delete(this.items[id]))
         {
             delete(this.itemsSerializedStates[id]);
             this.updateItemsQueryParams();
             this.itemsNumber--;
+        }
+    },
+
+    hideAddItemBtnIf: function()
+    {
+        if (this.itemsNumber >= MAX_ITEMS_NUMBER)
+        {
+            this.$addNewItemBtn.hide(0);
         }
     },
     
@@ -59,10 +67,7 @@ var menuItems = {
             this.items[id] = new ItemBase(id);
             this.itemsNumber++;
         }
-        else
-        {
-            this.$addNewItemBtn.hide(200);
-        }
+        this.hideAddItemBtnIf();
     },
     
     createItemsFromQueryParams: function(itemsSerializedStates)
@@ -73,10 +78,7 @@ var menuItems = {
             this.items[id] = new ItemBase(id, itemsSerializedStates[i]);
             this.itemsNumber++;
         }
-        if (this.itemsNumber >= MAX_ITEMS_NUMBER)
-        {
-            this.$addNewItemBtn.hide(200);
-        }
+        this.hideAddItemBtnIf();
     },
 
     readItemsQueryParams: function()
