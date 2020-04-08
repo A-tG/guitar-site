@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/colors.css">
     <link rel="stylesheet" type="text/css" href="css/head.css">
+    <link rel="stylesheet" type="text/css" href="css/foot.css">
     <link rel="stylesheet" type="text/css" href="css/metronome.css">
     <link rel="stylesheet" type="text/css" href="css/items/items.css">
     <link rel="stylesheet" type="text/css" href="css/items/scales.css">
@@ -156,8 +157,8 @@
               </ul>
             </li>
             <li class="head_item head_separator normal_bg2"></li>
-            <li id="common_settings_wrapper">
-              <div id="common_settings_btn" class="head_item element_color hover_element_color material-icons md-36 transitional" title="Open settings">&#xE8B8;</div>
+            <li id="common_settings_wrapper" class="head_item">
+              <div id="common_settings_btn" class="element_color hover_element_color material-icons md-36 transitional" title="Open settings">&#xE8B8;</div>
               <ul id="settings_block" class="normal_bg1 settings_block_hide">
                 <li id="settings_close_btn" class="element_color hover_element_color material-icons md-36 transitional" title="Close settings">&#xE5CE;</li>
                 <li class="settings_item settings_separator normal_bg2"></li>
@@ -173,6 +174,42 @@
         <div id="add_new_item_btn" class="add_new_item" title="Add item">
           <i class="material-icons element_color hover_element_color md-82 transitional">&#xE146;</i>
         </div>
+        <footer class="foot normal_bg1">
+          <ul>
+            <li class="foot_item">
+              <a class="element_color font_main font_14 hover_element_color transitional" href="https://github.com/A-tG/a-tg.github.io/commits/master" title="Changelog">Changelog</a>
+            </li>
+            <li class="foot_item">
+              <a class="element_color font_main font_14 hover_element_color transitional" href="https://github.com/A-tG/guitar-site" title="GitHub source files">GitHub source files</a>
+            </li>
+            <li class="foot_item">
+              <script type="text/javascript" language="javascript">
+              <!--
+              // Email obfuscator script 2.1 by Tim Williams, University of Arizona
+              // Random encryption key feature coded by Andrew Moulden
+              // This code is freeware provided these four comment lines remain intact
+              // A wizard to generate this code is at http://www.jottings.com/obfuscator/
+              { coded = "KR3.sdxIS.R44ox@3sKIo.S4s"
+                key = "wd2ckFGE0BWhs3jiAX9OZa4DRer7Svz1pYl6JxuNIyTnUqK58mgLCQMbPHVoft"
+                shift=coded.length
+                link=""
+                for (i=0; i<coded.length; i++) {
+                  if (key.indexOf(coded.charAt(i))==-1) {
+                    ltr = coded.charAt(i)
+                    link += (ltr)
+                  }
+                  else {     
+                    ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+                    link += (key.charAt(ltr))
+                  }
+                }
+              document.write("<a class='element_color font_main font_14 hover_element_color transitional' href='mailto:"+link+"'>Feedback email</a>")
+              }
+              //-->
+              </script>
+            </li>
+          </ul>
+        </footer>
       </div>
       <noscript class="noscipt_warning font_main font_25 font_bold normal_color">Please update your browser or enable javascript</noscript>
     </div>
