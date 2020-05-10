@@ -39,14 +39,15 @@
 {
     .strings_btns_block
     {
-        margin-left: 10px;
+        margin: 0 18px;
     }
     .strings_options_block
     {
-        margin-top: 3px;
+        margin-top: 1px;
+        margin-right: 15px;
     }
     .string_tune
     {
-        margin: 6px auto;
+        margin: 10px auto;
     }
 }

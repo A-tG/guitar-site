@@ -81,7 +81,7 @@
 }
 .tempo_input_block
 {
-    margin: 17px 0 0 10px;
+    margin: 22px 0 0 10px;
 }
 .tempo_input
 {
@@ -95,7 +95,6 @@
 }
 .signature_block
 {
-    height: 48px;
     margin-left: 20px;
 }
 .signature_block li
@@ -104,7 +103,7 @@
 }
 .signature_option_block
 {
-    margin-top: 4px;
+    margin: 4px 0;
 }
 .signature_select
 {
@@ -130,4 +129,12 @@
     left: 0;
     height: 100%;
     width: 100%;
+}
+
+@media screen and (max-width: 1250px)
+{
+    .signature_option_block
+    {
+        margin: 12px 0;
+    }
 }

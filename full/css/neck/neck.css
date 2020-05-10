@@ -48,13 +48,18 @@
 
 .tuning_options
 {
-    min-height: 80px;
+    min-height: 100px;
     text-align: justify;
     float: left;
 }
+.tuning_options ul
+{
+    float: left;
+    margin-right: 10px
+}
 .tuning_options li
 {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 .tuning_options li:last-child
 {
@@ -63,12 +68,11 @@
 .tuning_select
 {
     display: inline-block;
-    vertical-align: middle;
     height: 25px;
 }
 .half_step_block
 {
-    display: inline-block;
+    text-align: center;
     vertical-align: middle;
 }
 .half_step_select

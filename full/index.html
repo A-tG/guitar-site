@@ -323,22 +323,28 @@
     </script>
 
     <script id="tuning_options_tmpl" type="text/plain">
-      <ul class="tuning_options">
-        <li>
-          <span class="options_text font_main font_18 normal_color">Tuning</span>
-          <select class="tuning_select font_main font_18 capitalized element_color normal_bg3">
-            <option value="standard_e" selected>Standard E</option>
-            <option value="standard_e_bass">Standard E Bass</option>
-            <option value="standard_e_bass_6">Standard E Bass 6 strings</option>
-            <option value="drop_d_6">Drop D 6 strings</option>
-            <option value="drop_a_7">Drop A 7 strings</option>
-            <option value="drop_e_8">Drop E 8 strings</option>
-            <option value="custom">Custom</option>
-          </select>
-        </li>
-        <li>
-          <span class="options_text font_main font_18 normal_color">Half-step</span>
-          <div class="half_step_block">
+      <div class="tuning_options">
+        <ul>
+          <li>
+            <span class="options_text font_main font_18 normal_color">Tuning</span>
+          </li>
+          <li>
+            <span class="options_text font_main font_18 normal_color">Half-step</span>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <select class="tuning_select font_main font_18 capitalized element_color normal_bg3">
+              <option value="standard_e" selected>Standard E</option>
+              <option value="standard_e_bass">Standard E Bass</option>
+              <option value="standard_e_bass_6">Standard E Bass 6 strings</option>
+              <option value="drop_d_6">Drop D 6 strings</option>
+              <option value="drop_a_7">Drop A 7 strings</option>
+              <option value="drop_e_8">Drop E 8 strings</option>
+              <option value="custom">Custom</option>
+            </select>
+          </li>
+          <li class="half_step_block">
             <div class="left_arrow left_arrow_element_color left_arrow_element_hover transitional" title="Half-step lower"></div>
             <select class="half_step_select font_main font_14 element_color normal_bg3">
               <option value="-11">-11</option>
@@ -366,60 +372,72 @@
               <option value="11">+11</option>
             </select>
             <div class="right_arrow right_arrow_element_color right_arrow_element_hover transitional" title="Half-step higher"></div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+        <div class="clear"></div>
+      </div>
     </script>
 
     <script id="scales_select_tmpl" type="text/plain">
       <div class="scale_select_block">
-        <span class="options_text font_main font_18 normal_color">Scale</span>
-        <select class="scale_select font_main font_18 element_color normal_bg3">
-          <option value="acoustic">Acoustic Scale</option>
-          <option value="aeolian">Aeolian</option>
-          <option value="aeolian_pent">Aeolian Pentatonic</option>
-          <option value="alt_dom">Altered Dominant</option>
-          <option value="alt_scale">Altered Scale</option>
-          <option value="bartok">Bartok</option>
-          <option value="blues">Blues (add M7)</option>
-          <option value="blues_min_hex">Blues Minor Hexatonic</option>
-          <option value="blues_pent">Blues Pentatonic</option>
-          <option value="chromatic">Chromatic</option>
-          <option value="dim">Diminished</option>
-          <option value="dim_whole_tone">Diminished Whole-tone</option>
-          <option value="dom_beb">Dominant Bebop</option>
-          <option value="dom_dim">Dominant Diminished</option>
-          <option value="dorian">Dorian</option>
-          <option value="dorian_beb">Dorian Bebop</option>
-          <option value="dorian_pent">Dorian Pentatonic</option>
-          <option value="half_whole_tone">Half-whole tone</option>
-          <option value="harmonic_min">Harmonic Minor</option>
-          <option value="ionian">Ionian</option>
-          <option value="major" selected>Major</option>
-          <option value="major_beb">Major Bebop</option>
-          <option value="major_pent">Major Pentatonic</option>
-          <option value="melodic_min">Melodic Minor</option>
-          <option value="minor">Minor</option>
-          <option value="minor_beb">Minor Bebop</option>
-          <option value="minor_pent">Minor Pentatonic</option>
-          <option value="myxolydian">Myxolydian</option>
-          <option value="myxolydian_pent">Myxolydian Pentatonic</option>
-          <option value="locrian">Locrian</option>
-          <option value="lydian">Lydian</option>
-          <option value="phrygian">Phrygian</option>
-          <option value="phrygian_pent">Phrygian Pentatonic</option>
-          <option value="spanish">Spanish Mode</option>
-          <option value="sup_locrian">Super Locrian</option>
-          <option value="suspended_pent">Suspended Pentatonic</option>
-          <option value="symm_dim">Symmetrical Diminished</option>
-          <option value="whole_half_tone">Whole-half Tone</option>
-          <option value="whole_tone">Whole-tone</option>
-        </select>
-        <div class="triads_mode_block">
-          <span class="options_text font_main font_18 normal_color">Triads</span>
-          <div class="triads_checkbox material-icons md-24 element_color hover_element_color transitional" title="Show notes">&#xE834;</div>
-          <div class="triads_checkbox_empty material-icons md-24 element_color hover_element_color transitional" title="Show triads">&#xE835;</div>
-        </div>
+        <ul>
+          <li>
+            <span class="options_text font_main font_18 normal_color">Scale</span>
+          </li>
+          <li>
+            <span class="options_text font_main font_18 normal_color">Triads</span>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <select class="scale_select font_main font_18 element_color normal_bg3">
+              <option value="acoustic">Acoustic Scale</option>
+              <option value="aeolian">Aeolian</option>
+              <option value="aeolian_pent">Aeolian Pentatonic</option>
+              <option value="alt_dom">Altered Dominant</option>
+              <option value="alt_scale">Altered Scale</option>
+              <option value="bartok">Bartok</option>
+              <option value="blues">Blues (add M7)</option>
+              <option value="blues_min_hex">Blues Minor Hexatonic</option>
+              <option value="blues_pent">Blues Pentatonic</option>
+              <option value="chromatic">Chromatic</option>
+              <option value="dim">Diminished</option>
+              <option value="dim_whole_tone">Diminished Whole-tone</option>
+              <option value="dom_beb">Dominant Bebop</option>
+              <option value="dom_dim">Dominant Diminished</option>
+              <option value="dorian">Dorian</option>
+              <option value="dorian_beb">Dorian Bebop</option>
+              <option value="dorian_pent">Dorian Pentatonic</option>
+              <option value="half_whole_tone">Half-whole tone</option>
+              <option value="harmonic_min">Harmonic Minor</option>
+              <option value="ionian">Ionian</option>
+              <option value="major" selected>Major</option>
+              <option value="major_beb">Major Bebop</option>
+              <option value="major_pent">Major Pentatonic</option>
+              <option value="melodic_min">Melodic Minor</option>
+              <option value="minor">Minor</option>
+              <option value="minor_beb">Minor Bebop</option>
+              <option value="minor_pent">Minor Pentatonic</option>
+              <option value="myxolydian">Myxolydian</option>
+              <option value="myxolydian_pent">Myxolydian Pentatonic</option>
+              <option value="locrian">Locrian</option>
+              <option value="lydian">Lydian</option>
+              <option value="phrygian">Phrygian</option>
+              <option value="phrygian_pent">Phrygian Pentatonic</option>
+              <option value="spanish">Spanish Mode</option>
+              <option value="sup_locrian">Super Locrian</option>
+              <option value="suspended_pent">Suspended Pentatonic</option>
+              <option value="symm_dim">Symmetrical Diminished</option>
+              <option value="whole_half_tone">Whole-half Tone</option>
+              <option value="whole_tone">Whole-tone</option>
+            </select>
+          </li>
+          <li class="triads_mode_block">
+            <div class="triads_checkbox material-icons md-18 element_color hover_element_color transitional" title="Show notes">&#xE834;</div>
+            <div class="triads_checkbox_empty material-icons md-18 element_color hover_element_color transitional" title="Show triads">&#xE835;</div>
+          </li>
+        </ul>
+        <div class="clear"></div>
       </div>
     </script>
     
@@ -454,18 +472,18 @@
         </ul>
         <div class="scale_notes_and_semitones_block">
           <ul>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional selected_text" title="Select root note">C</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">C#</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">D</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">D#</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">E</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">F</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">F#</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">G</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">G#</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">A</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">A#</li>
-            <li class="root_note font_main font_18 element_color hover_element_color transitional" title="Select root note">B</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional selected_text" title="Select root note">C</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">C#</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">D</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">D#</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">E</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">F</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">F#</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">G</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">G#</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">A</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">A#</li>
+            <li class="root_note font_main font_18 element_color normal_bg2 hover_element_color transitional" title="Select root note">B</li>
             <div class="clear"></div>
           </ul>
         </div>

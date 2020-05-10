@@ -31,13 +31,13 @@
 }
 .item_options_block
 {
+    margin-top: 4px;
     text-align: center;
 }
 .options_text
 {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 3px;
     text-transform: capitalize;
 }
 .close_btn

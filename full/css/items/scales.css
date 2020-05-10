@@ -1,8 +1,21 @@
 .scale_select_block
 {
-    min-height: 80px;
+    min-height: 100px;
     text-align: justify;
     float: right;
+}
+.scale_select_block ul
+{
+    float: left;
+    margin-left: 10px
+}
+.scale_select_block li
+{
+    margin-bottom: 16px;
+}
+.scale_select_block li:last-child
+{
+    margin-bottom: 0;
 }
 .scale_select
 {
@@ -10,10 +23,6 @@
     vertical-align: middle;
     text-transform: capitalize;
     height: 25px;
-}
-.triads_mode_block
-{
-    margin-top: 9px;
 }
 .triads_checkbox
 {
@@ -38,9 +47,9 @@
     float: left;
     margin: 0px 20px 0 0;
 }
-.scale_notes_signs li:first-child
+.scale_notes_signs li:first-child, .scale_notes_and_semitones_block ul:first-child
 {
-    margin-bottom: 6px;
+    margin-bottom: 16px;
 }
 .root_note
 {
@@ -48,18 +57,16 @@
     float: left;
     min-width: 27px;
     text-align: center;
-    padding: 0 3px;
+    margin: 0 6px;
+    border-radius: 4px;
 }
 .scale_notes_and_semitones_block
 {
     float: left;
 }
-.scale_notes_and_semitones_block ul:first-child
-{
-    margin-bottom: 6px;
-}
 .scale_notes
 {
+    margin-top: 6px;
     position: relative;
 }
 .scale_note
@@ -72,15 +79,16 @@
 }
 .scale_rel_step
 {
-    line-height: 23px;
+    line-height: 22px;
 }
 .scale_note_text
 {
-    line-height: 27px;
+    line-height: 22px;
 }
 .semitone_block
 {
     position: relative;
+    line-height: 24px;
     bottom: -23px;
     display: inline-block;
     text-align: center;
@@ -90,7 +98,7 @@
 .separator_ver_small
 {
     position: absolute;
-    bottom: -4px;
+    bottom: -6px;
     display: inline-block;
     height: 8px;
     width: 2px;

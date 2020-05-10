@@ -67,14 +67,14 @@
 {
     .left_arrow
     {
-        margin-right: 6px;
+        margin-right: 12px;
         border-top: 9px solid transparent;
         border-right: 18px solid;
         border-bottom: 9px solid transparent;
     }
     .right_arrow
     {
-        margin-left: 6px;
+        margin-left: 12px;
         border-top: 9px solid transparent;
         border-left: 18px solid;
         border-bottom: 9px solid transparent;
