@@ -37,4 +37,4 @@
 Check out [full/js/types/](full/js/types/) for useful classes
 
 ## Support developer
-[![Paypal Logo](https://www.paypalobjects.com/webstatic/paypalme/images/pp_logo_small.png)](https://www.paypal.me/atgDeveloperMusician/5)
+[![Boosty logo](https://static.boosty.to/assets/images/logoLetterB.7ALsj.svg)](https://boosty.to/a-tg.dev)
