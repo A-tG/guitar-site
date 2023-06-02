@@ -37,4 +37,4 @@
 Check out [full/js/types/](full/js/types/) for useful classes
 
 ## Support developer
-[![Boosty logo](https://static.boosty.to/assets/images/logoLetterB.7ALsj.svg)](https://boosty.to/a-tg.dev)
+[Available methods](https://taplink.cc/atgdev)
