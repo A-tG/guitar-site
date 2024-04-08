@@ -79,7 +79,7 @@ ScalesItemState.prototype.saveToQuery = function()
 ScalesItemState.prototype.saveToDefaultOptions = function()
 {
     defaults.scales.state.deserialize(this.serialize());
-    defaults.scales.saveToCookie();
+    defaults.scales.saveToStorage();
 }
 
 ScalesItemState.prototype.readFromDefaultOptions = function()

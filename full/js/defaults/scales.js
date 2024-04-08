@@ -1,19 +1,19 @@
 defaults.scales = {
     state: {},
 
-    readFromCookie: function()
+    readFromStorage: function()
     {
-        return Cookies.get("defaultScaleOptions");
+        return window.localStorage.getItem("defaultScaleOptions");
     },
 
-    saveToCookie: function()
+    saveToStorage: function()
     {
-        Cookies.set("defaultScaleOptions", this.state, {expires: DEFAULT_SCALE_OPTIONS_EXPIRE_DAYS});
+        window.localStorage.setItem("defaultScaleOptions", JSON.stringify(this.state))
     },
 
     init: function()
     {
         this.state = new ScalesStateBase();
-        this.state.deserialize(this.readFromCookie());
+        this.state.deserialize(this.readFromStorage());
     }
 }

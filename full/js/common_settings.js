@@ -12,9 +12,9 @@ function ColorSchemeSwitcher()
         COLOR_SCHEMES_CLASSES.forEach(function(item) {$blockToSwitchClass.toggleClass(item, false)});
     }
 
-    this.saveToCookies = function()
+    this.saveToStorage = function()
     {
-        Cookies.set("colorScheme", currentScheme);
+        window.localStorage.setItem("colorScheme", currentScheme);
     }
 
     this.switchScheme = function(scheme)
@@ -25,7 +25,7 @@ function ColorSchemeSwitcher()
             currentScheme = scheme;
             resetScheme();
             $blockToSwitchClass.toggleClass(currentScheme, true);
-            this.saveToCookies();
+            this.saveToStorage();
         }
     }
 
@@ -61,9 +61,10 @@ function ColorSchemeSwitcher()
 
     this.init = function()
     {
-        if (Cookies.getJSON("colorScheme") !== undefined)
+        var scheme = window.localStorage.getItem("colorScheme");
+        if (scheme)
         {
-            currentScheme = Cookies.getJSON("colorScheme");
+            currentScheme = scheme;
         }
         this.switchScheme(currentScheme);
         this.initButtons();
@@ -96,16 +97,16 @@ function NotationSwitcher()
         $toFlatBtn.show();
     }
 
-    this.saveToCookies = function()
+    this.saveToStorage = function()
     {
-        Cookies.set("isFlatNotation", !!isFlat);
+        window.localStorage.setItem("isFlatNotation", (+!!isFlat).toString());
     }
 
     this.onToFlatClick = function(event)
     {
         var that = event.data.that;
         that.toFlat();
-        that.saveToCookies();
+        that.saveToStorage();
         menuItems.updateNoteNotation();
     }
 
@@ -113,7 +114,7 @@ function NotationSwitcher()
     {
         var that = event.data.that;
         that.toSharp();
-        that.saveToCookies();
+        that.saveToStorage();
         menuItems.updateNoteNotation();
     }
 
@@ -135,10 +136,7 @@ function NotationSwitcher()
 
     this.init = function()
     {
-        if (Cookies.getJSON("isFlatNotation") !== undefined)
-        {
-            isFlat = !!Cookies.getJSON("isFlatNotation");
-        }
+        isFlat = !!+window.localStorage.getItem("isFlatNotation");
         this.initButtons();
         if (isFlat)
         {
