@@ -1,0 +1,62 @@
+.n1 {
+    content: "C";
+}
+
+.n2 {
+    content: "C#";
+}
+.flat-notation .n2 {
+    content: "Db";
+}
+
+.n3 {
+    content: "D";
+}
+
+.n4 {
+    content: "D#";
+}
+.flat-notation .n4 {
+    content: "Eb";
+}
+
+.n5 {
+    content: "E";
+}
+
+.n6 {
+    content: "F";
+}
+
+.n7 {
+    content: "F#";
+}
+.flat-notation .n7 {
+    content: "Gb";
+}
+
+.n8 {
+    content: "G";
+}
+
+.n9 {
+    content: "G#";
+}
+.flat-notation .n9 {
+    content: "Ab";
+}
+
+.n10 {
+    content: "A";
+}
+
+.n11 {
+    content: "A#";
+}
+.flat-notation .n11 {
+    content: "Bb";
+}
+
+.n12 {
+    content: "B";
+}

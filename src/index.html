@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/material_icons.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/notes.css">
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/colors.css">
     <link rel="stylesheet" type="text/css" href="css/head.css">
@@ -33,7 +34,7 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <div class="bg-block night" data-bind="class: settings.themeSwitcher.name">
+    <div class="bg-block night" data-bind="class: settings.themeSwitcher.name, css: { 'flat-notaion': settings.notationSwitcher.isFlat }">
       <!-- ko using: settings -->
       <div class="settings-block-wrap" data-bind="visible: isShown, clickCurrent: close" style="display: none;">
         <div id="settings-block" class="norm-bg1">
@@ -158,7 +159,7 @@
                     <span class="fnt f14 weak-clr" data-bind="text: max + '%'">100%</span>
                   </div>
                   <input id="metr-vol" class="volume-range" type="range" value="50" min="-1" max="100" step="1"
-                    data-bind="value: value, valueUpdate: 'input', attr: {min: min - 1, max: max}, event: { focus: enableFocus, blur: disableFocus }">
+                         data-bind="value: value, valueUpdate: 'input', attr: {min: min - 1, max: max}, event: { focus: enableFocus, blur: disableFocus }">
                 </li>
                 <!-- /ko -->
 
