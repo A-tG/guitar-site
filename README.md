@@ -35,11 +35,11 @@
 
 ## Development
 1. `npm install`
-1. `node subset-iconfont.js` then copy folder '.font-output\material-icons\webfonts' to 'src\'
+1. `node subset-iconfont.js` then copy folder '.font-output\material-icons\webfonts' to 'src\' (filled, outlined variants)
 
    On Windows: `robocopy .font-output/material-icons/webfonts src/webfonts *filled* *outlined* /im /is /it`
 1. `npx webpack` Compiles TypeScript into js
-1. Now you can start local server with index.html
+1. Now you should start local server (any of your preference) in 'stc\index.html'
 
    Metronome requires WebWorker and will not work if index.html just opened in browser because of CORS policy
 
