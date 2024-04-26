@@ -23,16 +23,13 @@
  * And other useful tools
 
 ## Used:
- [jquery](https://jquery.com/)
+ [Knockout](https://knockoutjs.com)
 
- [jquery-outside-events-plugin](http://benalman.com/projects/jquery-outside-events-plugin/)
+ [webpack](https://webpack.js.org) to compile typecript into browser ready js
  
- [doT.js](https://github.com/olado/doT)
+ [subset-iconfont](https://github.com/dzhuang/subset-iconfont) to generate subset of icons
  
  [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
-
-## For developers:
-Check out [full/js/types/](full/js/types/) for useful classes
 
 ## Support developer
 [Available methods](https://taplink.cc/atgdev)

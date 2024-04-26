@@ -1,0 +1,77 @@
+html,
+body,
+div,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+li {
+    list-style: none;
+    font-size: 0;
+    cursor: default;
+}
+
+span,
+div {
+    cursor: default;
+}
+
+a * {
+    cursor: pointer;
+}
+
+select {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.bg-block {
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.items-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.content-block {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    min-height: 100%;
+    min-width: 1250px;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+}
+
+.noscipt-warning {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.nonselect-txt {
+    user-select: none;
+}
+
+@media screen and (max-width: 1250px) {
+    .content-block {
+        min-width: 850px;
+    }
+
+}

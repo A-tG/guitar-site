@@ -1,0 +1,39 @@
+.fnt {
+    font-family: Tahoma, Arial, Verdana;
+}
+
+.f12 {
+    font-size: 12px;
+}
+
+.f14 {
+    font-size: 14px;
+}
+
+.f16 {
+    font-size: 16px;
+}
+
+.f18 {
+    font-size: 18px;
+}
+
+.f24 {
+    font-size: 24px;
+}
+
+.f25 {
+    font-size: 25px;
+}
+
+.f26 {
+    font-size: 26px;
+}
+
+.f-bold {
+    font-weight: bold;
+}
+
+.capitalized {
+    text-transform: capitalize;
+}

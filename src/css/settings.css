@@ -1,0 +1,57 @@
+.settings-block-wrap {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: contrast(.9) blur(2px);
+}
+
+#settings-block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.settings-block-content {
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+    padding: 0 5px 5px 5px
+}
+
+.settings-block-content td {
+    padding: 0;
+}
+
+.settings-block-content td:first-child {
+    text-align: left;
+}
+
+.settings-separator {
+    margin: 0 auto;
+    height: 2px;
+}
+
+.settings-block-controls,
+.themes-block,
+.settings-block-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings-block-controls>*:first-child {
+    flex: 1;
+}
+.settings-block-controls>*:last-child {
+    margin-left: auto;
+}
+
+.night #settings-block {
+    box-shadow: 0 0 8px #222;
+}
+
+.day #settings-block {
+    box-shadow: 0 0 8px #bbb;
+}

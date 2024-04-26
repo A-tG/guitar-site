@@ -1,0 +1,50 @@
+.strings_options_block {
+    display: inline-block;
+    margin: 5px 10px 0 0;
+}
+
+.strings_btns_block {
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.strings_number {
+    display: inline-block;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.string_btn {
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+.string_tune {
+    margin: 3px auto;
+}
+
+.string_tune_sel {
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    line-height: 18px;
+    height: 18px;
+    width: 40px;
+}
+
+@media screen and (max-width: 1250px) {
+    .strings_btns_block {
+        margin: 0 18px;
+    }
+
+    .strings_options_block {
+        margin-top: 1px;
+        margin-right: 15px;
+    }
+
+    .string_tune {
+        margin: 10px auto;
+    }
+}

@@ -1,0 +1,141 @@
+.metr-disabled {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: 1;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.metr-block {
+    display: inline-block;
+    position: relative;
+}
+
+.metr-el {
+    height: 100%;
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.metr-icon {
+    position: relative;
+    height: 50px;
+    width: 30px;
+    margin: 0 10px 0 10px;
+}
+
+.metr-svg-dasharay {
+    stroke-dasharray: 2;
+}
+
+.metr-svg-medium-stoke {
+    stroke-width: 2;
+}
+
+.metr-svg-light-stoke {
+    stroke-width: 1;
+}
+
+.beat-type-sel-block {
+    margin: 3px 0;
+}
+
+.volume-block,
+.tempo-block {
+    margin-left: 10px;
+}
+
+.tempo-block {
+    flex-direction: row;
+}
+
+.volume-range,
+.tempo-range {
+    width: 160px;
+    margin: 3px 0;
+    padding: 0;
+}
+
+.metr-option-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.metr-option-head > *:first-child
+{
+    margin-right: auto;
+}
+.metr-option-head > *:last-child {
+    margin-left: auto;
+}
+
+.tempo-input-block {
+    vertical-align: bottom;
+}
+
+.tempo-input {
+    display: inline-block;
+    vertical-align: middle;
+    height: 18px;
+    width: 50px;
+    text-decoration: none;
+    line-height: 18px;
+    border: 0;
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+
+.tempo-input::-webkit-inner-spin-button,
+.tempo-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.signature_block li {
+    margin-right: 10px;
+}
+
+.signature-option-block {
+    margin: 4px 0;
+}
+
+.signature-sel {
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    text-transform: capitalize;
+    line-height: 18px;
+    height: 18px;
+}
+
+.metr-beat-vis-block {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+#metr-pointer-block {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (max-width: 1250px) {
+    .signature-option-block {
+        margin: 12px 0;
+    }
+}

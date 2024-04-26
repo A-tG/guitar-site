@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'Material Icons Filled';
+    font-weight: 400;
+    font-display: block;
+    src: url("../webfonts/mi-filled-400.ttf?v=b9ff7623acf714ddf50347fa0c0ab2ef") format("truetype"), 
+         url("../webfonts/mi-filled-400.woff?v=b9ff7623acf714ddf50347fa0c0ab2ef") format("woff"), 
+         url("../webfonts/mi-filled-400.woff2?v=b9ff7623acf714ddf50347fa0c0ab2ef") format("woff2");
+}
+
+@font-face {
+    font-family: 'Material Icons Outlined';
+    font-weight: 400;
+    font-display: block;
+    src: url("../webfonts/mi-outlined-400.ttf?v=947c2f7f9a40096451eacc0a6dd4ecf1") format("truetype"), 
+         url("../webfonts/mi-outlined-400.woff?v=947c2f7f9a40096451eacc0a6dd4ecf1") format("woff"),
+         url("../webfonts/mi-outlined-400.woff2?v=947c2f7f9a40096451eacc0a6dd4ecf1") format("woff2");
+}
+
+.mi-filled,
+.mi-outlined {
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.mi-filled {
+    font-family: 'Material Icons Filled';
+    font-weight: 400;
+}
+
+.mi-outlined {
+    font-family: 'Material Icons Outlined';
+    font-weight: 400;
+}
+
+.md-18 {
+    font-size: 18px;
+}
+
+.md-24 {
+    font-size: 24px;
+}
+
+.md-36 {
+    font-size: 36px;
+}
+
+.md-46 {
+    font-size: 46px;
+}
+
+.md-48 {
+    font-size: 48px;
+}
+
+.md-82 {
+    font-size: 82px;
+}
+
+.i-note-flat::before {
+    content: "\266D";
+}
+
+.i-note-sharp::before {
+    content: "\266F";
+}
+
+.mi-add-box::before {
+    content: "\e146";
+}
+
+.mi-add-circle::before {
+    content: "\e147";
+}
+
+.mi-check-box::before {
+    content: "\e834";
+}
+
+.mi-check-box-outline-blank::before {
+    content: "\e835";
+}
+
+.mi-close::before {
+    content: "\e5cd";
+}
+
+.mi-dark-mode::before {
+    content: "\e51c";
+}
+
+.mi-expand-less::before {
+    content: "\e5ce";
+}
+
+.mi-light-mode::before {
+    content: "\e518";
+}
+
+.mi-pause-circle::before {
+    content: "\e1a2";
+}
+
+.mi-play-circle::before {
+    content: "\e1c4";
+}
+
+.mi-remove-circle::before {
+    content: "\e15c";
+}
+
+.mi-settings::before {
+    content: "\e8b8";
+}
+
+.mi-star::before {
+    content: "\e838";
+}
+
+.mi-menu::before {
+    content: "\e5d2";
+}

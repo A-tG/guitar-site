@@ -1,0 +1,13 @@
+pause-circle 
+play-circle 
+settings 
+light-mode 
+dark-mode 
+add-box
+add-circle
+remove-circle
+close
+check-box-outline-blank
+check-box
+star
+menu
