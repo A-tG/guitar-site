@@ -221,3 +221,4 @@ pip-log.txt
 node_modules
 src/js/*
 !/src/js/knockout-3.5.1.js
+src/webfonts/
