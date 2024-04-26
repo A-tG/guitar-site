@@ -14,20 +14,20 @@ const MetrPointerCanvasID = "metr-pointer-block"
 
 const metrModel = new MetronomeM
 const cnvVM = new CanvasVM
-let work, aCtx, sched
+let worker, aCtx, sched
 try 
 {
-    work = new Worker(
+    worker = new Worker(
         /* webpackChunkName: "work-mtr" */
         // @ts-ignore
         new URL("./workers/metronome.ts", import.meta.url)
     )
     
     aCtx = new AudioContext
-    const cnvEl = document.querySelector('#' + MetrPointerCanvasID) as HTMLCanvasElement
-    const cnvAnim = new CanvasPointerAnimaion(new AudioCtxTimeProvider(aCtx), cnvEl, cnvVM)
+    const cnv = document.querySelector('#' + MetrPointerCanvasID) as HTMLCanvasElement
+    const anim = new CanvasPointerAnimaion(new AudioCtxTimeProvider(aCtx), cnv, cnvVM)
 
-    sched = new Scheduler(metrModel, aCtx, work, cnvAnim)
+    sched = new Scheduler(metrModel, aCtx, worker, anim)
     metrModel.scheduler = sched
     metrModel.audio = sched.audioSystem
 } 
@@ -36,7 +36,7 @@ catch (error)
     console.log("Error initializing metronome systems\n", error)
 }
 
-const metr = new MetronomeVM(cnvVM, new OptionStorage("metronome.clickType"), metrModel, work, aCtx)
+const metr = new MetronomeVM(cnvVM, new OptionStorage("metronome.clickType"), metrModel, worker, aCtx)
 const commonSettings = new CommonSettingsVM
 const vm = new MainVM(commonSettings, metr)
 ko.applyBindings(vm)
