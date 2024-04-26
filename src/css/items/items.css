@@ -22,12 +22,6 @@
     margin: 5px 0 5px 15px;
 }
 
-.options_text {
-    display: inline-block;
-    vertical-align: middle;
-    text-transform: capitalize;
-}
-
 .item-controls {
     margin-left: auto;
     display: flex;
