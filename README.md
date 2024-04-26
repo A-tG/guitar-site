@@ -1,3 +1,5 @@
+**Reworked version using typescript and knockoutjs MVVM**
+
 # [Website for guitar practicing](https://a-tg.github.io)
 * All tools in one browser tab
 * Minimal response time - website works completly on the client side
@@ -30,6 +32,16 @@
  [subset-iconfont](https://github.com/dzhuang/subset-iconfont) to generate subset of icons
  
  [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
+
+## Development
+1. `npm install`
+1. `node subset-iconfont.js` then copy folder '.font-output\material-icons\webfonts' to 'src\'
+
+   On Windows: `robocopy .font-output/material-icons/webfonts src/webfonts *filled* *outlined* /im /is /it`
+1. `npx webpack` Compiles TypeScript into js
+1. Now you can start local server with index.html
+
+   Metronome requires WebWorker and will not work if index.html just opened in browser because of CORS policy
 
 ## Support developer
 [Available methods](https://taplink.cc/atgdev)
