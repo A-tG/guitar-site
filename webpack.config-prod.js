@@ -22,6 +22,6 @@ module.exports = {
     output: {
       filename: 'main.js',
       chunkFilename: '[name].js',
-      path: path.resolve(__dirname, 'build/js'),
+      path: path.resolve(__dirname, 'built/js'),
     },
 };
