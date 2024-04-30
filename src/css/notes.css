@@ -1,62 +1,62 @@
-.n1 {
+.n0 {
     content: "C";
 }
 
-.n2 {
+.n1 {
     content: "C#";
 }
-.flat-notation .n2 {
+.flat-notation .n1 {
     content: "Db";
 }
 
-.n3 {
+.n2 {
     content: "D";
 }
 
-.n4 {
+.n3 {
     content: "D#";
 }
-.flat-notation .n4 {
+.flat-notation .n3 {
     content: "Eb";
 }
 
-.n5 {
+.n4 {
     content: "E";
 }
 
-.n6 {
+.n5 {
     content: "F";
 }
 
-.n7 {
+.n6 {
     content: "F#";
 }
-.flat-notation .n7 {
+.flat-notation .n6 {
     content: "Gb";
 }
 
-.n8 {
+.n7 {
     content: "G";
 }
 
-.n9 {
+.n8 {
     content: "G#";
 }
-.flat-notation .n9 {
+.flat-notation .n8 {
     content: "Ab";
 }
 
-.n10 {
+.n9 {
     content: "A";
 }
 
-.n11 {
+.n10 {
     content: "A#";
 }
-.flat-notation .n11 {
+.flat-notation .n10 {
     content: "Bb";
 }
 
-.n12 {
+.n11 {
     content: "B";
 }
