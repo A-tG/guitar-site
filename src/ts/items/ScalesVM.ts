@@ -1,9 +1,11 @@
-import { getInterval, getScalesIdNames } from "../types/Scales"
+import { Note } from "../types/Note"
+import { getIntervals, getScalesIdNames } from "../types/Scales"
 
 export class ScalesVM
 {
     private _scaleId
     private _intervals
+    private _root = ko.observable(Note.C)
 
     readonly scalesIds
 
@@ -29,6 +31,15 @@ export class ScalesVM
         }
     }
 
+    get Root()
+    {
+        return this._root()
+    }
+    set Root(val)
+    {
+        this._root(val)
+    }
+
     constructor()
     {
         const names = getScalesIdNames()
@@ -36,7 +47,7 @@ export class ScalesVM
 
         const name = names[0]
         this._scaleId = ko.observable(name)
-        this._intervals = ko.observableArray(getInterval(name) as number[])
+        this._intervals = ko.observableArray(getIntervals(name) as number[])
         this._intervals.extend({ rateLimit: 16 })
     }
 }
