@@ -49,9 +49,9 @@ intervals.set("symm_dim", halfWhole)
 
 intervals.set("bartok", intervals.get("acoustic")!)
 
-export function getInterval(name: string): ReadonlyArray<number>
+export function getIntervals(name: string): ReadonlyArray<number>
 {
-    return intervals.get("string") ?? []
+    return intervals.get(name) ?? []
 }
 
 export function getScalesIdNames()
