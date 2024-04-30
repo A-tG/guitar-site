@@ -36,7 +36,7 @@
   <body>
     <div class="bg-block night" data-bind="class: settings.themeSwitcher.name, css: { 'flat-notaion': settings.notationSwitcher.isFlat }">
       <!-- ko using: settings -->
-      <div class="settings-block-wrap" data-bind="visible: isShown, clickCurrent: close" style="display: none;">
+      <div class="settings-block-wrap" data-bind="visible: isShown, clickCurrent: close" style="display: none">
         <div id="settings-block" class="norm-bg1">
           <div class="settings-block-controls">
             <span class="norm-clr fnt f-bold f18">Settings</span>
@@ -247,7 +247,7 @@
         <i class="add-new-item mi-filled mi-add-box md-82 el-clr hov-el-clr tr-al"
            data-bind="visible: isAddBtnVisible, click: addItem"
            title="Add item"
-           style="display: none;"></i>
+           style="display: none"></i>
 
         <footer class="foot norm-bg1">
           <ul>
@@ -268,15 +268,15 @@
       <li class="item-block norm-bg1">
         <div class="item-content">
         </div>
-        <div class="item-controls">
-          <div class="el-clr hov-el-clr mi-outlined md-36 mi-close tr-al"
+        <ul class="item-controls">
+          <li class="el-clr hov-el-clr mi-outlined md-36 mi-close tr-al"
                data-bind="click: $parentContext.$parent.removeItem.bind($parentContext.$parent, $parent.Id)" 
-               title="Close"></div>
-          <div class="el-clr hov-el-clr mi-filled md-36 mi-menu tr-al" 
-               title="Open item's menu"></div>
-          <div class="el-clr hov-el-clr mi-outlined mi-star md-36 tr-al"
-               title="Set current options as default"></div>
-        </div>
+               title="Close"></li>
+          <li class="el-clr hov-el-clr mi-filled md-36 mi-menu tr-al" 
+               title="Open item's menu"></li>
+          <li class="el-clr hov-el-clr mi-outlined mi-star md-36 tr-al"
+               title="Set current options as default"></li>
+        </ul>
       </li>
     </script>
 
