@@ -4,8 +4,8 @@ settings
 light-mode 
 dark-mode 
 add-box
-add-circle
-remove-circle
+add-circle-outline
+remove-circle-outline
 close
 check-box-outline-blank
 check-box
