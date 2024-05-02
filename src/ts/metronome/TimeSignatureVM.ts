@@ -5,14 +5,12 @@ import { State } from "./State"
 
 export class TimeSignatureVM
 {
-    private readonly _beats = range(1, 16, 1)
-    private _beatsPerMeasure = ko.observable(this._beats[3])
     
-    private readonly _beatLengths = [1, 2, 4, 8, 16, 32]
-    private _beatLen = ko.observable(this._beatLengths[2])
+    readonly beats = range(1, 16, 1)
+    readonly beatLengths = [1, 2, 4, 8, 16, 32]
 
-    readonly beats = ko.observableArray(this._beats)
-    readonly beatLengths = ko.observableArray(this._beatLengths)
+    private _beatsPerMeasure = ko.observable(this.beats[3])
+    private _beatLen = ko.observable(this.beatLengths[2])
 
     private _storageBeatLen?: OptionStorage
     private _storageBeatPer?: OptionStorage
@@ -25,7 +23,7 @@ export class TimeSignatureVM
     }
     set beatsPerMeasure(val)
     {
-        if (!this._beats.includes(val)) return
+        if (!this.beats.includes(val)) return
 
         this._beatsPerMeasure(val)
         this._state.beatsPerMeasure = val
@@ -38,7 +36,7 @@ export class TimeSignatureVM
     }
     set beatLength(val)
     {
-        if (!this._beatLengths.includes(val)) return
+        if (!this.beatLengths.includes(val)) return
 
         this._beatLen(val)
         this._state.beatDurationValue = val
@@ -56,14 +54,14 @@ export class TimeSignatureVM
 
     beatsPrev()
     {
-        let val = ArrayUtils.previousValue(this._beats, this.beatsPerMeasure)
+        let val = ArrayUtils.previousValue(this.beats, this.beatsPerMeasure)
         if (!val) return
 
         this.beatsPerMeasure = val
     }
     beatsNext()
     {
-        let val = ArrayUtils.nextValue(this._beats, this.beatsPerMeasure)
+        let val = ArrayUtils.nextValue(this.beats, this.beatsPerMeasure)
         if (!val) return
 
         this.beatsPerMeasure = val
@@ -71,14 +69,14 @@ export class TimeSignatureVM
 
     lenPrev()
     {
-        let val = ArrayUtils.previousValue(this._beatLengths, this.beatLength)
+        let val = ArrayUtils.previousValue(this.beatLengths, this.beatLength)
         if (!val) return
 
         this.beatLength = val
     }
     lenNext()
     {
-        let val = ArrayUtils.nextValue(this._beatLengths, this.beatLength)
+        let val = ArrayUtils.nextValue(this.beatLengths, this.beatLength)
         if (!val) return
 
         this.beatLength = val
