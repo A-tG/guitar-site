@@ -15,8 +15,8 @@
     --clr-dark-extra: #383838;
 
     --clr-yellow: #fc0;
-    --clr-blue: #0072cf;
-    --clr-orange: #ce4b00;
+    --clr-blue: #0079db;
+    --clr-orange: #d44e00;
     --clr-cyan: #0bb;
     --clr-light-yellow: #ebbb70;
 }
@@ -25,21 +25,21 @@
     background: var(--clr-dark2);
 }
 .day .norm-bg1 {
-    background: var(--clr-white1);
+    background: white;
 }
 
 .night .norm-bg2 {
     background: var(--clr-dark3);
 }
 .day .norm-bg2 {
-    background: var(--clr-gray4);
+    background: var(--clr-white2);
 }
 
 .night .norm-bg3 {
     background: var(--clr-dark4);
 }
 .day .norm-bg3 {
-    background: var(--clr-gray3);
+    background: var(--clr-white1);
 }
 
 .night .norm-clr {
@@ -84,10 +84,10 @@
     color: var(--clr-orange);
 }
 
-.night .element-bg {
+.night .el-bg {
     background: var(--clr-yellow);
 }
-.day .element-bg {
+.day .el-bg {
     background: var(--clr-blue);
 }
 
@@ -262,7 +262,7 @@
     background-color: var(--clr-dark4);
 }
 .day input[type="range"]::-webkit-slider-runnable-track {
-    background-color: var(--clr-gray3);
+    background-color: var(--clr-white1);
 }
 .night input[type="range"]::-webkit-slider-thumb {
     background-color: var(--clr-yellow);
@@ -287,7 +287,7 @@
     background-color: var(--clr-dark4);
 }
 .day input[type="range"]::-moz-range-track {
-    background-color: var(--clr-gray3);
+    background-color: var(--clr-white1);
 }
 .night input[type="range"]::-moz-range-thumb {
     background-color: var(--clr-yellow);
