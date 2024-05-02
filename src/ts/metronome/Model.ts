@@ -96,7 +96,7 @@ export class MetronomeM implements State
     }
     set beatsPerMeasure(val)
     {
-        this._beatsPer
+        this._beatsPer = val
     }
 
     get metronomeClickType()
