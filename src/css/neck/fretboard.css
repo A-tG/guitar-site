@@ -95,10 +95,6 @@
     background: #0bb;
 }
 
-.hidden-note {
-    display: none;
-}
-
 .fret-inlay {
     flex: 0;
     z-index: 1;
