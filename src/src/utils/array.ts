@@ -95,3 +95,15 @@ export class ArrayUtils
         return result
     }
 }
+
+export function SumArrElements(arr: number[] | ReadonlyArray<number>, to: number, from: number = 0)
+{
+    if (to < 0) throw new RangeError()
+
+    let result = 0
+    for (let i = 0; i < to; i++)
+    {
+        result += arr[i]
+    }  
+    return result
+}
