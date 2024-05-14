@@ -162,11 +162,11 @@
 }
 
 .night .note {
-    color: var(--clr-dark2);
+    color: black;
     background: var(--clr-yellow);
 }
 .day .note {
-    color: var(--clr-white1);
+    color: var(--clr-white3);
     background: var(--clr-blue);
 }
 

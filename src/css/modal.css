@@ -1,0 +1,23 @@
+.modal-block-wrap {
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: contrast(.9) blur(2px);
+}
+
+.modal-block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.modal-block-content {
+    margin: 15px;
+    margin-top: 0;
+}
+
+.modal-block-content>*:nth-child(3n + 1) {
+    justify-self: left;
+}

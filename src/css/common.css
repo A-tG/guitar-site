@@ -1,4 +1,4 @@
-.toggle_checkbox {
+.tgl-checkbox {
     margin: 0 4px;
     position: relative;
     width: 40px;
@@ -6,12 +6,19 @@
     border-radius: 2px;
 }
 
-.toggle_checkbox_slider {
+.tgl-checkbox-slider {
     position: absolute;
-    top: 0;
-    width: 18px;
-    height: 18px;
+    width: 45%;
+    height: 100%;
     border-radius: 2px;
+}
+.slider-l {
+    right: 100%;
+    transform: translateX(100%);
+}
+
+.slider-r {
+    right: 0;
 }
 
 .fnt-el {
@@ -37,37 +44,12 @@
 }
 
 .tr-al {
-    -webkit-transition-duration: 0.1s;
-    -o-transition-duration: 0.1s;
-    -moz-transition-duration: 0.1s;
     transition-duration: 0.1s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
 }
 
-.dummy_checkbox {
-    display: none;
-}
-
-.center_origin {
-    transform-origin: center;
-}
-
-@media screen and (max-width: 1250px) {
-    .l-arr {
-        margin-right: 12px;
-        border-top: 9px solid transparent;
-        border-right: 18px solid;
-        border-bottom: 9px solid transparent;
-    }
-
-    .r-arr {
-        margin-left: 12px;
-        border-top: 9px solid transparent;
-        border-left: 18px solid;
-        border-bottom: 9px solid transparent;
-    }
+.invis {
+    visibility: hidden;
 }
 
 /* Range Reset */
@@ -85,7 +67,6 @@ input[type="range"]::-webkit-slider-runnable-track {
     border-radius: 0px;
     height: 10px;
 }
-
 /* slider thumb */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -102,7 +83,6 @@ input[type="range"]::-moz-range-track {
     border-radius: 0px;
     height: 10px;
 }
-
 /* slider thumb */
 input[type="range"]::-moz-range-thumb {
     border: none;

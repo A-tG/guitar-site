@@ -1,17 +1,24 @@
-.strings_options_block {
-    display: inline-block;
-    margin: 5px 10px 0 0;
-}
-
-.strings_btns_block {
-    float: left;
-    margin-right: 10px;
+.strings-numb {
+    display: block;
+    width: 2ch;
+    margin: 0 4px 0 4px;
     text-align: center;
 }
 
-.strings_number {
+.tuners-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.strings-btns-block {
+    text-align: center;
+    z-index: 1;
+}
+
+.strings-btns-block > * {
     display: inline-block;
-    width: 20px;
     vertical-align: middle;
 }
 
@@ -20,31 +27,25 @@
     vertical-align: middle;
 }
 
-.string_tune {
+.str-tuner {
     margin: 3px auto;
 }
+.str-tuner > * {
+    vertical-align: middle;
+}
 
-.string_tune_sel {
+.str-tuner-sel {
+    text-align: center;
     margin: 0 auto;
     display: inline-block;
     vertical-align: middle;
     text-decoration: none;
-    line-height: 18px;
-    height: 18px;
-    width: 40px;
+}
+.str-tuner-sel option
+{
+    text-align: start;
 }
 
-@media screen and (max-width: 1250px) {
-    .strings_btns_block {
-        margin: 0 18px;
-    }
-
-    .strings_options_block {
-        margin-top: 1px;
-        margin-right: 15px;
-    }
-
-    .string_tune {
-        margin: 10px auto;
-    }
+.tunings-menu-btn {
+    display: none;
 }

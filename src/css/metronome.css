@@ -2,30 +2,27 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    left: 0;
     z-index: 1;
     opacity: 0.9;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
     text-transform: capitalize;
 }
 
 .metr-block {
-    display: inline-block;
     position: relative;
+    display: inline-block;
 }
 
 .metr-el {
     height: 100%;
-    margin-left: 5px;
+    margin: 2px 0 2px 5px;
     display: inline-block;
     vertical-align: middle;
 }
 
 .metr-icon {
-    position: relative;
     height: 50px;
     width: 30px;
     margin: 0 10px 0 10px;
@@ -58,28 +55,33 @@
 
 .volume-range,
 .tempo-range {
-    width: 160px;
     margin: 3px 0;
     padding: 0;
 }
+.tempo-range {
+    width: 100%;
+}
+
+.vol-number {
+    width: 100%;
+    position: absolute;
+    display: block;
+}
 
 .metr-option-head {
+    margin-bottom: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
 }
-.metr-option-head > *:first-child
-{
-    margin-right: auto;
+.metr-option-head > * {
+    margin: 0 5px;
+    position: relative;
 }
-.metr-option-head > *:last-child {
-    margin-left: auto;
-}
-
-.tempo-input-block {
-    vertical-align: bottom;
+.metr-option-head>*:last-child {
+    margin-right: 0;
 }
 
 .tempo-input {
@@ -111,13 +113,12 @@
 }
 
 .signature-sel {
+    text-align: end;
     margin: 0 auto;
     display: inline-block;
     vertical-align: middle;
     text-decoration: none;
     text-transform: capitalize;
-    line-height: 18px;
-    height: 18px;
 }
 
 .metr-beat-vis-block {
@@ -132,10 +133,4 @@
     left: 0;
     height: 100%;
     width: 100%;
-}
-
-@media screen and (max-width: 1250px) {
-    .signature-option-block {
-        margin: 12px 0;
-    }
 }

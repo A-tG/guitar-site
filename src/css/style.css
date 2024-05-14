@@ -7,6 +7,10 @@ li {
     padding: 0;
 }
 
+body {
+    min-height: 100vh;
+}
+
 ul,
 li {
     list-style: none;
@@ -50,7 +54,6 @@ select {
     text-align: center;
     margin: 0 auto;
     min-height: 100%;
-    min-width: 1250px;
     padding-bottom: 70px;
     box-sizing: border-box;
 }
@@ -67,11 +70,4 @@ select {
 
 .nonselect-txt {
     user-select: none;
-}
-
-@media screen and (max-width: 1250px) {
-    .content-block {
-        min-width: 850px;
-    }
-
 }

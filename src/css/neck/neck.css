@@ -1,83 +1,65 @@
-.neck_block {
+.neck-block {
+    position: relative;
+    display: grid;
+    row-gap: 4px;
+    column-gap: 4px;
+    grid-template-columns: auto 1fr;
+}
+
+.lh-rh-toggle-block {
     width: 100%;
+    position: absolute;
 }
 
-.tuners_and_fretboard_block {
-    display: flex;
-}
-
-.lh_toggle_block {
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.lh_toggle_block div {
+.lh-rh-toggle-block > * {
     display: inline-block;
     vertical-align: middle;
-}
-
-.slider_rh {
-    right: 0;
-}
-
-.slider_lh {
-    left: 0;
 }
 
 .lh {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
 
-.lh .note {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
+.lh .strings-btns-block,
+.lh .str-tuner-sel,
+.lh .note,
+.lh .lh-rh-toggle-block,
+.lh .halfsteps-numb {
     transform: scaleX(-1);
 }
 
-.lh .string_tune_sel {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
+.lh .frets-numbers > * {
     transform: scaleX(-1);
 }
 
-.tuning_options {
-    min-height: 100px;
-    text-align: justify;
-    float: left;
+.scales-select-block > * {
+    margin: 10px auto;
 }
 
-.tuning_options ul {
-    float: left;
-    margin-right: 10px
+.tuning-btn-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tuning-btn-block > *:first-child {
+    margin-right: 5px;
+}
+.tuning-btn-block > *:last-child {
+    margin-right: 5px;
 }
 
-.tuning_options li {
-    margin-bottom: 16px;
+.halfsteps-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.halfsteps-block > *:first-child {
+    margin-right: 8px;
+}
+.halfsteps-block select, .halfsteps-block option {
+    text-align: end;
 }
 
-.tuning_options li:last-child {
-    margin-bottom: 0;
-}
-
-.tuning_sel {
-    display: inline-block;
-    height: 25px;
-}
-
-.half_step_block {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.half_step_sel {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: right;
-    line-height: 20px;
-    height: 20px;
+.halfsteps-numb {
+    width: 3ch;
 }
