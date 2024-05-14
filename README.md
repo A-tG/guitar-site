@@ -36,7 +36,7 @@
 1. `npm install` inside '\src' to initialize vue
 1. `node subset-iconfont.js` then copy folder '.font-output\material-icons\webfonts' to 'src\public' (filled, outlined variants)
 
-   On Windows: `robocopy .font-output\material-icons\webfonts src\webfonts *filled* *outlined* /im /is /it`
+   On Windows: `robocopy .font-output\material-icons\webfonts src\public\webfonts *filled* *outlined* /im /is /it`
 1. Calling `npm run dev` inside '.\src' starts local server for development
 1. Calling `npm run build` inside '.\src' builds project to '.\dist'
 
