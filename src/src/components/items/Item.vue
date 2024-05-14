@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ScalesItem from './guitar/ScalesItem.vue';
+import ScalesItem from './guitar/Scales/ScalesItem.vue';
 
 const props = defineProps<{
     onCloseButton: () => void
