@@ -1,4 +1,4 @@
-// npm install -D @fortawesome/fontawesome-free @mdi/font @mdi/svg
+// npm install -D material-icons @material-design-icons/svg
 const subset = require('subset-iconfont');
 const fs = require('fs')
 
