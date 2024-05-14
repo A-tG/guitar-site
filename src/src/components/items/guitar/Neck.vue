@@ -19,7 +19,8 @@ const scaleLen = 25.5 * 25.4 // inches to mm
 const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
 
 const isFlat = inject(isFlatNotationKey)
-const rootNote = defineModel<Note>("rootNote")
+const rootNote = defineModel<Note>("rootNote", { required: true })
+const notesToShow = defineModel<number[] | readonly number[]>("notesToShow")
 
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
@@ -75,6 +76,11 @@ function getFretVerStyle(fretNumber: number)
 {
     return 'flex:' + getFretWidth(scaleLen, fretNumber)
 }
+
+function isShowNote(n: Note)
+{
+    return notesToShow?.value?.includes(n)
+}
 </script>
 
 <template>
@@ -122,7 +128,7 @@ function getFretVerStyle(fretNumber: number)
         <div class="fretboard frets-width-cont">
             <div class="fret-null">
                 <div class="fret-hor" v-for="(s, i) in stringsTunings">
-                    <div class="note fnt f16 norm-note">
+                    <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, HS))">
                         {{ noteN(highN(s.value, HS), isFlat) }}
                     </div>
                 </div>
@@ -133,7 +139,7 @@ function getFretVerStyle(fretNumber: number)
                 <div class="fret-inlay inlay-bottom neg-bg" v-if="isDoubleDot(f)"></div>
                 <div class=" fret-hor fretboard-bg" v-for="(s, i) in stringsTunings">
                     <div class="string" :style="getStringStyle(i)"></div>
-                    <div class="note fnt f16 norm-note" 
+                    <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, f + HS))"
                         :class="highN(s.value, f + HS) == rootNote ? 'highlight-note' : ''">
                         {{ noteN(highN(s.value, f + HS), isFlat) }}
                     </div>

@@ -1,23 +1,33 @@
 <script setup lang="ts">
 import { Note, getHigherNote, getNotesList } from "@/types/Note";
 import Neck from "../Neck.vue"
-import { inject, ref, watch } from "vue";
+import { inject, reactive, ref, watch } from "vue";
 import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
 import { defaultScaleId, getIntervals, getScalesIds } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { SumArrElements } from "@/utils/array";
 
-const isFlat = inject(isFlatNotationKey)
 
-const selectedScale = ref(defaultScaleId)
-const intervals = ref(getIntervals(selectedScale.value))
-watch(selectedScale, (val) => {
-    intervals.value = getIntervals(val)
-})
+const relToMajList = ['1', 'b2/b9', '2/9', 'b3/#9', '3', '4/11', 'b5/#11', '5', '#5/b13', '6/13', 'b7/#13', '7']
+
+const isFlat = inject(isFlatNotationKey)
 
 const isTriadMode = ref(false)
 const root = ref(Note.C)
+const notesToggleList = reactive(Array(12).fill(true))
+
+const selectedScale = ref(defaultScaleId)
+const intervals = ref(getIntervals(selectedScale.value))
+const notesToShow = ref<Note[]>([])
+notesToShow.value = getNotesToShow()
+watch(selectedScale, (val) => {
+    intervals.value = getIntervals(val)
+
+    notesToShow.value = getNotesToShow()
+})
+watch(root, () => notesToShow.value = getNotesToShow())
+
 
 const textCommonClass = "norm-clr fnt f18"
 const scales = getScalesIds().sort()
@@ -28,10 +38,29 @@ function getScaleNote(noteNumber: number)
 
     return getHigherNote(root.value, SumArrElements(intervals.value, noteNumber))
 }
+
+function getRelToMaj(noteNumber: number)
+{
+    if (noteNumber == 0) return relToMajList[noteNumber]
+
+    return relToMajList[SumArrElements(intervals.value, noteNumber)]
+}
+
+function getNotesToShow()
+{
+    const notes = [root.value]
+    let lastN = notes[0]
+    for (const int of intervals.value)
+    {
+        lastN = getHigherNote(lastN, int)
+        notes.push(lastN)
+    }
+    return notes
+}
 </script>
 
 <template>
-    <Neck v-model:rootNote="root"></Neck>
+    <Neck v-model:rootNote="root" v-model:notesToShow="notesToShow"></Neck>
     <div class="scale-block">
         <div class="scale-options">
             <span :class="textCommonClass">Root</span>
@@ -45,7 +74,11 @@ function getScaleNote(noteNumber: number)
             <span :class="textCommonClass">Numbered</span>
             <ul class="scale-notes-block">
                 <ScaleNoteInterval v-for="int, i in intervals" :noteName="getNoteName(getScaleNote(i), isFlat)"
-                    :number="i + 1" :interval="int"></ScaleNoteInterval>
+                    v-model:isActive="notesToggleList[i]" :number="i + 1" :interval="int" :relToMaj="getRelToMaj(i)">
+                </ScaleNoteInterval>
+                <ScaleNoteInterval v-model:isActive="notesToggleList[0]" :noteName="getNoteName(root, isFlat)"
+                    :number="1" :relToMaj="'1'">
+                </ScaleNoteInterval>
             </ul>
 
             <span :class="textCommonClass">Relative</span>
