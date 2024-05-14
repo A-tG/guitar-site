@@ -2,16 +2,15 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=380, initial-scale=1.0" >
     <title>Learn and improve your musical skills in a new comfortable way</title>
     <meta name="description" 
-          content="Experience fast user interface. Learn guitar scales on customizable fretboard. Practice with highly precise metronome.">
-
-    <script src="js/knockout-3.5.1.js" defer></script>
+      content="Experience fast user interface. Learn guitar scales on customizable fretboard. Practice with highly precise metronome.">
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/material_icons.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/notes.css">
+    <link rel="stylesheet" type="text/css" href="css/modal.css">
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" type="text/css" href="css/colors.css">
     <link rel="stylesheet" type="text/css" href="css/head.css">
@@ -23,263 +22,24 @@
     <link rel="stylesheet" type="text/css" href="css/neck/neck.css">
     <link rel="stylesheet" type="text/css" href="css/neck/fretboard.css">
     <link rel="stylesheet" type="text/css" href="css/neck/strings_options.css">
+    <link rel="stylesheet" type="text/css" href="css/media_screen.css">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=wAXGY3MrKO">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=wAXGY3MrKO">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=wAXGY3MrKO">
-    <link rel="manifest" href="/site.webmanifest?v=wAXGY3MrKO">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=wAXGY3MrKO" color="#0078d7">
-    <link rel="shortcut icon" href="/favicon.ico?v=wAXGY3MrKO">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png?v=wAXGY3MrKO">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png?v=wAXGY3MrKO">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png?v=wAXGY3MrKO">
+    <link rel="manifest" href="favicon/site.webmanifest?v=wAXGY3MrKO">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg?v=wAXGY3MrKO" color="#0078d7">
+    <link rel="shortcut icon" href="favicon/favicon.ico?v=wAXGY3MrKO">
     <meta name="msapplication-TileColor" content="#0078d7">
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <div class="bg-block night" data-bind="class: settings.themeSwitcher.name, css: { 'flat-notaion': settings.notationSwitcher.isFlat }">
-      <!-- ko using: settings -->
-      <div class="settings-block-wrap" data-bind="visible: isShown, clickCurrent: close" style="display: none">
-        <div id="settings-block" class="norm-bg1">
-          <div class="settings-block-controls">
-            <span class="norm-clr fnt f-bold f18">Settings</span>
-            <i class="el-clr hov-el-clr tr-al mi-outlined md-36 mi-close" title="Close settings"
-               data-bind="click: close"></i>
-          </div>
-
-          <table class="settings-block-content">
-            <tbody>
-              <tr data-bind="using: themeSwitcher">
-                <td>
-                  <span class="norm-clr fnt f18">Theme</span>
-                </td>
-                <td>
-                  <ul class="themes-block">
-                    <li data-bind="visible: theme != ColorTheme.night, click: toNight"
-                      class="el-clr hov-el-clr tr-al" title="Switch to night theme">
-                      <i class="mi-filled md-36 mi-dark-mode"></i>
-                    </li>
-                    <li data-bind="visible: theme != ColorTheme.day, click: toDay" class="el-clr hov-el-clr tr-al"
-                      title="Switch to day theme">
-                      <i class="mi-filled md-36 mi-light-mode"></i>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <div class="settings-separator norm-bg2"></div>
-                </td>
-              </tr>
-              <tr data-bind="using: notationSwitcher">
-                <td>
-                  <span class="norm-clr fnt f18">Notation</span>
-                </td>
-                <td>
-                  <i class="mi-outlined md-36 fnt-el fnt el-clr hov-el-clr tr-al"
-                     title="Switch notation" data-bind="css: { 'i-note-flat': isSharp, 'i-note-sharp': isFlat }, click: change"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- /ko -->
-
-      <div class="content-block norm-bg2">
-        <header class="head-block norm-bg1">
-          <ul class="head-block-content">
-            <li>
-              <a class="el-clr fnt f24 hov-el-clr tr-al" href="" title="Artistic Guitar">
-                <svg id="metr-icon" class="head-subitem svg-el-stroke svg-el-fill hov-svg-clr tr-al" 
-                     height="35" width="35" viewBox="0 0 210 297">
-                  <ellipse transform="matrix(.93093 -.3652 .21607 .97638 0 0)" cx="19.418" cy="236.87" rx="80.642" ry="49.289"/>
-                  <g stroke-linecap="round" stroke-linejoin="round">
-                   <path d="m136.41 198.68-0.75004-174.01z" stroke-width="17.82"/>
-                   <path d="m-26.106 84.56c39.199-6.5722 60.508-25.357 67.886-67.886 8.5104 42.449 25.931 61.895 
-                   67.886 67.886-40.608 6.2621-59.569 30.212-67.886 67.886-7.268-37.989-28.522-61.242-67.886-67.886z"/>
-                   <path d="m146.01 236.74c28.613-4.7973 44.167-18.509 49.553-49.553 6.2121 30.985 18.928 45.18 
-                   49.553 49.553-29.641 4.571-43.482 22.053-49.553 49.553-5.3052-27.73-20.819-44.703-49.553-49.553z"/>
-                  </g>
-                </svg>
-                <span class="head-subitem">Artistic Guitar</span>
-              </a>
-            </li>
-
-            <li class="head-separator norm-bg2"></li>
-            <li>
-              <a class="el-clr fnt f24 hov-el-clr tr-al" 
-                 href="https://taplink.cc/atgdev" title="Donate">Donate</a>
-            </li>
-
-            <li class="head-separator norm-bg2"></li>
-            <li>
-              <ul class="metr-block" data-bind="using: metronome">
-                <li data-bind="hidden: isEnabled"
-                    class="metr-disabled fnt f24 neg-bg neg-clr">
-                    <span>unable to initialize the metronome</span>
-                </li>
-
-                <li class="metr-icon metr-el">
-                  <svg class="svg-norm-stroke svg-no-fill metr-svg-medium-stoke" height="50" width="30">
-                    <polygon points="8,5 22,5 28,45 2,45" />
-                    <path class="metr-svg-dasharay" d="M15 10 L15 28" />
-                    <path d="M15 34 L27 10" />
-                    <polygon class="svg-norm-fill metr-svg-light-stoke" points="27.3,10.5 25.7,10.5 24.5,12.5 28.5,12.5" 
-                             transform="rotate(-152.79946,26.501937,10.962363)" />
-                  </svg>
-                </li>
-
-                <li data-bind="using: canvas" class="metr-beat-vis-block metr-el norm-bg3">
-                  <canvas id="metr-pointer-block" data-bind="css: { 'metr-accent-clr': isAccent }"
-                          class="norm-clr fnt f26" 
-                          width="40" height="40"></canvas>
-                </li>
-
-                <li class="play-btn metr-el el-clr hov-el-clr tr-al"
-                    data-bind="click: togglePlay"
-                    title="Toggle metronome playing">
-                    <i class="mi-outlined md-46" data-bind="css: { 'mi-pause-circle': isPlaying, 'mi-play-circle': !isPlaying }"></i>
-                </li>
-
-                <li class="metr-el">
-                  <div class="norm-clr fnt f18">Click type</div>
-                  <div class="beat-type-sel-block">
-                    <select class="signature-sel el-clr norm-bg3 fnt f14"
-                            data-bind="options: clickTypes, value: clickType">
-                    </select>
-                  </div>
-                </li>
-
-                <!-- ko using: volume -->
-                <li class="volume-block metr-el nonselect-txt" data-bind="event: { mouseover: enableHover, mouseout: disableHover }">
-                  <div class="metr-option-head">
-                    <span class="fnt f14 weak-clr" data-bind="text: min + '%'">0%</span>
-                    <div class="fnt f18 norm-clr">
-                      <label for="metr-vol" data-bind="hidden: isHover || isFocus">Volume</label>
-                      <span data-bind="visible: isHover || isFocus, text: value"></span>
-                    </div>
-                    <span class="fnt f14 weak-clr" data-bind="text: max + '%'">100%</span>
-                  </div>
-                  <input id="metr-vol" class="volume-range" type="range" value="50" min="-1" max="100" step="1"
-                         data-bind="value: value, valueUpdate: 'input', attr: {min: min - 1, max: max}, event: { focus: enableFocus, blur: disableFocus }">
-                </li>
-                <!-- /ko -->
-
-                <li class="tempo-block metr-el nonselect-txt" data-bind="using: tempo">
-                  <div class="metr-el">
-                    <div class="metr-option-head">
-                      <span class="fnt f14 weak-clr" data-bind="text: min">40</span>
-                      <label for="metr-tempo" class="fnt f18 norm-clr">Tempo</label>
-                      <span class="fnt f14 weak-clr" data-bind="text: max">320</span>
-                    </div>
-                    <input id="metr-tempo" class="tempo-range" type="range" value="120" min="40" max="320" step="1"
-                           data-bind="value: value, valueUpdate: 'input', attr: {min: min, max: max}">
-                  </div>
-
-                  <div class="metr-el tempo-input-block">
-                    <div class="l-arr l-arr-el-clr l-arr-el-hov tr-al" 
-                          data-bind="click: decrease"
-                          title="Reduce tempo"></div>
-                    <input class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos" 
-                           step="1"
-                           data-bind="value: value, attr: { min: min, max: max }">
-                    <div class="r-arr r-arr-el-clr r-arr-el-hov tr-al" 
-                         data-bind="click: increase"
-                         title="Increase tempo"></div>
-                    <datalist id="tempos" data-bind="foreach: tempoList">
-                      <option data-bind="value: $data, text: $data"></option>
-                    </datalist>
-                  </div>
-                </li>
-
-                <li class="metr-el">
-                  <ul>
-                    <li class="metr-el">
-                      <span class="norm-clr fnt f18">Signature</span>
-                    </li>
-
-                    <li class="metr-el" data-bind="using: signature">
-                      <div class="signature-option-block">
-                        <div class="l-arr l-arr-el-clr l-arr-el-hov tr-al" 
-                            title="Reduce beats number" data-bind="click: beatsPrev"></div>
-                        <select class="signature-sel el-clr norm-bg3 fnt f14"
-                                data-bind="options: beats, value: beatsPerMeasure"></select>
-                        <div class="r-arr r-arr-el-clr r-arr-el-hov tr-al" 
-                             title="Increase beats number" data-bind="click: beatsNext"></div>
-                      </div>
-
-                      <div class="signature-option-block">
-                        <div class="l-arr l-arr-el-clr l-arr-el-hov tr-al" 
-                             title="Increase beat(note) value"
-                             data-bind="click: lenPrev"></div>
-                        <select class="signature-sel el-clr norm-bg3 fnt f14"
-                                data-bind="options: beatLengths, value: beatLength"></select>
-                        <div class="r-arr r-arr-el-clr r-arr-el-hov tr-al" 
-                             title="Reduce beat(note) value"
-                             data-bind="click: lenNext"></div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-
-            <li class="head-separator norm-bg2"></li>
-            <!-- ko using: settings -->
-            <li id="common-settings-wrap">
-              <div class="el-clr hov-el-clr tr-al" title="Open settings"
-                   data-bind="click: toggleOpen">
-                <i class="mi-filled md-36 mi-settings"></i>
-              </div>
-            </li>
-            <!-- /ko -->
-          </ul>
-        </header>
-
-        <noscript>
-          <span class="noscipt-warning fnt f26 f-bold norm-clr norm-bg1">
-            Please enable javascript or update your browser
-          </span>
-        </noscript>
-
-        <ul class="items-container" data-bind="foreach: Items">
-          <!-- ko component: "item" -->
-          <!-- /ko -->
-        </ul>
-        <i class="add-new-item mi-filled mi-add-box md-82 el-clr hov-el-clr tr-al"
-           data-bind="visible: isAddBtnVisible, click: addItem"
-           title="Add item"
-           style="display: none"></i>
-
-        <footer class="foot norm-bg1">
-          <ul>
-            <li class="foot-item">
-              <a class="el-clr fnt f14 hov-el-clr tr-al" 
-                 href="https://github.com/A-tG/a-tg.github.io/commits/master" title="Changelog">Changelog</a>
-            </li>
-            <li class="foot-item">
-              <a class="el-clr fnt f14 hov-el-clr tr-al" 
-                 href="https://github.com/A-tG/guitar-site" title="GitHub source files and feedback">GitHub source files</a>
-            </li>
-          </ul>
-        </footer>
-      </div>
-    </div>
-
-    <script id="item-tmpl" type="text/html">
-      <li class="item-block norm-bg1">
-        <div class="item-content">
-        </div>
-        <ul class="item-controls">
-          <li class="el-clr hov-el-clr mi-outlined md-36 mi-close tr-al"
-               data-bind="click: $parentContext.$parent.removeItem.bind($parentContext.$parent, $parent.Id)" 
-               title="Close"></li>
-          <li class="el-clr hov-el-clr mi-filled md-36 mi-menu tr-al" 
-               title="Open item's menu"></li>
-          <li class="el-clr hov-el-clr mi-outlined mi-star md-36 tr-al"
-               title="Set current options as default"></li>
-        </ul>
-      </li>
-    </script>
-
-    <script src="js/main.js" defer></script>
+    <noscript>
+      <span class="noscipt-warning fnt f26 f-bold">
+        Please enable javascript or update your browser
+      </span>
+    </noscript>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts" defer></script>
   </body>
 </html>
