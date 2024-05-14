@@ -37,8 +37,8 @@
 1. `node subset-iconfont.js` then copy folder '.font-output\material-icons\webfonts' to 'src\public' (filled, outlined variants)
 
    On Windows: `robocopy .font-output\material-icons\webfonts src\public\webfonts *filled* *outlined* /im /is /it`
-1. Calling `npm run dev` inside '.\src' starts local server for development
-1. Calling `npm run build` inside '.\src' builds project to '.\dist'
+1. `npm run dev` inside '.\src' starts local server for development
+1. `npm run build` inside '.\src' builds production ready assets to '.\dist'
 
 ## Support developer
-[Available methods](https://taplink.cc/atgdev)
+[Available donation methods](https://taplink.cc/atgdev)
