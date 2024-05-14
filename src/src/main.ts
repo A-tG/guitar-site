@@ -1,4 +1,4 @@
-import { createApp, ref, type Ref } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import VueSafeTeleport from 'vue-safe-teleport'
 
