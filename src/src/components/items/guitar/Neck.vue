@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { inject, reactive, ref, watch } from 'vue';
 import Tuner from './Tuner.vue';
-import { type TuningID, getStringTuning, getTuningNotes, defaultTuningId } from '@/types/Tunings';
-import { getHigherNote as highN, getNoteName as noteN } from '@/types/Note';
+import { getStringTuning, getTuningNotes, defaultTuningId } from '@/types/Tunings';
+import { Note, getHigherNote as highN, getNoteName as noteN } from '@/types/Note';
 import { getFretWidth } from '@/types/Frets';
 import { isFlatNotationKey } from '@/components/keys';
 import { SafeTeleport } from 'vue-safe-teleport';
@@ -19,6 +19,7 @@ const scaleLen = 25.5 * 25.4 // inches to mm
 const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
 
 const isFlat = inject(isFlatNotationKey)
+const rootNote = defineModel<Note>("rootNote")
 
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
@@ -132,7 +133,8 @@ function getFretVerStyle(fretNumber: number)
                 <div class="fret-inlay inlay-bottom neg-bg" v-if="isDoubleDot(f)"></div>
                 <div class=" fret-hor fretboard-bg" v-for="(s, i) in stringsTunings">
                     <div class="string" :style="getStringStyle(i)"></div>
-                    <div class="note fnt f16 norm-note">
+                    <div class="note fnt f16 norm-note" 
+                        :class="highN(s.value, f + HS) == rootNote ? 'highlight-note' : ''">
                         {{ noteN(highN(s.value, f + HS), isFlat) }}
                     </div>
                 </div>
