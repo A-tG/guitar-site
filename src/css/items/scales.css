@@ -87,6 +87,3 @@
     justify-content: center;
     align-items: end;
 }
-.semitone-block:last-child {
-    display: none;
-}
