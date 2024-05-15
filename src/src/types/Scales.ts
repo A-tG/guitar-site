@@ -91,7 +91,7 @@ export function getScalesIds()
 
 export function getUniqueScalesIds()
 {
-    return uniqueIntervalsIDs.slice()
+    return uniqueIntervalsIDs as ReadonlyArray<TuningID>
 }
 
 function checkForDuplicates()

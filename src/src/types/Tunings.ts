@@ -3,7 +3,7 @@ import { Note } from "./Note";
 export type TuningID = 'std_e' | 'std_e_bass' | 'std_e_bass6' | 'drop_d6' | 'drop_a7' | 'drop_e8'
 export const defaultTuningId: TuningID = 'std_e'
 
-const tunings: Record<TuningID, Note[]> = {
+const tunings: Record<TuningID, ReadonlyArray<Note>> = {
     'std_e': [
         Note.E,
         Note.B,
@@ -49,7 +49,7 @@ export function getTuningNotes(name: TuningID)
 {
     if (!tunings[name]) throw new Error(`${name} tuning does not exist`)
 
-    return tunings[name].slice()!
+    return tunings[name]
 }
 
 export function getTuningsIds()
