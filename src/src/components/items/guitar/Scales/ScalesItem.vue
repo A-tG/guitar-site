@@ -6,7 +6,7 @@ import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
 import { defaultScaleId, getIntervals, getScalesIds, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
-import { SumArrElements } from "@/utils/array";
+import { sumArrElements } from "@/utils/array";
 
 
 const relToMajList = stepsRelativeToMajor
@@ -36,14 +36,14 @@ function getScaleNote(noteNumber: number)
 {
     if (noteNumber == 0) return root.value
 
-    return getHigherNote(root.value, SumArrElements(intervals.value, noteNumber))
+    return getHigherNote(root.value, sumArrElements(intervals.value, noteNumber))
 }
 
 function getRelToMaj(noteNumber: number)
 {
     if (noteNumber == 0) return relToMajList[noteNumber]
 
-    return relToMajList[SumArrElements(intervals.value, noteNumber)]
+    return relToMajList[sumArrElements(intervals.value, noteNumber)]
 }
 
 function getNotesToShow()

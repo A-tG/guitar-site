@@ -96,7 +96,7 @@ export class ArrayUtils
     }
 }
 
-export function SumArrElements(arr: number[] | ReadonlyArray<number>, to: number, from: number = 0)
+export function sumArrElements(arr: number[] | ReadonlyArray<number>, to: number, from: number = 0)
 {
     if (to < 0) throw new RangeError()
 
@@ -106,4 +106,17 @@ export function SumArrElements(arr: number[] | ReadonlyArray<number>, to: number
         result += arr[i]
     }  
     return result
+}
+
+export function isArraysEqual<T>(arr1: T[], arr2: T[])
+{
+    const len1 = arr1.length
+    const len2 = arr2.length
+    if (len1 != len2) return false
+
+    for (let i = 0; i < len1; i++)
+    {
+        if (arr1[i] != arr2[i]) return false
+    }
+    return true
 }
