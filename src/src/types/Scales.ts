@@ -1,62 +1,63 @@
-export const defaultScaleId = 'major'
+export const defaultScaleId: TuningID = 'maj'
 export const stepsRelativeToMajor = ['1', 'b2/b9', '2/9', 'b3/#9', '3', '4/11', 'b5/#11', '5', '#5/b13', '6/13', 'b7/#13', '7'] as const
+export type TuningID = 'maj' | 'min' | 'harm_min' | 'chrom' | 'dor' | 'phr' | 'phr_dom' | 'lyd' | 'mix' | 'locr' | 'mel_min' | 'alt_dom' | 'bl_min_hex' | 'bl_pent' | 'bl' | 'maj_pent' | 'sus_pent' | 'phr_pent' | 'mix_pent' | 'aeol_pent' | 'maj_beb' | 'min_beb' | 'dom_beb' | 'wton' | 'whton' | 'hwton' | 'ac' |
+    'ion' | 'aeol' | 'span_mod' | 'sup_locr' | 'dim_wton' | 'alt_sc' | 'dor_pent' | 'min_pent' | 'dor_beb' | 'dim' | 'dom_dim' | 'symm_dim' | 'bart'
 
-const Intervals = new Map([
-    [defaultScaleId, [2, 2, 1, 2, 2, 2, 1]],
-    ['minor', [2, 1, 2, 2, 1, 2, 2]],
-    ['harmonic_min', [2, 1, 2, 2, 1, 3, 1]],
-    ['chromatic', [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
-    ['dorian', [2, 1, 2, 2, 2, 1, 2]],
-    ['phrygian', [1, 2, 2, 2, 1, 2, 2]],
-    ['phrygian_dom', [1, 3, 1, 2, 1, 2, 2]],
-    ['lydian', [2, 2, 2, 1, 2, 2, 1]],
-    ['myxolydian', [2, 2, 1, 2, 2, 1, 2]],
-    ['locrian', [1, 2, 2, 1, 2, 2, 2]],
-    ['melodic_min', [2, 1, 2, 2, 2, 2, 1]],
+const Intervals = new Map<TuningID, number[]>([
+    ['maj', [2, 2, 1, 2, 2, 2, 1]],
+    ['min', [2, 1, 2, 2, 1, 2, 2]],
+    ['harm_min', [2, 1, 2, 2, 1, 3, 1]],
+    ['chrom', [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
+    ['dor', [2, 1, 2, 2, 2, 1, 2]],
+    ['phr', [1, 2, 2, 2, 1, 2, 2]],
+    ['phr_dom', [1, 3, 1, 2, 1, 2, 2]],
+    ['lyd', [2, 2, 2, 1, 2, 2, 1]],
+    ['mix', [2, 2, 1, 2, 2, 1, 2]],
+    ['locr', [1, 2, 2, 1, 2, 2, 2]],
+    ['mel_min', [2, 1, 2, 2, 2, 2, 1]],
     ['alt_dom', [1, 2, 1, 2, 2, 2, 2]],
-    ['blues_min_hex', [3, 2, 1, 1, 3, 2]],
-    ['blues_pent', [3, 2, 1, 4, 2]],
-    ['blues', [3, 2, 1, 1, 3, 1, 1]],
-    ['major_pent', [2, 2, 3, 2, 3]],
-    ['suspended_pent', [2, 3, 2, 3, 2]],
-    ['phrygian_pent', [3, 2, 3, 2, 2]],
-    ['myxolydian_pent', [2, 3, 2, 2, 3]],
-    ['aeolian_pent', [3, 2, 2, 3, 2]],
-    ['major_beb', [2, 2, 1, 2, 1, 1, 2, 1]],
-    ['minor_beb', [2, 1, 1, 1, 2, 2, 1, 2]],
+    ['bl_min_hex', [3, 2, 1, 1, 3, 2]],
+    ['bl_pent', [3, 2, 1, 4, 2]],
+    ['bl', [3, 2, 1, 1, 3, 1, 1]],
+    ['maj_pent', [2, 2, 3, 2, 3]],
+    ['sus_pent', [2, 3, 2, 3, 2]],
+    ['phr_pent', [3, 2, 3, 2, 2]],
+    ['mix_pent', [2, 3, 2, 2, 3]],
+    ['aeol_pent', [3, 2, 2, 3, 2]],
+    ['maj_beb', [2, 2, 1, 2, 1, 1, 2, 1]],
+    ['min_beb', [2, 1, 1, 1, 2, 2, 1, 2]],
     ['dom_beb', [2, 2, 1, 2, 2, 1, 1, 1]],
-    ['whole_tone', [2, 2, 2, 2, 2, 2]],
-    ['whole_half_tone', [2, 1, 2, 1, 2, 1, 2, 1]],
-    ['half_whole_tone', [1, 2, 1, 2, 1, 2, 1, 2]],
-    ['acoustic', [2, 2, 2, 1, 2, 1, 2]],
-    ['bartok', [2, 2, 2, 1, 2, 1, 2]]
+    ['wton', [2, 2, 2, 2, 2, 2]],
+    ['whton', [2, 1, 2, 1, 2, 1, 2, 1]],
+    ['hwton', [1, 2, 1, 2, 1, 2, 1, 2]],
+    ['ac', [2, 2, 2, 1, 2, 1, 2]]
 ])
 
-Intervals.set('ionian', Intervals.get('major')!)
-Intervals.set('aeolian', Intervals.get('minor')!)
-Intervals.set('spanish_mod', Intervals.get('phrygian')!)
+Intervals.set('ion', Intervals.get('maj')!)
+Intervals.set('aeol', Intervals.get('min')!)
+Intervals.set('span_mod', Intervals.get('phr')!)
 
 const altScale = Intervals.get('alt_dom')!
-Intervals.set('sup_locrian', altScale)
-Intervals.set('dim_whole_tone', altScale)
-Intervals.set('alt_scale', altScale)
+Intervals.set('sup_locr', altScale)
+Intervals.set('dim_wton', altScale)
+Intervals.set('alt_sc', altScale)
 
-Intervals.set('dorian_pent', Intervals.get('suspended_pent')!)
-Intervals.set('minor_pent', Intervals.get('aeolian_pent')!)
-Intervals.set('dorian_beb', Intervals.get('minor_beb')!)
-Intervals.set('dim', Intervals.get('whole_half_tone')!)
+Intervals.set('dor_pent', Intervals.get('sus_pent')!)
+Intervals.set('min_pent', Intervals.get('aeol_pent')!)
+Intervals.set('dor_beb', Intervals.get('min_beb')!)
+Intervals.set('dim', Intervals.get('whton')!)
 
-const halfWhole = Intervals.get('half_whole_tone')!
+const halfWhole = Intervals.get('hwton')!
 Intervals.set('dom_dim', halfWhole)
 Intervals.set('symm_dim', halfWhole)
 
-Intervals.set('bartok', Intervals.get('acoustic')!)
+Intervals.set('bart', Intervals.get('ac')!)
 
 export function getIntervals(scaleName: string): ReadonlyArray<number>
 {
-    if (!Intervals.has(scaleName)) throw new Error(`${scaleName} scale does not exist`)
+    if (!Intervals.has(scaleName as TuningID)) throw new Error(`${scaleName} scale does not exist`)
 
-    return Intervals.get(scaleName)!
+    return Intervals.get(scaleName as TuningID)!
 }
 
 export function getScalesIds()
