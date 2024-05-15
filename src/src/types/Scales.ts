@@ -1,9 +1,11 @@
+import { isArraysEqual } from "@/utils/array"
+
 export const defaultScaleId: TuningID = 'maj'
 export const stepsRelativeToMajor = ['1', 'b2/b9', '2/9', 'b3/#9', '3', '4/11', 'b5/#11', '5', '#5/b13', '6/13', 'b7/#13', '7'] as const
 export type TuningID = 'maj' | 'min' | 'harm_min' | 'chrom' | 'dor' | 'phr' | 'phr_dom' | 'lyd' | 'mix' | 'locr' | 'mel_min' | 'alt_dom' | 'bl_min_hex' | 'bl_pent' | 'bl' | 'maj_pent' | 'sus_pent' | 'phr_pent' | 'mix_pent' | 'aeol_pent' | 'maj_beb' | 'min_beb' | 'dom_beb' | 'wton' | 'whton' | 'hwton' | 'ac' |
     'ion' | 'aeol' | 'span_mod' | 'sup_locr' | 'dim_wton' | 'alt_sc' | 'dor_pent' | 'min_pent' | 'dor_beb' | 'dim' | 'dom_dim' | 'symm_dim' | 'bart'
 
-const intervals: Record<TuningID, number[]> = {
+const intervalsList: Record<TuningID, number[]> = {
     'maj': [2, 2, 1, 2, 2, 2, 1],
     'min': [2, 1, 2, 2, 1, 2, 2],
     'harm_min': [2, 1, 2, 2, 1, 3, 1],
@@ -46,32 +48,66 @@ const intervals: Record<TuningID, number[]> = {
     bart: []
 }
 
-intervals.ion = intervals.maj
-intervals.aeol = intervals.min
-intervals.span_mod = intervals.phr
+checkForDuplicates()
 
-intervals.sup_locr = intervals.alt_dom
-intervals.dim_wton = intervals.alt_dom
-intervals.alt_sc = intervals.alt_dom
-
-intervals.dor_pent = intervals.sus_pent
-intervals.min_pent = intervals.aeol_pent
-intervals.dor_beb = intervals.min_beb
-intervals.dim = intervals.whton
-
-intervals.dom_dim = intervals.hwton
-intervals.symm_dim = intervals.hwton
-
-intervals.bart = intervals.ac
-
-export function getIntervals(scaleName: TuningID): ReadonlyArray<number>
+const uniqueIntervalsIDs: TuningID[] = []
+for (const p in intervalsList)
 {
-    if (!intervals[scaleName]) throw new Error(`${scaleName} scale does not exist`)
+    const id = p as TuningID
+    if (intervalsList[id].length == 0) continue
+    
+    uniqueIntervalsIDs.push(id)
+}
 
-    return intervals[scaleName]
+intervalsList.ion = intervalsList.maj
+intervalsList.aeol = intervalsList.min
+intervalsList.span_mod = intervalsList.phr
+
+intervalsList.sup_locr = intervalsList.alt_dom
+intervalsList.dim_wton = intervalsList.alt_dom
+intervalsList.alt_sc = intervalsList.alt_dom
+
+intervalsList.dor_pent = intervalsList.sus_pent
+intervalsList.min_pent = intervalsList.aeol_pent
+intervalsList.dor_beb = intervalsList.min_beb
+intervalsList.dim = intervalsList.whton
+
+intervalsList.dom_dim = intervalsList.hwton
+intervalsList.symm_dim = intervalsList.hwton
+
+intervalsList.bart = intervalsList.ac
+
+export function getIntervals(scaleName: TuningID): ReadonlyArray<typeof intervalsList["maj"][0]>
+{
+    if (!intervalsList[scaleName]) throw new Error(`${scaleName} scale does not exist`)
+
+    return intervalsList[scaleName]
 }
 
 export function getScalesIds()
 {
-    return Object.keys(intervals)
+    return Object.keys(intervalsList)
+}
+
+export function getUniqueScalesIds()
+{
+    return uniqueIntervalsIDs.slice()
+}
+
+function checkForDuplicates()
+{
+    const checked: number[][] = []
+    for (const p in intervalsList)
+    {
+        const id = p as TuningID
+        const intervals = intervalsList[id]
+        if (intervals.length == 0) continue
+        
+        if (checked.some((el) => isArraysEqual(el, intervals)))
+        {
+            console.warn(`Scale ${id} have duplicates`)
+            continue
+        }
+        checked.push(intervals)
+    }
 }
