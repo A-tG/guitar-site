@@ -2,7 +2,7 @@ export const defaultScaleId = 'major'
 export const stepsRelativeToMajor = ['1', 'b2/b9', '2/9', 'b3/#9', '3', '4/11', 'b5/#11', '5', '#5/b13', '6/13', 'b7/#13', '7'] as const
 
 const Intervals = new Map([
-    ['major', [2, 2, 1, 2, 2, 2, 1]],
+    [defaultScaleId, [2, 2, 1, 2, 2, 2, 1]],
     ['minor', [2, 1, 2, 2, 1, 2, 2]],
     ['harmonic_min', [2, 1, 2, 2, 1, 3, 1]],
     ['chromatic', [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]],
