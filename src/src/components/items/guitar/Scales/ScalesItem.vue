@@ -4,12 +4,12 @@ import Neck from "../Neck.vue"
 import { inject, reactive, ref, watch } from "vue";
 import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
-import { defaultScaleId, getIntervals, getScalesIds } from "@/types/Scales";
+import { defaultScaleId, getIntervals, getScalesIds, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { SumArrElements } from "@/utils/array";
 
 
-const relToMajList = ['1', 'b2/b9', '2/9', 'b3/#9', '3', '4/11', 'b5/#11', '5', '#5/b13', '6/13', 'b7/#13', '7']
+const relToMajList = stepsRelativeToMajor
 
 const isFlat = inject(isFlatNotationKey)
 
