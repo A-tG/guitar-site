@@ -20,11 +20,13 @@ const scaleLen = 25.5 * 25.4 // inches to mm
 const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
 
 const props = defineProps<{
-    notesDisplayModes: Map<Note, NoteDisplayMode>
+    notesDisplayModes: Map<Note, NoteDisplayMode>,
+    extraNoteNames?: Map<Note, string>
 }>()
 const notesDisplayModes = props.notesDisplayModes
+const extraNames = props.extraNoteNames
 
-const isFlat = inject(isFlatNotationKey)
+const isFlat = inject(isFlatNotationKey)!
 
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
@@ -99,6 +101,17 @@ function isShowNote(n: Note)
 {
     return (notesDisplayModes.get(n)! & NoteDisplayMode.Disabled) !== NoteDisplayMode.Disabled
 }
+
+function getNoteName(note: Note, offset: number)
+{
+    const n = highN(note, offset)
+    const name = extraNames?.get(n)
+    if (name)
+    {
+        return name
+    }
+    return noteN(n, isFlat?.value)
+}
 </script>
 
 <template>
@@ -148,7 +161,7 @@ function isShowNote(n: Note)
                 <div class="fret-hor" v-for="(s, i) in stringsTunings">
                     <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, HS))"
                         :class="getNoteClass(highN(s.value, HS))">
-                        {{ noteN(highN(s.value, HS), isFlat) }}
+                        {{ getNoteName(s.value, HS)}}
                     </div>
                 </div>
             </div>
@@ -160,7 +173,7 @@ function isShowNote(n: Note)
                     <div class="string" :style="getStringStyle(i)"></div>
                     <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, f + HS))"
                         v-if="isShowNote(highN(s.value, f + HS))">
-                        {{ noteN(highN(s.value, f + HS), isFlat) }}
+                        {{ getNoteName(s.value, f + HS) }}
                     </div>
                 </div>
             </div>

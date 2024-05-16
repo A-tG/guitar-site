@@ -6,35 +6,63 @@ import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
 import { defaultScaleId, getIntervals, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
-import { sumArrElements } from "@/utils/array";
+import { copyValues, sumArrElements } from "@/utils/array";
 import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
 import { NoteDisplayMode } from "../NoteDisplayMode";
 
-
 const relToMajList = stepsRelativeToMajor
+const textCommonClass1 = "norm-clr fnt f16"
+const textCommonClass2 = "norm-clr fnt f18"
 
 const isFlat = inject(isFlatNotationKey)
 
 const isTriadMode = ref(false)
+watch(isTriadMode, (val) => {
+    updateNotesExtraNames()
+    if (val)
+    {
+        copyValues(currentToggleList, notesToggleList)
+        copyValues(triadsToggleList, currentToggleList)
+        return
+    }
+    copyValues(currentToggleList, triadsToggleList)
+    copyValues(notesToggleList, currentToggleList)
+})
+
 const root = ref(Note.C)
-const notesToggleList = reactive(Array(12).fill(true))
-watch (notesToggleList, () => updateNotesDispModes())
+
+const notesToggleList = reactive(Array(12).fill(true) as boolean[])
+const triadsToggleList = reactive(Array(12).fill(false) as boolean[])
+triadsToggleList.forEach((_, i, arr) => {
+    if ((i === 0) || (i === 2) || (i === 4))
+    {
+        arr[i] = true
+    }
+})
+
+const currentToggleList = reactive(notesToggleList.slice())
+watch(currentToggleList, () => updateNotesDispModes())
 
 const selectedScale = ref(defaultScaleId)
 const intervals = ref(getIntervals(selectedScale.value))
 const notesDisplayModes = reactive(new Map(
     getNotesList().map(v => [v, NoteDisplayMode.Disabled]))
 )
+const notesExtraNames = reactive(new Map<Note, string>)
+
 updateNotesDispModes()
+updateNotesExtraNames()
+
 watch(selectedScale, (val) => {
     intervals.value = getIntervals(val)
 
     updateNotesDispModes()
+    updateNotesExtraNames()
 })
-watch(root, () => updateNotesDispModes())
-
-const textCommonClass1 = "norm-clr fnt f16"
-const textCommonClass2 = "norm-clr fnt f18"
+watch(root, () => { 
+    updateNotesDispModes()
+    updateNotesExtraNames()
+})
 
 function getScaleNote(noteNumber: number)
 {
@@ -57,7 +85,7 @@ function updateNotesDispModes()
     let i = 0
     for (const int of intervals.value)
     {
-        const mode = notesToggleList[i++] ?
+        const mode = currentToggleList[i++] ?
             lastNote == root.value ? NoteDisplayMode.Highlight : NoteDisplayMode.Normal :
             NoteDisplayMode.Inactve
         notesDisplayModes.set(lastNote, mode)
@@ -65,10 +93,21 @@ function updateNotesDispModes()
         lastNote = getHigherNote(lastNote, int)
     }
 }
+
+function updateNotesExtraNames()
+{
+    notesExtraNames.clear()
+    let note = root.value
+    for (let i = 0; i < intervals.value.length; i++)
+    {
+        notesExtraNames.set(note, isTriadMode.value ? (i + 1).toString() : '')
+        note = getHigherNote(note, intervals.value[i])
+    }
+}
 </script>
 
 <template>
-    <Neck :notesDisplayModes="notesDisplayModes"></Neck>
+    <Neck :notesDisplayModes="notesDisplayModes" :extraNoteNames="notesExtraNames"></Neck>
     <div class="scale-block">
         <div class="scale-options">
             <span :class="textCommonClass1">Root</span>
@@ -82,9 +121,9 @@ function updateNotesDispModes()
             <span :class="textCommonClass1">Numbered</span>
             <ul class="scale-notes-block">
                 <ScaleNoteInterval v-for="int, i in intervals" :noteName="getNoteName(getScaleNote(i), isFlat)"
-                    v-model:isActive="notesToggleList[i]" :number="i + 1" :interval="int" :relToMaj="getRelToMaj(i)">
+                    v-model:isActive="currentToggleList[i]" :number="i + 1" :interval="int" :relToMaj="getRelToMaj(i)">
                 </ScaleNoteInterval>
-                <ScaleNoteInterval v-model:isActive="notesToggleList[0]" :noteName="getNoteName(root, isFlat)"
+                <ScaleNoteInterval v-model:isActive="currentToggleList[0]" :noteName="getNoteName(root, isFlat)"
                     :number="1" :relToMaj="'1'">
                 </ScaleNoteInterval>
             </ul>
