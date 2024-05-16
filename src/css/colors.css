@@ -184,12 +184,12 @@
     background: var(--clr-orange);
 }
 
-.night .transparent-note {
+.night .inactive-note{
     background: var(--clr-gray-extra);
     color: var(--clr-dark2);
 }
 
-.day .transparent-note {
+.day .inactive-note{
     background: var(--clr-dark-extra);
     color: var(--clr-white1);
 }
