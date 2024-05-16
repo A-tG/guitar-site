@@ -31,7 +31,7 @@ const notesDisplayModes = props.notesDisplayModes
 const extraNames = props.extraNoteNames
 
 const isFlat = inject(isFlatNotationKey)!
-
+const box = ref(-1)
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
 let customTuningNotes = getTuningNotes(currentTuningId.value).slice()
@@ -113,16 +113,17 @@ function getFretVerStyle(fretNumber: number)
     return 'flex:' + getFretWidth(scaleLen, fretNumber)
 }
 
-function getNoteClass(n: Note)
+function getNoteClass(n: Note, fret: number, stringNumber: number)
 {
     let result = ''
     const mode = notesDisplayModes.get(n)!
-    if ((mode & NoteDisplayMode.Highlight) === NoteDisplayMode.Highlight)
-    {
-        result += 'highlight-note'
-    } else if ((mode & NoteDisplayMode.Inactve) === NoteDisplayMode.Inactve)
+    if ((mode & NoteDisplayMode.Inactve) === NoteDisplayMode.Inactve || 
+        !isInBox(fret, stringNumber))
     {
         result += 'inactive-note'
+    } else if ((mode & NoteDisplayMode.Highlight) === NoteDisplayMode.Highlight)
+    {
+        result += 'highlight-note'
     }
     return result
 }
@@ -154,6 +155,34 @@ function updateTuningId()
         }
     }
     currentTuningId.value = customId
+}
+
+function toggleBox(numb: number)
+{
+    box.value = numb === box.value ? -1 : numb 
+    console.log(box.value)
+}
+
+function isInBox(fret: number, stringNumber: number)
+{
+    if (box.value < 0) return true
+
+    if (fret < box.value) return false
+
+    return fret <= (box.value + getBoxSizeForString(stringNumber))
+}
+
+function getBoxSizeForString(stringNumber: number)
+{
+    if (stringNumber == 0) return getBoxSizeForString(1)
+    const higherString = stringNumber - 1
+    const noteOnHigherString = highN(stringsTunings[higherString].value, box.value)
+    let boxSize = 0
+    for (boxSize; true; boxSize++)
+    {
+        if (noteOnHigherString == highN(stringsTunings[stringNumber].value, box.value + boxSize)) break
+    }
+    return boxSize == 0 ? 1 : boxSize - 1
 }
 </script>
 
@@ -203,7 +232,7 @@ function updateTuningId()
             <div class="fret-null">
                 <div class="fret-hor" v-for="(s, i) in stringsTunings">
                     <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, HS))"
-                        :class="getNoteClass(highN(s.value, HS))">
+                        :class="getNoteClass(highN(s.value, HS), 0, i)">
                         {{ getNoteName(s.value, HS)}}
                     </div>
                 </div>
@@ -214,7 +243,7 @@ function updateTuningId()
                 <div class="fret-inlay inlay-bottom neg-bg" v-if="isDoubleDot(f)"></div>
                 <div class=" fret-hor fretboard-bg" v-for="(s, i) in stringsTunings">
                     <div class="string" :style="getStringStyle(i)"></div>
-                    <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, f + HS))"
+                    <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, f + HS), f, i)"
                         v-if="isShowNote(highN(s.value, f + HS))">
                         {{ getNoteName(s.value, f + HS) }}
                     </div>
@@ -231,7 +260,8 @@ function updateTuningId()
         </div>
 
         <div class="frets-numbers frets-width-cont">
-            <div class="norm-bg2 el-clr hov-el-clr" v-for="i in fretsNumber + 1"
+            <div class="el-clr hov-el-clr" v-for="i in fretsNumber + 1" @click="toggleBox(i - 1)"
+                :class="box !== i - 1 ? 'norm-bg2': ''" 
                 :style="i > 1 ? getFretVerStyle(i - 1) : ''">
                 <div class="fret-dot-cont">
                     <div class="fret-dot neg-bg" v-if="isAddFretDot(i - 1) || isDoubleDot(i - 1)"></div>
