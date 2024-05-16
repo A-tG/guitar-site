@@ -17,18 +17,6 @@ const textCommonClass2 = "norm-clr fnt f18"
 const isFlat = inject(isFlatNotationKey)
 
 const isTriadMode = ref(false)
-watch(isTriadMode, (val) => {
-    updateNotesExtraNames()
-    if (val)
-    {
-        copyValues(currentToggleList, notesToggleList)
-        copyValues(triadsToggleList, currentToggleList)
-        return
-    }
-    copyValues(currentToggleList, triadsToggleList)
-    copyValues(notesToggleList, currentToggleList)
-})
-
 const root = ref(Note.C)
 
 const notesToggleList = reactive(Array(12).fill(true) as boolean[])
@@ -39,9 +27,7 @@ triadsToggleList.forEach((_, i, arr) => {
         arr[i] = true
     }
 })
-
 const currentToggleList = reactive(notesToggleList.slice())
-watch(currentToggleList, () => updateNotesDispModes())
 
 const selectedScale = ref(defaultScaleId)
 const intervals = ref(getIntervals(selectedScale.value))
@@ -50,9 +36,19 @@ const notesDisplayModes = reactive(new Map(
 )
 const notesExtraNames = reactive(new Map<Note, string>)
 
-updateNotesDispModes()
-updateNotesExtraNames()
-
+watch(isTriadMode, (val) =>
+{
+    updateNotesExtraNames()
+    if (val)
+    {
+        copyValues(currentToggleList, notesToggleList)
+        copyValues(triadsToggleList, currentToggleList)
+        return
+    }
+    copyValues(currentToggleList, triadsToggleList)
+    copyValues(notesToggleList, currentToggleList)
+})
+watch(currentToggleList, () => updateNotesDispModes())
 watch(selectedScale, (val) => {
     intervals.value = getIntervals(val)
 
@@ -63,6 +59,9 @@ watch(root, () => {
     updateNotesDispModes()
     updateNotesExtraNames()
 })
+
+updateNotesDispModes()
+updateNotesExtraNames()
 
 function getScaleNote(noteNumber: number)
 {
