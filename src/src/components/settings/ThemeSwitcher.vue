@@ -35,12 +35,12 @@ load()
 
 <template>
     <ul class="themes-block">
-        <li class="el-clr hov-el-clr tr-al" title="Switch to night theme" 
-            @click="theme = ColorTheme.night" v-if="theme != ColorTheme.night">
+        <li class="el-clr hov-el-clr tr-al" title="Switch to night theme" @click="theme = ColorTheme.night"
+            v-if="theme != ColorTheme.night">
             <i class="mi-filled md-36 mi-dark-mode"></i>
         </li>
-        <li class="el-clr hov-el-clr tr-al" title="Switch to day theme" 
-            @click="theme = ColorTheme.day" v-if="theme != ColorTheme.day">
+        <li class="el-clr hov-el-clr tr-al" title="Switch to day theme" @click="theme = ColorTheme.day"
+            v-if="theme != ColorTheme.day">
             <i class="mi-filled md-36 mi-light-mode"></i>
         </li>
     </ul>

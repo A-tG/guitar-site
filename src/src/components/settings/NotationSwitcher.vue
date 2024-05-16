@@ -26,7 +26,6 @@ load()
 </script>
 
 <template>
-    <span class="norm-clr fnt f18">Notation</span>
     <i class="mi-outlined md-36 fnt-el fnt el-clr hov-el-clr tr-al" :title="titleText" @click="isFlat = !isFlat"
         :class="{ 'i-note-flat': !isFlat, 'i-note-sharp': isFlat }"></i>
 </template>

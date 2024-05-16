@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import NotationSwitcher from './NotationSwitcher.vue'
 import ThemeSwitcher from './ThemeSwitcher.vue'
 import ModalWindow from '../ModalWindow.vue';
+import InactiveNoteOpacity from './InactiveNoteOpacity.vue';
+
+const commonClasses = 'norm-clr fnt f18'
 
 const isShown = ref(false)
 </script>
@@ -17,10 +20,14 @@ const isShown = ref(false)
     <SafeTeleport to="#modal" :disabled="!isShown">
         <ModalWindow title="Settings" v-show="isShown" :onCloseButton="() => isShown = false">
             <div class="settings-content">
-                <span class="norm-clr fnt f18">Theme</span>
+                <span :class="commonClasses">Theme</span>
                 <ThemeSwitcher></ThemeSwitcher>
                 <div class="settings-separator norm-bg2"></div>
+                <span :class="commonClasses">Notation</span>
                 <NotationSwitcher></NotationSwitcher>
+                <div class="settings-separator norm-bg2"></div>
+                <span :class="commonClasses">Inactive note opacity </span>
+                <InactiveNoteOpacity></InactiveNoteOpacity>
             </div>
         </ModalWindow>
     </SafeTeleport>
