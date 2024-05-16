@@ -5,6 +5,23 @@
     }
 }
 
+@media screen and (max-width: 1400px) {
+    .item-block {
+        flex-direction: column-reverse;
+    }
+    .item-controls {
+        flex-direction: row-reverse;
+    }
+
+    .item-block {
+        margin: 70px auto 0;
+        width: 100%;
+    }
+    .item-content {
+        margin: 5px 0 5px 5px;
+    }
+}
+
 @media screen and (max-width: 1250px) {
     .l-arr {
         margin-right: 12px;
@@ -19,15 +36,6 @@
         border-left: 18px solid;
         border-bottom: 9px solid transparent;
     }
-
-    .item-block {
-        margin: 70px auto 0;
-        width: 100%;
-    }
-
-    .item-content {
-        margin: 5px 0 5px 5px;
-    }
     
     .signature-option-block:first-child {
         margin-bottom: 12px;
@@ -36,9 +44,9 @@
     .signature-option-block:last-child {
         margin-top: 12px;
     }
-    
-    .scale_notes_signs {
-        margin-right: 5px;
+
+    .scale-block {
+        justify-content: center;
     }
 
     .frets-width-cont>*:nth-child(n+14) {
@@ -63,16 +71,15 @@
     }
 }
 
+@media screen and (max-width: 800px) {
+    #content {
+        min-width: 750px;
+    }
+}
+
 @media screen and (max-width: 620px) {
     .frets-width-cont>*:nth-child(1) {
         flex: 15
-    }
-
-    .item-block {
-        flex-direction: column-reverse;
-    }
-    .item-controls {
-        flex-direction: row-reverse;
     }
 
     .fret-hor {
@@ -110,7 +117,7 @@
     .frets-width-cont>*:nth-child(1) {
         flex: 15
     }
-    #content, .modal-block-wrap {
+    .modal-block-wrap {
         min-width: 380px;
     }
 }
