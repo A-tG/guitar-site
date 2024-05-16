@@ -27,8 +27,8 @@ const isShown = ref(false)
                 <NotationSwitcher></NotationSwitcher>
                 <div class="settings-separator norm-bg2"></div>
                 <div class="whole-row">
-                    <div>
-                        <span class="title" :class="commonClasses">Inactive note opacity</span>
+                    <div class="title">
+                        <span :class="commonClasses">Inactive note opacity</span>
                     </div>
                     <InactiveNoteOpacity></InactiveNoteOpacity>
                 </div>

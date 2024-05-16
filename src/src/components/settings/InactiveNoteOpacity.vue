@@ -22,8 +22,8 @@ watch(opacity, (val) => {
 
 <style scoped>
 span {
-    display: block;
-    width: 5ch;
+    width: 4ch;
+    text-align: end;
 }
 div {
     display: flex;
