@@ -175,7 +175,9 @@ function isInBox(fret: number, stringNumber: number)
 
 function getBoxSizeForString(stringNumber: number)
 {
+    // for last string get same box size as for previous string
     if (stringNumber == 0) return getBoxSizeForString(1)
+
     const higherString = stringNumber - 1
     const noteOnHigherString = highN(stringsTunings[higherString].value, box.value)
     let boxSize = 0
