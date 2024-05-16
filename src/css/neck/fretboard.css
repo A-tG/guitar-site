@@ -74,17 +74,17 @@
 }
 
 .note {
-    display: inline-block;
     height: 1em;
     width: 2ch;
     padding: 3px;
     cursor: default;
     position: relative;
     right: 10%;
-    text-align: center;
     border-radius: 4px;
     z-index: 4;
     user-select: none;
+    align-content: center;
+    justify-content: center;
 }
 
 .norm-note {
