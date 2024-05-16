@@ -20,14 +20,18 @@ const isShown = ref(false)
     <SafeTeleport to="#modal" :disabled="!isShown">
         <ModalWindow title="Settings" v-show="isShown" :onCloseButton="() => isShown = false">
             <div class="settings-content">
-                <span :class="commonClasses">Theme</span>
+                <span class="title" :class="commonClasses">Theme</span>
                 <ThemeSwitcher></ThemeSwitcher>
                 <div class="settings-separator norm-bg2"></div>
-                <span :class="commonClasses">Notation</span>
+                <span class="title" :class="commonClasses">Notation</span>
                 <NotationSwitcher></NotationSwitcher>
                 <div class="settings-separator norm-bg2"></div>
-                <span :class="commonClasses">Inactive note opacity </span>
-                <InactiveNoteOpacity></InactiveNoteOpacity>
+                <div class="whole-row">
+                    <div>
+                        <span class="title" :class="commonClasses">Inactive note opacity</span>
+                    </div>
+                    <InactiveNoteOpacity></InactiveNoteOpacity>
+                </div>
             </div>
         </ModalWindow>
     </SafeTeleport>

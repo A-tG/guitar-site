@@ -5,6 +5,10 @@
     gap: 8px;
 }
 
+.settings-content .title {
+    justify-self: left;
+}
+
 .settings-separator {
     grid-column: 1 / span 2;
     height: 2px;
@@ -17,6 +21,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.settings-content .whole-row {
+    grid-column: 1 / span 2;
 }
 
 .modal-block-controls {
