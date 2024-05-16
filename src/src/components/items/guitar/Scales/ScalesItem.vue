@@ -4,7 +4,7 @@ import Neck from "../Neck.vue"
 import { inject, reactive, ref, watch } from "vue";
 import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
-import { defaultScaleId, getIntervals, getScalesIds, getUniqueScalesIds, stepsRelativeToMajor } from "@/types/Scales";
+import { defaultScaleId, getIntervals, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { sumArrElements } from "@/utils/array";
 import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
@@ -30,7 +30,8 @@ watch(selectedScale, (val) => {
 watch(root, () => notesToShow.value = getNotesToShow())
 
 
-const textCommonClass = "norm-clr fnt f18"
+const textCommonClass1 = "norm-clr fnt f16"
+const textCommonClass2 = "norm-clr fnt f18"
 
 function getScaleNote(noteNumber: number)
 {
@@ -63,7 +64,7 @@ function getNotesToShow()
     <Neck v-model:rootNote="root" v-model:notesToShow="notesToShow"></Neck>
     <div class="scale-block">
         <div class="scale-options">
-            <span :class="textCommonClass">Root</span>
+            <span :class="textCommonClass1">Root</span>
             <ul class="root-notes">
                 <li class="fnt f18 el-clr hov-el-clr tr-al" v-for="n, i in getNotesList()" @click="root = n"
                     :class="root == i ? 'selected selected-text' : 'norm-bg2'">
@@ -71,7 +72,7 @@ function getNotesToShow()
                 </li>
             </ul>
 
-            <span :class="textCommonClass">Numbered</span>
+            <span :class="textCommonClass1">Numbered</span>
             <ul class="scale-notes-block">
                 <ScaleNoteInterval v-for="int, i in intervals" :noteName="getNoteName(getScaleNote(i), isFlat)"
                     v-model:isActive="notesToggleList[i]" :number="i + 1" :interval="int" :relToMaj="getRelToMaj(i)">
@@ -81,16 +82,16 @@ function getNotesToShow()
                 </ScaleNoteInterval>
             </ul>
 
-            <span :class="textCommonClass">Relative</span>
-            <span :class="textCommonClass">Notes</span>
-            <span :class="textCommonClass">Semitones</span>
+            <span :class="textCommonClass1">Relative</span>
+            <span :class="textCommonClass1">Notes</span>
+            <span :class="textCommonClass1">Semitones</span>
         </div>
 
         <div class="scale-sel-block">
             <div class="scale-sel-title" @click="isTriadMode = !isTriadMode">
-                <span :class="textCommonClass">Scale</span>
+                <span :class="textCommonClass2">Scale</span>
                 <div class="el-clr hov-el-clr ">
-                    <span :class="textCommonClass">Triads mode</span>
+                    <span :class="textCommonClass2">Triads mode</span>
                     <i class="mi-filled md-24 tr-al"
                         :class="isTriadMode ? 'mi-check-box' : 'mi-check-box-outline-blank'"></i>
                 </div>
