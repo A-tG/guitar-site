@@ -27,12 +27,16 @@ const isShown = ref(false)
                 <NotationSwitcher></NotationSwitcher>
                 <div class="settings-separator norm-bg2"></div>
                 <div class="whole-row">
-                    <div class="title">
-                        <span :class="commonClasses">Inactive note opacity</span>
-                    </div>
+                    <span class="title" :class="commonClasses">Inactive note opacity</span>
                     <InactiveNoteOpacity></InactiveNoteOpacity>
                 </div>
             </div>
         </ModalWindow>
     </SafeTeleport>
 </template>
+
+<style scoped>
+.whole-row .title {
+    display: block;
+}
+</style>
