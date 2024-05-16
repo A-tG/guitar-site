@@ -32,7 +32,6 @@ watch(selectedScale, (val) => {
     updateNotesDispModes()
 })
 watch(root, () => updateNotesDispModes())
-console.log(notesDisplayModes)
 
 const textCommonClass1 = "norm-clr fnt f16"
 const textCommonClass2 = "norm-clr fnt f18"
@@ -54,17 +53,15 @@ function getRelToMaj(noteNumber: number)
 function updateNotesDispModes()
 {
     notesDisplayModes.forEach((_, k, list) => list.set(k, NoteDisplayMode.Disabled))
-    console.log(notesDisplayModes)
     let lastNote = root.value
     let i = 0
-    console.log(notesToggleList)
     for (const int of intervals.value)
     {
         const mode = notesToggleList[i++] ?
             lastNote == root.value ? NoteDisplayMode.Highlight : NoteDisplayMode.Normal :
             NoteDisplayMode.Inactve
         notesDisplayModes.set(lastNote, mode)
-        
+
         lastNote = getHigherNote(lastNote, int)
     }
 }
