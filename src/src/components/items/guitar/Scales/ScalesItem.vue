@@ -8,6 +8,7 @@ import { defaultScaleId, getIntervals, stepsRelativeToMajor } from "@/types/Scal
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { sumArrElements } from "@/utils/array";
 import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
+import { NoteDisplayMode } from "../NoteDisplayMode";
 
 
 const relToMajList = stepsRelativeToMajor
@@ -17,18 +18,21 @@ const isFlat = inject(isFlatNotationKey)
 const isTriadMode = ref(false)
 const root = ref(Note.C)
 const notesToggleList = reactive(Array(12).fill(true))
+watch (notesToggleList, () => updateNotesDispModes())
 
 const selectedScale = ref(defaultScaleId)
 const intervals = ref(getIntervals(selectedScale.value))
-const notesToShow = ref<Note[]>([])
-notesToShow.value = getNotesToShow()
+const notesDisplayModes = reactive(new Map(
+    getNotesList().map(v => [v, NoteDisplayMode.Disabled]))
+)
+updateNotesDispModes()
 watch(selectedScale, (val) => {
     intervals.value = getIntervals(val)
 
-    notesToShow.value = getNotesToShow()
+    updateNotesDispModes()
 })
-watch(root, () => notesToShow.value = getNotesToShow())
-
+watch(root, () => updateNotesDispModes())
+console.log(notesDisplayModes)
 
 const textCommonClass1 = "norm-clr fnt f16"
 const textCommonClass2 = "norm-clr fnt f18"
@@ -47,21 +51,27 @@ function getRelToMaj(noteNumber: number)
     return relToMajList[sumArrElements(intervals.value, noteNumber)]
 }
 
-function getNotesToShow()
+function updateNotesDispModes()
 {
-    const notes = [root.value]
-    let lastN = notes[0]
+    notesDisplayModes.forEach((_, k, list) => list.set(k, NoteDisplayMode.Disabled))
+    console.log(notesDisplayModes)
+    let lastNote = root.value
+    let i = 0
+    console.log(notesToggleList)
     for (const int of intervals.value)
     {
-        lastN = getHigherNote(lastN, int)
-        notes.push(lastN)
+        const mode = notesToggleList[i++] ?
+            lastNote == root.value ? NoteDisplayMode.Highlight : NoteDisplayMode.Normal :
+            NoteDisplayMode.Inactve
+        notesDisplayModes.set(lastNote, mode)
+        
+        lastNote = getHigherNote(lastNote, int)
     }
-    return notes
 }
 </script>
 
 <template>
-    <Neck v-model:rootNote="root" v-model:notesToShow="notesToShow"></Neck>
+    <Neck :notesDisplayModes="notesDisplayModes"></Neck>
     <div class="scale-block">
         <div class="scale-options">
             <span :class="textCommonClass1">Root</span>

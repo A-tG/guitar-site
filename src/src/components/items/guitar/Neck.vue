@@ -10,6 +10,7 @@ import ModalWindow from '@/components/ModalWindow.vue';
 import Tuning from './Tuning.vue';
 import LeftArrow from '@/components/common/LeftArrow.vue';
 import RightArrow from '@/components/common/RightArrow.vue';
+import { NoteDisplayMode } from './NoteDisplayMode';
 
 const minStrings = 3
 const maxStrings = 18
@@ -18,9 +19,12 @@ const fretsNumber = 24
 const scaleLen = 25.5 * 25.4 // inches to mm
 const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
 
+const props = defineProps<{
+    notesDisplayModes: Map<Note, NoteDisplayMode>
+}>()
+const notesDisplayModes = props.notesDisplayModes
+
 const isFlat = inject(isFlatNotationKey)
-const rootNote = defineModel<Note>("rootNote", { required: true })
-const notesToShow = defineModel<number[] | readonly number[]>("notesToShow")
 
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
@@ -77,9 +81,23 @@ function getFretVerStyle(fretNumber: number)
     return 'flex:' + getFretWidth(scaleLen, fretNumber)
 }
 
+function getNoteClass(n: Note)
+{
+    let result = ''
+    const mode = notesDisplayModes.get(n)!
+    if ((mode & NoteDisplayMode.Highlight) === NoteDisplayMode.Highlight)
+    {
+        result += 'highlight-note'
+    } else if ((mode & NoteDisplayMode.Inactve) === NoteDisplayMode.Inactve)
+    {
+        result += 'inactive-note'
+    }
+    return result
+}
+
 function isShowNote(n: Note)
 {
-    return notesToShow?.value?.includes(n)
+    return (notesDisplayModes.get(n)! & NoteDisplayMode.Disabled) !== NoteDisplayMode.Disabled
 }
 </script>
 
@@ -128,7 +146,8 @@ function isShowNote(n: Note)
         <div class="fretboard frets-width-cont">
             <div class="fret-null">
                 <div class="fret-hor" v-for="(s, i) in stringsTunings">
-                    <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, HS))">
+                    <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, HS))"
+                        :class="getNoteClass(highN(s.value, HS))">
                         {{ noteN(highN(s.value, HS), isFlat) }}
                     </div>
                 </div>
@@ -139,8 +158,8 @@ function isShowNote(n: Note)
                 <div class="fret-inlay inlay-bottom neg-bg" v-if="isDoubleDot(f)"></div>
                 <div class=" fret-hor fretboard-bg" v-for="(s, i) in stringsTunings">
                     <div class="string" :style="getStringStyle(i)"></div>
-                    <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, f + HS))"
-                        :class="highN(s.value, f + HS) == rootNote ? 'highlight-note' : ''">
+                    <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, f + HS))"
+                        v-if="isShowNote(highN(s.value, f + HS))">
                         {{ noteN(highN(s.value, f + HS), isFlat) }}
                     </div>
                 </div>
