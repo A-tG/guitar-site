@@ -17,9 +17,10 @@ const isActive = defineModel<boolean>('isActive', { required: true })
         <span class="fnt f18 norm-clr">{{ number }}</span>
         <span class="fnt f12 norm-clr">{{ relToMaj }}</span>
         <span class="fnt f18 tr-al" :class="isActive ? '' : 'transparent'">{{ noteName }}</span>
-        <div></div>
+        <div class="vert-line middle-gray-bg"></div>
     </li>
-    <li class="semitone-block f14" v-if="interval" :style="`width: ${intervalsWidth[interval - 1] * baseWidth}px`">
+    <li class="semitone-block f14 middle-gray-border" v-if="interval"
+        :style="`width: ${intervalsWidth[interval - 1] * baseWidth}px`">
         <span class="fnt norm-clr">{{ interval }}</span>
     </li>
 </template>

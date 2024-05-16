@@ -73,6 +73,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 .scale-note > * {
     flex: 1;
@@ -86,4 +87,11 @@
     display: flex;
     justify-content: center;
     align-items: end;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.vert-line {
+    height: 100%;
+    width: 2px;
 }
