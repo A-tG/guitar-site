@@ -27,13 +27,14 @@ const props = defineProps<{
     notesDisplayModes: Map<Note, NoteDisplayMode>,
     extraNoteNames?: Map<Note, string>
 }>()
-const notesDisplayModes = props.notesDisplayModes
+const notesDispModes = props.notesDisplayModes
 const extraNames = props.extraNoteNames
 
 const isFlat = inject(isFlatNotationKey)!
 const box = ref(-1)
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
+
 let customTuningNotes = getTuningNotes(currentTuningId.value).slice()
 const stringsTunings = reactive(customTuningNotes.slice(0, defaultStrings).map((el) => ref(el)))
 const isLH = ref(false)
@@ -116,7 +117,7 @@ function getFretVerStyle(fretNumber: number)
 function getNoteClass(n: Note, fret: number, stringNumber: number)
 {
     let result = ''
-    const mode = notesDisplayModes.get(n)!
+    const mode = notesDispModes.get(n)!
     if ((mode & NoteDisplayMode.Inactve) === NoteDisplayMode.Inactve || 
         !isInBox(fret, stringNumber))
     {
@@ -130,7 +131,7 @@ function getNoteClass(n: Note, fret: number, stringNumber: number)
 
 function isShowNote(n: Note)
 {
-    return (notesDisplayModes.get(n)! & NoteDisplayMode.Disabled) !== NoteDisplayMode.Disabled
+    return (notesDispModes.get(n)! & NoteDisplayMode.Disabled) !== NoteDisplayMode.Disabled
 }
 
 function getNoteName(note: Note, offset: number)
