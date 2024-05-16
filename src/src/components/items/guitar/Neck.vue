@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { inject, reactive, ref, watch } from 'vue';
 import Tuner from './Tuner.vue';
-import { getStringTuning, getTuningNotes, defaultTuningId } from '@/types/Tunings';
-import { Note, getHigherNote as highN, getNoteName as noteN } from '@/types/Note';
+import { getStringTuning, getTuningNotes, defaultTuningId, getTuningsIds, type TuningID } from '@/types/Tunings';
+import { Note, getLowerNote, getHigherNote as highN, getNoteName as noteN } from '@/types/Note';
 import { getFretWidth } from '@/types/Frets';
 import { isFlatNotationKey } from '@/components/keys';
 import { SafeTeleport } from 'vue-safe-teleport';
@@ -11,13 +11,17 @@ import Tuning from './Tuning.vue';
 import LeftArrow from '@/components/common/LeftArrow.vue';
 import RightArrow from '@/components/common/RightArrow.vue';
 import { NoteDisplayMode } from './NoteDisplayMode';
+import { isArraysEqual } from '@/utils/array';
 
-const minStrings = 3
-const maxStrings = 18
+const customId: TuningID = 'custom'
+const minStringsNumber = 3
+const maxStringsNumber = 18
 const defaultStrings = 6
 const fretsNumber = 24
 const scaleLen = 25.5 * 25.4 // inches to mm
 const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
+
+let isCustomTuning = false
 
 const props = defineProps<{
     notesDisplayModes: Map<Note, NoteDisplayMode>,
@@ -30,14 +34,24 @@ const isFlat = inject(isFlatNotationKey)!
 
 const currentTuningId = ref(defaultTuningId)
 const HS = ref(0)
-let tuningNotes = getTuningNotes(currentTuningId.value)
-const stringsTunings = reactive(tuningNotes.slice(0, defaultStrings).map((el) => ref(el)))
+let customTuningNotes = getTuningNotes(currentTuningId.value).slice()
+const stringsTunings = reactive(customTuningNotes.slice(0, defaultStrings).map((el) => ref(el)))
 const isLH = ref(false)
 const isTuningMenuShown = ref(false)
 
-watch(currentTuningId, (val) => {
-    if (val as string == "custom") return
+stringsTunings.forEach((el, i) => watch(el, () => {
+    customTuningNotes[i] = el.value
+    updateTuningId()
+}))
 
+watch(currentTuningId, (val) => {
+    if (val == customId) 
+    {
+        isCustomTuning = true
+        return
+    }
+
+    isCustomTuning = false
     const len = stringsTunings.length
     const notes = getTuningNotes(val)
     const nLen = notes.length
@@ -45,22 +59,38 @@ watch(currentTuningId, (val) => {
     {
         stringsTunings[i % len].value = notes[i % nLen]
     }
+    customTuningNotes = notes.slice()
 })
 
 function removeString()
 {
     const len = stringsTunings.length
-    if (len <= minStrings) return
+    if (len <= minStringsNumber) return
 
     stringsTunings.pop()
 }
 function addString()
 {
     const len = stringsTunings.length
-    if (len >= maxStrings) return
+    if (len >= maxStringsNumber) return
 
-    const t = getStringTuning(stringsTunings.length, currentTuningId.value)
-    stringsTunings.push(ref(t))
+    let n: Note
+    if (isCustomTuning)
+    {
+        let l = customTuningNotes.length
+        if (len >= l)
+        {
+            customTuningNotes.push(getLowerNote(customTuningNotes[l - 1], 5))
+            n = customTuningNotes[l]
+        } else
+        {
+            n = customTuningNotes[len]
+        }
+    } else
+    {
+        n = getStringTuning(stringsTunings.length, currentTuningId.value)
+    }
+    stringsTunings.push(ref(n))
 }
 
 function isAddFretDot(fretNumber: number)
@@ -111,6 +141,19 @@ function getNoteName(note: Note, offset: number)
         return name
     }
     return noteN(n, isFlat?.value)
+}
+
+function updateTuningId()
+{
+    for (const id of getTuningsIds())
+    {
+        if (isArraysEqual(getTuningNotes(id), customTuningNotes))
+        {
+            currentTuningId.value = id
+            return
+        }
+    }
+    currentTuningId.value = customId
 }
 </script>
 

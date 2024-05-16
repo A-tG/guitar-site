@@ -26,7 +26,6 @@ watch(HS, (val) => {
             </div>
             <select class="fnt f18 capitalized el-clr norm-bg3" v-model="tuningId">
                 <option v-for="t in getTuningsIds()" :value="t"> {{ getTuningName(t).value }}</option>
-                <option value="custom">Custom</option>
             </select>
         </div>
         <div class="halfsteps-block">

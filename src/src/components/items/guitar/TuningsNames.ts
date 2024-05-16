@@ -2,6 +2,7 @@ import { type TuningID } from "@/types/Tunings";
 import { ref, type Ref } from "vue";
 
 const names: Record<TuningID, Ref<string>> = {
+    'custom': ref('custom'),
     'std_e': ref('standard e'),
     'std_e_bass': ref('bass standard e'),
     'std_e_bass6': ref('bass standard e 6'),
