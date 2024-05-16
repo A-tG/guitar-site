@@ -54,7 +54,7 @@ export function getTuningNotes(name: TuningID)
 
 export function getTuningsIds()
 {
-    return Object.keys(tunings)
+    return Object.keys(tunings) as ReadonlyArray<TuningID>
 }
 
 export function getStringTuning(strNumber: number, name: TuningID)
