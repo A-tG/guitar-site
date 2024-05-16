@@ -86,7 +86,7 @@ export function getIntervals(scaleName: TuningID): ReadonlyArray<typeof interval
 
 export function getScalesIds()
 {
-    return Object.keys(intervalsList)
+    return Object.keys(intervalsList) as ReadonlyArray<TuningID>
 }
 
 export function getUniqueScalesIds()
