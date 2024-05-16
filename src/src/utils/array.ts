@@ -120,3 +120,29 @@ export function isArraysEqual<T>(arr1: ReadonlyArray<T>, arr2: ReadonlyArray<T>)
     }
     return true
 }
+
+export function exchangeArrValues<T>(arr1: Array<T>, arr2: Array<T>)
+{
+    const len1 = arr1.length
+    const len2 = arr2.length
+    if (len1 != len2) throw new RangeError()
+
+    for (let i = 0; i < len1; i++)
+    {
+        const v1 = arr1[i]
+        arr1[i] = arr2[i]
+        arr2[i] = v1
+    }
+}
+
+export function copyValues<T>(from: Array<T>, to: Array<T>)
+{
+    const len1 = from.length
+    const len2 = to.length
+    if (len1 != len2) throw new RangeError()
+
+    for (let i = 0; i < len1; i++)
+    {
+        to[i] = from[i]
+    }
+}
