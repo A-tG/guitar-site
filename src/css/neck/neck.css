@@ -32,7 +32,7 @@
     transform: scaleX(-1);
 }
 
-.scales-select-block > * {
+.tuning-sel-block > * {
     margin: 10px auto;
 }
 

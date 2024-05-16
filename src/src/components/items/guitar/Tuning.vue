@@ -19,7 +19,7 @@ watch(HS, (val) => {
 </script>
 
 <template>
-    <div class="scales-select-block">
+    <div class="tuning-sel-block">
         <div>
             <div>
                 <span class="norm-clr fnt f18">Tuning</span>
