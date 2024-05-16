@@ -4,9 +4,10 @@ import Neck from "../Neck.vue"
 import { inject, reactive, ref, watch } from "vue";
 import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
-import { defaultScaleId, getIntervals, getScalesIds, stepsRelativeToMajor } from "@/types/Scales";
+import { defaultScaleId, getIntervals, getScalesIds, getUniqueScalesIds, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { sumArrElements } from "@/utils/array";
+import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
 
 
 const relToMajList = stepsRelativeToMajor
@@ -30,7 +31,6 @@ watch(root, () => notesToShow.value = getNotesToShow())
 
 
 const textCommonClass = "norm-clr fnt f18"
-const scales = getScalesIds().sort()
 
 function getScaleNote(noteNumber: number)
 {
@@ -96,7 +96,7 @@ function getNotesToShow()
                 </div>
             </div>
             <select class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
-                <option v-for="s in scales">{{ s }}</option>
+                <option v-for="s in getSortedConcatNamesIDs()" :value="s">{{ getConcatScaleName(s).value }}</option>
             </select>
         </div>
     </div>
