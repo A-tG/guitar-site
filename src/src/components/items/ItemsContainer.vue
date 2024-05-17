@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { reactive } from "vue";
 import Item from "./Item.vue"
 
 const maxItemsNumber = 5
 
 const items = reactive(new Map<number, any>())
-const isAddButtonVisible = computed(() => items.size < maxItemsNumber)
 
 function getIdForItem()
 {
@@ -36,7 +35,7 @@ addItem()
         </TransitionGroup>
     </ul>
     <i class="add-new-item mi-filled mi-add-box md-82 el-clr hov-el-clr tr-al" title="Add item" @click="addItem"
-        v-show="isAddButtonVisible"></i>
+        v-show="items.size < maxItemsNumber"></i>
 </template>
 
 <style scoped>
