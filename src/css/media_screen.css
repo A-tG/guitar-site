@@ -45,10 +45,6 @@
         margin-top: 12px;
     }
 
-    .scale-block {
-        justify-content: center;
-    }
-
     .frets-width-cont>*:nth-child(n+14) {
         display: none;
     }
