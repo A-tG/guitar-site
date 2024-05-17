@@ -116,6 +116,9 @@ function updateNotesExtraNames()
                     {{ getNoteName(n, isFlat) }}
                 </li>
             </ul>
+            <span :class="textCommonClass1">Relative</span>
+            <span :class="textCommonClass1">Notes</span>
+            <span :class="textCommonClass1">Semitones</span>
 
             <span :class="textCommonClass1">Numbered</span>
             <ul class="scale-notes-block">
@@ -126,10 +129,6 @@ function updateNotesExtraNames()
                     :number="1" :relToMaj="'1'">
                 </ScaleNoteInterval>
             </ul>
-
-            <span :class="textCommonClass1">Relative</span>
-            <span :class="textCommonClass1">Notes</span>
-            <span :class="textCommonClass1">Semitones</span>
         </div>
 
         <div class="scale-sel-block">
