@@ -1,11 +1,11 @@
 import { isArraysEqual } from "@/utils/array"
 
-export const defaultScaleId: TuningID = 'maj'
+export const defaultScaleId: ScaleID = 'maj'
 export const stepsRelativeToMajor = ['1', 'b2/b9', '2/9', 'b3/#9', '3', '4/11', 'b5/#11', '5', '#5/b13', '6/13', 'b7/#13', '7'] as const
-export type TuningID = 'maj' | 'min' | 'harm_min' | 'chrom' | 'dor' | 'phr' | 'phr_dom' | 'lyd' | 'mix' | 'locr' | 'mel_min' | 'alt_dom' | 'bl_min_hex' | 'bl_pent' | 'bl' | 'maj_pent' | 'sus_pent' | 'phr_pent' | 'mix_pent' | 'aeol_pent' | 'maj_beb' | 'min_beb' | 'dom_beb' | 'wton' | 'whton' | 'hwton' | 'ac' |
+export type ScaleID = 'maj' | 'min' | 'harm_min' | 'chrom' | 'dor' | 'phr' | 'phr_dom' | 'lyd' | 'mix' | 'locr' | 'mel_min' | 'alt_dom' | 'bl_min_hex' | 'bl_pent' | 'bl' | 'maj_pent' | 'sus_pent' | 'phr_pent' | 'mix_pent' | 'aeol_pent' | 'maj_beb' | 'min_beb' | 'dom_beb' | 'wton' | 'whton' | 'hwton' | 'ac' |
     'ion' | 'aeol' | 'span_mod' | 'sup_locr' | 'dim_wton' | 'alt_sc' | 'dor_pent' | 'min_pent' | 'dor_beb' | 'dim' | 'dom_dim' | 'symm_dim' | 'bart'
 
-const intervalsList: Record<TuningID, number[]> = {
+const intervalsList: Record<ScaleID, number[]> = {
     'maj': [2, 2, 1, 2, 2, 2, 1],
     'min': [2, 1, 2, 2, 1, 2, 2],
     'harm_min': [2, 1, 2, 2, 1, 3, 1],
@@ -50,10 +50,10 @@ const intervalsList: Record<TuningID, number[]> = {
 
 checkForDuplicates()
 
-const uniqueIntervalsIDs: TuningID[] = []
+const uniqueIntervalsIDs: ScaleID[] = []
 for (const p in intervalsList)
 {
-    const id = p as TuningID
+    const id = p as ScaleID
     if (intervalsList[id].length == 0) continue
     
     uniqueIntervalsIDs.push(id)
@@ -77,7 +77,7 @@ intervalsList.symm_dim = intervalsList.hwton
 
 intervalsList.bart = intervalsList.ac
 
-export function getIntervals(scaleName: TuningID): ReadonlyArray<typeof intervalsList["maj"][0]>
+export function getIntervals(scaleName: ScaleID): ReadonlyArray<typeof intervalsList["maj"][0]>
 {
     if (!intervalsList[scaleName]) throw new Error(`${scaleName} scale does not exist`)
 
@@ -86,12 +86,12 @@ export function getIntervals(scaleName: TuningID): ReadonlyArray<typeof interval
 
 export function getScalesIds()
 {
-    return Object.keys(intervalsList) as ReadonlyArray<TuningID>
+    return Object.keys(intervalsList) as ReadonlyArray<ScaleID>
 }
 
 export function getUniqueScalesIds()
 {
-    return uniqueIntervalsIDs as ReadonlyArray<TuningID>
+    return uniqueIntervalsIDs as ReadonlyArray<ScaleID>
 }
 
 function checkForDuplicates()
@@ -99,7 +99,7 @@ function checkForDuplicates()
     const checked: number[][] = []
     for (const p in intervalsList)
     {
-        const id = p as TuningID
+        const id = p as ScaleID
         const intervals = intervalsList[id]
         if (intervals.length == 0) continue
         

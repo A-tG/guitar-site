@@ -1,10 +1,10 @@
-import { getIntervals, getScalesIds, type TuningID } from "@/types/Scales"
+import { getIntervals, getScalesIds, type ScaleID } from "@/types/Scales"
 import { isArraysEqual } from "@/utils/array"
 import { ref, type Ref } from "vue"
 
 const pent = "pentatonic"
 
-const names: Record<TuningID, Ref<string>> = {
+const names: Record<ScaleID, Ref<string>> = {
     'maj': ref('major'),
     'min': ref('minor'),
     'harm_min': ref('harmonic minor'),
@@ -47,7 +47,7 @@ const names: Record<TuningID, Ref<string>> = {
     'bart': ref('bartok')
 }
 
-const concatNames = new Map<TuningID, Ref<string>>()
+const concatNames = new Map<ScaleID, Ref<string>>()
 
 const separator = '/'
 
@@ -55,13 +55,13 @@ function concatScalesNames()
 {
     for (const k of Object.keys(names))
     {
-        const id = k as TuningID
+        const id = k as ScaleID
         const el = names[id] 
         concatNames.set(id, ref(el.value + getConcatName(id)))
     }
 }
 
-function getConcatName(id: TuningID)
+function getConcatName(id: ScaleID)
 {
     let res = ""
     const intervals = getIntervals(id)
@@ -82,7 +82,7 @@ concatScalesNames()
 const sortedConcatIds = new Map([...concatNames]
     .sort((a, b) => a[1].value.localeCompare(b[1].value)))
 
-export function getConcatScaleName(id: TuningID)
+export function getConcatScaleName(id: ScaleID)
 {
     return concatNames.get(id)!
 }
