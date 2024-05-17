@@ -24,3 +24,33 @@ const isActive = defineModel<boolean>('isActive', { required: true })
         <span class="fnt norm-clr">{{ interval }}</span>
     </li>
 </template>
+
+<style scoped>
+.scale-note {
+    width: 40px;
+    border-radius: 2px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.scale-note>* {
+    flex: 1;
+    align-content: center;
+}
+.scale-note .transparent {
+    opacity: .5;
+}
+.semitone-block {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+.vert-line {
+    height: 100%;
+    width: 2px;
+}
+</style>

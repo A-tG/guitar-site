@@ -275,3 +275,25 @@ function getBoxSizeForString(stringNumber: number)
         </div>
     </div>
 </template>
+
+<style scoped>
+.fret-inlay {
+    flex: 0;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+}
+.inlay-top {
+    top: 25%;
+}
+.inlay-bottom {
+    top: 75%;
+}
+</style>
