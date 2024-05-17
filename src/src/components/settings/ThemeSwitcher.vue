@@ -34,7 +34,7 @@ load()
 </script>
 
 <template>
-    <ul class="themes-block">
+    <ul class="block">
         <li class="el-clr hov-el-clr tr-al" title="Switch to night theme" @click="theme = ColorTheme.night"
             v-if="theme != ColorTheme.night">
             <i class="mi-filled md-36 mi-dark-mode"></i>
@@ -45,3 +45,11 @@ load()
         </li>
     </ul>
 </template>
+
+<style scoped>
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
