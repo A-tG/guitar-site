@@ -89,7 +89,7 @@ function addString()
         }
     } else
     {
-        n = getStringTuning(stringsTunings.length, currentTuningId.value)
+        n = getStringTuning(len, currentTuningId.value)
     }
     stringsTunings.push(ref(n))
 }
@@ -97,7 +97,7 @@ function addString()
 function isAddFretDot(fretNumber: number)
 {
     return (fretNumber > 0) && (fretNumber <= 9) || 
-        (fretNumber > 13) && (fretNumber < 23) ? fretNumber & 1 : false
+        (fretNumber > 13) && (fretNumber < 23) ? (fretNumber & 1) === 1 : false
 }
 function isDoubleDot(fretNumber: number)
 {
