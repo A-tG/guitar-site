@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import LeftArrow from '@/components/common/LeftArrow.vue';
+import RightArrow from '@/components/common/RightArrow.vue';
 import type { State } from '@/metronome/State';
 import { OptionStorage } from '@/utils/LocalStorage';
 import { range } from '@/utils/range';
@@ -48,12 +50,10 @@ load()
         <div class="metr-option-head">
             <span class="fnt f14 weak-clr">{{ min }}</span>
             <label for="metr-tempo" class="fnt f18 norm-clr">Tempo</label>
-            <div class="l-arr l-arr-el-clr l-arr-el-hov tr-al" title="Reduce tempo" @click="tempo--">
-            </div>
+            <LeftArrow title="Reduce tempo" @click="tempo--"></LeftArrow>
             <input class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos" step="1" :min="min"
                 :max="max" v-model="tempo">
-            <div class="r-arr r-arr-el-clr r-arr-el-hov tr-al" title="Increase tempo" @click="tempo++">
-            </div>
+            <RightArrow title="Increase tempo" @click="tempo++"></RightArrow>
             <datalist id="tempos">
                 <option v-for="o in tempoList" :value="o">{{ o }}</option>
             </datalist>
