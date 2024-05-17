@@ -19,3 +19,29 @@ const props = defineProps<{
         </div>
     </div>
 </template>
+
+<style>
+.modal-block-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: contrast(.9) blur(2px);
+}
+.modal-block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+.modal-block-content {
+    margin: 15px;
+    margin-top: 0;
+}
+.modal-block-content>*:nth-child(3n + 1) {
+    justify-self: left;
+}
+</style>

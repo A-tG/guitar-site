@@ -8,7 +8,7 @@ li {
 }
 
 body {
-    min-height: 100vh;
+    overflow: hidden;
 }
 
 ul,
@@ -38,7 +38,6 @@ select {
 }
 
 .bg-block {
-    min-height: 100vh;
     height: 100vh;
 }
 
@@ -70,4 +69,8 @@ select {
 
 .nonselect-txt {
     user-select: none;
+}
+
+#app {
+    overflow: auto;
 }

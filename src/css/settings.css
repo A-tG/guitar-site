@@ -17,8 +17,7 @@
 }
 
 .modal-block-controls,
-.themes-block,
-.modal-block-wrap {
+.themes-block {
     display: flex;
     justify-content: center;
     align-items: center;
