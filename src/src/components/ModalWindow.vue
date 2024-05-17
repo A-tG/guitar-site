@@ -6,22 +6,22 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="modal-block-wrap" @click.self="onCloseButton">
-        <div class="norm-bg1 modal-block">
-            <div class="modal-block-controls">
+    <div class="wrap" @click.self="onCloseButton">
+        <div class="norm-bg1 block">
+            <div class="controls">
                 <span class="norm-clr fnt f-bold f18">{{ title }}</span>
                 <i class="el-clr hov-el-clr tr-al mi-outlined md-28 mi-close" title="Close settings"
                     @click="onCloseButton"></i>
             </div>
-            <div class="modal-block-content">
+            <div class="content">
                 <slot></slot>
             </div>
         </div>
     </div>
 </template>
 
-<style>
-.modal-block-wrap {
+<style scoped>
+.wrap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,19 +29,33 @@ const props = defineProps<{
     position: absolute;
     width: 100%;
     height: 100%;
-    backdrop-filter: contrast(.9) blur(2px);
+    backdrop-filter: contrast(.9) blur(1.5px);
 }
-.modal-block {
+.block {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     text-align: center;
 }
-.modal-block-content {
+.content {
     margin: 15px;
     margin-top: 0;
 }
-.modal-block-content>*:nth-child(3n + 1) {
+.content>*:nth-child(3n + 1) {
     justify-self: left;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.controls {
+    padding-left: 10px;
+}
+.controls>*:first-child {
+    flex: 1;
+}
+.controls>*:last-child {
+    margin-left: auto;
 }
 </style>
