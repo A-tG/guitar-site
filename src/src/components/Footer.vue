@@ -19,12 +19,10 @@
     bottom: 0;
     width: 100%;
 }
-
 .item {
     padding: 3px 40px;
     display: inline-block;
 }
-
 .foot a {
     text-decoration: none;
 }
