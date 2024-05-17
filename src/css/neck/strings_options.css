@@ -33,6 +33,9 @@
 .str-tuner > * {
     vertical-align: middle;
 }
+#modal .str-tuner {
+    margin: 4px auto;
+}
 
 .str-tuner-sel {
     text-align: center;
@@ -40,6 +43,9 @@
     display: inline-block;
     vertical-align: middle;
     text-decoration: none;
+}
+#modal .str-tuner-sel {
+    margin: 0 4px;
 }
 .str-tuner-sel option
 {
