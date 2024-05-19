@@ -1,7 +1,7 @@
 import { Note } from "./Note";
 
 export type TuningID = 'std_e' | 'std_e_bass' | 'std_e_bass6' | 'drop_d6' | 'drop_a7' | 'drop_e8' | 'custom'
-export const defaultTuningId: TuningID = 'std_e'
+export const DefaultTuningId: TuningID = 'std_e'
 
 const tunings: Record<TuningID, Note[]> = {
     custom: [],

@@ -37,12 +37,20 @@ const box = ref(state.box)
 const currentTuningId = ref(state.tuning.id)
 const HS = ref(state.tuning.HS)
 
-let customTuningNotes = getTuningNotes(currentTuningId.value).slice()
+let customTuningNotes: Note[] = []
+if (currentTuningId.value == 'custom')
+{
+    isCustomTuning = true
+    customTuningNotes = state.tuning.tunings
+} else
+{
+    customTuningNotes = getTuningNotes(currentTuningId.value).slice()
+    state.tuning.tunings = customTuningNotes
+}
 const stringsTunings = reactive<Ref<Note>[]>([])
 const isLH = ref(state.isLH)
 const isTuningMenuShown = ref(false)
 
-state.tuning.tunings = customTuningNotes
 
 watch(stringsTunings, (val) => state.stringsNumber = val.length)
 watch(HS, (val) => state.tuning.HS = val)
@@ -203,7 +211,8 @@ function getBoxSizeForString(stringNumber: number)
     return boxSize == 0 ? 1 : boxSize - 1
 }
 
-for (let i = 0; i < state.stringsNumber; i++)
+const stringsNUmb = state.stringsNumber
+for (let i = 0; i < stringsNUmb; i++)
 {
     addString()
 }

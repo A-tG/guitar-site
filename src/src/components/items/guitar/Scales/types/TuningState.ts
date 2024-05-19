@@ -1,9 +1,9 @@
 import { Note, noteToString, stringToNote } from "@/types/Note";
-import { defaultTuningId, getTuningsIds, type TuningID } from "@/types/Tunings";
+import { DefaultTuningId, getTuningNotes, getTuningsIds, type TuningID } from "@/types/Tunings";
 
 export class TuningState
 {
-    private _id = defaultTuningId
+    private _id = DefaultTuningId
     private _hs = 0
     private _tunings: Note[] = []
 
@@ -66,6 +66,7 @@ export class TuningState
                 s.tunings = tunings.map((el) => stringToNote(el))
             } else
             {
+                s.id = DefaultTuningId
                 console.warn('Invalid strings tunings: ' + tunings)
             }
         }

@@ -80,7 +80,7 @@ export function stringToNote(str: string)
     for (let i = 0; i < NumberOfNotes; i++)
     {   
         const name = getNoteName(i as Note, true).toLowerCase()
-        if (name == str.toLowerCase())
+        if (name === str.toLowerCase())
         {
             n = i as Note
             break
