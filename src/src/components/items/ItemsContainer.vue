@@ -67,6 +67,7 @@ function isCorrectId(id: string)
 
 function addItemsFromQuery()
 {
+    let added = 0
     for(let [key, _] of getList())
     {
         if (!isCorrectId(key)) continue
@@ -85,6 +86,11 @@ function addItemsFromQuery()
             s.loadDefaults()
         }
         items.value.set(id, s)
+        added++
+    }
+    if (added == 0)
+    {
+        addItem()
     }
 }
 
