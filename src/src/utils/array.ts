@@ -138,8 +138,6 @@ export function exchangeArrValues<T>(arr1: Array<T>, arr2: Array<T>)
 export function copyValues<T>(from: Array<T>, to: Array<T>)
 {
     const len1 = from.length
-    const len2 = to.length
-    if (len1 != len2) throw new RangeError()
 
     for (let i = 0; i < len1; i++)
     {
