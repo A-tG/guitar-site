@@ -144,3 +144,11 @@ export function copyValues<T>(from: Array<T>, to: Array<T>)
         to[i] = from[i]
     }
 }
+
+export function clearArr<T>(arr: T[])
+{
+    while(arr.length > 0)
+    {
+        arr.pop()
+    }
+}

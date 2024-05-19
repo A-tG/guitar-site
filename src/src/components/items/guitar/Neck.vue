@@ -11,7 +11,7 @@ import Tuning from './Tuning.vue';
 import LeftArrow from '@/components/common/LeftArrow.vue';
 import RightArrow from '@/components/common/RightArrow.vue';
 import { NoteDisplayMode } from './NoteDisplayMode';
-import { copyValues, isArraysEqual } from '@/utils/array';
+import { clearArr, copyValues, isArraysEqual } from '@/utils/array';
 import type { ScalesItemState } from './Scales/types/ScalesItemState';
 
 const customId: TuningID = 'custom'
@@ -66,6 +66,7 @@ watch(currentTuningId, (val) => {
     {
         stringsTunings[i % len].value = notes[i % nLen]
     }
+    clearArr(customTuningNotes)
     copyValues(notes, customTuningNotes)
 })
 
