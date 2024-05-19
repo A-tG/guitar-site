@@ -1,4 +1,5 @@
-**Reworked version using typescript and vuejs**
+https://github.com/A-tG/guitar-site/assets/19589064/bfcdf47b-d721-497e-9e7a-66489c253d51
+
 
 # [Website for guitar practicing](https://a-tg.github.io)
 * All tools in one browser tab
