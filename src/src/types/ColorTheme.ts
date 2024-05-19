@@ -1,10 +1,16 @@
 export const enum ColorTheme
 {
-    day = 1,
+    auto,
+    day,
     night
 }
 
-export const themes = new Map([
+export function isColorTheme(numb: number)
+{
+    return (numb >= ColorTheme.auto) && (numb <= ColorTheme.night)
+}
+
+export const themesNames = new Map([
     [ColorTheme.day, "day"],
     [ColorTheme.night, "night"]
 ]) as ReadonlyMap<ColorTheme, string>
