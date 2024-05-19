@@ -31,6 +31,9 @@ function addItem()
     if (stateStr)
     {
         s.deserialize(stateStr)
+    } else
+    {
+        s.loadDefaults()
     }
     items.value.set(id, s)
 }
