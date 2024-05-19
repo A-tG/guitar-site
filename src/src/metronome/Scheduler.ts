@@ -110,11 +110,8 @@ export class Scheduler
     {
         if (!this._state.isPlaying) return 
         this._audio.clearAudioQ()
-        if (this.getDurBetweenBeats() * this._lookAheadNumber > 0.5)
-        {
-            this.clearQ()
-            this._animation.animationQ.clear()
-        }
+        this.clearQ()
+        this._animation.animationQ.clear()
     }
 
     getWorkerTickrate()

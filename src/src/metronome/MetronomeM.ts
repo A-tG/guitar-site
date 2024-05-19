@@ -88,6 +88,7 @@ export class MetronomeM implements State
         if (val && !isPowerOfTwo(val)) return
 
         this._beatDur = val
+        this._sched?.onRateChange()
     }
 
     get beatsPerMeasure()
@@ -97,6 +98,7 @@ export class MetronomeM implements State
     set beatsPerMeasure(val)
     {
         this._beatsPer = val
+        this._sched?.onRateChange()
     }
 
     get metronomeClickType()

@@ -36,6 +36,7 @@ export class AnimationQ
     private _q: Array<Animation> = []
     private _handle = 0
     private _maxQlen = 16 
+    private _isPlaying = false
 
     private get currentTime()
     {
@@ -49,11 +50,13 @@ export class AnimationQ
 
     start()
     {
+        this._isPlaying = true
         this._handle = requestAnimationFrame(this.update.bind(this))
     }
 
     stop()
     {
+        this._isPlaying = false
         cancelAnimationFrame(this._handle)
         this.clear()
     }
@@ -67,6 +70,11 @@ export class AnimationQ
     clear()
     {
         this._q = []
+        if (this._isPlaying)
+        {
+            cancelAnimationFrame(this._handle)
+            this.start()
+        }
     }
 
     private update()
