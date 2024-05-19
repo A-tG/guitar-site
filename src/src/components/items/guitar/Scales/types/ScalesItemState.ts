@@ -12,7 +12,7 @@ export class ScalesItemState implements IState
     private readonly _id: number
     private readonly _type: ItemType = 'scales'
 
-    private _scale = new ScaleState()
+    private _scale = new ScaleState
     private _tuning = new TuningState
     private _stringsNumber = 6
     private _isTriads = false
