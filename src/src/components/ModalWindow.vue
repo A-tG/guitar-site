@@ -23,18 +23,18 @@ const props = defineProps<{
 <style scoped>
 .wrap {
     display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 10;
     position: absolute;
     width: 100%;
     height: 100%;
     backdrop-filter: contrast(.9) blur(1.5px);
+    overflow: auto;
 }
 .block {
+    margin: auto;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: auto;
     text-align: center;
 }
 .content {

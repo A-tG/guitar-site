@@ -12,6 +12,10 @@
     justify-content: space-around;
 }
 
+#modal .strings-btns-block {
+    margin: 4px 0;
+}
+
 .strings-btns-block {
     text-align: center;
     z-index: 1;
