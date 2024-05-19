@@ -85,8 +85,7 @@ export class AudioSystem
         osc.start(beat.audioTime)
         osc.stop(beat.audioTime + duration)
         this.rampAudio(beat.audioTime, duration)
-        
-        console.log(this._oscNodes.size)
+
         const id = beat.audioTime
         this._oscNodes.set(id, osc)
         osc.onended = () => {
