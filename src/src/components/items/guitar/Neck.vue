@@ -51,7 +51,7 @@ const stringsTunings = reactive<Ref<Note>[]>([])
 const isLH = ref(state.isLH)
 const isTuningMenuShown = ref(false)
 
-
+watch(isLH, (val) => state.isLH = val)
 watch(stringsTunings, (val) => state.stringsNumber = val.length)
 watch(HS, (val) => state.tuning.HS = val)
 watch(box, (val) => state.box = val)
