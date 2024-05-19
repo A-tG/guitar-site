@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref, watch, type Ref } from "vue";
 import Item from "./Item.vue"
+import type { IState } from "./guitar/Scales/types/IState";
+import { ScalesItemState } from "./guitar/Scales/types/ScalesItemState";
+import { decodeQueryParam, encodeQueryParam, getParam, removeParam, setParam } from "@/types/QueryParamsManager";
 
 const maxItemsNumber = 5
 
-const items = reactive(new Map<number, any>())
+const items = ref(new Map<number, IState>())
 
 function getIdForItem()
 {
     let i = 0
-    for (let [k] of items)
+    for (let [k] of items.value)
     {
         if (k != i) break
 
@@ -20,18 +23,47 @@ function getIdForItem()
 
 function addItem()
 {
-    if (items.size >= maxItemsNumber) return
+    if (items.value.size >= maxItemsNumber) return
     
-    items.set(getIdForItem(), null)
+    const id = getIdForItem()
+    const stateStr = getStateString(id)
+    const s = new ScalesItemState(id)
+    if (stateStr)
+    {
+        s.deserialize(stateStr)
+    }
+    items.value.set(id, s)
+}
+function removeItem(k: number)
+{
+    items.value.delete(k)
+    removeParam('i' + k)
+}
+
+function getStateString(id: number)
+{
+    const str = getParam('i' + id)
+    if (!str) return undefined
+
+    return decodeQueryParam(str)
 }
 
 addItem()
+
+watch(items, (val) => {
+    for (let [k, v] of val)
+    {
+        setParam('i' + k, encodeQueryParam(JSON.stringify(v)))
+    }
+}, { deep: true })
 </script>
 
 <template>
     <ul class="items-container">
         <TransitionGroup>
-            <Item v-for="item in items" :onCloseButton="() => { items.delete(item[0]) }" :key="item[0]"></Item>
+            <Item v-for="[k, item] in items" :onCloseButton="() => { removeItem(k) }" :key="k"
+                :state="item">
+            </Item>
         </TransitionGroup>
     </ul>
     <i class="add-new-item mi-filled mi-add-box md-82 el-clr hov-el-clr tr-al" title="Add item" @click="addItem"

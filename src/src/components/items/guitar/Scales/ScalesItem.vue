@@ -1,43 +1,54 @@
 <script setup lang="ts">
 import { Note, getHigherNote, getNotesList } from "@/types/Note";
 import Neck from "../Neck.vue"
-import { inject, reactive, ref, watch } from "vue";
+import { inject, reactive, ref, watch, type Ref } from "vue";
 import { isFlatNotationKey } from "@/components/keys";
 import { getNoteName } from '@/types/Note';
-import { defaultScaleId, getIntervals, stepsRelativeToMajor } from "@/types/Scales";
+import { getIntervals, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { copyValues, sumArrElements } from "@/utils/array";
 import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
 import { NoteDisplayMode } from "../NoteDisplayMode";
+import type { ScalesItemState } from "./types/ScalesItemState";
+import type { IState } from "./types/IState";
 
 const relToMajList = stepsRelativeToMajor
 const textCommonClass1 = "norm-clr fnt f16"
 const textCommonClass2 = "norm-clr fnt f18"
 
 const isFlat = inject(isFlatNotationKey)
+const props = defineProps<{
+    state: IState
+}>()
+const state = props.state as ScalesItemState
 
-const isTriadMode = ref(false)
-const root = ref(Note.C)
+const isTriadMode = ref(state.isTriads)
+const root = ref(state.scale.root)
 
-const notesToggleList = reactive(Array(12).fill(true) as boolean[])
-const triadsToggleList = reactive(Array(12).fill(false) as boolean[])
-triadsToggleList.forEach((_, i, arr) => {
-    if ((i === 0) || (i === 2) || (i === 4))
-    {
-        arr[i] = true
-    }
-})
+const notesToggleList = reactive(state.notesPattern)
+const triadsToggleList = reactive(state.triadsPattern)
 const currentToggleList = reactive(notesToggleList.slice())
 
-const selectedScale = ref(defaultScaleId)
+const selectedScale = ref(state.scale.id)
 const intervals = ref(getIntervals(selectedScale.value))
 const notesDisplayModes = reactive(new Map(
     getNotesList().map(v => [v, NoteDisplayMode.Disabled]))
 )
 const notesExtraNames = reactive(new Map<Note, string>)
 
+watch(currentToggleList, (val) => {
+    if (isTriadMode.value)
+    {
+        state.triadsPattern = val
+    } else
+    {
+        state.notesPattern = val
+    }
+})
 watch(isTriadMode, (val) =>
 {
+    state.isTriads = val
+    
     updateNotesExtraNames()
     if (val)
     {
@@ -50,12 +61,15 @@ watch(isTriadMode, (val) =>
 })
 watch(currentToggleList, () => updateNotesDispModes())
 watch(selectedScale, (val) => {
-    intervals.value = getIntervals(val)
+    state.scale.id = val
 
+    intervals.value = getIntervals(val)
     updateNotesDispModes()
     updateNotesExtraNames()
 })
-watch(root, () => { 
+watch(root, (val) => {
+    state.scale.root = val
+
     updateNotesDispModes()
     updateNotesExtraNames()
 })
@@ -106,7 +120,7 @@ function updateNotesExtraNames()
 </script>
 
 <template>
-    <Neck :notesDisplayModes="notesDisplayModes" :extraNoteNames="notesExtraNames"></Neck>
+    <Neck :notesDisplayModes="notesDisplayModes" :extraNoteNames="notesExtraNames" :state="state"></Neck>
     <div class="scale-block">
         <div class="scale-options">
             <span :class="textCommonClass1">Root</span>

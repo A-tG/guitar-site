@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { inject, reactive, ref, watch } from 'vue';
+import { inject, reactive, ref, watch, type Ref } from 'vue';
 import Tuner from './Tuner.vue';
-import { getStringTuning, getTuningNotes, defaultTuningId, getTuningsIds, type TuningID } from '@/types/Tunings';
+import { getStringTuning, getTuningNotes, getTuningsIds, type TuningID } from '@/types/Tunings';
 import { Note, getLowerNote, getHigherNote as highN, getNoteName as noteN } from '@/types/Note';
 import { getFretWidth } from '@/types/Frets';
 import { isFlatNotationKey } from '@/components/keys';
@@ -11,12 +11,12 @@ import Tuning from './Tuning.vue';
 import LeftArrow from '@/components/common/LeftArrow.vue';
 import RightArrow from '@/components/common/RightArrow.vue';
 import { NoteDisplayMode } from './NoteDisplayMode';
-import { isArraysEqual } from '@/utils/array';
+import { copyValues, isArraysEqual } from '@/utils/array';
+import type { ScalesItemState } from './Scales/types/ScalesItemState';
 
 const customId: TuningID = 'custom'
 const minStringsNumber = 3
 const maxStringsNumber = 18
-const defaultStrings = 6
 const fretsNumber = 24
 const scaleLen = 25.5 * 25.4 // inches to mm
 const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
@@ -24,35 +24,41 @@ const stringsHeights = [1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]
 let isCustomTuning = false
 
 const props = defineProps<{
+    state: ScalesItemState,
     notesDisplayModes: Map<Note, NoteDisplayMode>,
     extraNoteNames?: Map<Note, string>
 }>()
+const state = props.state
 const notesDispModes = props.notesDisplayModes
 const extraNames = props.extraNoteNames
 
 const isFlat = inject(isFlatNotationKey)!
-const box = ref(-1)
-const currentTuningId = ref(defaultTuningId)
-const HS = ref(0)
+const box = ref(state.box)
+const currentTuningId = ref(state.tuning.id)
+const HS = ref(state.tuning.HS)
 
 let customTuningNotes = getTuningNotes(currentTuningId.value).slice()
-const stringsTunings = reactive(customTuningNotes.slice(0, defaultStrings).map((el) => ref(el)))
-const isLH = ref(false)
+const stringsTunings = reactive<Ref<Note>[]>([])
+const isLH = ref(state.isLH)
 const isTuningMenuShown = ref(false)
 
-stringsTunings.forEach((el, i) => watch(el, () => {
-    customTuningNotes[i] = el.value
-    updateTuningId()
-}))
+state.tuning.tunings = customTuningNotes
 
+watch(stringsTunings, (val) => state.stringsNumber = val.length)
+watch(HS, (val) => state.tuning.HS = val)
+watch(box, (val) => state.box = val)
 watch(currentTuningId, (val) => {
+    state.tuning.id = val
+
     if (val == customId) 
     {
         isCustomTuning = true
+        state.tuning.tunings = customTuningNotes
         return
     }
 
     isCustomTuning = false
+    state.tuning.tunings = customTuningNotes
     const len = stringsTunings.length
     const notes = getTuningNotes(val)
     const nLen = notes.length
@@ -60,7 +66,7 @@ watch(currentTuningId, (val) => {
     {
         stringsTunings[i % len].value = notes[i % nLen]
     }
-    customTuningNotes = notes.slice()
+    copyValues(notes, customTuningNotes)
 })
 
 function removeString()
@@ -91,7 +97,12 @@ function addString()
     {
         n = getStringTuning(len, currentTuningId.value)
     }
-    stringsTunings.push(ref(n))
+    const refN = ref(n)
+    watch(refN, (val) => {
+        customTuningNotes[len] = val
+        updateTuningId()
+    })
+    stringsTunings.push(refN)
 }
 
 function isAddFretDot(fretNumber: number)
@@ -125,6 +136,10 @@ function getNoteClass(n: Note, fret: number, stringNumber: number)
     } else if ((mode & NoteDisplayMode.Highlight) === NoteDisplayMode.Highlight)
     {
         result += 'highlight-note'
+    }
+    if (!isShowNote(n))
+    {
+        result += 'invis'
     }
     return result
 }
@@ -161,7 +176,6 @@ function updateTuningId()
 function toggleBox(numb: number)
 {
     box.value = numb === box.value ? -1 : numb 
-    console.log(box.value)
 }
 
 function isInBox(fret: number, stringNumber: number)
@@ -186,6 +200,11 @@ function getBoxSizeForString(stringNumber: number)
         if (noteOnHigherString == highN(stringsTunings[stringNumber].value, box.value + boxSize)) break
     }
     return boxSize == 0 ? 1 : boxSize - 1
+}
+
+for (let i = 0; i < state.stringsNumber; i++)
+{
+    addString()
 }
 </script>
 
@@ -234,8 +253,7 @@ function getBoxSizeForString(stringNumber: number)
         <div class="fretboard frets-width-cont">
             <div class="fret-null">
                 <div class="fret-hor" v-for="(s, i) in stringsTunings">
-                    <div class="note fnt f16 norm-note" v-if="isShowNote(highN(s.value, HS))"
-                        :class="getNoteClass(highN(s.value, HS), 0, i)">
+                    <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, HS), 0, i)">
                         {{ getNoteName(s.value, HS)}}
                     </div>
                 </div>
@@ -246,8 +264,7 @@ function getBoxSizeForString(stringNumber: number)
                 <div class="fret-inlay inlay-bottom neg-bg" v-if="isDoubleDot(f)"></div>
                 <div class=" fret-hor fretboard-bg" v-for="(s, i) in stringsTunings">
                     <div class="string" :style="getStringStyle(i)"></div>
-                    <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, f + HS), f, i)"
-                        v-if="isShowNote(highN(s.value, f + HS))">
+                    <div class="note fnt f16 norm-note" :class="getNoteClass(highN(s.value, f + HS), f, i)">
                         {{ getNoteName(s.value, f + HS) }}
                     </div>
                 </div>

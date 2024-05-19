@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import ScalesItem from './guitar/Scales/ScalesItem.vue';
+import type { IState } from './guitar/Scales/types/IState';
 
 const props = defineProps<{
-    onCloseButton: () => void
+    onCloseButton: () => void,
+    state: IState
 }>()
 </script>
 
 <template>
     <li class="item-block norm-bg1">
         <div class="item-content">
-            <ScalesItem></ScalesItem>
+            <ScalesItem :state="state"></ScalesItem>
         </div>
         <div class="item-controls">
             <div class="el-clr hov-el-clr mi-outlined md-36 mi-close tr-al" title="Close" @click="onCloseButton"></div>
