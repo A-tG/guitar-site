@@ -25,9 +25,9 @@ const state = props.state as ScalesItemState
 const isTriadMode = ref(state.isTriads)
 const root = ref(state.scale.root)
 
-const notesToggleList = reactive(state.notesPattern)
-const triadsToggleList = reactive(state.triadsPattern)
-const currentToggleList = reactive(notesToggleList.slice())
+const notesToggleList = state.notesPattern
+const triadsToggleList = state.triadsPattern
+const currentToggleList = reactive(isTriadMode.value ? state.triadsPattern.slice() : state.notesPattern.slice())
 
 const selectedScale = ref(state.scale.id)
 const intervals = ref(getIntervals(selectedScale.value))
@@ -35,16 +35,6 @@ const notesDisplayModes = reactive(new Map(
     getNotesList().map(v => [v, NoteDisplayMode.Disabled]))
 )
 const notesExtraNames = reactive(new Map<Note, string>)
-
-watch(currentToggleList, (val) => {
-    if (isTriadMode.value)
-    {
-        state.triadsPattern = val
-    } else
-    {
-        state.notesPattern = val
-    }
-})
 watch(isTriadMode, (val) =>
 {
     state.isTriads = val
@@ -59,7 +49,16 @@ watch(isTriadMode, (val) =>
     copyValues(currentToggleList, triadsToggleList)
     copyValues(notesToggleList, currentToggleList)
 })
-watch(currentToggleList, () => updateNotesDispModes())
+watch(currentToggleList, (val) => {
+    if (isTriadMode.value)
+    {
+        copyValues(val, triadsToggleList)
+    } else
+    {
+        copyValues(val, notesToggleList)
+    }
+    updateNotesDispModes()
+})
 watch(selectedScale, (val) => {
     state.scale.id = val
 
