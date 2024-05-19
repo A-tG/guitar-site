@@ -29,21 +29,22 @@ export function decodeQueryParam(str: string)
 export function setParam(key: string, value: string)
 {
     searchParams.set(key, value)
-    history.replaceState(undefined, '', '?' + decodeURIComponent(searchParams.toString()))
+    replaceAdressQuery(decodeURIComponent(searchParams.toString()))
 }
 
 export function removeParam(key: string)
 {
     searchParams.delete(key)
     let newState = decodeURIComponent(searchParams.toString())
-    if (!newState)
-    {
-        newState = './'
-    }
-    history.replaceState(undefined, '', newState)
+    replaceAdressQuery(newState)
 }
 
 export function getParam(key: string)
 {
     return searchParams.get(key)
+}
+
+function replaceAdressQuery(val: string)
+{
+    history.replaceState(undefined, '', '?' + val)
 }
