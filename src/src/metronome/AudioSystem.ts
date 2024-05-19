@@ -25,6 +25,7 @@ export class AudioSystem
     private _rampNode?: GainNode
     private _gainNode!: GainNode
     //private _eqNode!: BiquadFilterNode
+    private _oscNodes = new Map<number, OscillatorNode>()
 
     get clickType()
     {
@@ -33,6 +34,10 @@ export class AudioSystem
     set clickType(val)
     {
         this._clickOscType = val
+        for (let [k, v] of this._oscNodes)
+        {
+            v.type = val
+        }
     }
 
     get time()
@@ -80,7 +85,14 @@ export class AudioSystem
         osc.start(beat.audioTime)
         osc.stop(beat.audioTime + duration)
         this.rampAudio(beat.audioTime, duration)
-        osc.onended = () => osc.disconnect()
+        
+        console.log(this._oscNodes.size)
+        const id = beat.audioTime
+        this._oscNodes.set(id, osc)
+        osc.onended = () => {
+            osc.disconnect()
+            this._oscNodes.delete(id)
+        }
     }
 
     clearAudioQ()
@@ -89,6 +101,7 @@ export class AudioSystem
         this._dummyNode?.disconnect()
         this._rampNode = undefined
         this._dummyNode = undefined
+        this._oscNodes.clear()
         this.initRampNode()
         this.initDummyNode()
     }
