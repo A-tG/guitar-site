@@ -9,6 +9,7 @@ import Tempo from "./Tempo.vue";
 import { AudioCtxTimeProvider } from "@/animation/AnimationQ";
 import { Scheduler } from "@/metronome/Scheduler";
 import { CanvasPointerAnimaion } from "@/metronome/CanvasPointerAnimation";
+import metronomeWorker from '@/workers/metronome?worker&inline'
 
 const clickTypes: OscillatorType[] = ["sine", "square", "sawtooth", "triangle"]
 
@@ -36,10 +37,7 @@ function init()
     let worker, aCtx, sched
     try 
     {
-        worker = new Worker(
-            new URL("@/workers/metronome", import.meta.url),
-            { type: 'module' }
-        )
+        worker = new metronomeWorker()
 
         aCtx = new AudioContext
         const cnv = canvas.value!
