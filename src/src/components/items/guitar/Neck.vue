@@ -141,14 +141,14 @@ function getNoteClass(n: Note, fret: number, stringNumber: number)
     if ((mode & NoteDisplayMode.Inactve) === NoteDisplayMode.Inactve || 
         !isInBox(fret, stringNumber))
     {
-        result += 'inactive-note'
+        result += ' inactive-note'
     } else if ((mode & NoteDisplayMode.Highlight) === NoteDisplayMode.Highlight)
     {
-        result += 'highlight-note'
+        result += ' highlight-note'
     }
     if (!isShowNote(n))
     {
-        result += 'invis'
+        result += ' invis'
     }
     return result
 }
