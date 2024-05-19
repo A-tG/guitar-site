@@ -19,7 +19,7 @@ watch(opacity, (val) => {
 function load()
 {
     let val = o.loadNumber()
-    if (!val) return
+    if (!val && val !== 0) return
 
     opacity.value = val
 }
