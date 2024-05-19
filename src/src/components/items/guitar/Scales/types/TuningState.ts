@@ -81,7 +81,6 @@ export class TuningState
         ]
         if (this.id == "custom")
         {
-            console.log("custom")
             arr.push(this.tunings.map((el) => noteToString(el)))
         }
         return arr
