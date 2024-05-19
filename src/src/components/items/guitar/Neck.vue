@@ -245,6 +245,13 @@ for (let i = 0; i < stringsNUmb; i++)
         <div v-show="false">
             <SafeTeleport to="#modal" :disabled="!isTuningMenuShown">
                 <ModalWindow title="Tuning" :onCloseButton="() => isTuningMenuShown = false">
+                    <div class="strings-btns-block">
+                        <div class="el-clr hov-el-clr mi-filled md-28 mi-remove-circle-outline tr-al"
+                            @click="removeString"></div>
+                        <span class="strings-numb norm-clr fnt f16 f-bold">{{ stringsTunings.length }}</span>
+                        <div class="el-clr hov-el-clr mi-filled md-28 mi-add-circle-outline tr-al" @click="addString">
+                        </div>
+                    </div>
                     <ul class="tuners-block">
                         <Tuner v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]">
                         </Tuner>
@@ -291,8 +298,7 @@ for (let i = 0; i < stringsNUmb; i++)
 
         <div class="frets-numbers frets-width-cont">
             <div class="el-clr hov-el-clr" v-for="i in fretsNumber + 1" @click="toggleBox(i - 1)"
-                :class="box !== i - 1 ? 'norm-bg2': ''" 
-                :style="i > 1 ? getFretVerStyle(i - 1) : ''">
+                :class="box !== i - 1 ? 'norm-bg2': ''" :style="i > 1 ? getFretVerStyle(i - 1) : ''">
                 <div class="fret-dot-cont">
                     <div class="fret-dot neg-bg" v-if="isAddFretDot(i - 1) || isDoubleDot(i - 1)"></div>
                     <div class="fret-dot neg-bg" v-if="isDoubleDot(i - 1)"></div>
