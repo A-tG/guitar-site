@@ -44,6 +44,11 @@ export function getParam(key: string)
     return searchParams.get(key)
 }
 
+export function getList()
+{
+    return new Map(searchParams)
+}
+
 function replaceAdressQuery(val: string)
 {
     history.replaceState(undefined, '', '?' + val)

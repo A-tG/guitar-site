@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from "vue";
+import { ref, watch } from "vue";
 import Item from "./Item.vue"
 import type { IState } from "./guitar/Scales/types/IState";
 import { ScalesItemState } from "./guitar/Scales/types/ScalesItemState";
-import { decodeQueryParam, encodeQueryParam, getParam, removeParam, setParam } from "@/types/QueryParamsManager";
+import { decodeQueryParam, encodeQueryParam, getList, getParam, removeParam, setParam } from "@/types/QueryParamsManager";
 
 const maxItemsNumber = 5
 
@@ -51,7 +51,44 @@ function getStateString(id: number)
     return decodeQueryParam(str)
 }
 
-addItem()
+function isCorrectId(id: string)
+{
+    if ((id[0] !== 'i') || (id.length > 3)) return false
+
+    let result = false
+    for(let i = 1; i < id.length; i++)
+    {
+        const ch = id[i]
+        result = !isNaN(parseInt(ch))
+        if (!result) break
+    }
+    return result
+}
+
+function addItemsFromQuery()
+{
+    for(let [key, _] of getList())
+    {
+        if (!isCorrectId(key)) continue
+
+        let id: number
+        id = Number.parseInt(key.substring(1))
+        if (isNaN(id)) continue
+        
+        const stateStr = getStateString(id)
+        const s = new ScalesItemState(id)
+        if (stateStr)
+        {
+            s.deserialize(stateStr)
+        } else
+        {
+            s.loadDefaults()
+        }
+        items.value.set(id, s)
+    }
+}
+
+addItemsFromQuery()
 
 watch(items, (val) => {
     for (let [k, v] of val)
