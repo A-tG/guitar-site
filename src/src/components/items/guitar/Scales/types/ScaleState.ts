@@ -1,6 +1,5 @@
 import { Note, MinNote, MaxNote, isNote } from "@/types/Note"
 import { defaultScaleId, getScalesIds } from "@/types/Scales"
-import { getTuningsIds } from "@/types/Tunings"
 
 export class ScaleState
 {
@@ -43,7 +42,7 @@ export class ScaleState
         }
 
         const id = arr[1]
-        if (getTuningsIds().includes(id))
+        if (getScalesIds().includes(id))
         {
             s.id = id
         } else
