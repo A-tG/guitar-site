@@ -57,7 +57,9 @@ export class ScalesItemState implements IState
     }
     set stringsNumber(val)
     {
-        if (!Number.isInteger(val) && ((val < 3) || (val > 18))) return
+        if (!Number.isInteger(val)) return
+
+        if ((val < 3) || (val > 18)) return
 
         this._stringsNumber = val
     }
@@ -95,7 +97,9 @@ export class ScalesItemState implements IState
     }
     set box(val)
     {
-        if (!Number.isInteger(val) && ((val < -1) || (val > 24))) return
+        if (!Number.isInteger(val)) return
+
+        if ((val < -1) || (val > 24)) return
 
         this._box = val
     }
@@ -136,21 +140,21 @@ export class ScalesItemState implements IState
         {
             try
             {
-                parsedArr = JSON.parse(JSONstring);
+                parsedArr = JSON.parse(JSONstring)
             }
             catch (err)
             {
-                console.error("Invalid JSON: " + JSONstring);
+                console.error("Invalid JSON: " + JSONstring)
             }
         }
-        this.scale = ScaleState.fromArr(parsedArr[1]);
-        this.tuning = TuningState.fromArr(parsedArr[2]);
-        this.stringsNumber = +parsedArr[3];
-        this.isTriads = !!parsedArr[4];
-        this.notesPattern = fromInt(+parsedArr[5], NumberOfNotes);
-        this.triadsPattern = fromInt(+parsedArr[6], NumberOfNotes);
-        this.box = +parsedArr[7];
-        this.isLH = !!parsedArr[8];
+        this.scale = ScaleState.fromArr(parsedArr[1])
+        this.tuning = TuningState.fromArr(parsedArr[2])
+        this.stringsNumber = +parsedArr[3]
+        this.isTriads = !!parsedArr[4]
+        try { this.notesPattern = fromInt(+parsedArr[5], NumberOfNotes) } catch { }
+        try { this.triadsPattern = fromInt(+parsedArr[6], NumberOfNotes) } catch { }
+        this.box = +parsedArr[7]
+        this.isLH = !!parsedArr[8]
     }
 
     loadDefaults()

@@ -31,6 +31,7 @@ export class ScaleState
     static fromArr(arr: any[])
     {
         const s = new ScaleState
+        if (!arr) return s
 
         const root = +arr[0]
         if (isNote(root))

@@ -39,6 +39,7 @@ export class TuningState
     static fromArr(arr: any[])
     {
         const s = new TuningState
+        if (!arr) return s
 
         const id = arr[0] as TuningID
         if (getTuningsIds().includes(id))
