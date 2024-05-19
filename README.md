@@ -27,6 +27,8 @@
 ## Used:
  [Vue](https://vuejs.org)
  
+ [vue-safe-teleport](https://github.com/Akryum/vue-safe-teleport)
+ 
  [subset-iconfont](https://github.com/dzhuang/subset-iconfont) to generate subset of icons
  
  [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
