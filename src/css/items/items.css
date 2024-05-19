@@ -1,0 +1,37 @@
+.item-block {
+    vertical-align: top;
+    display: flex;
+    margin: 70px auto 0 auto;
+    width: 90%;
+    max-width: 1780px;
+}
+
+.night .item-block {
+    box-shadow: 0 0 5px #222;
+}
+
+.day .item-block {
+    box-shadow: 0 0 5px #bbb;
+}
+
+.item-content {
+    flex: 1;
+    margin: 5px 5px 5px 10px;
+}
+
+.item-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.item-controls > *:first-child{
+    margin-bottom: auto;
+}
+.item-controls > *:last-child {
+    margin-top: auto;
+}
+
+.add-new-item {
+    margin: 70px auto;
+    width: 82px;
+}

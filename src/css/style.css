@@ -1,0 +1,76 @@
+html,
+body,
+div,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+ul,
+li {
+    list-style: none;
+    font-size: 0;
+    cursor: default;
+}
+
+span,
+div {
+    cursor: default;
+}
+
+a * {
+    cursor: pointer;
+}
+
+select {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.bg-block {
+    height: 100vh;
+}
+
+.items-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.content-block {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    min-height: 100%;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+}
+
+.noscipt-warning {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.nonselect-txt {
+    user-select: none;
+}
+
+#app {
+    overflow: auto;
+}

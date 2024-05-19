@@ -1,0 +1,136 @@
+.metr-disabled {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.metr-block {
+    position: relative;
+    display: inline-block;
+}
+
+.metr-el {
+    height: 100%;
+    margin: 2px 0 2px 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.metr-icon {
+    height: 50px;
+    width: 30px;
+    margin: 0 10px 0 10px;
+}
+
+.metr-svg-dasharay {
+    stroke-dasharray: 2;
+}
+
+.metr-svg-medium-stoke {
+    stroke-width: 2;
+}
+
+.metr-svg-light-stoke {
+    stroke-width: 1;
+}
+
+.beat-type-sel-block {
+    margin: 3px 0;
+}
+
+.volume-block,
+.tempo-block {
+    margin-left: 10px;
+}
+
+.tempo-block {
+    flex-direction: row;
+}
+
+.volume-range,
+.tempo-range {
+    margin: 3px 0;
+    padding: 0;
+}
+.tempo-range {
+    width: 100%;
+}
+
+.vol-number {
+    width: 100%;
+    position: absolute;
+    display: block;
+}
+
+.metr-option-head {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.metr-option-head > * {
+    margin: 0 5px;
+    position: relative;
+}
+.metr-option-head>*:last-child {
+    margin-right: 0;
+}
+
+.tempo-input {
+    display: inline-block;
+    vertical-align: middle;
+    height: 18px;
+    width: 50px;
+    text-decoration: none;
+    line-height: 18px;
+    border: 0;
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+
+.tempo-input::-webkit-inner-spin-button,
+.tempo-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.signature_block li {
+    margin-right: 10px;
+}
+
+.signature-option-block {
+    margin: 4px 0;
+}
+
+.signature-sel {
+    text-align: end;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.metr-beat-vis-block {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+#metr-pointer-block {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}

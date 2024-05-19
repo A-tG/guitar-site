@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@material-design-icons/svg": "^0.14.13",
+    "material-icons": "^1.13.12",
+    "subset-iconfont": "^1.0.3"
+  }
+}

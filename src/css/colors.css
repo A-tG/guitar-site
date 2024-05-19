@@ -1,0 +1,309 @@
+:root {
+    --clr-dark1: #111;
+    --clr-dark2: #222;
+    --clr-dark3: #333;
+    --clr-dark4: #555;
+    --clr-gray1: #777;
+    --clr-gray2: #999;
+    --clr-gray3: #bbb;
+    --clr-gray4: #ccc;
+    --clr-white1: #ddd;
+    --clr-white2: #eee;
+    --clr-white3: #fff;
+
+    --clr-gray-extra: #c8c8c8;
+    --clr-dark-extra: #585858;
+
+    --clr-yellow: #fc0;
+    --clr-blue: #0079db;
+    --clr-orange: #d44e00;
+    --clr-cyan: #0bb;
+    --clr-light-yellow: #ebbb70;
+}
+
+.night .norm-bg1 {
+    background: var(--clr-dark2);
+}
+.day .norm-bg1 {
+    background: white;
+}
+
+.night .norm-bg2 {
+    background: var(--clr-dark3);
+}
+.day .norm-bg2 {
+    background: var(--clr-white2);
+}
+
+.night .norm-bg3 {
+    background: var(--clr-dark4);
+}
+.day .norm-bg3 {
+    background: var(--clr-white1);
+}
+
+.night .norm-clr {
+    color: var(--clr-white2);
+}
+.day .norm-clr {
+    color: var(--clr-dark1);
+}
+
+.night .neg-bg{
+    background: var(--clr-white2);
+}
+.day .neg-bg{
+    background: var(--clr-dark1);
+}
+
+.night .neg-clr {
+    color: var(--clr-dark1);
+}
+.day .neg-clr {
+    color: var(--clr-white2);
+}
+
+.night .weak-clr {
+    color: var(--clr-gray2);
+}
+.day .weak-clr {
+    color: var(--clr-dark4);
+}
+
+.night .el-clr {
+    color: var(--clr-yellow);
+}
+.day .el-clr {
+    color: var(--clr-blue);
+}
+
+.night .el-clr.selected-text {
+    color: var(--clr-white3);
+}
+.day .el-clr.selected-text {
+    color: var(--clr-orange);
+}
+
+.night .el-bg {
+    background: var(--clr-yellow);
+}
+.day .el-bg {
+    background: var(--clr-blue);
+}
+
+.night .highlight-el-clr {
+    color: var(--clr-cyan);
+}
+.day .highlight-el-clr {
+    color: var(--clr-yellow);
+}
+
+.night .highlight-el-bg {
+    background: var(--clr-cyan);
+}
+.day .highlight-el-bg {
+    background: var(--clr-orange);
+}
+
+.night .l-arr-el-clr {
+    border-right-color: var(--clr-yellow);
+}
+.day .l-arr-el-clr {
+    border-right-color: var(--clr-blue);
+}
+
+.night .r-arr-el-clr {
+    border-left-color: var(--clr-yellow);
+}
+.day .r-arr-el-clr {
+    border-left-color: var(--clr-blue);
+}
+
+.night .hov-el-clr:hover {
+    color: var(--clr-white3);
+}
+.day .hov-el-clr:hover {
+    color: var(--clr-orange);
+}
+
+.night .hov-el-bg:hover {
+    background: var(--clr-white3);
+}
+.day .hov-el-bg:hover {
+    background: var(--clr-orange);
+}
+
+.night .hov-parent:hover .hov-child-clr {
+    background: var(--clr-white3);
+}
+.day .hov-parent:hover .hov-child-clr {
+    background: var(--clr-orange);
+}
+
+.night .l-arr-el-hov:hover {
+    border-right-color: var(--clr-white3);
+}
+.day .l-arr-el-hov:hover {
+    border-right-color: var(--clr-orange);
+}
+
+.night .r-arr-el-hov:hover {
+    border-left-color: var(--clr-white3);
+}
+.day .r-arr-el-hov:hover {
+    border-left-color: var(--clr-orange);
+}
+
+.night .fretboard-bg {
+    background: var(--clr-dark1);
+}
+.day .fretboard-bg {
+    background: var(--clr-light-yellow);
+}
+
+.night .note {
+    color: black;
+    background: var(--clr-yellow);
+}
+.day .note {
+    color: var(--clr-white3);
+    background: var(--clr-blue);
+}
+
+.night .norm-note {
+    background: var(--clr-yellow);
+}
+.day .norm-note {
+    background: var(--clr-blue);
+}
+
+.night .highlight-note {
+    background: var(--clr-cyan);
+}
+.day .highlight-note {
+    background: var(--clr-orange);
+}
+
+.night .inactive-note{
+    background: var(--clr-gray-extra);
+    color: var(--clr-dark2);
+}
+
+.day .inactive-note{
+    background: var(--clr-dark-extra);
+    color: var(--clr-white1);
+}
+
+.night .fret-ver-hov {
+    border-color: var(--clr-cyan);
+}
+.day .fret-ver-hov {
+    border-color: var(--clr-orange);
+}
+
+.middle-gray-bg {
+    background: var(--clr-gray1);
+}
+
+.middle-gray-border {
+    border-color: var(--clr-gray1);
+}
+
+.night .svg-norm-stroke {
+    stroke: var(--clr-white2);
+}
+.day .svg-norm-stroke {
+    stroke: var(--clr-dark1);
+}
+
+.night .svg-norm-fill {
+    fill: var(--clr-white2);
+}
+.day .svg-norm-fill {
+    fill: var(--clr-dark1);
+}
+
+.svg-no-fill {
+    fill: none;
+}
+
+.night .svg-el-stroke {
+    stroke: var(--clr-yellow);
+}
+.day .svg-el-stroke {
+    stroke: var(--clr-blue);
+}
+
+.night .svg-el-fill {
+    fill: var(--clr-yellow);
+}
+.day .svg-el-fill {
+    fill: var(--clr-blue);
+}
+
+.night .hov-el-clr:hover .hov-svg-clr {
+    stroke: var(--clr-white3);
+    fill: var(--clr-white3);
+}
+
+.day .hov-el-clr:hover .hov-svg-clr {
+    stroke: var(--clr-orange);
+    fill: var(--clr-orange);
+}
+
+.night .metr-accent-clr {
+    color: var(--clr-cyan);
+}
+.day .metr-accent-clr {
+    color: var(--clr-orange);
+}
+
+.night input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--clr-dark4);
+}
+.day input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--clr-white1);
+}
+.night input[type="range"]::-webkit-slider-thumb {
+    background-color: var(--clr-yellow);
+}
+.day input[type="range"]::-webkit-slider-thumb {
+    background-color: var(--clr-blue);
+}
+.night input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: var(--clr-white3);
+}
+.day input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: var(--clr-orange);
+}
+.night input[type="range"]:focus::-webkit-slider-thumb {
+    background-color: var(--clr-white3);
+}
+.day input[type="range"]:focus::-webkit-slider-thumb {
+    background-color: var(--clr-orange);
+}
+
+.night input[type="range"]::-moz-range-track {
+    background-color: var(--clr-dark4);
+}
+.day input[type="range"]::-moz-range-track {
+    background-color: var(--clr-white1);
+}
+.night input[type="range"]::-moz-range-thumb {
+    background-color: var(--clr-yellow);
+}
+.day input[type="range"]::-moz-range-thumb {
+    background-color: var(--clr-blue);
+}
+.night input[type="range"]:hover::-moz-range-thumb {
+    background-color: var(--clr-white3);
+}
+.day input[type="range"]:hover::-moz-range-thumb {
+    background-color: var(--clr-orange);
+}
+.night input[type="range"]:focus::-moz-range-thumb {
+    background-color: var(--clr-white3);
+}
+.day input[type="range"]:focus::-moz-range-thumb {
+    background-color: var(--clr-orange);
+}

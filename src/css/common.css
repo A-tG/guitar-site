@@ -1,0 +1,93 @@
+.tgl-checkbox {
+    margin: 0 4px;
+    position: relative;
+    width: 40px;
+    height: 18px;
+    border-radius: 2px;
+}
+
+.tgl-checkbox-slider {
+    position: absolute;
+    width: 45%;
+    height: 100%;
+    border-radius: 2px;
+}
+.slider-l {
+    right: 100%;
+    transform: translateX(100%);
+}
+
+.slider-r {
+    right: 0;
+}
+
+.fnt-el {
+    line-height: 1;
+}
+
+.l-arr {
+    margin-right: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    border-top: 6px solid transparent;
+    border-right: 12px solid;
+    border-bottom: 6px solid transparent;
+}
+
+.r-arr {
+    margin-left: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    border-top: 6px solid transparent;
+    border-left: 12px solid;
+    border-bottom: 6px solid transparent;
+}
+
+.tr-al {
+    transition-duration: 0.1s;
+    user-select: none;
+}
+
+.invis {
+    visibility: hidden;
+}
+
+/* Range Reset */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Chrome, Safari, Opera and Edge Chromium styles*/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+    border-radius: 0px;
+    height: 10px;
+}
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -5px;
+    height: 20px;
+    width: 12px;
+    border-radius: 1px;
+}
+
+/*Firefox styles */
+/* slider track */
+input[type="range"]::-moz-range-track {
+    border-radius: 0px;
+    height: 10px;
+}
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+    border: none;
+    border-radius: 1px;
+    height: 20px;
+    width: 12px;
+    border-radius: 1px;
+}

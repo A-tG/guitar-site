@@ -16,8 +16,6 @@ local.properties
 .settings/
 .loadpath
 
-*.bat
-
 # External tool builders
 .externalToolBuilders/
 
@@ -215,3 +213,11 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+*.bat
+*.cmd
+.font-output
+.vscode/
+node_modules
+src/webfonts/
+built/

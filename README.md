@@ -1,3 +1,5 @@
+**Reworked version using typescript and vuejs**
+
 # [Website for guitar practicing](https://a-tg.github.io)
 * All tools in one browser tab
 * Minimal response time - website works completly on the client side
@@ -23,16 +25,22 @@
  * And other useful tools
 
 ## Used:
- [jquery](https://jquery.com/)
-
- [jquery-outside-events-plugin](http://benalman.com/projects/jquery-outside-events-plugin/)
+ [Vue](https://vuejs.org)
  
- [doT.js](https://github.com/olado/doT)
+ [vue-safe-teleport](https://github.com/Akryum/vue-safe-teleport)
+ 
+ [subset-iconfont](https://github.com/dzhuang/subset-iconfont) to generate subset of icons
  
  [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
 
-## For developers:
-Check out [full/js/types/](full/js/types/) for useful classes
+## Development
+1. `npm install`
+1. `npm install` inside '\src' to initialize vue
+1. `node subset-iconfont.js` Then copy folder '.font-output\material-icons\webfonts' to 'src\public' (filled, outlined variants). Icons are listed in 'used-icons.txt'
+
+   On Windows: `robocopy .font-output\material-icons\webfonts src\public\webfonts *filled* *outlined* /im /is /it`
+1. `npm run dev` inside '.\src' starts local server for development
+1. `npm run build` inside '.\src' builds production ready assets to '.\dist'
 
 ## Support developer
-[Available methods](https://taplink.cc/atgdev)
+[Available donation methods](https://taplink.cc/atgdev)

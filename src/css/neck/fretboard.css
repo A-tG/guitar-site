@@ -1,0 +1,104 @@
+.fretboard, .frets-numbers{
+    display: flex;
+    flex-direction: row;
+}
+
+.fretboard {
+    background-color: #eee;
+}
+
+.fretboard > *, .frets-numbers > * {
+    margin-right: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+}
+
+.frets-numbers > * {
+    justify-content: space-between;
+    border-radius: 2px;
+}
+.frets-numbers > *:first-child {
+    justify-content: end;
+}
+
+.fret-hor {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    padding: 1px 0;
+}
+
+.fret-null {
+    background: #fff;
+}
+.fret-null .fret-hor {
+    justify-content: left;
+}
+.fret-null .note {
+    left: 0;
+    position: absolute;
+}
+
+.fret-ver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.frets-width-cont>*:nth-child(1) {
+    flex-grow: 0;
+    flex: 5;
+}
+
+.frets-numbers>*:nth-child(1) {
+    position: relative;
+}
+.frets-numbers>*:nth-child(1) * {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.string {
+    z-index: 2;
+    border-right: 5px solid #ddd;
+    background: #ddd;
+    width: 100%;
+    position: absolute;
+}
+
+.note {
+    height: 1em;
+    width: 2ch;
+    padding: 3px;
+    cursor: default;
+    position: relative;
+    right: 10%;
+    border-radius: 4px;
+    z-index: 4;
+    user-select: none;
+    align-content: center;
+    justify-content: center;
+}
+
+.fret-dot-cont {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+.fret-dot {
+    width: 6px;
+    height: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}

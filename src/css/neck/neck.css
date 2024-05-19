@@ -1,0 +1,65 @@
+.neck-block {
+    position: relative;
+    display: grid;
+    row-gap: 4px;
+    column-gap: 4px;
+    grid-template-columns: auto 1fr;
+}
+
+.lh-rh-toggle-block {
+    width: 100%;
+    position: absolute;
+}
+
+.lh-rh-toggle-block > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.lh {
+    transform: scaleX(-1);
+}
+
+.lh .strings-btns-block,
+.lh .str-tuner-sel,
+.lh .note,
+.lh .lh-rh-toggle-block,
+.lh .halfsteps-numb {
+    transform: scaleX(-1);
+}
+
+.lh .frets-numbers > * {
+    transform: scaleX(-1);
+}
+
+.tuning-sel-block > * {
+    margin: 10px auto;
+}
+
+.tuning-btn-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tuning-btn-block > *:first-child {
+    margin-right: 5px;
+}
+.tuning-btn-block > *:last-child {
+    margin-right: 5px;
+}
+
+.halfsteps-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.halfsteps-block > *:first-child {
+    margin-right: 8px;
+}
+.halfsteps-block select, .halfsteps-block option {
+    text-align: end;
+}
+
+.halfsteps-numb {
+    width: 3ch;
+}

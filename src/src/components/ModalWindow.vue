@@ -1,0 +1,61 @@
+<script setup lang="ts">
+const props = defineProps<{
+    title: string,
+    onCloseButton: () => void
+}>()
+</script>
+
+<template>
+    <div class="wrap" @click.self="onCloseButton">
+        <div class="norm-bg1 block">
+            <div class="controls">
+                <span class="norm-clr fnt f-bold f18">{{ title }}</span>
+                <i class="el-clr hov-el-clr tr-al mi-outlined md-28 mi-close" title="Close settings"
+                    @click="onCloseButton"></i>
+            </div>
+            <div class="content">
+                <slot></slot>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+.wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: contrast(.9) blur(1.5px);
+}
+.block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+.content {
+    margin: 15px;
+    margin-top: 0;
+}
+.content>*:nth-child(3n + 1) {
+    justify-self: left;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.controls {
+    padding-left: 10px;
+}
+.controls>*:first-child {
+    flex: 1;
+}
+.controls>*:last-child {
+    margin-left: auto;
+}
+</style>
