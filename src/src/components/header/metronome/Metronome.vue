@@ -10,6 +10,8 @@ import { AudioCtxTimeProvider } from "@/animation/AnimationQ";
 import { Scheduler } from "@/metronome/Scheduler";
 import { CanvasPointerAnimaion } from "@/metronome/CanvasPointerAnimation";
 import metronomeWorker from '@/workers/metronome?worker&inline'
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiPlayCircleOutline, mdiPauseCircleOutline } from "@mdi/js";
 
 const clickTypes: OscillatorType[] = ["sine", "square", "sawtooth", "triangle"]
 
@@ -87,8 +89,9 @@ onMounted(init)
             <canvas id="metr-pointer-block" class="norm-clr fnt f26" width="40" height="40" ref="canvas"></canvas>
         </li>
 
-        <li class="play-btn metr-el el-clr hov-el-clr tr-al mi-outlined md-46" title="Toggle metronome playing"
-            :class="{ 'mi-pause-circle': isPlaying, 'mi-play-circle': !isPlaying }" @click="isPlaying = !isPlaying">
+        <li class="metr-el el-clr hov-el-clr tr-al" title="Toggle metronome playing">
+            <SvgIcon type="mdi" :path="isPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline" :size="46"
+                @click="isPlaying = !isPlaying"></SvgIcon>
         </li>
 
         <li class="metr-el">
