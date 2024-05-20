@@ -73,7 +73,7 @@
     position: absolute;
 }
 
-.note {
+.fretboard .note {
     height: 1em;
     width: 2ch;
     padding: 3px;
