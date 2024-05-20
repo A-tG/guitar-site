@@ -129,11 +129,10 @@ function updateNotesExtraNames()
                     {{ getNoteName(n, isFlat) }}
                 </li>
             </ul>
+            <span :class="textCommonClass1">Numbered</span>
             <span :class="textCommonClass1">Relative</span>
             <span :class="textCommonClass1">Notes</span>
             <span :class="textCommonClass1">Semitones</span>
-
-            <span :class="textCommonClass1">Numbered</span>
             <ul class="scale-notes-block">
                 <ScaleNoteInterval v-for="int, i in intervals" :noteName="getNoteName(getScaleNote(i), isFlat)"
                     v-model:isActive="currentToggleList[i]" :number="i + 1" :interval="int" :relToMaj="getRelToMaj(i)">
