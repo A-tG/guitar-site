@@ -28,21 +28,21 @@ load()
 </script>
 
 <template style="display: flex">
-    <div>
-        <input id="in-n-opacity" type="range" step="0.01" :min="min" :max="max" v-model="opacity">
-        <span class="norm-clr fnt f18">{{ Math.floor(opacity * 100) }}%</span>
+    <div class="block">
+        <input id="in-n-opacity" class="input" type="range" step="0.01" :min="min" :max="max" v-model="opacity">
+        <span class="text norm-clr fnt f18">{{ Math.floor(opacity * 100) }}%</span>
     </div>
 </template>
 
 <style scoped>
-span {
+.text {
     width: 4ch;
     text-align: end;
 }
-div {
+.block {
     display: flex;
 }
-input {
+.input {
     flex: 1;
 }
 </style>

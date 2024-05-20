@@ -2,11 +2,11 @@
     <footer class="foot norm-bg1">
         <ul>
             <li class="item">
-                <a class="el-clr fnt f14 hov-el-clr tr-al" href="https://github.com/A-tG/a-tg.github.io/commits/master"
-                    title="Changelog">Changelog</a>
+                <a class="el-clr fnt f14 hov-el-clr tr-al link"
+                    href="https://github.com/A-tG/a-tg.github.io/commits/master" title="Changelog">Changelog</a>
             </li>
             <li class="item">
-                <a class="el-clr fnt f14 hov-el-clr tr-al" href="https://github.com/A-tG/guitar-site"
+                <a class="el-clr fnt f14 hov-el-clr tr-al link" href="https://github.com/A-tG/guitar-site"
                     title="GitHub source files and feedback">GitHub source files</a>
             </li>
         </ul>
@@ -23,7 +23,7 @@
     padding: 3px 40px;
     display: inline-block;
 }
-.foot a {
+.link {
     text-decoration: none;
 }
 </style>
