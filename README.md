@@ -4,6 +4,7 @@ https://github.com/A-tG/guitar-site/assets/19589064/bfcdf47b-d721-497e-9e7a-6648
 # [Website for guitar practicing](https://a-tg.github.io)
 * All tools in one browser tab
 * Minimal response time - website works completly on the client side
+* Extremly small size: less than 50kb gzip
 * Day/night color themes
 * Share your link with others
 ## What already works:
