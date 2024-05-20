@@ -4,6 +4,8 @@ import NotationSwitcher from './NotationSwitcher.vue'
 import ThemeSwitcher from './ThemeSwitcher.vue'
 import ModalWindow from '../ModalWindow.vue';
 import InactiveNoteOpacity from './InactiveNoteOpacity.vue';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiCog } from "@mdi/js";
 
 const commonClasses = 'norm-clr fnt f18'
 
@@ -11,10 +13,9 @@ const isShown = ref(false)
 </script>
 
 <template>
-    <li id="common-settings-wrap">
-        <i class="el-clr hov-el-clr tr-al mi-filled md-36 mi-settings" title="Open settings"
-            @click="isShown = !isShown">
-        </i>
+    <li id="common-settings-wrap" title="Open settings">
+        <SvgIcon class="el-clr hov-el-clr tr-al" type="mdi" :size="36" :path="mdiCog" @click="isShown = !isShown">
+        </SvgIcon>
     </li>
 
     <SafeTeleport to="#modal" :disabled="!isShown">
