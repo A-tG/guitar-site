@@ -33,5 +33,8 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[ext]'
       }
     }
+  },
+  define: {
+    __VUE_OPTIONS_API__: false
   }
 })
