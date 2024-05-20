@@ -3,11 +3,16 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import {viteSingleFile} from 'vite-plugin-singlefile'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    viteSingleFile({ 
+      useRecommendedBuildConfig: false,
+      inlinePattern: [ "**/*.css"]
+    }),
     createHtmlPlugin({
       minify: true
     })
@@ -20,6 +25,6 @@ export default defineConfig({
   build: {
     outDir: '../built',
     emptyOutDir: true,
-    minify: 'terser'
+    minify: 'terser',
   }
 })
