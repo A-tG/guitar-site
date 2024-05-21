@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiClose } from "@mdi/js";
+
+defineProps<{
     title: string,
     onCloseButton: () => void
 }>()
@@ -10,8 +13,9 @@ const props = defineProps<{
         <div class="norm-bg1 block">
             <div class="controls">
                 <span class="norm-clr fnt f-bold f18">{{ title }}</span>
-                <i class="el-clr hov-el-clr tr-al mi-outlined md-28 mi-close" title="Close settings"
-                    @click="onCloseButton"></i>
+                <div class="el-clr hov-el-clr tr-al" title="Close settings" @click="onCloseButton">
+                    <SvgIcon type="mdi" :size="28" :path="mdiClose"></SvgIcon>
+                </div>
             </div>
             <div class="content">
                 <slot></slot>
