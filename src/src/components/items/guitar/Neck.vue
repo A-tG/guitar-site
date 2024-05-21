@@ -13,6 +13,8 @@ import RightArrow from '@/components/common/RightArrow.vue';
 import { NoteDisplayMode } from './NoteDisplayMode';
 import { clearArr, copyValues, isArraysEqual } from '@/utils/array';
 import type { ScalesItemState } from './Scales/types/ScalesItemState';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiMinusCircleOutline, mdiPlusCircleOutline, mdiMenu } from "@mdi/js";
 
 const customId: TuningID = 'custom'
 const minStringsNumber = 3
@@ -232,11 +234,16 @@ for (let i = 0; i < stringsNUmb; i++)
         </div>
 
         <div class="strings-btns-block">
-            <i class="el-clr hov-el-clr mi-filled md-24 mi-menu tr-al tunings-menu-btn"
-                @click="isTuningMenuShown = !isTuningMenuShown"></i>
-            <div class="el-clr hov-el-clr mi-filled md-24 mi-remove-circle-outline tr-al" @click="removeString"></div>
+            <div class="el-clr hov-el-clr tr-al tunings-menu-btn" @click="isTuningMenuShown = !isTuningMenuShown">
+                <SvgIcon type="mdi" :size="24" :path="mdiMenu"></SvgIcon>
+            </div>
+            <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
+                <SvgIcon type="mdi" :size="24" :path="mdiMinusCircleOutline"></SvgIcon>
+            </div>
             <span class="strings-numb norm-clr fnt f14 f-bold">{{ stringsTunings.length }}</span>
-            <div class="el-clr hov-el-clr mi-filled md-24 mi-add-circle-outline tr-al" @click="addString"></div>
+            <div class="el-clr hov-el-clr tr-al" title="Add string" @click="addString">
+                <SvgIcon type="mdi" :size="24" :path="mdiPlusCircleOutline"></SvgIcon>
+            </div>
         </div>
 
         <div>
@@ -246,10 +253,12 @@ for (let i = 0; i < stringsNUmb; i++)
             <SafeTeleport to="#modal" :disabled="!isTuningMenuShown">
                 <ModalWindow title="Tuning" :onCloseButton="() => isTuningMenuShown = false">
                     <div class="strings-btns-block">
-                        <div class="el-clr hov-el-clr mi-filled md-28 mi-remove-circle-outline tr-al"
-                            @click="removeString"></div>
+                        <div class="el-clr hov-el-clr tr-al" @click="removeString">
+                            <SvgIcon type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
+                        </div>
                         <span class="strings-numb norm-clr fnt f16 f-bold">{{ stringsTunings.length }}</span>
-                        <div class="el-clr hov-el-clr mi-filled md-28 mi-add-circle-outline tr-al" @click="addString">
+                        <div class="el-clr hov-el-clr tr-al" @click="addString">
+                            <SvgIcon type="mdi" :size="28" :path="mdiPlusCircleOutline"></SvgIcon>
                         </div>
                     </div>
                     <ul class="tuners-block">
@@ -289,8 +298,9 @@ for (let i = 0; i < stringsNUmb; i++)
         </div>
 
         <div class="tuning-btn-block">
-            <i class="el-clr hov-el-clr mi-filled md-24 mi-menu tr-al"
-                @click="isTuningMenuShown = !isTuningMenuShown"></i>
+            <div class="el-clr hov-el-clr tr-al" title="Open tunings settings" @click="isTuningMenuShown = !isTuningMenuShown">
+                <SvgIcon type="mdi" :size="24" :path="mdiMenu"></SvgIcon>
+            </div>
             <LeftArrow @click="HS--"></LeftArrow>
             <span class="halfsteps-numb norm-clr fnt f14 f-bold">{{ HS }}</span>
             <RightArrow @click="HS++"></RightArrow>
