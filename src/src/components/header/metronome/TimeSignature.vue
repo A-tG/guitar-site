@@ -92,7 +92,8 @@ load()
         <li class="metr-el">
             <div class="signature-option-block">
                 <LeftArrow title="Reduce beats number" @click="beatsPrev"></LeftArrow>
-                <select class="signature-sel el-clr norm-bg3 fnt f16" v-model="beatsPerMeasure">
+                <select aria-label="Metronome beats per measure" class="signature-sel el-clr norm-bg3 fnt f16"
+                    v-model="beatsPerMeasure">
                     <option v-for="o in beats" :value="o">{{ o }}</option>
                 </select>
                 <RightArrow title="Increase beats number" @click="beatsNext"></RightArrow>
@@ -100,7 +101,8 @@ load()
 
             <div class="signature-option-block">
                 <LeftArrow title="Increase beat (note) value" @click="lenPrev"></LeftArrow>
-                <select class="signature-sel el-clr norm-bg3 fnt f16" v-model="beatLen">
+                <select aria-label="Metronome beat length" class="signature-sel el-clr norm-bg3 fnt f16"
+                    v-model="beatLen">
                     <option v-for="o in beatLengths" :value="o">{{ o }}</option>
                 </select>
                 <RightArrow title="Reduce beat (note) value" @click="lenNext"></RightArrow>
