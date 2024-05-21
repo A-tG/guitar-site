@@ -253,11 +253,11 @@ for (let i = 0; i < stringsNUmb; i++)
             <SafeTeleport to="#modal" :disabled="!isTuningMenuShown">
                 <ModalWindow title="Tuning" :onCloseButton="() => isTuningMenuShown = false">
                     <div class="strings-btns-block">
-                        <div class="el-clr hov-el-clr tr-al" @click="removeString">
+                        <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
                             <SvgIcon type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
                         </div>
                         <span class="strings-numb norm-clr fnt f16 f-bold">{{ stringsTunings.length }}</span>
-                        <div class="el-clr hov-el-clr tr-al" @click="addString">
+                        <div class="el-clr hov-el-clr tr-al" title="Add string" @click="addString">
                             <SvgIcon type="mdi" :size="28" :path="mdiPlusCircleOutline"></SvgIcon>
                         </div>
                     </div>
@@ -298,12 +298,13 @@ for (let i = 0; i < stringsNUmb; i++)
         </div>
 
         <div class="tuning-btn-block">
-            <div class="el-clr hov-el-clr tr-al" title="Open tunings settings" @click="isTuningMenuShown = !isTuningMenuShown">
+            <div class="el-clr hov-el-clr tr-al" title="Open tunings settings"
+                @click="isTuningMenuShown = !isTuningMenuShown">
                 <SvgIcon type="mdi" :size="24" :path="mdiMenu"></SvgIcon>
             </div>
-            <LeftArrow @click="HS--"></LeftArrow>
+            <LeftArrow title="Decrease half-steps" @click="HS--"></LeftArrow>
             <span class="halfsteps-numb norm-clr fnt f14 f-bold">{{ HS }}</span>
-            <RightArrow @click="HS++"></RightArrow>
+            <RightArrow title="Increase half-steps" @click="HS++"></RightArrow>
         </div>
 
         <div class="frets-numbers frets-width-cont">

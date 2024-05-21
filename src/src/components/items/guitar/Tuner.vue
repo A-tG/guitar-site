@@ -24,7 +24,7 @@ function higher()
 <template>
     <li class="str-tuner">
         <LeftArrow title="Tune lower" @click="lower"></LeftArrow>
-        <select class="str-tuner-sel fnt f16 capitalized el-clr norm-bg3" v-model="selectedNote">
+        <select aria-label="Select string tuning" class="str-tuner-sel fnt f16 capitalized el-clr norm-bg3" v-model="selectedNote">
             <option v-for="n in notes" :value="n">{{ getNoteName(n, isFlat) }}</option>
         </select>
         <RightArrow title="Tune higher" @click="higher"></RightArrow>

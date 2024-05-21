@@ -24,19 +24,19 @@ watch(HS, (val) => {
             <div>
                 <span class="norm-clr fnt f18">Tuning</span>
             </div>
-            <select class="fnt f18 capitalized el-clr norm-bg3" v-model="tuningId">
+            <select aria-label="Select tuning" class="fnt f18 capitalized el-clr norm-bg3" v-model="tuningId">
                 <option v-for="t in getTuningsIds()" :value="t"> {{ getTuningName(t).value }}</option>
             </select>
         </div>
         <div class="halfsteps-block">
             <span class="norm-clr fnt f18">Half-steps</span>
-            <LeftArrow @click="HS--"></LeftArrow>
-            <select class="fnt f14 capitalized el-clr norm-bg3" v-model="HS">
+            <LeftArrow title="Decrease half-steps" @click="HS--"></LeftArrow>
+            <select aria-label="Select half-steps offset" class="fnt f14 capitalized el-clr norm-bg3" v-model="HS">
                 <option v-for="i in (maxHS * 2) + 1" :value="i - maxHS - 1">
                     {{ i - maxHS - 1 }}
                 </option>
             </select>
-            <RightArrow @click="HS++"></RightArrow>
+            <RightArrow title="Increase half-steps" @click="HS++"></RightArrow>
         </div>
     </div>
 </template>
