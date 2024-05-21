@@ -13,7 +13,7 @@ const isActive = defineModel<boolean>('isActive', { required: true })
 </script>
 
 <template>
-    <li class="scale-note el-clr hov-el-clr norm-bg2" @click="isActive = !isActive">
+    <li class="scale-note el-clr hov-el-clr norm-bg2" title="Toggle scale note display" @click="isActive = !isActive">
         <span class="fnt f18 norm-clr">{{ number }}</span>
         <span class="fnt f12 norm-clr">{{ relToMaj }}</span>
         <span class="fnt f18 tr-al" :class="isActive ? '' : 'transparent'">{{ noteName }}</span>
