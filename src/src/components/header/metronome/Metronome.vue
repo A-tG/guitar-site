@@ -97,7 +97,7 @@ onMounted(init)
         <li class="metr-el">
             <div class="norm-clr fnt f18">Click type</div>
             <div class="beat-type-sel-block">
-                <select class="signature-sel el-clr norm-bg3 fnt f14" v-model="clickType">
+                <select aria-label="Metronome click type" class="signature-sel el-clr norm-bg3 fnt f14" v-model="clickType">
                     <option v-for="o in clickTypes" :value="o">{{ o }}</option>
                 </select>
             </div>
