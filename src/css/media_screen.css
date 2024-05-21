@@ -73,7 +73,7 @@
     }
 }
 
-@media screen and (max-width: 620px) {
+/*@media screen and (max-width: 620px) {
     .frets-width-cont>*:nth-child(1) {
         flex: 15
     }
@@ -123,4 +123,4 @@
         display: block;
         margin: 0 auto;
     }
-}
+}*/
