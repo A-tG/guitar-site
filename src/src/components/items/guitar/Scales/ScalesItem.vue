@@ -11,6 +11,8 @@ import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
 import { NoteDisplayMode } from "../NoteDisplayMode";
 import type { ScalesItemState } from "./types/ScalesItemState";
 import type { IState } from "./types/IState";
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiCheckboxBlankOutline, mdiCheckboxMarked } from "@mdi/js";
 
 const relToMajList = stepsRelativeToMajor
 const textCommonClass1 = "norm-clr fnt f16"
@@ -148,8 +150,8 @@ function updateNotesExtraNames()
                 <span :class="textCommonClass2">Scale</span>
                 <div class="el-clr hov-el-clr ">
                     <span :class="textCommonClass2">Triads mode</span>
-                    <i class="mi-filled md-24 tr-al"
-                        :class="isTriadMode ? 'mi-check-box' : 'mi-check-box-outline-blank'"></i>
+                    <SvgIcon class="tr-al" type="mdi" :size="24"
+                        :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
                 </div>
             </div>
             <select class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
