@@ -49,11 +49,11 @@ load()
             <span class="fnt f14 weak-clr">{{ min }}%</span>
             <div class="fnt f18 norm-clr">
                 <span class="vol-number" v-show="isHover || isFocused">{{ volume }}</span>
-                <label for="metr-vol" :class="{ invis: isHover || isFocused }">Volume</label>
+                <span :class="{ invis: isHover || isFocused }">Volume</span>
             </div>
             <span class="fnt f14 weak-clr">{{ max }}%</span>
         </div>
-        <input id="metr-vol" class="volume-range" type="range" :min="min" :max="max" step="1" @focus="isFocused = true"
+        <input aria-label="Metronome volume" class="volume-range" type="range" :min="min" :max="max" step="1" @focus="isFocused = true"
             @blur="isFocused = false" v-model="volume">
     </div>
 </template>
