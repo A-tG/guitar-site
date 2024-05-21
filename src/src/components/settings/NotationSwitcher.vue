@@ -29,11 +29,11 @@ load()
 
 <template>
     <div class="el-clr hov-el-clr tr-al" title="Switch to sharp notation"
-        @click="isFlat = false" v-if="isFlat">
+        @click="isFlat = false" v-show="isFlat">
         <SvgIcon type="mdi" :size="36" :path="mdiMusicAccidentalSharp"></SvgIcon>
     </div>
     <div class="el-clr hov-el-clr tr-al" title="Switch to flat notation"
-        @click="isFlat = true" v-if="!isFlat">
+        @click="isFlat = true" v-show="!isFlat">
         <SvgIcon type="mdi" :size="36" :path="mdiMusicAccidentalFlat"></SvgIcon>
     </div>
 </template>

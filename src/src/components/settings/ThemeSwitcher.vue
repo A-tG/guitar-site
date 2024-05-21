@@ -59,15 +59,15 @@ load()
 <template>
     <ul class="block">
         <li class="el-clr hov-el-clr tr-al" title="Switch to night theme" @click="theme = ColorTheme.night"
-            v-if="theme != ColorTheme.night">
+            v-show="theme != ColorTheme.night">
             <SvgIcon type="mdi" :size="36" :path="mdiWeatherNight"></SvgIcon>
         </li>
         <li class="el-clr hov-el-clr tr-al" title="Switch to day theme" @click="theme = ColorTheme.day"
-            v-if="theme != ColorTheme.day">
+            v-show="theme != ColorTheme.day">
             <SvgIcon type="mdi" :size="36" :path="mdiWhiteBalanceSunny"></SvgIcon>
         </li>
         <li class="el-clr hov-el-clr tr-al" title="Switch to automatic theme" @click="theme = ColorTheme.auto"
-            v-if="(theme != ColorTheme.auto) && isAutoThemeSupported">
+            v-show="(theme != ColorTheme.auto) && isAutoThemeSupported">
             <i class="fnt f-bold f36 icon">A</i>
         </li>
     </ul>
