@@ -51,8 +51,8 @@ load()
             <span class="fnt f14 weak-clr">{{ min }}</span>
             <label for="metr-tempo" class="fnt f18 norm-clr">Tempo</label>
             <LeftArrow title="Reduce tempo" @click="tempo--"></LeftArrow>
-            <input class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos" step="1" :min="min"
-                :max="max" v-model.lazy.trim.number="tempo">
+            <input aria-label="Tempo input" class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos"
+                step="1" :min="min" :max="max" v-model.lazy.trim.number="tempo">
             <RightArrow title="Increase tempo" @click="tempo++"></RightArrow>
             <datalist id="tempos">
                 <option v-for="o in tempoList" :value="o">{{ o }}</option>
