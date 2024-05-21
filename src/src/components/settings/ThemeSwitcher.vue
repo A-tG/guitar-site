@@ -3,6 +3,8 @@ import { ColorTheme, isColorTheme, themesNames } from '@/types/ColorTheme';
 import { OptionStorage } from '@/utils/LocalStorage';
 import { inject, ref, watch } from 'vue';
 import { themeNameKey } from '../keys';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiWhiteBalanceSunny, mdiWeatherNight } from "@mdi/js";
 
 const matchMediaStr = '(prefers-color-scheme: light)'
 
@@ -58,11 +60,11 @@ load()
     <ul class="block">
         <li class="el-clr hov-el-clr tr-al" title="Switch to night theme" @click="theme = ColorTheme.night"
             v-if="theme != ColorTheme.night">
-            <i class="mi-filled md-36 mi-dark-mode"></i>
+            <SvgIcon type="mdi" :size="36" :path="mdiWeatherNight"></SvgIcon>
         </li>
         <li class="el-clr hov-el-clr tr-al" title="Switch to day theme" @click="theme = ColorTheme.day"
             v-if="theme != ColorTheme.day">
-            <i class="mi-filled md-36 mi-light-mode"></i>
+            <SvgIcon type="mdi" :size="36" :path="mdiWhiteBalanceSunny"></SvgIcon>
         </li>
         <li class="el-clr hov-el-clr tr-al" title="Switch to automatic theme" @click="theme = ColorTheme.auto"
             v-if="(theme != ColorTheme.auto) && isAutoThemeSupported">
