@@ -11,9 +11,9 @@ defineProps<{
 <template>
     <div class="wrap" @click.self="onCloseButton">
         <div class="norm-bg1 block">
-            <div class="controls">
+            <div class="controls norm-bg2">
                 <span class="norm-clr fnt f-bold f18">{{ title }}</span>
-                <div class="el-clr hov-el-clr tr-al" title="Close settings" @click="onCloseButton">
+                <div class="close-btn-block el-clr hov-el-clr tr-al" title="Close settings" @click="onCloseButton">
                     <SvgIcon type="mdi" :size="28" :path="mdiClose"></SvgIcon>
                 </div>
             </div>
@@ -55,11 +55,15 @@ defineProps<{
 }
 .controls {
     padding-left: 10px;
+    margin-bottom: 5px;
 }
 .controls>*:first-child {
     flex: 1;
 }
 .controls>*:last-child {
     margin-left: auto;
+}
+.close-btn-block {
+    display: flex;
 }
 </style>
