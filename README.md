@@ -31,16 +31,12 @@ https://github.com/A-tG/guitar-site/assets/19589064/bfcdf47b-d721-497e-9e7a-6648
  
  [vue-safe-teleport](https://github.com/Akryum/vue-safe-teleport)
  
- [subset-iconfont](https://github.com/dzhuang/subset-iconfont) to generate subset of icons
+ [Material Design Icons](https://pictogrammers.com/library/mdi/)
  
  [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
 
 ## Development
-1. `npm install`
-1. `npm install` inside '\src' to initialize vue
-1. `node subset-iconfont.js` Then copy folder '.font-output\material-icons\webfonts' to 'src\public' (filled, outlined variants). Icons are listed in 'used-icons.txt'
-
-   On Windows: `robocopy .font-output\material-icons\webfonts src\public\webfonts *filled* *outlined* /im /is /it`
+1. `npm install` inside '\src' to initialize vite and vue
 1. `npm run dev` inside '.\src' starts local server for development
 1. `npm run build` inside '.\src' builds production ready assets to '.\dist'
 
