@@ -68,7 +68,7 @@ load()
         </li>
         <li class="el-clr hov-el-clr tr-al" title="Switch to automatic theme" @click="theme = ColorTheme.auto"
             v-if="(theme != ColorTheme.auto) && isAutoThemeSupported">
-            <i class="fnt f-bold md-36 icon">A</i>
+            <i class="fnt f-bold f36 icon">A</i>
         </li>
     </ul>
 </template>

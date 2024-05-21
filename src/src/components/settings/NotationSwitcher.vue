@@ -26,6 +26,12 @@ load()
 </script>
 
 <template>
-    <i class="mi-outlined md-36 fnt-el fnt el-clr hov-el-clr tr-al" :title="titleText" @click="isFlat = !isFlat"
+    <i class="icon f36 fnt-el fnt el-clr hov-el-clr tr-al" :title="titleText" @click="isFlat = !isFlat"
         :class="{ 'i-note-flat': !isFlat, 'i-note-sharp': isFlat }"></i>
 </template>
+
+<style scoped>
+.icon {
+    font-style: normal;
+}
+</style>
