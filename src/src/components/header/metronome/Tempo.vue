@@ -49,9 +49,9 @@ load()
     <div class="metr-el">
         <div class="metr-option-head">
             <span class="fnt f14 weak-clr">{{ min }}</span>
-            <label for="metr-tempo" class="fnt f18 norm-clr">Tempo</label>
+            <span class="fnt f18 norm-clr">Tempo</span>
             <LeftArrow title="Reduce tempo" @click="tempo--"></LeftArrow>
-            <input aria-label="Tempo input" class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos"
+            <input aria-label="Metronome tempo input" class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos"
                 step="1" :min="min" :max="max" v-model.lazy.trim.number="tempo">
             <RightArrow title="Increase tempo" @click="tempo++"></RightArrow>
             <datalist id="tempos">
@@ -59,6 +59,6 @@ load()
             </datalist>
             <span class="fnt f14 weak-clr">{{ max }}</span>
         </div>
-        <input id="metr-tempo" class="tempo-range" type="range" step="1" :min="min" :max="max" v-model="tempo">
+        <input aria-label="Metronome tempo slider" class="tempo-range" type="range" step="1" :min="min" :max="max" v-model="tempo">
     </div>
 </template>
