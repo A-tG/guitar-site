@@ -2,6 +2,8 @@
 import { OptionStorage } from '@/utils/LocalStorage';
 import { computed, inject, watch} from 'vue';
 import { isFlatNotationKey } from '../keys';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiMusicAccidentalSharp, mdiMusicAccidentalFlat } from "@mdi/js";
 
 const isFlat = inject(isFlatNotationKey)!
 
@@ -26,12 +28,12 @@ load()
 </script>
 
 <template>
-    <i class="icon f36 fnt-el fnt el-clr hov-el-clr tr-al" :title="titleText" @click="isFlat = !isFlat"
-        :class="{ 'i-note-flat': !isFlat, 'i-note-sharp': isFlat }"></i>
+    <div class="el-clr hov-el-clr tr-al" title="Switch to sharp notation"
+        @click="isFlat = false" v-if="isFlat">
+        <SvgIcon type="mdi" :size="36" :path="mdiMusicAccidentalSharp"></SvgIcon>
+    </div>
+    <div class="el-clr hov-el-clr tr-al" title="Switch to flat notation"
+        @click="isFlat = true" v-if="!isFlat">
+        <SvgIcon type="mdi" :size="36" :path="mdiMusicAccidentalFlat"></SvgIcon>
+    </div>
 </template>
-
-<style scoped>
-.icon {
-    font-style: normal;
-}
-</style>
