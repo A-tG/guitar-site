@@ -126,7 +126,7 @@ function updateNotesExtraNames()
         <div class="scale-options">
             <span :class="textCommonClass1">Root</span>
             <ul class="root-notes">
-                <li class="fnt f18 el-clr hov-el-clr tr-al" v-for="n, i in getNotesList()" @click="root = n"
+                <li class="fnt f18 el-clr hov-el-clr tr-al" title="Select root note" v-for="n, i in getNotesList()" @click="root = n"
                     :class="root == i ? 'selected selected-text' : 'norm-bg2'">
                     {{ getNoteName(n, isFlat) }}
                 </li>
@@ -154,7 +154,7 @@ function updateNotesExtraNames()
                         :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
                 </div>
             </div>
-            <select class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
+            <select aria-label="Select scale" class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
                 <option v-for="s in getSortedConcatNamesIDs()" :value="s">{{ getConcatScaleName(s).value }}</option>
             </select>
         </div>
