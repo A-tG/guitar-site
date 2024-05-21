@@ -4,6 +4,8 @@ import Item from "./Item.vue"
 import type { IState } from "./guitar/Scales/types/IState";
 import { ScalesItemState } from "./guitar/Scales/types/ScalesItemState";
 import { decodeQueryParam, encodeQueryParam, getList, getParam, removeParam, setParam } from "@/types/QueryParamsManager";
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiPlusBox } from "@mdi/js";
 
 const maxItemsNumber = 5
 
@@ -112,8 +114,10 @@ watch(items, (val) => {
             </Item>
         </TransitionGroup>
     </ul>
-    <i class="add-new-item mi-filled mi-add-box md-82 el-clr hov-el-clr tr-al" title="Add item" @click="addItem"
-        v-show="items.size < maxItemsNumber"></i>
+    <div class="add-new-item el-clr hov-el-clr tr-al" title="Add item" @click="addItem"
+        v-show="items.size < maxItemsNumber">
+        <SvgIcon type="mdi" :path="mdiPlusBox" :size="82"></SvgIcon>
+</div>
 </template>
 
 <style scoped>
