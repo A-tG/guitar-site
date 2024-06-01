@@ -3,7 +3,7 @@ import { range } from "../utils/range"
 export const MinNote = 0
 export const MaxNote = 11
 
-export enum Note
+export const enum Note
 {
     // !!!! if C = MinNote insteaod of C = 0, every enum become undefined !!!!
     C = 0,

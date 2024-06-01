@@ -1,4 +1,4 @@
-export enum NoteDisplayMode {
+export const enum NoteDisplayMode {
     Highlight = 1,
     Normal = 1 << 1,
     Inactve = 1 << 2,
