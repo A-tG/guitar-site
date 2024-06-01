@@ -39,6 +39,7 @@ select {
 
 .bg-block {
     height: 100vh;
+    height: 100dvh;
 }
 
 .items-container
