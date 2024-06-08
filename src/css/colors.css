@@ -28,6 +28,9 @@
     background: white;
 }
 
+.norm-bg2 {
+    background: var(--clr-dark3);
+}
 .night .norm-bg2 {
     background: var(--clr-dark3);
 }
@@ -42,6 +45,9 @@
     background: var(--clr-white1);
 }
 
+.norm-clr {
+    color: var(--clr-white2);
+}
 .night .norm-clr {
     color: var(--clr-white2);
 }

@@ -38,8 +38,7 @@ select {
 }
 
 .bg-block {
-    height: 100vh;
-    height: 100dvh;
+    height: 100%
 }
 
 .items-container
@@ -74,4 +73,37 @@ select {
 
 #app {
     overflow: auto;
+    height: 100vh;
+    height: 100dvh;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.load-spinner-cont {
+    text-align: center;
+}
+.load-spinner-cont > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+#main-load-spinner {
+    margin-left: 5px;
+    display:  inline-block;
+}
+.load-spinner {
+    border: 8px solid var(--clr-dark4);
+    border-top: 8px solid var(--clr-cyan);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
