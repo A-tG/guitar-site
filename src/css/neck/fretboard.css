@@ -40,10 +40,6 @@
 .fret-null .fret-hor {
     justify-content: left;
 }
-.fret-null .note {
-    left: 0;
-    position: absolute;
-}
 
 .fret-ver {
     display: flex;
@@ -78,13 +74,16 @@
     width: 2ch;
     padding: 3px;
     cursor: default;
-    position: relative;
+    position: absolute;
     right: 10%;
     border-radius: 4px;
     z-index: 4;
     user-select: none;
     align-content: center;
     justify-content: center;
+}
+.fret-null .note {
+    left: 0;
 }
 
 .fret-dot-cont {
