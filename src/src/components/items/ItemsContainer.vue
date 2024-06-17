@@ -67,6 +67,20 @@ function isCorrectId(id: string)
     return result
 }
 
+function getState(id: number): IState
+{
+    const stateStr = getStateString(id)
+    const s = new ScalesItemState(id)
+    if (stateStr)
+    {
+        s.deserialize(stateStr)
+    } else
+    {
+        s.loadDefaults()
+    }
+    return s
+}
+
 function addItemsFromQuery()
 {
     let added = 0
@@ -78,16 +92,7 @@ function addItemsFromQuery()
         id = Number.parseInt(key.substring(1))
         if (isNaN(id)) continue
         
-        const stateStr = getStateString(id)
-        const s = new ScalesItemState(id)
-        if (stateStr)
-        {
-            s.deserialize(stateStr)
-        } else
-        {
-            s.loadDefaults()
-        }
-        items.value.set(id, s)
+        items.value.set(id, getState(id))
         added++
     }
     if (added == 0)
