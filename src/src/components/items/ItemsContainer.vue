@@ -23,11 +23,8 @@ function getIdForItem()
     return i
 }
 
-function addItem()
+function getState(id: number): IState
 {
-    if (items.value.size >= maxItemsNumber) return
-    
-    const id = getIdForItem()
     const stateStr = getStateString(id)
     const s = new ScalesItemState(id)
     if (stateStr)
@@ -37,7 +34,15 @@ function addItem()
     {
         s.loadDefaults()
     }
-    items.value.set(id, s)
+    return s
+}
+
+function addItem()
+{
+    if (items.value.size >= maxItemsNumber) return
+    
+    const id = getIdForItem()
+    items.value.set(id, getState(id))
 }
 function removeItem(k: number)
 {
@@ -66,24 +71,9 @@ function isCorrectId(id: string)
     }
     return result
 }
-
-function getState(id: number): IState
-{
-    const stateStr = getStateString(id)
-    const s = new ScalesItemState(id)
-    if (stateStr)
-    {
-        s.deserialize(stateStr)
-    } else
-    {
-        s.loadDefaults()
-    }
-    return s
-}
-
 function addItemsFromQuery()
 {
-    let added = 0
+    let isAdded = false
     for(let [key, _] of getList())
     {
         if (!isCorrectId(key)) continue
@@ -91,11 +81,13 @@ function addItemsFromQuery()
         let id: number
         id = Number.parseInt(key.substring(1))
         if (isNaN(id)) continue
+
+        if (items.value.size >= maxItemsNumber) return
         
         items.value.set(id, getState(id))
-        added++
+        isAdded = true
     }
-    if (added == 0)
+    if (!isAdded)
     {
         addItem()
     }
