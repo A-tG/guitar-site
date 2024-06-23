@@ -7,7 +7,7 @@ import { getNoteName } from '@/types/Note';
 import { getIntervals, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { copyValues, sumArrElements } from "@/utils/array";
-import { getConcatScaleName, getSortedConcatNamesIDs } from "./ScalesNames";
+import { getConcatScaleName, getSortedConcatNamesUniqIDs } from "./ScalesNames";
 import { NoteDisplayMode } from "../NoteDisplayMode";
 import type { ScalesItemState } from "./types/ScalesItemState";
 import type { IState } from "./types/IState";
@@ -164,7 +164,7 @@ const filter = ref("")
                 </div>
             </div>
             <select aria-label="Select scale" class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
-                <option v-for="s in getSortedConcatNamesIDs()" :value="s"
+                <option v-for="s in getSortedConcatNamesUniqIDs()" :value="s"
                     v-show="(filter.trim().length == 0) || (getConcatScaleName(s).value.includes(filter) )">{{ getConcatScaleName(s).value }}</option>
             </select>
         </div>
