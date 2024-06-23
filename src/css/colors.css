@@ -167,35 +167,35 @@
     background: var(--clr-light-yellow);
 }
 
-.night .note {
+.night .fretboard .note {
     color: black;
     background: var(--clr-yellow);
 }
-.day .note {
+.day .fretboard .note {
     color: var(--clr-white3);
     background: var(--clr-blue);
 }
 
-.night .norm-note {
+.night .fretboard .norm-note {
     background: var(--clr-yellow);
 }
-.day .norm-note {
+.day .fretboard .norm-note {
     background: var(--clr-blue);
 }
 
-.night .highlight-note {
+.night .fretboard .highlight-note {
     background: var(--clr-cyan);
 }
-.day .highlight-note {
+.day .fretboard .highlight-note {
     background: var(--clr-orange);
 }
 
-.night .inactive-note{
+.night .fretboard .inactive-note{
     background: var(--clr-gray-extra);
     color: var(--clr-dark2);
 }
 
-.day .inactive-note{
+.day .fretboard .inactive-note{
     background: var(--clr-dark-extra);
     color: var(--clr-white1);
 }
