@@ -1,4 +1,4 @@
-import { getIntervals, getScalesIds, type ScaleID } from "@/types/Scales"
+import { getIntervals, getScalesIds, getUniqueScalesIds, type ScaleID } from "@/types/Scales"
 import { isArraysEqual } from "@/utils/array"
 import { ref, type Ref } from "vue"
 
@@ -90,4 +90,9 @@ export function getConcatScaleName(id: ScaleID)
 export function getSortedConcatNamesIDs()
 {
     return Array.from(sortedConcatIds.keys())
+}
+
+export function getSortedConcatNamesUniqIDs()
+{
+    return Array.from(sortedConcatIds.keys()).filter((id) => getUniqueScalesIds().includes(id))
 }
