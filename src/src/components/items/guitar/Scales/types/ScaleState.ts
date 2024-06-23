@@ -1,5 +1,5 @@
 import { Note, MinNote, MaxNote, isNote } from "@/types/Note"
-import { defaultScaleId, getScalesIds } from "@/types/Scales"
+import { defaultScaleId, getUniqueScalesIds } from "@/types/Scales"
 
 export class ScaleState
 {
@@ -23,7 +23,7 @@ export class ScaleState
     }
     set id(val)
     {
-        if (!getScalesIds().includes(val)) return
+        if (!getUniqueScalesIds().includes(val)) return
 
         this._id = val
     }
@@ -43,7 +43,7 @@ export class ScaleState
         }
 
         const id = arr[1]
-        if (getScalesIds().includes(id))
+        if (getUniqueScalesIds().includes(id))
         {
             s.id = id
         } else
