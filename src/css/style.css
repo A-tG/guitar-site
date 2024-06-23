@@ -33,10 +33,6 @@ select {
     padding: 0;
 }
 
-.clear {
-    clear: both;
-}
-
 .bg-block {
     height: 100%
 }
