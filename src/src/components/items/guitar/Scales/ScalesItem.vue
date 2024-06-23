@@ -146,9 +146,9 @@ function updateNotesExtraNames()
         </div>
 
         <div class="scale-sel-block">
-            <div class="scale-sel-title" @click="isTriadMode = !isTriadMode">
+            <div class="scale-sel-title">
                 <span :class="textCommonClass2">Scale</span>
-                <div class="el-clr hov-el-clr ">
+                <div class="el-clr hov-el-clr" @click="isTriadMode = !isTriadMode">
                     <span :class="textCommonClass2">Triads mode</span>
                     <SvgIcon class="tr-al" type="mdi" :size="24"
                         :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
