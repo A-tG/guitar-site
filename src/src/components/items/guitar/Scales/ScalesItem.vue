@@ -124,8 +124,8 @@ const filter = ref("")
 
 <template>
     <Neck :notesDisplayModes="notesDisplayModes" :extraNoteNames="notesExtraNames" :state="state"></Neck>
-    <div class="scale-block">
-        <div class="scale-options">
+    <div class="root-cont">
+        <div class="options">
             <span :class="textCommonClass1">Root</span>
             <ul class="root-notes">
                 <li class="fnt f18 el-clr hov-el-clr tr-al" title="Select root note" v-for="n, i in getNotesList()" @click="root = n"
@@ -147,8 +147,8 @@ const filter = ref("")
             </ul>
         </div>
 
-        <div class="scale-sel-block">
-            <div class="scale-sel-title">
+        <div class="sel-block">
+            <div class="sel-title">
                 <span :class="textCommonClass2">Scale</span>
                 <div class="filter-cont norm-bg3" :class="textCommonClass2">
                     <SvgIcon class="tr-al filter-btn norm-clr" type="mdi" :size="22" :path="mdiMagnify"></SvgIcon>
@@ -172,6 +172,16 @@ const filter = ref("")
 </template>
 
 <style scoped>
+.root-cont {
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: start;
+    padding-top: 20px;
+    gap: 20px;
+}
+
 .filter-cont {
     flex: 1;
     margin: 0 15px;
@@ -184,5 +194,60 @@ const filter = ref("")
     background: none;
     border: 0;
     flex: 1;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+.options {
+    column-gap: 5px
+}
+.options > * {
+    text-align: left;
+}
+.options > *:nth-child(-n + 2) {
+    margin-bottom: 15px;
+}
+
+.sel-block {
+    display: flex;
+    flex-direction: column;
+}
+.sel-block > * {
+    text-align: left;
+}
+
+.sel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.sel-title * {
+    vertical-align: middle;
+}
+
+.root-notes {
+    display: flex;
+    gap: 12px;
+}
+.root-notes > * {
+    text-align: center;
+    width: 2ch;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.scale-notes-block {
+    display: flex;
+    height: 100%;
+    grid-row: 2 / span 5;
+    grid-column: 2;
+}
+
+.scale-notes-block .selected {
+    background: none;
 }
 </style>
