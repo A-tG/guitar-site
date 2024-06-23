@@ -5,7 +5,7 @@
     justify-content: space-around;
     align-items: start;
     padding-top: 20px;
-    gap: 10px;
+    gap: 20px;
 }
 
 .scale-options {
@@ -39,9 +39,6 @@
 }
 .scale-sel-title * {
     vertical-align: middle;
-}
-.scale-sel-title > *:first-child {
-    margin-right: 20px;
 }
 
 .root-notes {
