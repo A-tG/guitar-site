@@ -14,14 +14,14 @@ const isActive = defineModel<boolean>('isActive', { required: true })
 
 <template>
     <li class="scale-note el-clr hov-el-clr norm-bg2" title="Toggle scale note display" @click="isActive = !isActive">
-        <span class="fnt f18 norm-clr">{{ number }}</span>
-        <span class="fnt f12 norm-clr">{{ relToMaj }}</span>
-        <span class="fnt f18 tr-al" :class="isActive ? '' : 'transparent'">{{ noteName }}</span>
+        <span class="fnt f18 norm-clr nonselect-txt">{{ number }}</span>
+        <span class="fnt f12 norm-clr nonselect-txt">{{ relToMaj }}</span>
+        <span class="fnt f18 tr-al nonselect-txt" :class="isActive ? '' : 'transparent'">{{ noteName }}</span>
         <div class="vert-line middle-gray-bg"></div>
     </li>
     <li class="semitone-block f14 middle-gray-border" v-if="interval"
         :style="`width: ${intervalsWidth[interval - 1] * baseWidth}px`">
-        <span class="fnt norm-clr">{{ interval }}</span>
+        <span class="fnt norm-clr nonselect-txt">{{ interval }}</span>
     </li>
 </template>
 
