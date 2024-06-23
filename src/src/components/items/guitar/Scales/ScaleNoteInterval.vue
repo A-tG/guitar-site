@@ -13,7 +13,7 @@ const isActive = defineModel<boolean>('isActive', { required: true })
 </script>
 
 <template>
-    <li class="scale-note el-clr hov-el-clr norm-bg2" title="Toggle scale note display" @click="isActive = !isActive">
+    <li class="note el-clr hov-el-clr norm-bg2" title="Toggle scale note display" @click="isActive = !isActive">
         <span class="fnt f18 norm-clr nonselect-txt">{{ number }}</span>
         <span class="fnt f12 norm-clr nonselect-txt">{{ relToMaj }}</span>
         <span class="fnt f18 tr-al nonselect-txt" :class="isActive ? '' : 'transparent'">{{ noteName }}</span>
@@ -26,7 +26,7 @@ const isActive = defineModel<boolean>('isActive', { required: true })
 </template>
 
 <style scoped>
-.scale-note {
+.note {
     width: 40px;
     border-radius: 2px;
     text-align: center;
@@ -35,11 +35,11 @@ const isActive = defineModel<boolean>('isActive', { required: true })
     justify-content: space-between;
     align-items: center;
 }
-.scale-note>* {
+.note>* {
     flex: 1;
     align-content: center;
 }
-.scale-note .transparent {
+.note .transparent {
     opacity: .5;
 }
 .semitone-block {
