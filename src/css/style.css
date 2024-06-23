@@ -73,6 +73,7 @@ select {
 
 #app {
     overflow: auto;
+    scrollbar-width: thin;
     height: 100vh;
     height: 100dvh;
 }
