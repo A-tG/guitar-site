@@ -79,20 +79,26 @@ function getConcatName(id: ScaleID)
 
 concatScalesNames()
 
-const sortedConcatIds = new Map([...concatNames]
+const sortedConcat = new Map([...concatNames]
     .sort((a, b) => a[1].value.localeCompare(b[1].value)))
+let concNameToID = new Map(Array.from(sortedConcat, p => [p[1].value, p[0]]))
+
+const concatIDs: readonly ScaleID[] = Array.from(sortedConcat.keys())
+const concatUniqIDs: readonly ScaleID[]  = concatIDs.filter((id) => getUniqueScalesIds().includes(id))
 
 export function getConcatScaleName(id: ScaleID)
 {
     return concatNames.get(id)!
 }
-
 export function getSortedConcatNamesIDs()
 {
-    return Array.from(sortedConcatIds.keys())
+    return concatIDs
 }
-
 export function getSortedConcatNamesUniqIDs()
 {
-    return Array.from(sortedConcatIds.keys()).filter((id) => getUniqueScalesIds().includes(id))
+    return concatUniqIDs
+}
+export function getIdFromName(name: string)
+{
+    return concNameToID.get(name.toLowerCase())
 }

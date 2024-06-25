@@ -7,7 +7,7 @@ import { getNoteName } from '@/types/Note';
 import { getIntervals, stepsRelativeToMajor } from "@/types/Scales";
 import ScaleNoteInterval from "./ScaleNoteInterval.vue";
 import { copyValues, sumArrElements } from "@/utils/array";
-import { getConcatScaleName, getSortedConcatNamesUniqIDs } from "./ScalesNames";
+import { getConcatScaleName, getIdFromName, getSortedConcatNamesUniqIDs } from "./ScalesNames";
 import { NoteDisplayMode } from "../NoteDisplayMode";
 import type { ScalesItemState } from "./types/ScalesItemState";
 import type { IState } from "./types/IState";
@@ -120,6 +120,16 @@ function updateNotesExtraNames()
 }
 
 const filter = ref("")
+watch(filter, (val) => {
+    if (val.length == 0) return
+
+    const res = getIdFromName(val)
+    console.log(res)
+    if (!res) return
+
+    selectedScale.value = res
+    filter.value = ''
+})
 </script>
 
 <template>
@@ -150,10 +160,13 @@ const filter = ref("")
         <div class="sel-block">
             <div class="sel-title">
                 <span :class="textCommonClass2">Scale</span>
+                <datalist :id="$.uid.toString()">
+                    <option v-for="s in getSortedConcatNamesUniqIDs()">{{ getConcatScaleName(s).value }}</option>
+                </datalist>
                 <div class="filter-cont norm-bg3" :class="textCommonClass2">
                     <SvgIcon class="tr-al filter-btn norm-clr" type="mdi" :size="22" :path="mdiMagnify"></SvgIcon>
                     <input aria-label="Filter scales" class="filter-inp f18 norm-clr" type="text" 
-                        v-model="filter">
+                        v-model="filter" :list="$.uid.toString()">
                     <SvgIcon class="tr-al filter-btn el-clr hov-el-clr" type="mdi" :size="22"
                         :path="mdiBackspace" @click="filter = ''" :class="{ invis: filter.length == 0}"></SvgIcon>
                 </div>
@@ -165,7 +178,9 @@ const filter = ref("")
             </div>
             <select aria-label="Select scale" class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
                 <option v-for="s in getSortedConcatNamesUniqIDs()" :value="s"
-                    v-show="(filter.trim().length == 0) || (getConcatScaleName(s).value.includes(filter) )">{{ getConcatScaleName(s).value }}</option>
+                    v-show="(filter.trim().length == 0) || (getConcatScaleName(s).value.includes(filter))">
+                        {{ getConcatScaleName(s).value }}
+                </option>
             </select>
         </div>
     </div>
