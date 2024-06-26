@@ -124,7 +124,6 @@ watch(filter, (val) => {
     if (val.length == 0) return
 
     const res = getIdFromName(val)
-    console.log(res)
     if (!res) return
 
     selectedScale.value = res
@@ -166,7 +165,7 @@ watch(filter, (val) => {
                 <div class="filter-cont norm-bg3" :class="textCommonClass2">
                     <SvgIcon class="tr-al filter-btn norm-clr" type="mdi" :size="22" :path="mdiMagnify"></SvgIcon>
                     <input aria-label="Filter scales" class="filter-inp f18 norm-clr" type="text" 
-                        v-model="filter" :list="$.uid.toString()">
+                        v-model.trim="filter" :list="$.uid.toString()">
                     <SvgIcon class="tr-al filter-btn el-clr hov-el-clr" type="mdi" :size="22"
                         :path="mdiBackspace" @click="filter = ''" :class="{ invis: filter.length == 0}"></SvgIcon>
                 </div>
@@ -178,7 +177,7 @@ watch(filter, (val) => {
             </div>
             <select aria-label="Select scale" class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
                 <option v-for="s in getSortedConcatNamesUniqIDs()" :value="s"
-                    v-show="(filter.trim().length == 0) || (getConcatScaleName(s).value.includes(filter))">
+                    v-show="(filter.length == 0) || (getConcatScaleName(s).value.includes(filter))">
                         {{ getConcatScaleName(s).value }}
                 </option>
             </select>
