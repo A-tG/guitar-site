@@ -147,14 +147,19 @@ export class ScalesItemState implements IState
                 console.error("Invalid JSON: " + JSONstring)
             }
         }
-        this.scale = ScaleState.fromArr(parsedArr[1])
-        this.tuning = TuningState.fromArr(parsedArr[2])
-        this.stringsNumber = +parsedArr[3]
-        this.isTriads = !!parsedArr[4]
-        try { this.notesPattern = fromInt(+parsedArr[5], NumberOfNotes) } catch { }
-        try { this.triadsPattern = fromInt(+parsedArr[6], NumberOfNotes) } catch { }
-        this.box = +parsedArr[7]
-        this.isLH = !!parsedArr[8]
+        this.deserializeArr(parsedArr)
+    }
+
+    deserializeArr(arr: Array<any>)
+    {
+        this.scale = ScaleState.fromArr(arr[1])
+        this.tuning = TuningState.fromArr(arr[2])
+        this.stringsNumber = +arr[3]
+        this.isTriads = !!arr[4]
+        try { this.notesPattern = fromInt(+arr[5], NumberOfNotes) } catch { }
+        try { this.triadsPattern = fromInt(+arr[6], NumberOfNotes) } catch { }
+        this.box = +arr[7]
+        this.isLH = !!arr[8]
     }
 
     loadDefaults()
