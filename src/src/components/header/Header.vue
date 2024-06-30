@@ -27,3 +27,47 @@ import Settings from "@/components/settings/Settings.vue"
         </ul>
     </header>
 </template>
+
+<style scoped>
+.head-block {
+    width: 100%;
+    min-height: 50px;
+}
+
+.head-block-content {
+    text-align: center;
+}
+.head-block-content > * {
+    padding: 0 8px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.head-block a {
+    text-decoration: none;
+}
+
+.head-subitem {
+    vertical-align: middle;
+}
+
+.head-separator {
+    padding: 0;
+    width: 2px;
+    height: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+    .head-block-content>* {
+        display: block;
+        padding-bottom: 6px;
+        padding-top: 6px;
+    }
+
+    .head-separator {
+        width: 100%;
+        height: 2px;
+        padding: 0;
+    }
+}
+</style>

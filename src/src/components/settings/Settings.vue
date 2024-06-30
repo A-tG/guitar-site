@@ -13,7 +13,7 @@ const isShown = ref(false)
 </script>
 
 <template>
-    <li id="common-settings-wrap" title="Open settings">
+    <li class="open-btn" title="Open settings">
         <SvgIcon class="el-clr hov-el-clr tr-al" type="mdi" :size="36" :path="mdiCog" @click="isShown = !isShown">
         </SvgIcon>
     </li>
@@ -58,5 +58,9 @@ const isShown = ref(false)
     grid-column: 1 / -1;
     height: 2px;
     width: 100%;
+}
+.open-btn {
+    vertical-align: middle;
+    display: inline-block;
 }
 </style>
