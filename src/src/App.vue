@@ -30,4 +30,19 @@ provide(inactiveNoteOpacityKey, inactiveNoteOpacity)
 .inactive-note {
     opacity: v-bind('inactiveNoteOpacity');
 }
+
+.bg-block {
+    height: 100%
+}
+</style>
+
+<style scoped>
+.content-block {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    min-height: 100%;
+    padding-bottom: 35px;
+    box-sizing: border-box;
+}
 </style>

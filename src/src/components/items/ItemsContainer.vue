@@ -136,16 +136,16 @@ watch(items, (val) => {
 </script>
 
 <template>
-    <ul class="items-container">
+    <ul class="items-cont">
         <TransitionGroup>
             <Item v-for="[k, item] in items" :onCloseButton="() => { removeItem(k) }" :key="k"
                 :state="item">
             </Item>
         </TransitionGroup>
     </ul>
-    <div class="add-new-item el-clr hov-el-clr tr-al" title="Add item" @click="addItem"
+    <div class="add" title="Add item"
         v-show="items.size < maxItemsNumber">
-        <SvgIcon type="mdi" :path="mdiPlusBox" :size="82"></SvgIcon>
+        <SvgIcon class="el-clr hov-el-clr tr-al" type="mdi" :path="mdiPlusBox" :size="82" @click="addItem"></SvgIcon>
 </div>
 </template>
 
@@ -160,5 +160,16 @@ watch(items, (val) => {
 .v-leave-to {
     opacity: 0;
     transform: scaleY(0);
+}
+
+.items-cont
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.add {
+    margin: 35px auto;
 }
 </style>

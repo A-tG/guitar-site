@@ -30,7 +30,3 @@
 .item-controls > *:last-child {
     margin-top: auto;
 }
-
-.add-new-item {
-    margin: 35px auto;
-}
