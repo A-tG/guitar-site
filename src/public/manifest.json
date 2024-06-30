@@ -1,10 +1,11 @@
 {
   "name": "A-t Guitar",
-  "short-name": "A-tGuitar",
-  "start-url": ".",
+  "short_name": "A-tGuitar",
+  "start_url": ".",
+  "scope": "/",
   "display": "standalone",
   "backgroundcolor": "#333",
-  "theme-color": "#ffffff",
+  "theme_color": "#ffffff",
   "description": "Guitar scales and more",
   "icons": [
     {
