@@ -28,18 +28,6 @@
     margin: 0 10px 0 10px;
 }
 
-.metr-svg-dasharay {
-    stroke-dasharray: 2;
-}
-
-.metr-svg-medium-stoke {
-    stroke-width: 2;
-}
-
-.metr-svg-light-stoke {
-    stroke-width: 1;
-}
-
 .beat-type-sel-block {
     margin: 3px 0;
 }
