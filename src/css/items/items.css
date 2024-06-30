@@ -1,7 +1,7 @@
 .item-block {
     vertical-align: top;
     display: flex;
-    margin: 70px auto 0 auto;
+    margin: 35px auto 0 auto;
     width: 90%;
     max-width: 1780px;
 }
@@ -32,6 +32,5 @@
 }
 
 .add-new-item {
-    margin: 70px auto;
-    width: 82px;
+    margin: 35px auto;
 }
