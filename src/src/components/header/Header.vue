@@ -9,7 +9,7 @@ import Settings from "@/components/settings/Settings.vue"
     <header class="head-block norm-bg1">
         <ul class="head-block-content">
             <li>
-                <a class="el-clr fnt f24 hov-el-clr tr-al" href="?" title="Artistic Guitar">
+                <a class="norm-clr fnt f24" href="?" title="Artistic Guitar">
                     <SiteIcon></SiteIcon>
                     <span class="head-subitem">A-tGuitar</span>
                 </a>

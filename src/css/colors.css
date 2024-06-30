@@ -215,36 +215,16 @@
     border-color: var(--clr-gray1);
 }
 
-.night .svg-norm-stroke {
-    stroke: var(--clr-white2);
-}
-.day .svg-norm-stroke {
-    stroke: var(--clr-dark1);
+.svg-curr-stroke {
+    stroke: currentColor;
 }
 
-.night .svg-norm-fill {
-    fill: var(--clr-white2);
-}
-.day .svg-norm-fill {
-    fill: var(--clr-dark1);
+.svg-curr-fill {
+    fill: currentColor;
 }
 
 .svg-no-fill {
     fill: none;
-}
-
-.night .svg-el-stroke {
-    stroke: var(--clr-yellow);
-}
-.day .svg-el-stroke {
-    stroke: var(--clr-blue);
-}
-
-.night .svg-el-fill {
-    fill: var(--clr-yellow);
-}
-.day .svg-el-fill {
-    fill: var(--clr-blue);
 }
 
 .night .hov-el-clr:hover .hov-svg-clr {

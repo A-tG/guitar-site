@@ -81,7 +81,7 @@ onMounted(init)
             <span>unable to initialize the metronome</span>
         </li>
 
-        <li class="metr-icon metr-el">
+        <li class="metr-icon metr-el norm-clr">
             <MetronomeIcon></MetronomeIcon>
         </li>
 

@@ -1,5 +1,5 @@
 <template>
-    <svg id="metr-icon" class="head-subitem svg-el-stroke svg-el-fill hov-svg-clr tr-al" height="35" width="35"
+    <svg id="metr-icon" class="head-subitem svg-curr-fill svg-curr-stroke" height="35" width="35"
         viewBox="0 0 210 297">
         <ellipse transform="matrix(.93093 -.3652 .21607 .97638 0 0)" cx="19.418" cy="236.87" rx="80.642" ry="49.289" />
         <g stroke-linecap="round" stroke-linejoin="round">
