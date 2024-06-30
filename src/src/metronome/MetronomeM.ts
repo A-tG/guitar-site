@@ -24,7 +24,11 @@ export class MetronomeM implements State
     set audio(val: AudioSystem)
     {
         this._audio ??= val
-        if (this._audio) this._audio.gain = this.volume
+        if (this._audio)
+        {
+            this._audio.gain = this.volume
+            this._audio.clickType = this.metronomeClickType
+        }
     }
 
     get volume()

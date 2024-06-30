@@ -66,7 +66,7 @@ function save()
 function load()
 {
     const val = s.loadStr() as OscillatorType
-    if (!val) return
+    if (!val || !clickTypes.includes(val)) return
 
     clickType.value = val
 }
@@ -80,7 +80,7 @@ onMounted(init)
         <li v-if="!isEnabled" class="metr-disabled fnt f24 f-bold neg-bg neg-clr">
             <span>unable to initialize the metronome</span>
         </li>
-        
+
         <li class="metr-icon metr-el norm-clr">
             <MetronomeIcon></MetronomeIcon>
         </li>
