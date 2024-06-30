@@ -7,6 +7,7 @@ https://github.com/A-tG/guitar-site/assets/19589064/bfcdf47b-d721-497e-9e7a-6648
 * Extremly small size: around 50kB gzip
 * Day/night color themes
 * Share your link with others
+* Works offline via Service Worker/PWA support
 ## What already works:
 ### Metronome
 * High-precision click 
@@ -36,7 +37,7 @@ https://github.com/A-tG/guitar-site/assets/19589064/bfcdf47b-d721-497e-9e7a-6648
  [RealFaviconGenerator](https://realfavicongenerator.net/) for generating favicon
 
 ## Development
-1. `npm install` inside '\src' to initialize vite and vue
+1. `npm install` inside '.\src' to initialize vite and vue
 1. `npm run dev` inside '.\src' starts local server for development
 1. `npm run build` inside '.\src' builds production ready assets to '.\dist'
 
