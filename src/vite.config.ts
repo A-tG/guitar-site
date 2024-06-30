@@ -18,7 +18,6 @@ export default defineConfig({
       minify: true
     }),
     VitePWA({
-      injectRegister: 'inline',
       registerType: 'autoUpdate',
       manifest: false
     })
