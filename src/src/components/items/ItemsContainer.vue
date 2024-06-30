@@ -162,8 +162,7 @@ watch(items, (val) => {
     transform: scaleY(0);
 }
 
-.items-cont
-{
+.items-cont {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
