@@ -6,8 +6,11 @@ import { ScalesItemState } from "./guitar/Scales/types/ScalesItemState";
 import { decodeQueryParam, encodeQueryParam, getList, getParam, removeParam, setParam } from "@/types/QueryParamsManager";
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiPlusBox } from "@mdi/js";
+import { OptionStorage } from "@/utils/LocalStorage";
 
 const maxItemsNumber = 5
+const isPWA = window.matchMedia('(display-mode: standalone)')?.matches ?? false
+const o = new OptionStorage("itemsStates")
 
 const items = ref(new Map<number, IState>())
 
@@ -73,32 +76,61 @@ function isCorrectId(id: string)
 }
 function addItemsFromQuery()
 {
-    let isAdded = false
     for(let [key, _] of getList())
     {
+        if (items.value.size >= maxItemsNumber) return
+
         if (!isCorrectId(key)) continue
 
         let id: number
         id = Number.parseInt(key.substring(1))
         if (isNaN(id)) continue
-
-        if (items.value.size >= maxItemsNumber) return
         
         items.value.set(id, getState(id))
-        isAdded = true
-    }
-    if (!isAdded)
-    {
-        addItem()
     }
 }
+function addItemsFromStorage()
+{
+    const statesStr = o.loadStr()
+    if (!statesStr) return
 
-addItemsFromQuery()
+    try 
+    {
+        const parsed = JSON.parse(statesStr) as Array<[number, Array<any>]>
+        for (const pair of parsed)
+        {
+            if (items.value.size >= maxItemsNumber) return
+
+            const id = pair[0]
+            const s = new ScalesItemState(id)
+            s.deserializeArr(pair[1])
+            items.value.set(pair[0], s)
+        }
+    } catch (err) {}
+}
+
+if (isPWA)
+{
+    addItemsFromStorage()
+} else
+{
+    addItemsFromQuery()
+}
+if (items.value.size == 0)
+{
+    addItem()
+}
 
 watch(items, (val) => {
-    for (let [k, v] of val)
+    if (isPWA)
     {
-        setParam('i' + k, encodeQueryParam(JSON.stringify(v)))
+        o.saveStr(JSON.stringify(Array.from(val)))
+        return
+    }
+    
+    for (let [id, state] of val)
+    {
+        setParam('i' + id, encodeQueryParam(JSON.stringify(state)))
     }
 }, { deep: true })
 </script>
