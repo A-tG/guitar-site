@@ -80,20 +80,17 @@ onMounted(init)
         <li v-if="!isEnabled" class="metr-disabled fnt f24 f-bold neg-bg neg-clr">
             <span>unable to initialize the metronome</span>
         </li>
-
+        
         <li class="metr-icon metr-el norm-clr">
             <MetronomeIcon></MetronomeIcon>
         </li>
-
         <li class="metr-beat-vis-block metr-el norm-bg3">
             <canvas id="metr-pointer-block" class="norm-clr fnt f26" width="40" height="40" ref="canvas"></canvas>
         </li>
-
         <li class="metr-el el-clr hov-el-clr tr-al" title="Toggle metronome playing">
             <SvgIcon type="mdi" :path="isPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline" :size="46"
                 @click="isPlaying = !isPlaying"></SvgIcon>
         </li>
-
         <li class="metr-el">
             <div class="norm-clr fnt f18">Click type</div>
             <div class="beat-type-sel-block">
@@ -102,15 +99,12 @@ onMounted(init)
                 </select>
             </div>
         </li>
-
         <li class="volume-block metr-el nonselect-txt">
             <Volume :metronomeState="state"></Volume>
         </li>
-
         <li class="tempo-block metr-el nonselect-txt">
             <Tempo :metronomeState="state"></Tempo>
         </li>
-
         <li class="metr-el">
             <TimeSignature :metronomeState="state"></TimeSignature>
         </li>
