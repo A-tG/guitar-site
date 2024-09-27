@@ -136,12 +136,21 @@ watch(filter, (val) => {
     <div class="root-cont">
         <div class="options">
             <span :class="textCommonClass1">Root</span>
-            <ul class="root-notes">
-                <li class="fnt f18 el-clr hov-el-clr tr-al" title="Select root note" v-for="n, i in getNotesList()" @click="root = n"
-                    :class="root == i ? 'selected selected-text' : 'norm-bg2'">
-                    {{ getNoteName(n, isFlat) }}
-                </li>
-            </ul>
+            <div class="flex">
+                <div>
+                    <ul class="root-notes">
+                        <li class="fnt f18 el-clr hov-el-clr tr-al" title="Select root note" v-for="n, i in getNotesList()" @click="root = n"
+                            :class="root == i ? 'selected selected-text' : 'norm-bg2'">
+                            {{ getNoteName(n, isFlat) }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="el-clr hov-el-clr triad-mode-cont" @click="isTriadMode = !isTriadMode">
+                    <span :class="textCommonClass1">Triads</span>
+                    <SvgIcon class="tr-al" type="mdi" :size="22"
+                        :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
+                </div>
+            </div>
             <span :class="textCommonClass1">Numbered</span>
             <span :class="textCommonClass1">Relative</span>
             <span :class="textCommonClass1">Notes</span>
@@ -169,11 +178,6 @@ watch(filter, (val) => {
                     <SvgIcon class="tr-al filter-btn el-clr hov-el-clr" type="mdi" :size="22"
                         :path="mdiBackspace" @click="filter = ''" :class="{ invis: filter.length == 0}"></SvgIcon>
                 </div>
-                <div class="el-clr hov-el-clr" @click="isTriadMode = !isTriadMode">
-                    <span :class="textCommonClass2">Triads mode</span>
-                    <SvgIcon class="tr-al" type="mdi" :size="22"
-                        :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
-                </div>
             </div>
             <select aria-label="Select scale" class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">
                 <option v-for="s in getSortedConcatNamesUniqIDs()" :value="s"
@@ -194,6 +198,17 @@ watch(filter, (val) => {
     align-items: start;
     padding-top: 20px;
     gap: 20px;
+}
+
+.flex {
+    display: flex;
+    vertical-align: middle;
+}
+
+.triad-mode-cont {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .filter-cont {
