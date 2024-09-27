@@ -62,8 +62,9 @@ watch(currentToggleList, (val) => {
     updateNotesDispModes()
 })
 watch(selectedScale, (val) => {
-    state.scale.id = val
+    if (!val) return
 
+    state.scale.id = val
     intervals.value = getIntervals(val)
     updateNotesDispModes()
     updateNotesExtraNames()
@@ -206,7 +207,7 @@ watch(filter, (val) => {
 }
 
 .triad-mode-cont {
-    margin-left: 5px;
+    margin-left: 12px;
     display: flex;
     align-items: center;
 }
