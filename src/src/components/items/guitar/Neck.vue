@@ -252,6 +252,16 @@ for (let i = 0; i < stringsNUmb; i++)
         <div v-show="false">
             <SafeTeleport to="#modal" :disabled="!isTuningMenuShown">
                 <ModalWindow title="Tuning" :onCloseButton="() => isTuningMenuShown = false">
+                    <div class="flex marging-top-bott">
+                        <span class="fnt f18 norm-clr" title="Switch fretboard for lefthanded" @click="isLH = true">
+                            LH</span>
+                        <div class="tgl-checkbox hov-parent norm-bg3" title="Switch fretboard" @click="isLH = !isLH">
+                            <div class="tgl-checkbox-slider el-bg hov-child-clr tr-al"
+                                :class="{ 'slider-r': !isLH, 'slider-l': isLH }"></div>
+                        </div>
+                        <span class="fnt f18 norm-clr" title="Switch fretboard for righthanded" @click="isLH = false">
+                            RH</span>
+                    </div>
                     <div class="strings-btns-block">
                         <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
                             <SvgIcon type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
@@ -339,5 +349,13 @@ for (let i = 0; i < stringsNUmb; i++)
 }
 .inlay-bottom {
     top: 75%;
+}
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.marging-top-bott {
+    margin: 8px 0;
 }
 </style>
