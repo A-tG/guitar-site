@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, reactive, ref, watch, type Ref } from 'vue';
+import { computed, inject, reactive, ref, watch, type Ref } from 'vue';
 import Tuner from './Tuner.vue';
 import { getStringTuning, getTuningNotes, getTuningsIds, type TuningID } from '@/types/Tunings';
 import { Note, getLowerNote, getHigherNote as highN, getNoteName as noteN } from '@/types/Note';
@@ -38,6 +38,10 @@ const isFlat = inject(isFlatNotationKey)!
 const box = ref(state.box)
 const currentTuningId = ref(state.tuning.id)
 const HS = ref(state.tuning.HS)
+const stringsNumb = computed({
+    get() { return stringsTunings.length },
+    set(val) { changeStringsNumber(val) }
+})
 
 let customTuningNotes: Note[] = []
 if (currentTuningId.value == 'custom')
@@ -114,6 +118,16 @@ function addString()
         updateTuningId()
     })
     stringsTunings.push(refN)
+}
+function changeStringsNumber(toNumber: number)
+{
+    if ((toNumber < minStringsNumber) || (toNumber > maxStringsNumber)) return
+
+    const isIncr = (stringsTunings.length - toNumber) < 0
+    while ((stringsTunings.length - toNumber) != 0)
+    {
+        isIncr ? addString() : removeString()
+    }
 }
 
 function isAddFretDot(fretNumber: number)
@@ -213,11 +227,7 @@ function getBoxSizeForString(stringNumber: number)
     return boxSize == 0 ? 1 : boxSize - 1
 }
 
-const stringsNUmb = state.stringsNumber
-for (let i = 0; i < stringsNUmb; i++)
-{
-    addString()
-}
+stringsNumb.value = state.stringsNumber
 </script>
 
 <template>
@@ -263,13 +273,12 @@ for (let i = 0; i < stringsNUmb; i++)
                             RH</span>
                     </div>
                     <div class="strings-btns-block">
-                        <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
-                            <SvgIcon type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
-                        </div>
-                        <span class="strings-numb norm-clr fnt f16 f-bold">{{ stringsTunings.length }}</span>
-                        <div class="el-clr hov-el-clr tr-al" title="Add string" @click="addString">
-                            <SvgIcon type="mdi" :size="28" :path="mdiPlusCircleOutline"></SvgIcon>
-                        </div>
+                        <SvgIcon class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString" 
+                            type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
+                        <input aria-label="Strings number input" class="el-clr norm-bg3 fnt f16 str-numb-inp" v-model.lazy.trim.number="stringsNumb"
+                            step="1" :min="minStringsNumber" :max="maxStringsNumber">
+                        <SvgIcon class="el-clr hov-el-clr tr-al" title="Add string" @click="addString"
+                            type="mdi" :size="28" :path="mdiPlusCircleOutline"></SvgIcon>
                     </div>
                     <ul class="tuners-block">
                         <Tuner v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]">
@@ -357,5 +366,11 @@ for (let i = 0; i < stringsNUmb; i++)
 }
 .marging-top-bott {
     margin: 8px 0;
+}
+.str-numb-inp {
+    border: 0;
+    width: 2ch;
+    text-align: center;
+    margin: 0 8px
 }
 </style>

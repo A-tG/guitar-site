@@ -19,11 +19,9 @@
 .strings-btns-block {
     text-align: center;
     z-index: 1;
-}
-
-.strings-btns-block > * {
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .string_btn {
