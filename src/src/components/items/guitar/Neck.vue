@@ -243,16 +243,18 @@ stringsNumb.value = state.stringsNumber
                 Right handed</span>
         </div>
 
-        <div class="strings-btns-block">
-            <div class="el-clr hov-el-clr tr-al tunings-menu-btn" @click="isTuningMenuShown = !isTuningMenuShown">
-                <SvgIcon type="mdi" :size="24" :path="mdiMenu"></SvgIcon>
-            </div>
-            <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
-                <SvgIcon type="mdi" :size="24" :path="mdiMinusCircleOutline"></SvgIcon>
-            </div>
-            <span class="strings-numb norm-clr fnt f14 f-bold">{{ stringsTunings.length }}</span>
-            <div class="el-clr hov-el-clr tr-al" title="Add string" @click="addString">
-                <SvgIcon type="mdi" :size="24" :path="mdiPlusCircleOutline"></SvgIcon>
+        <div>
+            <div class="strings-btns-block">
+                <div class="el-clr hov-el-clr tr-al tunings-menu-btn" @click="isTuningMenuShown = !isTuningMenuShown">
+                    <SvgIcon type="mdi" :size="24" :path="mdiMenu"></SvgIcon>
+                </div>
+                <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
+                    <SvgIcon type="mdi" :size="24" :path="mdiMinusCircleOutline"></SvgIcon>
+                </div>
+                <span class="strings-numb norm-clr fnt f14 f-bold">{{ stringsTunings.length }}</span>
+                <div class="el-clr hov-el-clr tr-al" title="Add string" @click="addString">
+                    <SvgIcon type="mdi" :size="24" :path="mdiPlusCircleOutline"></SvgIcon>
+                </div>
             </div>
         </div>
 
@@ -272,7 +274,7 @@ stringsNumb.value = state.stringsNumber
                         <span class="fnt f18 norm-clr" title="Switch fretboard for righthanded" @click="isLH = false">
                             RH</span>
                     </div>
-                    <div class="strings-btns-block">
+                    <div class="strings-btns-block-mod">
                         <SvgIcon class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString" 
                             type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
                         <input aria-label="Strings number input" class="el-clr norm-bg3 fnt f16 str-numb-inp" v-model.lazy.trim.number="stringsNumb"
@@ -372,5 +374,11 @@ stringsNumb.value = state.stringsNumber
     width: 2ch;
     text-align: center;
     margin: 0 8px
+}
+
+@media screen and (max-width: 1250px) {
+    .lh-rh-toggle-block, .strings-btns-block {
+        display: none;
+    }
 }
 </style>

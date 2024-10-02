@@ -16,7 +16,7 @@
     margin: 4px 0;
 }
 
-.strings-btns-block {
+.strings-btns-block, .strings-btns-block-mod {
     text-align: center;
     z-index: 1;
     display: flex;
