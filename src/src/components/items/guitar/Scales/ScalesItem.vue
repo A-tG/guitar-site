@@ -146,7 +146,7 @@ watch(filter, (val) => {
                         </li>
                     </ul>
                 </div>
-                <div class="el-clr hov-el-clr triad-mode-cont" @click="isTriadMode = !isTriadMode">
+                <div class="el-clr hov-el-clr triad-mode-cont" title="Toggle triad mode" @click="isTriadMode = !isTriadMode">
                     <span :class="textCommonClass1">Triads</span>
                     <SvgIcon class="tr-al" type="mdi" :size="22"
                         :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
