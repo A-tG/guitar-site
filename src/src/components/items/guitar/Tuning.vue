@@ -40,3 +40,14 @@ watch(HS, (val) => {
         </div>
     </div>
 </template>
+
+<style scoped>
+.halfsteps-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.halfsteps-block > *:first-child {
+    margin-right: 5px;
+}
+</style>
