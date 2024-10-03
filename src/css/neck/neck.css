@@ -36,18 +36,6 @@
     margin: 10px auto;
 }
 
-.tuning-btn-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.tuning-btn-block > *:first-child {
-    margin-right: 5px;
-}
-.tuning-btn-block > *:last-child {
-    margin-right: 5px;
-}
-
 .halfsteps-block {
     display: flex;
     align-items: center;
