@@ -343,6 +343,14 @@ stringsNumb.value = state.stringsNumber
 </template>
 
 <style scoped>
+.neck-block {
+    position: relative;
+    display: grid;
+    row-gap: 4px;
+    column-gap: 4px;
+    grid-template-columns: auto 1fr;
+}
+
 .fret-inlay {
     flex: 0;
     z-index: 1;
@@ -377,9 +385,107 @@ stringsNumb.value = state.stringsNumber
     margin: 0 8px
 }
 
+.strings-numb {
+    display: block;
+    width: 2ch;
+    margin: 0 4px 0 4px;
+    text-align: center;
+}
+
+.tuners-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .tuning-btn-block > *:last-child {
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.tunings-menu-btn {
+    display: none;
+}
+
+.halfsteps-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.halfsteps-block > *:first-child {
+    margin-right: 8px;
+}
+.halfsteps-block select, .halfsteps-block option {
+    text-align: end;
+}
+.halfsteps-numb {
+    width: 3ch;
+}
+
+.lh-rh-toggle-block {
+    width: 100%;
+    position: absolute;
+}
+.lh-rh-toggle-block > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#modal .strings-btns-block {
+    margin: 4px 0;
+}
+
+.strings-btns-block {
+    text-align: center;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.str-tuner {
+    margin: 2px auto;
+}
+.str-tuner > * {
+    vertical-align: middle;
+}
+#modal .str-tuner {
+    margin: 4px auto;
+}
+
+.str-tuner-sel {
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+}
+#modal .str-tuner-sel {
+    margin: 0 4px;
+}
+.str-tuner-sel option
+{
+    text-align: start;
+}
+
+.lh {
+    transform: scaleX(-1);
+}
+
+.lh .strings-btns-block,
+.lh .str-tuner-sel,
+.lh .note,
+.lh .lh-rh-toggle-block,
+.lh .halfsteps-numb {
+    transform: scaleX(-1);
+}
+
+.lh .frets-numbers > * {
+    transform: scaleX(-1);
+}
+
+.tuning-sel-block > * {
+    margin: 10px auto;
 }
 
 @media screen and (max-width: 1250px) {
