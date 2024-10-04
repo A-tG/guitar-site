@@ -295,8 +295,8 @@ stringsNumb.value = state.stringsNumber
                 <Tuner class="responsive-collapse" v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]"></Tuner>
             </ul>
             <SvgIcon type="mdi" :size="28" :path="mdiMenu"
-                    class="el-clr hov-el-clr tr-al responsive-show" title="Open tunings settings"
-                    @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
+                class="el-clr hov-el-clr tr-al responsive-show" title="Open tunings settings"
+                @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
         </div>
         <div class="fretboard frets-width-cont">
             <div class="fret-null">
@@ -459,8 +459,6 @@ stringsNumb.value = state.stringsNumber
 .str-tuner-sel {
     text-align: center;
     margin: 0 auto;
-    display: inline-block;
-    vertical-align: middle;
     text-decoration: none;
 }
 #modal .str-tuner-sel {
@@ -472,14 +470,6 @@ stringsNumb.value = state.stringsNumber
 }
 
 .lh {
-    transform: scaleX(-1);
-}
-
-.lh .strings-btns-block,
-.lh .str-tuner-sel,
-.lh .note,
-.lh .lh-rh-toggle-block,
-.lh .halfsteps-numb {
     transform: scaleX(-1);
 }
 
@@ -507,5 +497,15 @@ stringsNumb.value = state.stringsNumber
     .responsive-collapse {
         width: 0;
     }
+}
+</style>
+
+<style>
+.lh .strings-btns-block,
+.lh .str-tuner-sel,
+.lh .note,
+.lh .lh-rh-toggle-block,
+.lh .halfsteps-numb {
+    transform: scaleX(-1);
 }
 </style>
