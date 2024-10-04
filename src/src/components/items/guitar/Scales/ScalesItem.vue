@@ -214,7 +214,7 @@ watch(filter, (val) => {
 
 .filter-cont {
     flex: 1;
-    margin: 0 15px;
+    margin-left: 15px;
     display: flex;
 }
 .filter-btn {
@@ -253,7 +253,7 @@ watch(filter, (val) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .sel-title * {
     vertical-align: middle;

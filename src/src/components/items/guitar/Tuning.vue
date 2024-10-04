@@ -31,7 +31,7 @@ watch(HS, (val) => {
         <div class="halfsteps-block">
             <span class="norm-clr fnt f18">Half-steps</span>
             <LeftArrow title="Decrease half-steps" @click="HS--"></LeftArrow>
-            <select aria-label="Select half-steps offset" class="fnt f14 capitalized el-clr norm-bg3" v-model="HS">
+            <select aria-label="Select half-steps offset" class="hs-select fnt f14 capitalized el-clr norm-bg3" v-model="HS">
                 <option v-for="i in (maxHS * 2) + 1" :value="i - maxHS - 1">
                     {{ i - maxHS - 1 }}
                 </option>

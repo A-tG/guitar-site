@@ -294,7 +294,7 @@ stringsNumb.value = state.stringsNumber
             <ul class="tuners-block responsive-cloak">
                 <Tuner class="responsive-collapse" v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]"></Tuner>
             </ul>
-            <SvgIcon type="mdi" :size="28" :path="mdiMenu"
+            <SvgIcon type="mdi" :size="30" :path="mdiMenu"
                 class="el-clr hov-el-clr tr-al responsive-show" title="Open tunings settings"
                 @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
         </div>
@@ -496,6 +496,10 @@ stringsNumb.value = state.stringsNumber
     }
     .responsive-collapse {
         width: 0;
+    }
+    .resp-margin-lr {
+        margin-left: 8px;
+        margin-right: 8px;
     }
 }
 </style>
