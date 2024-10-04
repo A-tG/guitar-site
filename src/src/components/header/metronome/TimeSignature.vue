@@ -90,7 +90,7 @@ load()
         </li>
 
         <li class="metr-el">
-            <div class="signature-option-block">
+            <div class="signature-option-block flex">
                 <LeftArrow title="Reduce beats number" @click="beatsPrev"></LeftArrow>
                 <select aria-label="Metronome beats per measure" class="signature-sel el-clr norm-bg3 fnt f16"
                     v-model="beatsPerMeasure">
@@ -99,7 +99,7 @@ load()
                 <RightArrow title="Increase beats number" @click="beatsNext"></RightArrow>
             </div>
 
-            <div class="signature-option-block">
+            <div class="signature-option-block flex">
                 <LeftArrow title="Increase beat (note) value" @click="lenPrev"></LeftArrow>
                 <select aria-label="Metronome beat length" class="signature-sel el-clr norm-bg3 fnt f16"
                     v-model="beatLen">
@@ -110,3 +110,11 @@ load()
         </li>
     </ul>
 </template>
+
+<style scoped>
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
