@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiChevronRightBox } from "@mdi/js";
+</script>
+
 <template>
-    <div class="r-arr r-arr-el-clr r-arr-el-hov tr-al"></div>
+    <SvgIcon class="el-clr hov-el-clr tr-al" type="mdi" :size="22" :path="mdiChevronRightBox"></SvgIcon>
 </template>

@@ -22,20 +22,6 @@
 }
 
 @media screen and (max-width: 1250px) {
-    .l-arr {
-        margin-right: 12px;
-        border-top: 9px solid transparent;
-        border-right: 18px solid;
-        border-bottom: 9px solid transparent;
-    }
-
-    .r-arr {
-        margin-left: 12px;
-        border-top: 9px solid transparent;
-        border-left: 18px solid;
-        border-bottom: 9px solid transparent;
-    }
-    
     .signature-option-block:first-child {
         margin-bottom: 12px;
     }

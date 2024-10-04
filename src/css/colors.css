@@ -111,13 +111,6 @@
     background: var(--clr-orange);
 }
 
-.night .l-arr-el-clr {
-    border-right-color: var(--clr-yellow);
-}
-.day .l-arr-el-clr {
-    border-right-color: var(--clr-blue);
-}
-
 .night .r-arr-el-clr {
     border-left-color: var(--clr-yellow);
 }
@@ -144,13 +137,6 @@
 }
 .day .hov-parent:hover .hov-child-clr {
     background: var(--clr-orange);
-}
-
-.night .l-arr-el-hov:hover {
-    border-right-color: var(--clr-white3);
-}
-.day .l-arr-el-hov:hover {
-    border-right-color: var(--clr-orange);
 }
 
 .night .r-arr-el-hov:hover {
