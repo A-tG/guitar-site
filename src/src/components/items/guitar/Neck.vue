@@ -290,10 +290,13 @@ stringsNumb.value = state.stringsNumber
             </SafeTeleport>
         </div>
 
-        <div class="tuners-block-wrap">
-            <ul class="tuners-block">
-                <Tuner v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]"></Tuner>
+        <div class="tuners-block-wrap flex">
+            <ul class="tuners-block responsive-cloak">
+                <Tuner class="responsive-collapse" v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]"></Tuner>
             </ul>
+            <SvgIcon type="mdi" :size="28" :path="mdiMenu"
+                    class="el-clr hov-el-clr tr-al responsive-show" title="Open tunings settings"
+                    @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
         </div>
         <div class="fretboard frets-width-cont">
             <div class="fret-null">
@@ -319,7 +322,7 @@ stringsNumb.value = state.stringsNumber
         <div>
             <div class="tuning-btn-block flex">
                 <SvgIcon type="mdi" :size="24" :path="mdiMenu"
-                    class="el-clr hov-el-clr tr-al" title="Open tunings settings"
+                    class="el-clr hov-el-clr tr-al responsive-hide" title="Open tunings settings"
                     @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
                 <div class="responsive-hide flex">
                     <LeftArrow title="Decrease half-steps" @click="HS--"></LeftArrow>
@@ -445,9 +448,9 @@ stringsNumb.value = state.stringsNumber
 
 .str-tuner {
     margin: 2px auto;
-}
-.str-tuner > * {
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #modal .str-tuner {
     margin: 4px auto;
@@ -488,9 +491,21 @@ stringsNumb.value = state.stringsNumber
     margin: 10px auto;
 }
 
+.responsive-show {
+    display: none;
+}
 @media screen and (max-width: 1250px) {
+    .responsive-cloak {
+        visibility: hidden;
+    }
     .responsive-hide {
         display: none;
+    }
+    .responsive-show {
+        display: block;
+    }
+    .responsive-collapse {
+        width: 0;
     }
 }
 </style>
