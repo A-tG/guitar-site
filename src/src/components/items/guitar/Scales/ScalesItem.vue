@@ -12,7 +12,7 @@ import { NoteDisplayMode } from "../NoteDisplayMode";
 import type { ScalesItemState } from "./types/ScalesItemState";
 import type { IState } from "./types/IState";
 import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiMagnify, mdiBackspace } from "@mdi/js";
+import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiMagnify, mdiBackspace, mdiInformationOutline } from "@mdi/js";
 
 const relToMajList = stepsRelativeToMajor
 const textCommonClass1 = "norm-clr fnt f16"
@@ -152,10 +152,14 @@ watch(filter, (val) => {
                         :path="isTriadMode ? mdiCheckboxMarked : mdiCheckboxBlankOutline"></SvgIcon>
                 </div>
             </div>
-            <span :class="textCommonClass1">Numbered</span>
-            <span :class="textCommonClass1">Relative</span>
-            <span :class="textCommonClass1">Notes</span>
-            <span :class="textCommonClass1">Semitones</span>
+            <span class="responsive-hide" :class="textCommonClass1">Numbered</span>
+            <span class="responsive-hide" :class="textCommonClass1">Relative</span>
+            <span class="responsive-hide" :class="textCommonClass1">Notes</span>
+            <span class="responsive-hide" :class="textCommonClass1">Semitones</span>
+            <div class="option-hint responsive-show">
+                <SvgIcon class=" el-clr" type="mdi" :size="22" :path="mdiInformationOutline"></SvgIcon>
+                <span class="hint-text fnt f14 norm-clr norm-bg2">Numbered<br>Relative to Major<br>Note<br>Semitones</span>
+            </div>
             <ul class="scale-notes-block">
                 <ScaleNoteInterval v-for="int, i in intervals" :noteName="getNoteName(getScaleNote(i), isFlat)"
                     v-model:isActive="currentToggleList[i]" :number="i + 1" :interval="int" :relToMaj="getRelToMaj(i)">
@@ -240,6 +244,19 @@ watch(filter, (val) => {
 .options > *:nth-child(-n + 2) {
     margin-bottom: 15px;
 }
+.option-hint {
+    grid-row: 2 / span 5;
+}
+.hint-text {
+    display: none;
+    padding: 5px;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 1;
+}
+.option-hint:hover .hint-text {
+    display: block;
+}
 
 .sel-block {
     display: flex;
@@ -279,5 +296,20 @@ watch(filter, (val) => {
 
 .scale-notes-block .selected {
     background: none;
+}
+
+.responsive-show {
+    display: none;
+}
+@media screen and (max-width: 1250px) {
+    .responsive-cloak {
+        visibility: hidden;
+    }
+    .responsive-hide {
+        display: none;
+    }
+    .responsive-show {
+        display: block;
+    }
 }
 </style>

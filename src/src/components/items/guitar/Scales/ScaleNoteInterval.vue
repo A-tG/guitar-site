@@ -51,6 +51,7 @@ const isActive = defineModel<boolean>('isActive', { required: true })
 }
 .vert-line {
     height: 100%;
+    min-height: 8px;
     width: 2px;
 }
 </style>
