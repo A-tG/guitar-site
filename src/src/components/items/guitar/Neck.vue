@@ -263,16 +263,18 @@ stringsNumb.value = state.stringsNumber
 
         <div v-show="false">
             <SafeTeleport to="#modal" :disabled="!isTuningMenuShown">
-                <ModalWindow title="Tuning" :onCloseButton="() => isTuningMenuShown = false">
-                    <div class="flex marging-top-bott">
-                        <span class="fnt f18 norm-clr" title="Switch fretboard for lefthanded" @click="isLH = true">
-                            LH</span>
-                        <div class="tgl-checkbox hov-parent norm-bg3" title="Switch fretboard" @click="isLH = !isLH">
-                            <div class="tgl-checkbox-slider el-bg hov-child-clr tr-al"
-                                :class="{ 'slider-r': !isLH, 'slider-l': isLH }"></div>
+                <ModalWindow title="Options" :onCloseButton="() => isTuningMenuShown = false">
+                    <div class="responsive-show">
+                        <div class="flex marging-top-bott">
+                            <span class="fnt f18 norm-clr" title="Switch fretboard for lefthanded" @click="isLH = true">
+                                LH</span>
+                            <div class="tgl-checkbox hov-parent norm-bg3" title="Switch fretboard" @click="isLH = !isLH">
+                                <div class="tgl-checkbox-slider el-bg hov-child-clr tr-al"
+                                    :class="{ 'slider-r': !isLH, 'slider-l': isLH }"></div>
+                            </div>
+                            <span class="fnt f18 norm-clr" title="Switch fretboard for righthanded" @click="isLH = false">
+                                RH</span>
                         </div>
-                        <span class="fnt f18 norm-clr" title="Switch fretboard for righthanded" @click="isLH = false">
-                            RH</span>
                     </div>
                     <div class="strings-btns-block marging-top-bott">
                         <SvgIcon class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString" 
