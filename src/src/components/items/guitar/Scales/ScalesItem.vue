@@ -13,6 +13,7 @@ import type { ScalesItemState } from "./types/ScalesItemState";
 import type { IState } from "./types/IState";
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiMagnify, mdiBackspace, mdiInformationOutline } from "@mdi/js";
+import SvgIconCommon from "@/components/common/SvgIconCommon.vue";
 
 const relToMajList = stepsRelativeToMajor
 const textCommonClass1 = "norm-clr fnt f16"
@@ -157,7 +158,7 @@ watch(filter, (val) => {
             <span class="responsive-hide" :class="textCommonClass1">Notes</span>
             <span class="responsive-hide" :class="textCommonClass1">Semitones</span>
             <div class="option-hint responsive-show">
-                <SvgIcon class=" el-clr" type="mdi" :size="22" :path="mdiInformationOutline"></SvgIcon>
+                <SvgIcon class="el-clr" type="mdi" :size="22" :path="mdiInformationOutline"></SvgIcon>
                 <span class="hint-text fnt f14 norm-clr norm-bg2">Numbered<br>Relative to Major<br>Note<br>Semitones</span>
             </div>
             <ul class="scale-notes-block">
@@ -180,8 +181,8 @@ watch(filter, (val) => {
                     <SvgIcon class="tr-al filter-btn norm-clr" type="mdi" :size="22" :path="mdiMagnify"></SvgIcon>
                     <input aria-label="Filter scales" class="filter-inp f18 norm-clr" type="text" 
                         v-model.trim="filter" :list="$.uid.toString()">
-                    <SvgIcon class="tr-al filter-btn el-clr hov-el-clr" type="mdi" :size="22"
-                        :path="mdiBackspace" @click="filter = ''" :class="{ invis: filter.length == 0}"></SvgIcon>
+                    <SvgIconCommon class="filter-btn" :size="22" :path="mdiBackspace" 
+                        @click="filter = ''" :class="{ invis: filter.length == 0}"></SvgIconCommon>
                 </div>
             </div>
             <select aria-label="Select scale" class="fnt f18 capitalized el-clr norm-bg3" v-model="selectedScale">

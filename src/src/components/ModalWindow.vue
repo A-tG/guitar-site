@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiClose } from "@mdi/js";
+import SvgIconCommon from './common/SvgIconCommon.vue';
 
 defineProps<{
     title: string,
@@ -14,7 +14,7 @@ defineProps<{
             <div class="controls norm-bg2">
                 <span class="norm-clr fnt f-bold f18">{{ title }}</span>
                 <div class="close-btn-block el-clr hov-el-clr tr-al" title="Close settings" @click="onCloseButton">
-                    <SvgIcon type="mdi" :size="28" :path="mdiClose"></SvgIcon>
+                    <SvgIconCommon :size="28" :path="mdiClose"></SvgIconCommon>
                 </div>
             </div>
             <div class="content">

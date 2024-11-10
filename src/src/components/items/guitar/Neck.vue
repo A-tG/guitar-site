@@ -8,13 +8,13 @@ import { isFlatNotationKey } from '@/components/keys';
 import { SafeTeleport } from 'vue-safe-teleport';
 import ModalWindow from '@/components/ModalWindow.vue';
 import Tuning from './Tuning.vue';
-import LeftArrow from '@/components/common/LeftArrow.vue';
-import RightArrow from '@/components/common/RightArrow.vue';
 import { NoteDisplayMode } from './NoteDisplayMode';
 import { clearArr, copyValues, isArraysEqual } from '@/utils/array';
 import type { ScalesItemState } from './Scales/types/ScalesItemState';
-import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiMinusCircleOutline, mdiPlusCircleOutline, mdiMenu } from "@mdi/js";
+import MinusBtn from '@/components/common/MinusBtn.vue';
+import PlusBtn from '@/components/common/PlusBtn.vue';
+import SvgIconCommon from '@/components/common/SvgIconCommon.vue';
 
 const customId: TuningID = 'custom'
 const minStringsNumber = 3
@@ -245,16 +245,11 @@ stringsNumb.value = state.stringsNumber
 
         <div>
             <div class="strings-btns-block responsive-hide">
-                <div class="el-clr hov-el-clr tr-al tunings-menu-btn" @click="isTuningMenuShown = !isTuningMenuShown">
-                    <SvgIcon type="mdi" :size="24" :path="mdiMenu"></SvgIcon>
-                </div>
-                <div class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString">
-                    <SvgIcon type="mdi" :size="24" :path="mdiMinusCircleOutline"></SvgIcon>
-                </div>
+                <SvgIconCommon class="tunings-menu-btn" :size="24" :path="mdiMenu" @click="isTuningMenuShown = !isTuningMenuShown"></SvgIconCommon>
+
+                <SvgIconCommon :size="24" :path="mdiMinusCircleOutline" title="Remove string" @click="removeString"></SvgIconCommon>
                 <span class="strings-numb norm-clr fnt f14 f-bold">{{ stringsTunings.length }}</span>
-                <div class="el-clr hov-el-clr tr-al" title="Add string" @click="addString">
-                    <SvgIcon type="mdi" :size="24" :path="mdiPlusCircleOutline"></SvgIcon>
-                </div>
+                <SvgIconCommon :size="24" :path="mdiPlusCircleOutline" title="Add string" @click="addString"></SvgIconCommon>
             </div>
         </div>
 
@@ -277,12 +272,10 @@ stringsNumb.value = state.stringsNumber
                         </div>
                     </div>
                     <div class="strings-btns-block marging-top-bott">
-                        <SvgIcon class="el-clr hov-el-clr tr-al" title="Remove string" @click="removeString" 
-                            type="mdi" :size="28" :path="mdiMinusCircleOutline"></SvgIcon>
+                        <SvgIconCommon :size="28" :path="mdiMinusCircleOutline" title="Remove string" @click="removeString"></SvgIconCommon>
                         <input aria-label="Strings number input" class="el-clr norm-bg3 fnt f16 str-numb-inp" v-model.lazy.trim.number="stringsNumb"
                             step="1" :min="minStringsNumber" :max="maxStringsNumber">
-                        <SvgIcon class="el-clr hov-el-clr tr-al" title="Add string" @click="addString"
-                            type="mdi" :size="28" :path="mdiPlusCircleOutline"></SvgIcon>
+                        <SvgIconCommon :size="29" :path="mdiPlusCircleOutline" title="Add string" @click="addString"></SvgIconCommon>
                     </div>
                     <ul class="tuners-block">
                         <Tuner v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]"></Tuner>
@@ -296,9 +289,8 @@ stringsNumb.value = state.stringsNumber
             <ul class="tuners-block responsive-cloak">
                 <Tuner class="responsive-collapse" v-for="(_, i) in stringsTunings" v-model:note="stringsTunings[i]"></Tuner>
             </ul>
-            <SvgIcon type="mdi" :size="30" :path="mdiMenu"
-                class="el-clr hov-el-clr tr-al responsive-show" title="Open tunings settings"
-                @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
+            <SvgIconCommon class="responsive-show" :size="30" :path="mdiMenu" title="Open tunings settings" 
+                @click="isTuningMenuShown = !isTuningMenuShown"></SvgIconCommon>
         </div>
         <div class="fretboard frets-width-cont">
             <div class="fret-null">
@@ -323,13 +315,12 @@ stringsNumb.value = state.stringsNumber
 
         <div>
             <div class="tuning-btn-block flex">
-                <SvgIcon type="mdi" :size="24" :path="mdiMenu"
-                    class="el-clr hov-el-clr tr-al responsive-hide" title="Open tunings settings"
-                    @click="isTuningMenuShown = !isTuningMenuShown"></SvgIcon>
+                <SvgIconCommon class="responsive-hide" :size="24" :path="mdiMenu" title="Open tunings settings"
+                    @click="isTuningMenuShown = !isTuningMenuShown"></SvgIconCommon>
                 <div class="responsive-hide flex">
-                    <LeftArrow title="Decrease half-steps" @click="HS--"></LeftArrow>
+                    <MinusBtn title="Decrease half-steps" @click="HS--"></MinusBtn>
                     <span class="halfsteps-numb norm-clr fnt f14 f-bold">{{ HS }}</span>
-                    <RightArrow title="Increase half-steps" @click="HS++"></RightArrow>
+                    <PlusBtn title="Increase half-steps" @click="HS++"></PlusBtn>
                 </div>
             </div>
         </div>

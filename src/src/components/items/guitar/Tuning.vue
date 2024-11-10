@@ -4,6 +4,8 @@ import { getTuningsIds } from '@/types/Tunings';
 import LeftArrow from '@/components/common/LeftArrow.vue';
 import RightArrow from '@/components/common/RightArrow.vue';
 import { getTuningName } from './TuningsNames';
+import PlusBtn from '@/components/common/PlusBtn.vue';
+import MinusBtn from '@/components/common/MinusBtn.vue';
 
 const tuningId = defineModel<string>("tuningId", { required: true })
 const HS = defineModel<number>("HS", { required: true })
@@ -30,13 +32,13 @@ watch(HS, (val) => {
         </div>
         <div class="halfsteps-block">
             <span class="norm-clr fnt f18">Half-steps</span>
-            <LeftArrow title="Decrease half-steps" @click="HS--"></LeftArrow>
+            <MinusBtn title="Decrease half-steps" @click="HS--"></MinusBtn>
             <select aria-label="Select half-steps offset" class="hs-select fnt f14 capitalized el-clr norm-bg3" v-model="HS">
                 <option v-for="i in (maxHS * 2) + 1" :value="i - maxHS - 1">
                     {{ i - maxHS - 1 }}
                 </option>
             </select>
-            <RightArrow title="Increase half-steps" @click="HS++"></RightArrow>
+            <PlusBtn title="Increase half-steps" @click="HS++"></PlusBtn>
         </div>
     </div>
 </template>

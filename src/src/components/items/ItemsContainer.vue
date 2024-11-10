@@ -4,9 +4,9 @@ import Item from "./Item.vue"
 import type { IState } from "./guitar/Scales/types/IState";
 import { ScalesItemState } from "./guitar/Scales/types/ScalesItemState";
 import { decodeQueryParam, encodeQueryParam, getList, getParam, removeParam, setParam } from "@/types/QueryParamsManager";
-import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiPlusBox } from "@mdi/js";
 import { OptionStorage } from "@/utils/LocalStorage";
+import SvgIconCommon from "../common/SvgIconCommon.vue";
 
 const maxItemsNumber = 5
 const isPWA = window.matchMedia('(display-mode: standalone)')?.matches ?? false
@@ -145,7 +145,7 @@ watch(items, (val) => {
     </ul>
     <div class="add" title="Add item"
         v-show="items.size < maxItemsNumber">
-        <SvgIcon class="el-clr hov-el-clr tr-al" type="mdi" :path="mdiPlusBox" :size="82" @click="addItem"></SvgIcon>
+        <SvgIconCommon :path="mdiPlusBox" :size="82" @click="addItem"></SvgIconCommon>
 </div>
 </template>
 
