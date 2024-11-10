@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import LeftArrow from '@/components/common/LeftArrow.vue';
-import RightArrow from '@/components/common/RightArrow.vue';
+import MinusBtn from '@/components/common/MinusBtn.vue';
+import PlusBtn from '@/components/common/PlusBtn.vue';
 import type { State } from '@/metronome/State';
 import { OptionStorage } from '@/utils/LocalStorage';
 import { ArrayUtils } from '@/utils/array';
@@ -91,21 +91,21 @@ load()
 
         <li class="metr-el">
             <div class="signature-option-block flex">
-                <LeftArrow title="Reduce beats number" @click="beatsPrev"></LeftArrow>
+                <MinusBtn title="Reduce beats number" @click="beatsPrev"></MinusBtn>
                 <select aria-label="Metronome beats per measure" class="signature-sel el-clr norm-bg3 fnt f16"
                     v-model="beatsPerMeasure">
                     <option v-for="o in beats" :value="o">{{ o }}</option>
                 </select>
-                <RightArrow title="Increase beats number" @click="beatsNext"></RightArrow>
+                <PlusBtn title="Increase beats number" @click="beatsNext"></PlusBtn>
             </div>
 
             <div class="signature-option-block flex">
-                <LeftArrow title="Increase beat (note) value" @click="lenPrev"></LeftArrow>
+                <MinusBtn title="Increase beat (note) value" @click="lenPrev"></MinusBtn>
                 <select aria-label="Metronome beat length" class="signature-sel el-clr norm-bg3 fnt f16"
                     v-model="beatLen">
                     <option v-for="o in beatLengths" :value="o">{{ o }}</option>
                 </select>
-                <RightArrow title="Reduce beat (note) value" @click="lenNext"></RightArrow>
+                <PlusBtn title="Reduce beat (note) value" @click="lenNext"></PlusBtn>
             </div>
         </li>
     </ul>
