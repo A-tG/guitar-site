@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import LeftArrow from '@/components/common/LeftArrow.vue';
-import RightArrow from '@/components/common/RightArrow.vue';
+import FiveBtn from '@/components/common/FiveBtn.vue';
+import MinusBtn from '@/components/common/MinusBtn.vue';
+import PlusBtn from '@/components/common/PlusBtn.vue';
 import type { State } from '@/metronome/State';
 import { OptionStorage } from '@/utils/LocalStorage';
 import { range } from '@/utils/range';
+import { mdiPlusBox } from '@mdi/js';
 import { ref, watch } from 'vue';
 
 const min = 40
@@ -50,10 +52,12 @@ load()
         <div class="metr-option-head">
             <span class="fnt f14 weak-clr">{{ min }}</span>
             <span class="fnt f18 norm-clr">Tempo</span>
-            <LeftArrow title="Reduce tempo" @click="tempo--"></LeftArrow>
+            <FiveBtn title="Reduce tempo by 5" @click="tempo -= 5"></FiveBtn>
+            <MinusBtn title="Reduce tempo" @click="tempo--"></MinusBtn>
             <input aria-label="Metronome tempo input" class="tempo-input el-clr norm-bg3 fnt f14" type="number" list="tempos"
                 step="1" :min="min" :max="max" v-model.lazy.trim.number="tempo">
-            <RightArrow title="Increase tempo" @click="tempo++"></RightArrow>
+            <PlusBtn title="Increase tempo" @click="tempo++" :path="mdiPlusBox"></PlusBtn>
+            <FiveBtn title="Increase tempo by 5" @click="tempo += 5"></FiveBtn>
             <datalist id="tempos">
                 <option v-for="o in tempoList" :value="o">{{ o }}</option>
             </datalist>
