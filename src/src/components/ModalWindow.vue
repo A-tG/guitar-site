@@ -45,9 +45,6 @@ defineProps<{
     margin: 15px;
     margin-top: 0;
 }
-.content>*:nth-child(3n + 1) {
-    justify-self: left;
-}
 .controls {
     display: flex;
     justify-content: center;
