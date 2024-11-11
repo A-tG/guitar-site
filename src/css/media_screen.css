@@ -43,6 +43,10 @@
     .volume-range, .tempo-range {
         margin-top: 10px;
     }
+    .metr-option-head > * {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
 }
 
 @media screen and (max-width: 800px) {
